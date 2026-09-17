@@ -9,13 +9,38 @@
 
 [npm 安装](#快速安装) · [观看录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4) · [制作自己的角色](#做一只属于你的宠物)
 
-![大肥鱼实际动画：举牌等候、打字、空挥联动与工具执行](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/bigfish-demo.gif)
-
 **默认安静陪伴 · 鞭策随时关闭 · 角色包自由替换**
 
 </div>
 
-> 上面的 GIF 和下面的录屏来自插件自带预览：使用实际宠物渲染与动画，任务和速度由演示数据驱动。只录制宠物区域，不包含聊天内容。社区独立项目，非 DeepSeek 官方产品。
+## 快速安装
+
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前 npm 版本为 **0.5.1**（体验版）；完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
+
+直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
+
+```sh
+dsh plugin --profile web add dsh-bigfish
+dsh --profile web
+```
+
+打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。
+
+**插件里还附带 `dsh-bigfish-pet-maker` Skill，可用来制作、替换和扩展角色包。** 想启用它，再执行一次：
+
+```sh
+npx --yes dsh-bigfish install-skill
+```
+
+安装后新建 DSH 会话，即可让 Agent 使用 `$dsh-bigfish-pet-maker` 制作新角色或扩展动作，再从「完整设置 → 角色库」导入生成的 `.dshpet`。详见[角色制作示例](#做一只属于你的宠物)。
+
+[详细安装、升级与卸载](https://github.com/gosomea/dsh-bigfish/blob/main/docs/installation.md) · [常见问题](https://github.com/gosomea/dsh-bigfish/blob/main/docs/faq.md) · [npm 包页面](https://www.npmjs.com/package/dsh-bigfish)
+
+## 动画展示
+
+![大肥鱼实际动画：举牌等候、打字、空挥联动与工具执行](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/bigfish-demo.gif)
+
+> 本节 GIF 和下面的录屏来自插件自带预览：使用实际宠物渲染与动画，任务和速度由演示数据驱动。只录制宠物区域，不包含聊天内容。社区独立项目，非 DeepSeek 官方产品。
 
 ## 她会做什么？
 
@@ -57,41 +82,6 @@
 
 动作可以在「完整设置 → 角色库」逐个预览，内置大肥鱼也支持。
 
-## 快速安装
-
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前 npm 版本为 **0.5.1**（体验版）；完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
-
-直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
-
-```sh
-dsh plugin --profile web add dsh-bigfish
-dsh --profile web
-```
-
-打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。
-
-**插件里还附带 `dsh-bigfish-pet-maker` Skill，可用来制作、替换和扩展角色包。** 想启用它，再执行一次：
-
-```sh
-npx --yes dsh-bigfish install-skill
-```
-
-它将随包的完整 Skill 安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。宠物插件本身的安装不会自动修改技能目录。
-
-然后在 DSH 中新建会话，直接说：
-
-> 用 $dsh-bigfish-pet-maker 给大肥鱼增加读书、喝茶和整理文件的动作，保留原有造型与动作，生成可导入的新版角色包和预览。
-
-也可以让 Agent 从零设计一只新宠物。生成的 `.dshpet` 通过「完整设置 → 角色库」导入，动作数量可以超过内置大肥鱼的预设。
-
-[npm 包页面](https://www.npmjs.com/package/dsh-bigfish) · [更多角色制作示例](#做一只属于你的宠物)
-
-插件管理器自动注册配置，无需手工再加一份 `bigfish` patch。若 DSH 已在运行且仍加载旧模块，在任务空闲时重启，再刷新页面。
-
-想先看效果？从 [GitHub Releases](https://github.com/gosomea/dsh-bigfish/releases/tag/v0.5.0) 下载 **`preview.html`**，用浏览器打开即可。它是单文件离线预览，可以切换速度、任务状态、场景及全部内置动作，**无需模型 API，也不会消耗 token**。这里的“离线”指预览；实际 Agent 工作仍由 DSH 及其模型配置决定。
-
-[详细安装、升级与卸载](https://github.com/gosomea/dsh-bigfish/blob/main/docs/installation.md) · [常见问题](https://github.com/gosomea/dsh-bigfish/blob/main/docs/faq.md)
-
 ## 按你的习惯陪伴
 
 - **想安静一点**：默认「安静陪着」，首次问候后不反复举牌、换台词。空闲互动、动作表现和说话频率分别控制。
@@ -124,6 +114,8 @@ npm 包已经包含完整 Skill，不必另下 ZIP：
 ```sh
 npx --yes dsh-bigfish install-skill
 ```
+
+默认安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。安装 Skill 后请新建 DSH 会话；宠物插件本身的安装不会自动修改技能目录。
 
 其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.0/dsh-bigfish-pet-maker-1.0.2.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
 
