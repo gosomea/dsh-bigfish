@@ -1,0 +1,30 @@
+{
+  "format": "dsh-pet",
+  "formatVersion": 1,
+  "id": "starter-bot",
+  "name": "入门机器人",
+  "version": "1.0.0",
+  "author": "Codex",
+  "description": "五类基础动作，可直接扩展",
+  "canvas": {
+    "width": 128,
+    "height": 144
+  },
+  "assets": {
+    "main": {
+      "path": "atlas.png",
+      "width": 1024,
+      "height": 5184
+    }
+  },
+  "thumbnail": "thumbnail.png",
+  "animations": "animations.json",
+  "fallbacks": {
+    "idle": "relay:breathe",
+    "working": "relay:work",
+    "attention": "relay:attention",
+    "success": "relay:success",
+    "error": "relay:error"
+  },
+  "capabilities": []
+}

@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-17",
+  "tool": "image_gen.imagegen",
+  "mode": "edit with local original-character atlas reference",
+  "reference": "assets/sprites/bigfish-atlas.png",
+  "output": "assets/sprites/bigfish-daily.png",
+  "actualSize": [
+    1448,
+    1086
+  ],
+  "format": "PNG RGBA, native alpha",
+  "postprocessing": "None. PNG copied unchanged. Runtime source rectangles calibrated to transparent gutters; uniform render scale 0.52 and per-frame foot anchors, with opaque bounds verified inside character clip.",
+  "prompt": "Create a production transparent PNG sprite sheet for this exact chibi blue whale maid character. Preserve original chibi proportions, blue long hair, fin ears, blue whale tail visible to the right in EVERY frame, navy and white maid dress and headband, and the small blue whale logo on white apron. No adult redesign. Precisely 4 equal columns × 3 equal rows, 12 full-body poses with generous transparent gutters; every cell has equal character scale and common foot baseline, entire tail and hair within its own cell. Transparent alpha background, no text, no grid, no shadows, no decorative particles. 2048x1536 landscape sprite sheet. Read row sequences left to right: Row1 tea animation: hold small porcelain teacup with both hands low near waist; raise teacup halfway with eyes looking at cup; sip at mouth with gently closed eyes; lower cup near waist happy relaxed expression. Row2 wipe sweat animation: hold small white handkerchief near waist in right hand; raise cloth to right temple; dab forehead eyes briefly closed; lower cloth smiling relieved. Row3 stretch animation: hands by shoulders preparing; both arms extending upward; hands overhead with long gentle stretch eyes closed; lowering arms to shoulders relaxed smile. Draw genuine hand arm facial pose changes, not mere translation or rotation. Keep same front-facing camera, maid headband, tail, whale apron emblem for continuity. Clear clean anime illustration matching supplied original, sharp expressive eyes and detailed hair, fully clothed friendly work companion. Fit every frame whole body with at least 24 pixel transparent margin. Use native alpha transparency."
+}

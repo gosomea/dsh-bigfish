@@ -1,0 +1,510 @@
+[
+  {
+    "id": "adult:idle",
+    "label": "安静眨眼",
+    "tags": [
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "daily",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 2200
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 130
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          806,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 130
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 2200
+      }
+    ]
+  },
+  {
+    "id": "adult:typing",
+    "label": "交替敲键盘",
+    "tags": [
+      "working",
+      "writing",
+      "edit",
+      "command",
+      "test",
+      "tool",
+      "parallel",
+      "agent",
+      "background"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1.25
+    ],
+    "frames": [
+      {
+        "asset": "daily",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 340
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          806,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "daily",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 340
+      }
+    ]
+  },
+  {
+    "id": "adult:waiting",
+    "label": "抬手等你确认",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "attention",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 1400
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          806,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 1400
+      }
+    ]
+  },
+  {
+    "id": "adult:error",
+    "label": "托腮检查问题",
+    "tags": [
+      "error",
+      "thinking"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "attention",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          806,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 850
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "attention",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 1200
+      }
+    ]
+  },
+  {
+    "id": "adult:success",
+    "label": "微笑点赞",
+    "tags": [
+      "success",
+      "export"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "tasks",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 850
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          806,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 800
+      }
+    ]
+  },
+  {
+    "id": "adult:read",
+    "label": "翻阅蓝色手册",
+    "tags": [
+      "read",
+      "search",
+      "web"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "tasks",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 1100
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          806,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "tasks",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 1100
+      }
+    ]
+  },
+  {
+    "id": "adult:wave",
+    "label": "挥手问候",
+    "tags": [
+      "greeting"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "social",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "social",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 500
+      },
+      {
+        "asset": "social",
+        "rect": [
+          806,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "social",
+        "rect": [
+          422,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 500
+      },
+      {
+        "asset": "social",
+        "rect": [
+          38,
+          0,
+          372,
+          512
+        ],
+        "durationMs": 650
+      }
+    ]
+  },
+  {
+    "id": "adult:near-miss",
+    "label": "侧躲后放松",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "social",
+        "rect": [
+          38,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 240
+      },
+      {
+        "asset": "social",
+        "rect": [
+          422,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 320
+      },
+      {
+        "asset": "social",
+        "rect": [
+          806,
+          512,
+          372,
+          512
+        ],
+        "durationMs": 440
+      }
+    ]
+  }
+]

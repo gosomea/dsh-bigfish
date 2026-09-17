@@ -1,0 +1,2772 @@
+{
+  "schemaVersion": 1,
+  "id": "bigfish-classic",
+  "version": "0.5.0",
+  "rigId": "bigfish-v1",
+  "capabilities": [
+    "layered",
+    "keyframes"
+  ],
+  "assets": [
+    "bigfish-atlas.png",
+    "bigfish-motions.png",
+    "bigfish-signs.png",
+    "bigfish-work.png",
+    "bigfish-quiet.png",
+    "bigfish-daily.png"
+  ],
+  "fallbackSceneId": "rest",
+  "scenes": [
+    {
+      "id": "desk",
+      "theme": "desk",
+      "states": [
+        "generating",
+        "reasoning",
+        "streaming-gap",
+        "awaiting-output"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "calm",
+          "kind": "loop",
+          "states": [
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "breathe",
+          "animation": {
+            "atlas": "quiet",
+            "frames": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "fps": 6,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "hug-tail",
+          "kind": "loop",
+          "states": [
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 7,
+          "motion": "hug"
+        },
+        {
+          "id": "thinking",
+          "kind": "loop",
+          "states": [
+            "awaiting-output",
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "focused",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0,
+            0.55
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 3,
+          "motion": "type",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              4,
+              5,
+              4,
+              6,
+              4,
+              7,
+              7,
+              4
+            ],
+            "fps": 5,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "nervous",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.35,
+            0.85
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 4,
+          "motion": "flinch"
+        },
+        {
+          "id": "pout",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.45,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 5,
+          "motion": "shuffle"
+        },
+        {
+          "id": "dodge",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 6,
+          "motion": "dodge",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "dizzy",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.8,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 9,
+          "motion": "run"
+        },
+        {
+          "id": "wipe",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0.4,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "wipe",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              4,
+              5,
+              6,
+              5,
+              6,
+              5,
+              7,
+              7
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "look-back",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 4,
+          "motion": "look-back",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              4,
+              8,
+              11,
+              4
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "panic",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 6,
+          "motion": "panic",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              8,
+              9,
+              8,
+              9,
+              10,
+              11
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "stamp",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            0.25
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "stamp"
+        },
+        {
+          "id": "stumble",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 9,
+          "motion": "stumble"
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    },
+    {
+      "id": "library",
+      "theme": "library",
+      "states": [
+        "reasoning",
+        "awaiting-output"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "calm",
+          "kind": "loop",
+          "states": [
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "breathe",
+          "animation": {
+            "atlas": "quiet",
+            "frames": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "fps": 6,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "hug-tail",
+          "kind": "loop",
+          "states": [
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 7,
+          "motion": "hug"
+        },
+        {
+          "id": "thinking",
+          "kind": "loop",
+          "states": [
+            "awaiting-output",
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "focused",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            0.55
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 3,
+          "motion": "type",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              4,
+              5,
+              4,
+              6,
+              4,
+              7,
+              7,
+              4
+            ],
+            "fps": 5,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "nervous",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0.35,
+            0.85
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 4,
+          "motion": "flinch"
+        },
+        {
+          "id": "pout",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0.45,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 5,
+          "motion": "shuffle"
+        },
+        {
+          "id": "dodge",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 6,
+          "motion": "dodge",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "dizzy",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0.8,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 9,
+          "motion": "run"
+        },
+        {
+          "id": "wipe",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0.4,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "wipe",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              4,
+              5,
+              6,
+              5,
+              6,
+              5,
+              7,
+              7
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "book",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "peek",
+          "kind": "loop",
+          "states": [
+            "reasoning",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "peek"
+        },
+        {
+          "id": "tea",
+          "kind": "loop",
+          "states": [
+            "reasoning",
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "tea",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              3,
+              3
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    },
+    {
+      "id": "workshop",
+      "theme": "workshop",
+      "states": [
+        "tool-running",
+        "failed"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "repair",
+          "kind": "loop",
+          "states": [
+            "tool-running"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 3,
+          "motion": "repair",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              4,
+              4,
+              5,
+              6,
+              6,
+              6,
+              7,
+              7,
+              4,
+              4
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "confused",
+          "kind": "loop",
+          "states": [
+            "failed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read"
+        },
+        {
+          "id": "wiping",
+          "kind": "loop",
+          "states": [
+            "tool-running"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0.4,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "wipe",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              4,
+              5,
+              6,
+              5,
+              6,
+              5,
+              7,
+              7
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "look-back",
+          "kind": "loop",
+          "states": [
+            "tool-running"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "look-back",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              4,
+              8,
+              11,
+              4
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "stretch",
+          "kind": "loop",
+          "states": [
+            "tool-running"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "stretch",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              8,
+              9,
+              10,
+              10,
+              10,
+              9,
+              11,
+              11
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    },
+    {
+      "id": "treadmill",
+      "theme": "treadmill",
+      "states": [
+        "generating",
+        "reasoning",
+        "streaming-gap"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "thinking",
+          "kind": "loop",
+          "states": [
+            "reasoning"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "focused",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0,
+            0.55
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 3,
+          "motion": "run"
+        },
+        {
+          "id": "nervous",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.35,
+            0.85
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 4,
+          "motion": "run"
+        },
+        {
+          "id": "pout",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.45,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 5,
+          "motion": "run"
+        },
+        {
+          "id": "dodge",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 6,
+          "motion": "dodge",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              8,
+              9,
+              10,
+              11
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "dizzy",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.8,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 9,
+          "motion": "run"
+        },
+        {
+          "id": "wipe",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0.4,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "wipe",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              4,
+              5,
+              6,
+              5,
+              6,
+              5,
+              7,
+              7
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "stumble",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 9,
+          "motion": "stumble"
+        },
+        {
+          "id": "panic",
+          "kind": "loop",
+          "states": [
+            "generating",
+            "reasoning",
+            "streaming-gap"
+          ],
+          "pressure": [
+            0.65,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 6,
+          "motion": "panic",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              8,
+              9,
+              8,
+              9,
+              10,
+              11
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    },
+    {
+      "id": "rest",
+      "theme": "rest",
+      "states": [
+        "idle",
+        "awaiting-output",
+        "waiting-user",
+        "retrying",
+        "disconnected",
+        "cancelled",
+        "blocked",
+        "limited",
+        "interrupted",
+        "unknown-end"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "calm",
+          "kind": "loop",
+          "states": [
+            "idle",
+            "awaiting-output",
+            "retrying",
+            "disconnected",
+            "cancelled",
+            "blocked",
+            "limited",
+            "interrupted",
+            "unknown-end"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "breathe",
+          "animation": {
+            "atlas": "quiet",
+            "frames": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3,
+              3
+            ],
+            "fps": 6,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "hug-tail",
+          "kind": "loop",
+          "states": [
+            "idle",
+            "awaiting-output",
+            "retrying",
+            "disconnected",
+            "cancelled",
+            "blocked",
+            "limited",
+            "interrupted",
+            "unknown-end"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 7,
+          "motion": "hug"
+        },
+        {
+          "id": "thinking",
+          "kind": "loop",
+          "states": [
+            "awaiting-output"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "read",
+          "animation": {
+            "atlas": "work",
+            "frames": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              2,
+              0,
+              0,
+              3,
+              3,
+              0,
+              0
+            ],
+            "fps": 3,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "nap",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 11,
+          "motion": "sleep"
+        },
+        {
+          "id": "wait-sign",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 6500,
+          "cooldownMs": 6000,
+          "channels": [
+            "body",
+            "arms",
+            "props"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "wait-sign",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              0,
+              1,
+              2,
+              2,
+              2,
+              2,
+              3,
+              2,
+              2,
+              2,
+              1,
+              0
+            ],
+            "fps": 2.5,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "wave",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 1,
+          "motion": "wave",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              12,
+              13,
+              12,
+              13,
+              14,
+              12
+            ],
+            "fps": 4,
+            "pingPong": false
+          }
+        },
+        {
+          "id": "peek",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 2,
+          "motion": "peek"
+        },
+        {
+          "id": "stretch",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 1,
+          "motion": "stretch",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              8,
+              9,
+              10,
+              10,
+              10,
+              9,
+              11,
+              11
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "tail-wag",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "tail-wag"
+        },
+        {
+          "id": "sigh",
+          "kind": "loop",
+          "states": [
+            "cancelled",
+            "interrupted"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 8,
+          "motion": "sigh"
+        },
+        {
+          "id": "tea",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "tea",
+          "animation": {
+            "atlas": "daily",
+            "frames": [
+              0,
+              1,
+              2,
+              2,
+              2,
+              1,
+              3,
+              3
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "sign-overhead",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 6500,
+          "cooldownMs": 12000,
+          "channels": [
+            "body",
+            "arms",
+            "props"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "sign-overhead",
+          "animation": {
+            "atlas": "signs",
+            "frames": [
+              0,
+              1,
+              2,
+              2,
+              3,
+              2,
+              2,
+              1,
+              0
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "sign-peek",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 6500,
+          "cooldownMs": 12000,
+          "channels": [
+            "body",
+            "arms",
+            "props"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "sign-peek",
+          "animation": {
+            "atlas": "signs",
+            "frames": [
+              4,
+              5,
+              6,
+              6,
+              7,
+              6,
+              6,
+              5,
+              4
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "sign-tail",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 6500,
+          "cooldownMs": 12000,
+          "channels": [
+            "body",
+            "arms",
+            "props"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "sign-tail",
+          "animation": {
+            "atlas": "signs",
+            "frames": [
+              8,
+              9,
+              10,
+              10,
+              11,
+              10,
+              10,
+              9,
+              8
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "sign-bounce",
+          "kind": "loop",
+          "states": [
+            "idle"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 3,
+          "durationMs": 6500,
+          "cooldownMs": 12000,
+          "channels": [
+            "body",
+            "arms",
+            "props"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "sign-bounce",
+          "animation": {
+            "atlas": "signs",
+            "frames": [
+              12,
+              13,
+              14,
+              14,
+              15,
+              14,
+              14,
+              13,
+              12
+            ],
+            "fps": 2,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "confirm",
+          "kind": "loop",
+          "states": [
+            "waiting-user"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 6000,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 0,
+          "motion": "confirm",
+          "animation": {
+            "atlas": "quiet",
+            "frames": [
+              4,
+              4,
+              5,
+              5,
+              6,
+              5,
+              7,
+              7
+            ],
+            "fps": 3,
+            "pingPong": false,
+            "loop": false
+          }
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    },
+    {
+      "id": "delivery",
+      "theme": "delivery",
+      "states": [
+        "completed"
+      ],
+      "minHoldMs": 20000,
+      "actions": [
+        {
+          "id": "happy",
+          "kind": "loop",
+          "states": [
+            "completed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 1,
+          "motion": "celebrate",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "fps": 4,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "delivery",
+          "kind": "loop",
+          "states": [
+            "completed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 10,
+          "motion": "celebrate",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              12,
+              13,
+              14,
+              15
+            ],
+            "fps": 4,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "relieved",
+          "kind": "loop",
+          "states": [
+            "completed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2200,
+          "cooldownMs": 3000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 11,
+          "motion": "hug"
+        },
+        {
+          "id": "bow",
+          "kind": "loop",
+          "states": [
+            "completed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 1,
+          "motion": "bow",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              12,
+              15,
+              15,
+              12
+            ],
+            "fps": 4,
+            "pingPong": false,
+            "loop": false
+          }
+        },
+        {
+          "id": "wave",
+          "kind": "loop",
+          "states": [
+            "completed"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 4000,
+          "cooldownMs": 5000,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "center",
+          "exitPose": "center",
+          "envelope": {
+            "x": 145,
+            "y": 15,
+            "width": 165,
+            "height": 205
+          },
+          "sprite": 1,
+          "motion": "wave",
+          "animation": {
+            "atlas": "motions",
+            "frames": [
+              12,
+              13,
+              12,
+              13,
+              14,
+              12
+            ],
+            "fps": 4,
+            "pingPong": false,
+            "loop": false
+          }
+        }
+      ],
+      "whipHull": {
+        "x": 0,
+        "y": 10,
+        "width": 100,
+        "height": 185
+      },
+      "margin": 18
+    }
+  ]
+}

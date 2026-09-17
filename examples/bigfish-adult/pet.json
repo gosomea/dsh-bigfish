@@ -1,0 +1,48 @@
+{
+  "format": "dsh-pet",
+  "formatVersion": 1,
+  "id": "bigfish-adult",
+  "name": "大肥鱼 · 成年版",
+  "version": "1.0.0",
+  "author": "Bigfish Studio",
+  "description": "原版大肥鱼长大后的蓝白女仆形象：保留蓝色长发、鲸鱼尾巴、女仆头饰和围裙鲸鱼标志。8 组动作，24 张生成关键姿态。",
+  "canvas": {
+    "width": 372,
+    "height": 512
+  },
+  "assets": {
+    "daily": {
+      "path": "daily.png",
+      "width": 1536,
+      "height": 1024
+    },
+    "attention": {
+      "path": "attention.png",
+      "width": 1536,
+      "height": 1024
+    },
+    "tasks": {
+      "path": "tasks.png",
+      "width": 1536,
+      "height": 1024
+    },
+    "social": {
+      "path": "social.png",
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "thumbnail": "daily.png",
+  "animations": "animations.json",
+  "dialogue": "dialogue.json",
+  "fallbacks": {
+    "idle": "adult:idle",
+    "working": "adult:typing",
+    "attention": "adult:waiting",
+    "success": "adult:success",
+    "error": "adult:error"
+  },
+  "capabilities": [
+    "air-swing"
+  ]
+}

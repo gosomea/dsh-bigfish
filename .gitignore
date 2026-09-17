@@ -1,0 +1,18 @@
+node_modules/
+lib/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.*
+!.env.example
+.probe/
+artifacts/
+
+# Private reference uploads and generated duplicate pack assets
+assets/references/
+packs/classic/*.png
+packs/classic/atlas-layout.json
+__pycache__/
+*.pyc

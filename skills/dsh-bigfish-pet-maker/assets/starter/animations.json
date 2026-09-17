@@ -1,0 +1,487 @@
+[
+  {
+    "id": "relay:breathe",
+    "label": "静静呼吸",
+    "tags": [
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 6000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "main",
+        "rect": [
+          0,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          128,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          256,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          384,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          512,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          640,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          768,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          896,
+          0,
+          128,
+          144
+        ],
+        "durationMs": 260
+      }
+    ]
+  },
+  {
+    "id": "relay:work",
+    "label": "认真工作",
+    "tags": [
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 6000,
+    "speed": [
+      0.8,
+      1.3
+    ],
+    "frames": [
+      {
+        "asset": "main",
+        "rect": [
+          0,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          128,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          256,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          384,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          512,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          640,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          768,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          896,
+          144,
+          128,
+          144
+        ],
+        "durationMs": 260
+      }
+    ]
+  },
+  {
+    "id": "relay:attention",
+    "label": "抬手等确认",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 6000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "main",
+        "rect": [
+          0,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          128,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          256,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          384,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          512,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          640,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          768,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          896,
+          288,
+          128,
+          144
+        ],
+        "durationMs": 260
+      }
+    ]
+  },
+  {
+    "id": "relay:success",
+    "label": "开心点头",
+    "tags": [
+      "success"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 6000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "main",
+        "rect": [
+          0,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          128,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          256,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          384,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          512,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          640,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          768,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          896,
+          432,
+          128,
+          144
+        ],
+        "durationMs": 260
+      }
+    ]
+  },
+  {
+    "id": "relay:error",
+    "label": "检查故障",
+    "tags": [
+      "error"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 6000,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "main",
+        "rect": [
+          0,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          128,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          256,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          384,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          512,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          640,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          768,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "main",
+        "rect": [
+          896,
+          576,
+          128,
+          144
+        ],
+        "durationMs": 260
+      }
+    ]
+  }
+]

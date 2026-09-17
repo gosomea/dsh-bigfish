@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-17",
+  "generator": "image_gen",
+  "reference": "assets/sprites/bigfish-atlas.png",
+  "outputs": [
+    {
+      "file": "assets/sprites/bigfish-work.png",
+      "source": "exec-9504fede-4a32-4d88-92ed-da73f83e68bb.png"
+    },
+    {
+      "file": "assets/sprites/bigfish-quiet.png",
+      "source": "exec-b9341689-4025-4935-9cf5-cfb096598084.png"
+    }
+  ],
+  "prompts": [
+    "Production animation sprite sheet for the SAME CHIBI BLUE WHALE MAID in reference. Keep exact chibi proportions, blue/cyan hair, white frilled headband, navy-white modest maid dress, white apron with dark blue whale emblem, big blue whale tail with fluke. Match reference soft polished anime style. Four columns x two rows of square cells, 1536x768 pixels, each384x384. Full character occupies at most 310x330 per cell centered x192 soles y360, SAME scale and foot baseline in every frame. Entire tail/hair/tools fit within each cell with at least24px transparent margins. TRUE transparent alpha PNG, no background, no shadows, no painted checkerboard, no text/numbers/grid. Each row four genuinely distinct sequential animation poses. No floating text or speech bubbles. TOP ROW READING: hold small open blue book at chest above whale logo, glance down; fingers lift right page; page halfway turned; page down and thoughtful glance up. BOTTOM ROW REPAIR: hold small blue toolbox in left hand below waist and short gold wrench in right, looking at it; lift wrench; turn wrist to tighten a little screw on box; inspect result with pleased focus and lower wrench. Consistent props and handedness. No table.",
+    "Production animation sprite sheet for the SAME CHIBI BLUE WHALE MAID in reference. Keep exact chibi proportions, blue/cyan hair, white frilled headband, navy-white modest maid dress, white apron with dark blue whale emblem, big blue whale tail with fluke. Match reference soft polished anime style. Four columns x two rows of square cells, 1536x768 pixels, each384x384. Full character occupies at most 310x330 per cell centered x192 soles y360, SAME scale and foot baseline in every frame. Entire tail/hair/tools fit within each cell with at least24px transparent margins. TRUE transparent alpha PNG, no background, no shadows, no painted checkerboard, no text/numbers/grid. Each row four genuinely distinct sequential animation poses. No floating text or speech bubbles. TOP ROW QUIET IDLE: hands folded, calm open eyes, tail relaxed; eyes half blink, tiny tail lift; closed eyes gentle smile; eyes reopen tail settles. No waving or bouncing. BOTTOM ROW WAITING FOR CONFIRMATION: looking attentively at viewer with right palm up, left hand at waist; tilt head a little, palm still open; slight blink; nod a little, hands gently together. Expression patient and questioning, unlike sleeping, working or smiling victory. No signs or question marks."
+  ],
+  "notes": "Original generated PNGs copied unchanged; source-coordinate rectangles only. 16 distinct poses, repeated frame references provide holds. Original character attribution remains unknown."
+}

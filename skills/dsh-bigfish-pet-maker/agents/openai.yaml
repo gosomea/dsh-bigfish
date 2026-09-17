@@ -1,0 +1,4 @@
+interface:
+  display_name: "DSH Bigfish 角色制作"
+  short_description: "制作、扩展和检查可替换的 DSH 宠物角色包"
+  default_prompt: "Use $dsh-bigfish-pet-maker to create or extend a DSH pet pack from my description and references."

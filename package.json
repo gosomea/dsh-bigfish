@@ -1,0 +1,74 @@
+{
+  "name": "dsh-bigfish",
+  "version": "0.5.0",
+  "private": true,
+  "description": "Adaptive DSH companion with replaceable, extensible character packs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/types/src/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "packs/classic",
+    "cordis.patch.yml",
+    "README.md",
+    "docs",
+    "LICENSE",
+    "NOTICE",
+    "skills/dsh-bigfish-pet-maker",
+    "examples/bigfish-adult"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "tsx scripts/build.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "demo:replay": "tsx scripts/replay.ts",
+    "probe:harness": "tsx scripts/probe-harness.ts",
+    "preview": "tsx scripts/serve.ts",
+    "test:browser": "playwright test",
+    "smoke:native": "tsx scripts/smoke-native.ts",
+    "package": "pnpm build && pnpm pack --pack-destination dist",
+    "test:soak": "tsx scripts/soak.ts"
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "3.18.2",
+    "@playwright/test": "1.58.2",
+    "@types/node": "22.20.0",
+    "@types/proper-lockfile": "4.1.4",
+    "@types/react": "18.3.5",
+    "@types/react-dom": "18.3.0",
+    "esbuild": "0.28.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3"
+  },
+  "packageManager": "pnpm@11.7.0",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "proper-lockfile": "4.1.2"
+  }
+}

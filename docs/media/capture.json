@@ -1,0 +1,48 @@
+{
+  "version": "0.5.0",
+  "source": "Built-in offline preview; actual Widget/FishCanvas rendering, simulated task states, real wall-clock recording; random selection fixed to the first eligible existing action for reproducibility.",
+  "recordedAt": "2026-09-17T17:08:01.030Z",
+  "durationSeconds": 35.239000000000004,
+  "chapters": [
+    {
+      "name": "举牌等你",
+      "seconds": 0
+    },
+    {
+      "name": "开始工作",
+      "seconds": 3
+    },
+    {
+      "name": "速度变化与空挥联动",
+      "seconds": 9.1
+    },
+    {
+      "name": "调用工具",
+      "seconds": 14.1
+    },
+    {
+      "name": "等你确认",
+      "seconds": 19.1
+    },
+    {
+      "name": "任务完成",
+      "seconds": 23.1
+    },
+    {
+      "name": "关闭鞭策，继续工作",
+      "seconds": 27.2
+    },
+    {
+      "name": "深色模式",
+      "seconds": 31.2
+    }
+  ],
+  "viewport": {
+    "width": 560,
+    "height": 560
+  },
+  "audio": false,
+  "paidModelCalls": false,
+  "privateChatIncluded": false,
+  "errors": []
+}
