@@ -7,9 +7,9 @@
 她会敲键盘、翻书、修工具、举牌等你，也会在任务结束时开心收工。<br>
 一个装在 **DeepSeek Harness Web** 里的可拖动宠物，支持替换角色、制作动作和自定义台词。
 
-[下载安装](https://github.com/gosomea/dsh-bigfish/releases/tag/v0.5.0) · [观看录屏](docs/media/bigfish-demo.mp4) · [制作自己的角色](#做一只属于你的宠物)
+[npm 安装](#快速安装) · [观看录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4) · [制作自己的角色](#做一只属于你的宠物)
 
-![大肥鱼实际动画：举牌等候、打字、空挥联动与工具执行](docs/media/bigfish-demo.gif)
+![大肥鱼实际动画：举牌等候、打字、空挥联动与工具执行](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/bigfish-demo.gif)
 
 **默认安静陪伴 · 鞭策随时关闭 · 角色包自由替换**
 
@@ -36,16 +36,16 @@
 
 <table>
 <tr>
-<td align="center"><img src="docs/media/waiting.png" width="330" alt="举牌等候的大肥鱼"><br><b>我在等哦</b><br>首次问候后安静陪伴</td>
-<td align="center"><img src="docs/media/working.png" width="330" alt="大肥鱼打字，气泡显示输出状态和速度"><br><b>认真开工</b><br>气泡、速度和状态放在一起</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/waiting.png" width="330" alt="举牌等候的大肥鱼"><br><b>我在等哦</b><br>首次问候后安静陪伴</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/working.png" width="330" alt="大肥鱼打字，气泡显示输出状态和速度"><br><b>认真开工</b><br>气泡、速度和状态放在一起</td>
 </tr>
 <tr>
-<td align="center"><img src="docs/media/tools.png" width="330" alt="大肥鱼执行工具时的修理动作"><br><b>工具也有动作</b><br>执行期间暂停空挥</td>
-<td align="center"><img src="docs/media/dark.png" width="330" alt="关闭鞭策后的深色模式大肥鱼"><br><b>夜里也陪着你</b><br>跟随明暗主题，鞭策可以关闭</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/tools.png" width="330" alt="大肥鱼执行工具时的修理动作"><br><b>工具也有动作</b><br>执行期间暂停空挥</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/dark.png" width="330" alt="关闭鞭策后的深色模式大肥鱼"><br><b>夜里也陪着你</b><br>跟随明暗主题，鞭策可以关闭</td>
 </tr>
 </table>
 
-**[▶ 观看 / 下载完整 MP4 录屏](docs/media/bigfish-demo.mp4)**：举牌 → 工作 → 速度变化 → 调用工具 → 等待确认 → 完成 → 关闭鞭策 → 深色模式。无需声音也能看懂。
+**[▶ 观看 / 下载完整 MP4 录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4)**：举牌 → 工作 → 速度变化 → 调用工具 → 等待确认 → 完成 → 关闭鞭策 → 深色模式。无需声音也能看懂。
 
 ### 不止是一张会晃的贴纸
 
@@ -53,29 +53,44 @@
 
 最近精修了喝茶、擦汗和伸懒腰，让动作有准备、过程和收尾：
 
-<img src="docs/media/daily-motions.gif" width="400" alt="大肥鱼连续分帧动作：捧杯喝茶、擦汗、伸懒腰">
+<img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/daily-motions.gif" width="400" alt="大肥鱼连续分帧动作：捧杯喝茶、擦汗、伸懒腰">
 
 动作可以在「完整设置 → 角色库」逐个预览，内置大肥鱼也支持。
 
-## 安装，开始陪伴
+## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前是 **0.5.0 体验版**；完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前 npm 版本为 **0.5.1**（体验版）；完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
 
-1. 从 [v0.5.0 Releases](https://github.com/gosomea/dsh-bigfish/releases/tag/v0.5.0) 下载 `dsh-bigfish-0.5.0.tgz`。
-2. 安装到你实际使用的 Web profile：
+直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.0.tgz
+dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
 
-3. 打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。
+打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。
+
+**插件里还附带 `dsh-bigfish-pet-maker` Skill，可用来制作、替换和扩展角色包。** 想启用它，再执行一次：
+
+```sh
+npx --yes dsh-bigfish install-skill
+```
+
+它将随包的完整 Skill 安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。宠物插件本身的安装不会自动修改技能目录。
+
+然后在 DSH 中新建会话，直接说：
+
+> 用 $dsh-bigfish-pet-maker 给大肥鱼增加读书、喝茶和整理文件的动作，保留原有造型与动作，生成可导入的新版角色包和预览。
+
+也可以让 Agent 从零设计一只新宠物。生成的 `.dshpet` 通过「完整设置 → 角色库」导入，动作数量可以超过内置大肥鱼的预设。
+
+[npm 包页面](https://www.npmjs.com/package/dsh-bigfish) · [更多角色制作示例](#做一只属于你的宠物)
 
 插件管理器自动注册配置，无需手工再加一份 `bigfish` patch。若 DSH 已在运行且仍加载旧模块，在任务空闲时重启，再刷新页面。
 
-想先看效果？下载同一 Release 的 **`preview.html`**，用浏览器打开即可。它是单文件离线预览，可以切换速度、任务状态、场景及全部内置动作，**无需模型 API，也不会消耗 token**。这里的“离线”指预览；实际 Agent 工作仍由 DSH 及其模型配置决定。
+想先看效果？从 [GitHub Releases](https://github.com/gosomea/dsh-bigfish/releases/tag/v0.5.0) 下载 **`preview.html`**，用浏览器打开即可。它是单文件离线预览，可以切换速度、任务状态、场景及全部内置动作，**无需模型 API，也不会消耗 token**。这里的“离线”指预览；实际 Agent 工作仍由 DSH 及其模型配置决定。
 
-[详细安装、升级与卸载](docs/installation.md) · [常见问题](docs/faq.md)
+[详细安装、升级与卸载](https://github.com/gosomea/dsh-bigfish/blob/main/docs/installation.md) · [常见问题](https://github.com/gosomea/dsh-bigfish/blob/main/docs/faq.md)
 
 ## 按你的习惯陪伴
 
@@ -90,7 +105,7 @@ dsh --profile web
 
 **多个会话同时工作时，跟随你当前打开的会话。** 不叠加后台速度，后台完成不会抢走前台状态；当前会话空闲时，宠物也保持空闲。刷新历史记录不会重播庆祝。
 
-[陪伴与设置说明](docs/settings-v2.md) · [台词与工具扩展](docs/dialogue.md) · [备份与恢复](docs/backup-and-storage.md)
+[陪伴与设置说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/settings-v2.md) · [台词与工具扩展](https://github.com/gosomea/dsh-bigfish/blob/main/docs/dialogue.md) · [备份与恢复](https://github.com/gosomea/dsh-bigfish/blob/main/docs/backup-and-storage.md)
 
 ## 做一只属于你的宠物
 
@@ -104,7 +119,13 @@ Release 另附 **大肥鱼 · 成年版**：沿用原始鲸鱼女仆形象，保
 
 ### 用一个 Skill 和 Agent 一起做角色
 
-下载 Release 中的 `dsh-bigfish-pet-maker-1.0.2.zip`，将其中的 `dsh-bigfish-pet-maker` 文件夹放到 DSH 的 `~/.dsh/skills/`，或你的 Agent 支持的技能目录。
+npm 包已经包含完整 Skill，不必另下 ZIP：
+
+```sh
+npx --yes dsh-bigfish install-skill
+```
+
+其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.0/dsh-bigfish-pet-maker-1.0.2.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
 
 然后直接和 Agent 说：
 
@@ -116,7 +137,7 @@ Release 另附 **大肥鱼 · 成年版**：沿用原始鲸鱼女仆形象，保
 
 Skill 包含模板、校验器、素材组装、离线预览和打包工具。生成新美术需要 Agent 自身具备图像生成能力；也支持使用已有素材。角色包遵守文件、像素和帧数量上限，加载时不会执行包内脚本或请求远程素材。
 
-[角色包使用指南](docs/pet-pack/user-guide.md) · [角色包协议](docs/pet-pack/spec.md) · [Skill 源码](skills/dsh-bigfish-pet-maker/SKILL.md)
+[角色包使用指南](https://github.com/gosomea/dsh-bigfish/blob/main/docs/pet-pack/user-guide.md) · [角色包协议](https://github.com/gosomea/dsh-bigfish/blob/main/docs/pet-pack/spec.md) · [Skill 源码](https://github.com/gosomea/dsh-bigfish/blob/main/skills/dsh-bigfish-pet-maker/SKILL.md)
 
 ## 从源码运行
 
@@ -141,7 +162,7 @@ pnpm pack --pack-destination dist
 python3 scripts/package-release.py
 ```
 
-Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准备已构建的 DSH 源码；详情见 [兼容性与验证](docs/compatibility.md)。录屏复现方法见 [媒体说明](docs/media/README.md)。
+Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准备已构建的 DSH 源码；详情见 [兼容性与验证](https://github.com/gosomea/dsh-bigfish/blob/main/docs/compatibility.md)。录屏复现方法见 [媒体说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/README.md)。
 
 ## 验证与边界
 
@@ -149,8 +170,8 @@ Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准�
 
 这不代表所有平台都已支持：Windows、x86、Safari / Firefox、网络共享文件系统及跨天运行尚未完成验证。共享同一 `DSH_HOME` 的多个实例需要全部升级到支持跨进程锁的版本。备份恢复包含冲突保护与回滚，但跨 Host 和浏览器存储不构成一个整体原子事务。
 
-[验证范围](docs/compatibility.md) · [五项优化审查](docs/review-0.5.0.md) · [架构](docs/architecture.md) · [动作设计](docs/scene-packs.md) · [速度自适应](docs/adaptive-speed.md)
+[验证范围](https://github.com/gosomea/dsh-bigfish/blob/main/docs/compatibility.md) · [五项优化审查](https://github.com/gosomea/dsh-bigfish/blob/main/docs/review-0.5.0.md) · [架构](https://github.com/gosomea/dsh-bigfish/blob/main/docs/architecture.md) · [动作设计](https://github.com/gosomea/dsh-bigfish/blob/main/docs/scene-packs.md) · [速度自适应](https://github.com/gosomea/dsh-bigfish/blob/main/docs/adaptive-speed.md)
 
 ## 许可与素材
 
-代码采用 [MIT](LICENSE)。角色美术和标志另见 [NOTICE](NOTICE) 与 [素材来源](docs/asset-provenance.md)：原始参考图作者尚未确认，代码许可不代表对第三方角色或商标权利的授权。本仓库不包含用户原始参考截图、聊天记录或模型凭据。
+代码采用 [MIT](https://github.com/gosomea/dsh-bigfish/blob/main/LICENSE)。角色美术和标志另见 [NOTICE](https://github.com/gosomea/dsh-bigfish/blob/main/NOTICE) 与 [素材来源](https://github.com/gosomea/dsh-bigfish/blob/main/docs/asset-provenance.md)：原始参考图作者尚未确认，代码许可不代表对第三方角色或商标权利的授权。本仓库不包含用户原始参考截图、聊天记录或模型凭据。

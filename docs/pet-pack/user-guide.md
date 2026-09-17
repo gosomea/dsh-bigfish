@@ -16,7 +16,15 @@
 
 ## 和 Agent 制作角色
 
-将 `dsh-bigfish-pet-maker` Skill 文件夹放入 Agent 的技能目录。DSH 用户目录为 `~/.dsh/skills/dsh-bigfish-pet-maker`；Codex 本地可发现目录为 `~/.codex/skills/dsh-bigfish-pet-maker`。具体宿主是否需要新会话刷新技能列表，取决于其技能发现机制。
+插件的 npm 包已包含完整 Skill，推荐一条命令安装：
+
+```sh
+npx --yes dsh-bigfish install-skill
+```
+
+默认使用 `$DSH_HOME/skills` 或 `~/.dsh/skills`；其他 Agent 可通过 `--skills-dir /absolute/path/to/skills` 指定目录。相同内容跳过，不同内容不会覆盖；重新启用已修改的 Skill 前请先备份。
+
+也可以将 `dsh-bigfish-pet-maker` Skill 文件夹手动放入 Agent 的技能目录。DSH 用户目录为 `~/.dsh/skills/dsh-bigfish-pet-maker`；Codex 本地可发现目录为 `~/.codex/skills/dsh-bigfish-pet-maker`。具体宿主是否需要新会话刷新技能列表，取决于其技能发现机制。
 
 可直接说：
 

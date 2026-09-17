@@ -1,7 +1,6 @@
 {
   "name": "dsh-bigfish",
-  "version": "0.5.0",
-  "private": true,
+  "version": "0.5.1",
   "description": "Adaptive DSH companion with replaceable, extensible character packs",
   "type": "module",
   "exports": {
@@ -13,11 +12,14 @@
     "./package.json": "./package.json"
   },
   "files": [
+    "bin",
     "lib",
-    "packs/classic",
+    "packs/classic/manifest.json",
     "cordis.patch.yml",
     "README.md",
-    "docs",
+    "docs/**/*.md",
+    "docs/**/*.json",
+    "docs/third-party-licenses.txt",
     "LICENSE",
     "NOTICE",
     "skills/dsh-bigfish-pet-maker",
@@ -35,8 +37,9 @@
     "preview": "tsx scripts/serve.ts",
     "test:browser": "playwright test",
     "smoke:native": "tsx scripts/smoke-native.ts",
-    "package": "pnpm build && pnpm pack --pack-destination dist",
-    "test:soak": "tsx scripts/soak.ts"
+    "package": "pnpm pack --pack-destination dist",
+    "test:soak": "tsx scripts/soak.ts",
+    "prepack": "pnpm check && pnpm build"
   },
   "devDependencies": {
     "@deepseek-ai/schemastery": "3.18.2",
@@ -70,5 +73,31 @@
   "license": "MIT",
   "dependencies": {
     "proper-lockfile": "4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gosomea/dsh-bigfish.git"
+  },
+  "homepage": "https://github.com/gosomea/dsh-bigfish#readme",
+  "bugs": {
+    "url": "https://github.com/gosomea/dsh-bigfish/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "virtual-pet",
+    "companion",
+    "skills",
+    "animation"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/types/src/index.d.ts",
+  "bin": {
+    "dsh-bigfish": "bin/dsh-bigfish.mjs"
   }
 }

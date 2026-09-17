@@ -2,12 +2,31 @@
 
 已验证：DeepSeek Harness `0.1.5-rc.1` 与 `0.1.5-rc.2`，macOS / Node 24.19.0 的完整原生安装。Linux 另验证插件构建、单元和浏览器，范围见 [兼容性](compatibility.md)。dsh 公开接口尚未稳定，其他版本先在隔离 profile 验证。
 
-## 安装交付包
-
-确保使用 Node 22.19+ 或 24+，并已安装 dsh。用绝对路径传入本项目 `dist/dsh-bigfish-0.5.0.tgz`：
+## 从 npm 快速安装（推荐）
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.0.tgz
+dsh plugin --profile web add dsh-bigfish
+dsh --profile web
+```
+
+安装指定版本可使用 `dsh-bigfish@0.5.1`。升级运行 `dsh plugin --profile web add dsh-bigfish@latest`，在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
+
+npm 包内含完整 `dsh-bigfish-pet-maker` Skill。按需启用：
+
+```sh
+npx --yes dsh-bigfish install-skill
+```
+
+默认安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`，未设置 DSH_HOME 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。安装器校验完整文件，相同版本可重复执行；不同内容不会被覆盖。使用 `--skills-dir /absolute/path/to/skills` 可安装到其他 Agent 的技能目录。在 DSH 中新建会话后，可让 Agent 用这个 Skill 制作新角色或给现有包增加动作，再从角色库导入 `.dshpet`。
+
+这个命令是显式操作，npm 安装 / 升级期间不会自动改动用户技能目录。旧 Skill 有改动时，先备份并移走原目录，或指定另一个技能目录。
+
+## 安装本地交付包
+
+确保使用 Node 22.19+ 或 24+，并已安装 dsh。在联网机器执行 `npm pack dsh-bigfish@0.5.1` 可取得安装包，再用绝对路径传入：
+
+```sh
+dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.1.tgz
 dsh --profile web
 ```
 
@@ -18,7 +37,7 @@ dsh --profile web
 ```sh
 export DSH_HOME=/absolute/path/to/bigfish-trial-home
 dsh --profile bigfish-trial --from-default-profile web --dump-config > /dev/null
-dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.5.0.tgz
+dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.5.1.tgz
 dsh --profile bigfish-trial --port 4180 --no-open
 ```
 
