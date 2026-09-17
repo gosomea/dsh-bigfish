@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "id": "bigfish-logic-fixture",
+  "version": "0.1.0",
+  "rigId": "bigfish-v1",
+  "capabilities": [
+    "layered"
+  ],
+  "assets": [],
+  "fallbackSceneId": "desk",
+  "scenes": [
+    {
+      "id": "desk",
+      "states": [
+        "idle",
+        "awaiting-output",
+        "reasoning",
+        "generating",
+        "streaming-gap",
+        "tool-running",
+        "waiting-user",
+        "retrying",
+        "disconnected",
+        "completed",
+        "cancelled",
+        "failed",
+        "blocked",
+        "limited",
+        "interrupted",
+        "unknown-end"
+      ],
+      "minHoldMs": 20000,
+      "whipHull": {
+        "x": 0,
+        "y": 0,
+        "width": 70,
+        "height": 150
+      },
+      "margin": 12,
+      "actions": [
+        {
+          "id": "work",
+          "kind": "loop",
+          "states": [
+            "idle",
+            "awaiting-output",
+            "reasoning",
+            "generating",
+            "streaming-gap",
+            "tool-running",
+            "waiting-user",
+            "retrying",
+            "disconnected",
+            "completed",
+            "cancelled",
+            "failed",
+            "blocked",
+            "limited",
+            "interrupted",
+            "unknown-end"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 2000,
+          "cooldownMs": 2500,
+          "channels": [
+            "body",
+            "arms"
+          ],
+          "entryPose": "standing",
+          "exitPose": "standing",
+          "envelope": {
+            "x": 100,
+            "y": 0,
+            "width": 100,
+            "height": 180
+          }
+        },
+        {
+          "id": "glance",
+          "kind": "reaction",
+          "states": [
+            "idle",
+            "awaiting-output",
+            "reasoning",
+            "generating",
+            "streaming-gap",
+            "tool-running",
+            "waiting-user",
+            "retrying",
+            "disconnected",
+            "completed",
+            "cancelled",
+            "failed",
+            "blocked",
+            "limited",
+            "interrupted",
+            "unknown-end"
+          ],
+          "pressure": [
+            0,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 500,
+          "cooldownMs": 2500,
+          "channels": [
+            "eyes"
+          ],
+          "entryPose": "standing",
+          "exitPose": "standing",
+          "envelope": {
+            "x": 100,
+            "y": 0,
+            "width": 100,
+            "height": 180
+          }
+        },
+        {
+          "id": "puff",
+          "kind": "reaction",
+          "states": [
+            "idle",
+            "awaiting-output",
+            "reasoning",
+            "generating",
+            "streaming-gap",
+            "tool-running",
+            "waiting-user",
+            "retrying",
+            "disconnected",
+            "completed",
+            "cancelled",
+            "failed",
+            "blocked",
+            "limited",
+            "interrupted",
+            "unknown-end"
+          ],
+          "pressure": [
+            0.3,
+            1
+          ],
+          "fatigue": [
+            0,
+            1
+          ],
+          "weight": 1,
+          "durationMs": 500,
+          "cooldownMs": 2500,
+          "channels": [
+            "mouth"
+          ],
+          "entryPose": "standing",
+          "exitPose": "standing",
+          "envelope": {
+            "x": 100,
+            "y": 0,
+            "width": 100,
+            "height": 180
+          }
+        }
+      ]
+    }
+  ]
+}
