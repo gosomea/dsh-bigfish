@@ -40,8 +40,10 @@ export class Director {
   tick(input: Pick<Snapshot, 'sessionId' | 'turn' | 'state' | 'pressure' | 'fatigue'>, now: number, policy: {richness:number;reduced:boolean;idleMotion:string;switchReady?:boolean;whipEnabled?:boolean} = {richness: 2, reduced: false, idleMotion: ''}): Direction {
     if (!Number.isFinite(now) || now < this.lastAt) throw new Error('Director clock must be monotonic');
     this.lastAt = now;
-    const stateChanged=this.lastState!==input.state;this.lastState=input.state;
-    const switchReady=policy.switchReady!==false||stateChanged;
+    const stateChanged=this.lastState!==input.state;
+    const ordinary=['generating','reasoning','streaming-gap','tool-running'];
+    const critical=stateChanged&&(!ordinary.includes(this.lastState)||!ordinary.includes(input.state));this.lastState=input.state;
+    const switchReady=policy.switchReady!==false||critical;
     const task = `${input.sessionId}:${input.turn}`;
     if (task !== this.task) {
       this.task = task; this.scene = null; this.action = this.reaction = null;
@@ -59,11 +61,12 @@ export class Director {
       }
     }
     const stable=policy.reduced||policy.richness===0;
-    const permitted=(a:Action)=>motionAllowed(a.motion,policy.richness,policy.reduced)&&(policy.whipEnabled!==false||!['flinch','dodge'].includes(a.motion))&&a.states.includes(input.state)&&(stable||(input.pressure>=a.pressure[0]&&input.pressure<=a.pressure[1]&&input.fatigue>=a.fatigue[0]&&input.fatigue<=a.fatigue[1]));
+    const supports=(a:Action)=>motionAllowed(a.motion,policy.richness,policy.reduced)&&!['flinch','dodge'].includes(a.motion)&&a.states.includes(input.state);
+    const permitted=(a:Action)=>supports(a)&&(stable||(input.pressure>=a.pressure[0]&&input.pressure<=a.pressure[1]&&input.fatigue>=a.fatigue[0]&&input.fatigue<=a.fatigue[1]));
     const eligible = this.pack.scenes.filter(s => s.states.includes(input.state)&&s.actions.some(a=>a.kind==='loop'&&permitted(a)));
     const previousAction = this.action;
     const fallback = this.pack.scenes.find(s => s.id === this.pack.fallbackSceneId)!;
-    const forced = !this.scene || !eligible.some(scene => scene.id === this.scene!.id);
+    const forced = !this.scene || !this.scene.states.includes(input.state)||!this.scene.actions.some(a=>a.kind==='loop'&&supports(a));
     let changed = false;
     if ((forced && (switchReady || !this.scene)) || (switchReady && this.scene && !stable && now - this.sceneAt >= Math.max(this.scene.minHoldMs,policy.richness===1?60000:0))) {
       const next = (stable ? eligible[0] : this.select(eligible.map(s => ({ ...s, weight: 1 })))) ?? fallback;
@@ -74,14 +77,14 @@ export class Director {
     const scene = this.scene ?? fallback;
     const valid = (a: Action) => permitted(a) && (!policy.idleMotion || input.state!=='idle' || a.motion===policy.idleMotion);
     let transition: Direction['transition'] = null;
-    if (changed || !this.action || (switchReady && (!valid(this.action) || now >= this.until)) || (input.state==='idle' && policy.idleMotion!==this.action.motion)) {
+    if (changed || !this.action || (switchReady && (!supports(this.action) || now >= this.until)) || (input.state==='idle' && policy.idleMotion!==this.action.motion)) {
       const loops = scene.actions.filter(a => a.kind === 'loop' && valid(a));
       const available = loops.filter(a => a.id !== this.action?.id && (this.cooldown.get(`${scene.id}:${a.id}`) ?? 0) <= now);
       const recentFree=available.filter(a=>!this.recent.includes(a.id));
       const fresh = recentFree.length ? recentFree : available.length ? available : loops.filter(a => a.id !== this.action?.id);
       const next = (stable ? loops[0] : null) ?? (!this.action && input.state === 'idle' ? loops.find(a => a.motion === 'wait-sign') : null) ?? this.select(fresh.length ? fresh : loops) ?? scene.actions.find(a => a.kind === 'loop')!;
       if (this.action && this.action.exitPose !== next.entryPose) transition = { fromPose: this.action.exitPose, toPose: next.entryPose };
-      this.action = next; this.until = stable || (input.state==='idle' && policy.idleMotion) ? Infinity : now + Math.max(next.durationMs,policy.richness===1?12000:6000);
+      this.action = next; this.until = stable || (input.state==='idle' && policy.idleMotion) ? Infinity : now + Math.max(next.durationMs,policy.richness===1?18000:12000);
       this.recent=[...this.recent.filter(id=>id!==next.id),next.id].slice(-3);
       this.cooldown.set(`${scene.id}:${next.id}`, this.until + next.cooldownMs);
       this.reaction = null;

@@ -94,8 +94,9 @@ test('air swing drives the rendered expression and stops during tool execution',
   await page.getByText('高级与重置',{exact:true}).click();await page.getByLabel('按模型自动校准').uncheck(); await page.getByLabel('鞭策节奏').selectOption('rhythm');
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   const canvas = page.locator('.bf-demo-stage canvas'); await expect(canvas).toHaveAttribute('data-whip', 'true');
-  await expect.poll(async () => canvas.evaluate(c => c.dataset.beat === 'react' && c.dataset.frame === c.dataset.beatPose && c.dataset.reaction !== 'none')).toBe(true);
+  await expect.poll(async () => canvas.evaluate(c => c.dataset.beat === 'react' && c.dataset.frame === c.dataset.beatPose && c.dataset.reaction !== 'none'),{intervals:[50]}).toBe(true);
   await page.locator('.bf-demo-stage').screenshot({ path: 'artifacts/whip-linked.png' });
+  await expect.poll(()=>canvas.getAttribute('data-beat'),{intervals:[50]}).toBe('hold');const held=await canvas.getAttribute('data-frame');await expect(canvas).toHaveAttribute('data-whip','false');await page.waitForTimeout(1600);await expect(canvas).toHaveAttribute('data-beat','hold');await expect(canvas).toHaveAttribute('data-frame',held!);
   await page.locator('#demo-state').selectOption('tool-running'); await expect(canvas).toHaveAttribute('data-whip', 'false'); await expect(canvas).toHaveAttribute('data-reaction', 'none');
 });
 
@@ -143,7 +144,7 @@ test('long dialogue, large pet and viewport changes respect measured bounds',asy
 
 test('quiet companion does not rotate signs or messages over ten minutes and reload',async({page})=>{
  await page.clock.install();await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget');
- await expect(widget.locator('canvas')).toHaveAttribute('data-motion','wait-sign');
+ await widget.getByRole('button',{name:'设置',exact:true}).click();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByRole('button',{name:'关闭',exact:true}).click();
  await page.clock.fastForward(9000);await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
  await page.clock.fastForward(600000);await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);await expect(widget.locator('.bf-card-actions button')).toHaveCount(2);
  await page.reload();await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
@@ -151,7 +152,7 @@ test('quiet companion does not rotate signs or messages over ten minutes and rel
 });
 
 test('settings preview shares idle budget and display-only-buttons has no status leakage',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByText('预览当前效果',{exact:true}).click();const preview=page.getByLabel('行为预览');
+ await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByText('预览当前效果',{exact:true}).click();const preview=page.getByLabel('行为预览');
  await expect(preview.locator('canvas')).toHaveAttribute('data-motion','wait-sign');await preview.getByRole('button',{name:'快进 30 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
  await page.getByLabel('空闲互动',{exact:true}).selectOption('frequent');await preview.getByRole('button',{name:'重新预览',exact:true}).click();await preview.getByRole('button',{name:'快进 120 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-idle-active','true');
  await page.getByLabel('消息显示',{exact:true}).selectOption('buttons');await expect(preview.locator('.bf-state')).toHaveCount(0);await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
@@ -164,4 +165,13 @@ test('animation tiers, reduced motion, explicit whip off and saved preferences c
  await page.getByLabel('动作表现').selectOption('1');await expect(canvas).not.toHaveAttribute('data-motion','run');await page.getByLabel('动作表现').selectOption('0');await expect(canvas).toHaveAttribute('data-atlas','classic');
  await page.getByLabel('动作表现').selectOption('2');await expect(canvas).toHaveAttribute('data-motion','run');await page.getByText('外观与动画',{exact:true}).click();await page.getByLabel('动画',{exact:true}).selectOption('reduced');await expect(canvas).toHaveAttribute('data-reduced','true');const frame=await canvas.getAttribute('data-frame');await page.waitForTimeout(400);await expect(canvas).toHaveAttribute('data-frame',frame!);
  await page.getByLabel('动画',{exact:true}).selectOption('normal');await expect(canvas).toHaveAttribute('data-motion','run');await page.reload();await page.getByRole('button',{name:'完整设置',exact:true}).click();await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByLabel('动作表现')).toHaveValue('2');
+});
+
+
+test('lively defaults keep the sign after speech hides and schedule another complete idle gesture',async({page})=>{
+ await page.clock.install();await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget'),canvas=widget.locator('canvas');
+ await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(1);
+ await page.clock.fastForward(7000);await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(canvas).toHaveAttribute('data-idle-active','true');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
+ await page.clock.fastForward(5500);await expect(canvas).toHaveAttribute('data-motion','breathe');await page.clock.fastForward(40000);await expect(canvas).toHaveAttribute('data-idle-active','true');await expect(canvas).not.toHaveAttribute('data-motion','breathe');
+ await page.locator('#demo-state').selectOption('generating');await expect(canvas).not.toHaveAttribute('data-motion','wait-sign');await expect(canvas).toHaveAttribute('data-idle-active','false');
 });

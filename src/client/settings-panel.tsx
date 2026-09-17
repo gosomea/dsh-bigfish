@@ -152,7 +152,7 @@ export function SettingsPanel({
         <p className="bf-help">
           {p.idleMode === "quiet"
             ? "首次问候后安静休息，不反复举牌或换台词。"
-            : "气泡和举牌共用间隔，每次互动最多 6 秒。"}
+            : "每次动作展示约 12 秒，气泡最多 6 秒；内置大肥鱼有台词时，每两次互动至少一次举牌。其他角色使用角色包提供的问候动作。"}
         </p>
         {select(
           "动作表现",
@@ -228,6 +228,7 @@ export function SettingsPanel({
           </details>
           <details className="bf-disclosure">
             <summary>消息内容与空闲习惯</summary>
+            {toggle("showTask", "文案关联本轮任务摘要")}
             {toggle("greetOnOpen", "首次出现时打招呼")}
             {toggle("idleHideMessage", "安静休息时隐藏消息文字")}
             {select(

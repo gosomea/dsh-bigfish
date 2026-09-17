@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium, expect } from '@playwright/test';
 const root = process.cwd(), harness = resolve(process.argv[2] ?? '../../deepseek-harness');
-const tarball = resolve(process.argv[3] ?? 'dist/dsh-bigfish-0.5.0.tgz');
+const packageVersion=JSON.parse(await readFile(resolve(root,'package.json'),'utf8')).version;
+const tarball = resolve(process.argv[3] ?? `dist/dsh-bigfish-${packageVersion}.tgz`);
 const previousTarball = process.argv[4] ? resolve(process.argv[4]) : undefined;
 await readFile(tarball); await mkdir('.probe', { recursive: true }); await mkdir('artifacts', { recursive: true });
 const home = await mkdtemp(resolve('.probe/package-home-'));
@@ -89,6 +90,7 @@ try {
 
   await expect(page.locator('.bf-state')).toHaveText('Writing', { timeout: 10000 });
   await expect(page.locator('.bf-stats')).toContainText('≈', { timeout: 5000 });
+  await expect(page.locator('.bf-task-context')).toContainText('测试大肥鱼实时动画');checks.push('native user-message task cue rendered with actual current turn');
   await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-whip', 'true');
   await page.waitForTimeout(2000); await page.screenshot({ path: 'artifacts/native-streaming.png' });
   const activeSessionId = await page.evaluate(async () => { const method='session/list'; const result=await (await fetch('/api/'+method,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({type:'client-request',rpcId:crypto.randomUUID(),method,payload:{args:{_request:{}}}})})).json(); return result.result.value.items.find((item: any) => item.running)?.sessionId; });

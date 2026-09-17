@@ -21,6 +21,7 @@ function LegacyFishCanvas({
   pack = classicPack,
   dragging = false,
   previewMotion = "",
+  activityMotion = "",
   idle,
 }: {
   snapshot: Snapshot;
@@ -29,6 +30,7 @@ function LegacyFishCanvas({
   pack?: ScenePack;
   dragging?: boolean;
   previewMotion?: string;
+  activityMotion?: string;
   idle?: IdlePresentation;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -50,6 +52,7 @@ function LegacyFishCanvas({
     if (renderer.current) {
       renderer.current.idlePresentation = idle;
       renderer.current.previewMotion = previewMotion;
+      renderer.current.activityMotion = activityMotion;
       renderer.current.signText = t("waitSign");
       renderer.current.signAlternatives = [
         t("waitSign"),

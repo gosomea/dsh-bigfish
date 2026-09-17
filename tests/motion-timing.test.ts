@@ -14,14 +14,16 @@ test('ordinary tool semantics switch at cycle end; confirmation interrupts immed
  const d=new PetDirector(fixture(),()=>0);assert.equal(d.choose(input,0).animation.id,'work');
  assert.equal(d.choose({...input,tag:'writing'},300).animation.id,'work');
  assert.equal(d.choose({...input,tag:'writing'},990).animation.id,'work');
- assert.equal(d.choose({...input,tag:'writing'},1000).animation.id,'write');
- assert.equal(d.choose({...input,state:'waiting-user'},1010).animation.id,'attention');
+ assert.equal(d.choose({...input,tag:'writing'},1000).animation.id,'work');
+ assert.equal(d.choose({...input,tag:'writing'},4000).animation.id,'write');
+ assert.equal(d.choose({...input,state:'waiting-user'},4010).animation.id,'attention');
 });
 test('one-shots finish before an ordinary semantic switch and never periodically restart',()=>{
  const p=fixture();p.animations.find(a=>a.id==='work')!.loop=false;const d=new PetDirector(p,()=>0);
  d.choose(input,0);assert.equal(d.choose({...input,tag:'writing'},500).animation.id,'work');
- assert.equal(d.choose({...input,tag:'writing'},1000).animation.id,'write');
- const attention={...input,state:'waiting-user' as const,tag:'attention'};d.choose(attention,1100);
+ assert.equal(d.choose({...input,tag:'writing'},1000).animation.id,'work');
+ assert.equal(d.choose({...input,tag:'writing'},4000).animation.id,'write');
+ const attention={...input,state:'waiting-user' as const,tag:'attention'};d.choose(attention,4100);
  const a=d.choose(attention,25000);assert.equal(a.animation.id,'attention');assert.equal(frameAt(a.animation,a.time),a.animation.frames.at(-1));
  assert.ok(d.choose(attention,37000).time>a.time);
 });
@@ -33,11 +35,11 @@ test('changing playback speed integrates elapsed segments without rewind or jump
 });
 test('ordinary semantic change cannot be hidden behind an author-defined long loop',()=>{
  const p=fixture();p.animations[1]!.frames.forEach(f=>f.durationMs=10000);const d=new PetDirector(p,()=>0);d.choose(input,0);
- const next={...input,tag:'writing'};assert.equal(d.choose(next,100).animation.id,'work');assert.equal(d.choose(next,1300).animation.id,'write');
+ const next={...input,tag:'writing'};assert.equal(d.choose(next,100).animation.id,'work');assert.equal(d.choose(next,6100).animation.id,'write');
 });
 test('recent motion history avoids the last three when more alternatives exist',()=>{
  const p=fixture();p.animations.push(...['a','b','c','d'].map(id=>({...p.animations[1]!,id})));const d=new PetDirector(p,()=>0);const ids=[];
- for(let t=0;t<=48000;t+=12000)ids.push(d.choose(input,t).animation.id);
+ for(let t=0;t<=80000;t+=20000)ids.push(d.choose(input,t).animation.id);
  assert.equal(new Set(ids.slice(0,4)).size,4);assert.notEqual(ids[4],ids[3]);assert.notEqual(ids[4],ids[2]);assert.notEqual(ids[4],ids[1]);
 });
 test('built-in confirmation has one dedicated sequence across every richness tier',()=>{
@@ -70,4 +72,16 @@ test('external near-miss never enters ordinary working pool, even if authored as
  const d=new PetDirector(p,()=>0);
  for(let t=0;t<60000;t+=1000)assert.notEqual(d.choose(input,t).animation.id,'dodge');
  assert.equal(d.choose({...input,preview:'dodge'},60001).animation.id,'dodge'); // Explicit asset inspection remains available.
+});
+
+test('external greeting replays on a new idle burst even when the fallback shares its animation ID',()=>{
+ const p=fixture();p.animations[0]!.tags.push('greeting');p.animations[0]!.loop=false;const d=new PetDirector(p,()=>0);
+ const idle={active:true,showText:true,motion:'wait-sign',text:'你好',serial:1};const i={...input,state:'idle' as const,idle};d.choose(i,0);assert.ok(d.choose(i,3000).time>=3000);
+ d.choose({...i,idle:{...idle,active:false}},12000);assert.equal(d.choose({...i,idle:{...idle,serial:2}},30000).time,0);
+});
+test('external ordinary playback does not advance under an air-swing reaction or rotate urgent poses',()=>{
+ const p=fixture(),d=new PetDirector(p,()=>0);d.choose(input,0);const a=d.choose(input,500);
+ assert.equal(d.choose({...input,reactionActive:true},5000).time,a.time);
+ p.animations.push({...p.animations.find(a=>a.id==='attention')!,id:'attention-alt'});
+ const waiting={...input,state:'waiting-user' as const};const first=d.choose(waiting,5100);assert.equal(d.choose(waiting,30000).animation.id,first.animation.id);
 });

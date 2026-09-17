@@ -131,3 +131,5 @@ body[data-ds-dark-theme] .bf-surface {
 .bf-pet-preview .bf-stage {width:280px;max-width:100%;margin:auto}
 .bf-restore img {width:32px;height:32px;object-fit:contain;pointer-events:none}
 .bf-role-thumb {height:40px;width:40px;object-fit:contain;vertical-align:middle;margin-right:8px}
+
+.bf-task-context { font-size: .9em; opacity: .75; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 5px; }

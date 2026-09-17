@@ -238,7 +238,7 @@ function parsePet(files) {
   const dialogue = p.dialogue ? object(json(files, str(p.dialogue))) : {};
   for (const [key, lines] of Object.entries(dialogue)) {
     id(key);
-    if (!Array.isArray(lines) || lines.length > 30 || lines.some((s) => typeof s !== "string" || !s.trim() || s.length > 160 || /\{(?!tool\}|file\}|elapsed\}|activeCount\}|completedCount\})[^}]*\}/.test(s))) throw Error("\u89D2\u8272\u53F0\u8BCD\u683C\u5F0F\u65E0\u6548");
+    if (!Array.isArray(lines) || lines.length > 30 || lines.some((s) => typeof s !== "string" || !s.trim() || s.length > 160 || /\{(?!task\}|tool\}|file\}|elapsed\}|activeCount\}|completedCount\})[^}]*\}/.test(s))) throw Error("\u89D2\u8272\u53F0\u8BCD\u683C\u5F0F\u65E0\u6548");
   }
   if (p.capabilities.includes("air-swing") && !animations.some((a) => a.tags.includes("near-miss"))) throw Error("\u7A7A\u6325\u4E92\u52A8\u9700\u8981 near-miss \u53CD\u5E94\u52A8\u753B");
   if (p.capabilities.includes("sign") && !animations.some((a) => a.frames.some((f) => f.sign))) throw Error("\u4E3E\u724C\u80FD\u529B\u9700\u8981\u724C\u9762\u951A\u70B9");

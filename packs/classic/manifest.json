@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "bigfish-classic",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "rigId": "bigfish-v1",
   "capabilities": [
     "layered",

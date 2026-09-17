@@ -7,7 +7,7 @@ root = Path(__file__).resolve().parents[1]
 version = json.loads((root / 'package.json').read_text())['version']
 dist = root / 'dist'
 skill = root / 'skills/dsh-bigfish-pet-maker'
-with ZipFile(dist / 'dsh-bigfish-pet-maker-1.0.2.zip', 'w', ZIP_DEFLATED) as archive:
+with ZipFile(dist / 'dsh-bigfish-pet-maker-1.0.3.zip', 'w', ZIP_DEFLATED) as archive:
     for file in sorted(skill.rglob('*')):
         if file.is_file() and not any(part.startswith('.') or part == '__pycache__' for part in file.relative_to(skill).parts):
             archive.write(file, 'dsh-bigfish-pet-maker/' + str(file.relative_to(skill)))
@@ -21,4 +21,4 @@ with ZipFile(dist / f'dsh-bigfish-source-{version}.zip', 'w', ZIP_DEFLATED) as a
         rel = file.relative_to(root)
         if file.is_file() and (str(rel) in files or not any(part.startswith('.') or part == '__pycache__' for part in rel.parts)):
             archive.write(file, 'dsh-bigfish/' + str(rel))
-print(f'Packaged source {version} and dsh-bigfish-pet-maker 1.0.2')
+print(f'Packaged source {version} and dsh-bigfish-pet-maker 1.0.3')

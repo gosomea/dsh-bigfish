@@ -10,9 +10,9 @@ export function DialogueSettings({prefs,save,preview,recentTools}:{recentTools:r
  <p className="bf-help">空闲等候类同时用于气泡和举牌。何时出现由“空闲互动”决定；固定文字时使用第一句。其他类别用于工作提示。</p>
  <label className="bf-field"><span>台词分类</span><select aria-label="台词分类" value={category} onChange={e=>{setCategory(e.target.value as Category);setDraft(null);setMessage('');}}>{categories.map(c=><option key={c} value={c}>{categoryLabels[c]}</option>)}</select></label>
  <label className="bf-lines-label">台词列表 · 每行一句<textarea aria-label="台词列表" rows={5} maxLength={4800} value={lines} onChange={e=>setDraft(e.target.value)}/></label>
- <p className="bf-help">随机轮换且避免连着重复。留空可关闭此类台词。变量：{'{tool} {file} {elapsed} {activeCount} {completedCount}'}</p>
+ <p className="bf-help">随机轮换且避免连着重复。留空可关闭此类台词。变量：{'{task} {tool} {file} {elapsed} {activeCount} {completedCount}'}</p>
  <div className="bf-button-row"><button onClick={async()=>{const next={...library,[category]:lines.split('\n').map(s=>s.trim()).filter(Boolean)};if(await commit({dialogueJson:JSON.stringify(next)}))setDraft(null);}}>保存这一类台词</button>
- <button onClick={()=>{const candidates=lines.split('\n').map(s=>s.trim()).filter(Boolean);setAudition({category,text:formatLine(candidates[Math.floor(Math.random()*candidates.length)]??'',{tool:'示例工具',file:'example.ts',elapsed:'12 秒',activeCount:3,completedCount:5})});}}>预览气泡与动作</button>
+ <button onClick={()=>{const candidates=lines.split('\n').map(s=>s.trim()).filter(Boolean);setAudition({category,text:formatLine(candidates[Math.floor(Math.random()*candidates.length)]??'',{task:'制作一个小游戏',tool:'示例工具',file:'example.ts',elapsed:'12 秒',activeCount:3,completedCount:5})});}}>预览气泡与动作</button>
  <button onClick={async()=>{const next={...library};delete next[category];if(await commit({dialogueJson:JSON.stringify(next)}))setDraft(null);}}>恢复这一类默认</button></div>
  {audition&&<div className="bf-dialogue-preview" aria-label="台词动作预览"><small>模拟预览 · 不调用工具</small>{preview(audition.category,audition.text)}<button onClick={()=>setAudition(null)}>关闭预览</button></div>}
  <details className="bf-disclosure"><summary>工具与扩展 · 专属规则</summary><h3>工具专属规则</h3><p className="bf-help">精确名称优先；末尾 * 匹配同一组工具。未知工具会自动使用通用台词。</p>

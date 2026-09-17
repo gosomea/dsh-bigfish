@@ -1,7 +1,7 @@
 import { parseLines, parseRules } from './dialogue.js';
 import { resolveConfig, type Config } from '../domain/config.js';
 export interface Preferences {
-  bubbleEnabled: boolean; bubbleStatus: boolean; bubbleText: boolean; showFile: boolean; showTool: boolean; bubbleWidth: number; bubbleFont: number; speechSeconds: number; talkLevel: number; dialogueJson: string; toolRulesJson: string;
+  bubbleEnabled: boolean; bubbleStatus: boolean; bubbleText: boolean; showTask: boolean; showFile: boolean; showTool: boolean; bubbleWidth: number; bubbleFont: number; speechSeconds: number; talkLevel: number; dialogueJson: string; toolRulesJson: string;
   completionMode:'celebrate'|'message'|'quiet';
   idleMode: 'quiet' | 'occasional' | 'frequent'; greetOnOpen: boolean; idleHideMessage: boolean; idleRandomText: boolean; whipEnabled: boolean; motionPolicy: 'system' | 'normal' | 'reduced';
   version: 2; enabled: boolean; mode: 'urge' | 'rhythm'; autoSpeed: boolean; targetRate: number;
@@ -11,10 +11,10 @@ export interface Preferences {
   windowSeconds: number; learnHistory: boolean; completionSeconds: number;
 }
 export const preferenceDefaults: Preferences = {
-  bubbleEnabled: true, bubbleStatus: true, bubbleText: true, showFile: true, showTool: true, bubbleWidth: 270, bubbleFont: 12, speechSeconds: 2.5, talkLevel: 0, dialogueJson: '{}', toolRulesJson: '[]',
-  completionMode:'celebrate', idleMode:'quiet', greetOnOpen:true, idleHideMessage:true, idleRandomText:false, whipEnabled:true, motionPolicy:'system',
+  bubbleEnabled: true, bubbleStatus: true, bubbleText: true, showTask: true, showFile: true, showTool: true, bubbleWidth: 270, bubbleFont: 12, speechSeconds: 2.5, talkLevel: 1, dialogueJson: '{}', toolRulesJson: '[]',
+  completionMode:'celebrate', idleMode:'frequent', greetOnOpen:true, idleHideMessage:true, idleRandomText:true, whipEnabled:true, motionPolicy:'system',
   version: 2, enabled: true, mode: 'urge', autoSpeed: true, targetRate: 100, maxWhipHz: 2.2,
-  intensity: 1, size: 180, opacity: 1, richness: 1, scene: 'auto', sound: false, volume: .15,
+  intensity: 1, size: 180, opacity: 1, richness: 2, scene: 'auto', sound: false, volume: .15,
   reducedMotion: false, showStats: true, includeReasoning: true, timePressure: false,
   referenceSeconds: 120, fatigueSeconds: 180, windowSeconds: 3, learnHistory: true, completionSeconds: 4,
 };
@@ -29,7 +29,7 @@ export function decodePreferences(value: unknown): Preferences {
   const sourceVersion=(value as {version?:number}).version;
   if (sourceVersion !== undefined && sourceVersion !== 1 && sourceVersion !== 2) throw new Error('Unsupported preferences version');
   p.version=2;
-  if(sourceVersion===1){p.bubbleEnabled=p.bubbleEnabled&&(p.bubbleText||p.bubbleStatus);p.bubbleStatus=p.bubbleEnabled;}
+  if(sourceVersion===1){p.idleMode='quiet';p.bubbleEnabled=p.bubbleEnabled&&(p.bubbleText||p.bubbleStatus);p.bubbleStatus=p.bubbleEnabled;}
   if (!['celebrate','message','quiet'].includes(p.completionMode)) throw new Error('Invalid completion selection');
   if (!['quiet','occasional','frequent'].includes(p.idleMode)||!['system','normal','reduced'].includes(p.motionPolicy)) throw new Error('Invalid behavior selection');
   for (const [key, defaultValue] of Object.entries(preferenceDefaults)) {

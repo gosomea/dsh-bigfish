@@ -1,3 +1,4 @@
+import {WorkMotion} from '../domain/work-motion.js';
 import {IdleDirector, type IdlePresentation} from '../domain/idle.js';
 import {motionAllowed,motionReduced} from '../domain/motion-policy.js';
 import { AirSwing } from '../domain/air-swing.js';
@@ -24,6 +25,9 @@ export class FishRenderer {
   private actionAt = 0;
   private lastAction = '';
   previewMotion = '';
+  activityMotion = '';
+  private workMotion = new WorkMotion();
+  private finishedAt:number|undefined;
   signText = '我在等哦';
   private frame = 0;
   private lastDraw = 0;
@@ -85,15 +89,17 @@ export class FishRenderer {
     const reduced = motionReduced(p,matchMedia('(prefers-reduced-motion: reduce)').matches);
     const input = { ...this.snapshot, pressure: Math.min(1, this.snapshot.pressure * p.intensity) };
     const task = `${input.sessionId}:${input.turn}`;
-    if (task !== this.turn) { this.turn = task; this.phase = 0; this.swing.reset(); this.transitionStart = now; this.lastScene = ''; }
+    if (task !== this.turn) { this.turn = task; this.phase = 0; this.swing.reset(); this.workMotion=new WorkMotion(); this.transitionStart = now; this.lastScene = ''; }
     const idle=this.idlePresentation??this.idleDirector.tick(Date.now(),input.state==='idle',!document.hidden,p,reduced);
     const idleMotion=input.state==='idle'?(this.previewMotion&&!reduced&&motionAllowed(this.previewMotion,p.richness,reduced)?this.previewMotion:idle.motion):'';
     const stillCompletion=input.state==='completed'&&p.completionMode!=='celebrate';
     const direction = this.director.tick(input, now, {richness:stillCompletion?0:p.richness,reduced:reduced||stillCompletion,idleMotion,switchReady:this.cycleComplete,whipEnabled:p.whipEnabled});
     const scene = this.pack.scenes.find(s => s.id === direction.sceneId)!;
-    const action = (this.previewMotion && !reduced && motionAllowed(this.previewMotion,p.richness,reduced) ? this.pack.scenes.flatMap(s => s.actions).find(a => a.motion === this.previewMotion) : undefined) ?? scene.actions.find(a => a.id === direction.actionId)!;
-    const actionKey = `${task}:${direction.sceneId}:${action.id}`;
-    if (actionKey !== this.lastAction) { this.lastAction = actionKey; this.actionAt = now; this.animationCursor=0; this.cycleComplete=false; this.transitionStart=now; }
+    const toolMotion=this.workMotion.choose(input.state==='tool-running',this.activityMotion,now,this.cycleComplete);
+    const requestedMotion=this.previewMotion||toolMotion;
+    const action = (requestedMotion && !reduced && motionAllowed(requestedMotion,p.richness,reduced) ? this.pack.scenes.flatMap(s => s.actions).find(a => a.motion === requestedMotion) : undefined) ?? scene.actions.find(a => a.id === direction.actionId)!;
+    const actionKey = `${task}:${action.id}`;
+    if (actionKey !== this.lastAction) { this.lastAction = actionKey; this.actionAt = now; this.finishedAt=undefined; this.animationCursor=0; this.cycleComplete=false; this.transitionStart=now; }
     const actionTime = (now - this.actionAt) / 1000;
     const theme = p.scene === 'auto' ? scene.theme : p.scene;
     if (direction.sceneId !== this.lastScene) { this.lastScene = direction.sceneId; this.transitionStart = now; }
@@ -133,7 +139,8 @@ export class FishRenderer {
       const frames = animation.pingPong ? [...animation.frames, ...animation.frames.slice(1, -1).reverse()] : animation.frames;
       const fps = animation.fps * (active.has(input.state) ? .8 + input.pressure * .9 : 1);
       const before=this.animationCursor;if(!reacting)this.animationCursor+=dt*fps;
-      this.cycleComplete=reacting?beat.phase>=.94:animation.loop===false?this.animationCursor>=frames.length:Math.floor(before/frames.length)!==Math.floor(this.animationCursor/frames.length);
+      if(animation.loop===false&&this.animationCursor>=frames.length&&this.finishedAt===undefined)this.finishedAt=now;
+      this.cycleComplete=reacting?false:animation.loop===false?this.finishedAt!==undefined&&now-this.finishedAt>=2500:Math.floor(before/frames.length)!==Math.floor(this.animationCursor/frames.length);
       frame = frames[reduced ? 0 : animation.loop===false?Math.min(frames.length-1,Math.floor(this.animationCursor)):Math.floor(this.animationCursor)%frames.length]!;
     }
     if(!animated)this.cycleComplete=actionTime*1000>=action.durationMs;
@@ -163,8 +170,8 @@ export class FishRenderer {
     this.canvas.dataset.idleActive=String(idle.active);this.canvas.dataset.richness=String(p.richness);this.canvas.dataset.reduced=String(reduced);
     this.canvas.dataset.renderMs = String(this.stats.lastMs); this.canvas.dataset.renderCount = String(this.stats.frames);
     this.canvas.dataset.motion = action.motion; this.canvas.dataset.frame = String(frame); this.canvas.dataset.atlas = animated ? animation!.atlas : 'classic';
-    this.canvas.dataset.scene = theme; this.canvas.dataset.expression = String(sprite); this.canvas.dataset.whip = String(allowed);
-    this.canvas.dataset.beat = allowed ? beat.stage : swing.visible ? 'retract' : 'rest';
+    this.canvas.dataset.scene = theme; this.canvas.dataset.expression = String(sprite); this.canvas.dataset.whip = String(swing.visible);
+    this.canvas.dataset.beat = swing.holding ? 'hold' : allowed ? beat.stage : swing.visible ? 'retract' : 'rest';
     this.canvas.dataset.reaction = reacting ? ['dodge', 'tail-cover', 'type-faster'][beat.variant]! : 'none';
     this.canvas.dataset.beatPose = reacting ? String(beat.pose) : '';
     this.schedule();

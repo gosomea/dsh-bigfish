@@ -134,3 +134,11 @@ test('excluded reasoning and metadata do not restore output animation', () => {
     assert.equal(f.view().snapshot.state, 'awaiting-output'); assert.equal(f.view().snapshot.tokens, 0);
   } finally { f.controller.dispose(); }
 });
+
+test('task cues follow only the selected session and clear when no session is selected',()=>{
+ const f=fixture(),user=(text:string)=>({role:'user',source:{kind:'user'},content:[{type:'text',text}]});try{
+  f.a.append('user/message',user('甲的任务'));f.b.append('user/message',user('乙的任务'));assert.equal(f.view().task,'甲的任务');
+  f.select('b');assert.equal(f.view().task,'乙的任务');f.a.append('user/message',user('甲的新任务'));assert.equal(f.view().task,'乙的任务');
+  f.select('a');assert.equal(f.view().task,'甲的新任务');f.select(undefined);assert.equal(f.view().task,'');
+ }finally{f.controller.dispose();}
+});

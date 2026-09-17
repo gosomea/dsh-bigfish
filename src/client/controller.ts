@@ -1,3 +1,4 @@
+import { TaskContext } from '../domain/task-context.js';
 import { Activities, extensionActivity, toolResults, type ActivitySummary } from '../domain/activities.js';
 import { parseRules } from '../contract/dialogue.js';
 import { HarnessAdapter, type AgentHandle } from '../host/adapter.js';
@@ -6,7 +7,7 @@ import type { Channel, ObservedOutput, Snapshot, WorkState } from '../contract/t
 import type { Binding, Entry, NativeServices } from './native-contract.js';
 import { PreferenceStore } from './preferences-store.js';
 
-export interface CompanionView { recentTools?:readonly string[]; activity?: ActivitySummary | null; snapshot: Snapshot; model: string; issue: string | null; demo: boolean }
+export interface CompanionView { task?:string|undefined; recentTools?:readonly string[]; activity?: ActivitySummary | null; snapshot: Snapshot; model: string; issue: string | null; demo: boolean }
 export interface Companion {
   preferences: PreferenceStore; getSnapshot(): CompanionView; subscribe(fn: () => void): () => void;
   resetLearning(all?: boolean): void; dispose(): void;
@@ -18,6 +19,7 @@ export class NativeCompanion implements Companion {
   readonly preferences: PreferenceStore;
   private adapter: HarnessAdapter;
   private activities = new Activities();
+  private taskContext = new TaskContext();
   private listeners = new Set<() => void>();
   private globalOff: (() => void)[] = [];
   private bindingOff: (() => void)[] = [];
@@ -90,7 +92,7 @@ export class NativeCompanion implements Companion {
     if (!force && next === this.binding) return;
     for (const off of this.bindingOff.splice(0)) off();
     if (this.binding) { this.persist(); this.adapter.disposeSession(this.binding.sessionId); }
-    this.activities.clear();
+    this.activities.clear(); this.taskContext.clear();
     this.binding = next; this.agent = null; this.attempt = null; this.windowRevision = -1; this.waiting = false;
     this.starting = false; this.hostRunning = next?.session.getSnapshot().running ?? false;
     if (next) {
@@ -114,9 +116,10 @@ export class NativeCompanion implements Companion {
     let turn = 0, start = this.now(), end: Entry['event'] | null = null;
     let live: Entry['event'] | null = null, observed: ObservedOutput | undefined, retry = false;
     const tools = new Set<string>();
-    this.activities.clear();
+    this.activities.clear(); this.taskContext.clear();
     for (const { event } of window.entries) {
       this.activities.accept(event.type, event.data, event.time, true);
+      this.taskContext.accept(event.type,event.data);
       if (event.type === 'turn/start') { turn = event.data.turn; start = event.time; end = null; tools.clear(); live = null; observed = undefined; retry = false; }
       if (event.type === 'turn/end' && event.data.turn === turn) end = event;
       if (event.type === 'tool/call') tools.add(event.data.callId);
@@ -183,6 +186,7 @@ export class NativeCompanion implements Companion {
   private entry({ event }: Entry) {
     if (!this.binding || !this.agent) return;
     this.activities.accept(event.type, event.data, this.now());
+    this.taskContext.accept(event.type,event.data);
     if (event.type === 'turn/start' || event.type === 'turn/end' || event.type === 'assistant/live-chunk') this.starting = false;
     if (event.type === 'assistant/live-chunk') {
       const data = event.data;
@@ -200,12 +204,14 @@ export class NativeCompanion implements Companion {
     // The browser publishes this echo synchronously, before serialization or network I/O.
     // Present readiness without inventing a turn, token count, or completion event.
     const pending = session?.pendingSubmissions?.some(s => s.placement === 'transcript');
+    let localSubmission=false;
     if ((pending || session?.awaitingFirstTurn || this.starting) &&
       (snapshot.state === 'idle' || Object.values(terminalState).includes(snapshot.state) || snapshot.state === 'unknown-end')) {
+      localSubmission=true;
       snapshot = { ...snapshot, state: 'awaiting-output', rate: null, tokens: 0, wallElapsed: 0,
         workElapsed: 0, generationElapsed: 0, pressure: 0, whipHz: 0, modelKey: null, baseline: null };
     }
-    this.view = { snapshot, recentTools:this.activities.recentTools, activity: this.activities.summary(this.now(), parseRules(this.preferences.getSnapshot().value.toolRulesJson)), model: this.agent?.options.model ?? '',
+    this.view = { snapshot, task:!localSubmission&&this.preferences.getSnapshot().value.showTask?this.taskContext.text:undefined, recentTools:this.activities.recentTools, activity: this.activities.summary(this.now(), parseRules(this.preferences.getSnapshot().value.toolRulesJson)), model: this.agent?.options.model ?? '',
       issue: session?.openState === 'error' ? 'connectionError' : this.historyIssue, demo: false };
     for (const fn of this.listeners) fn();
   }

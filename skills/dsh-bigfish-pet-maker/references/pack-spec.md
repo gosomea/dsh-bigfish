@@ -52,7 +52,7 @@ frame.durationMs 为 16–10000；weight 为 0.01–100；cooldownMs 为 0–360
 
 role：idle、working、attention、success、error。常见 tags：greeting、thinking、writing、read、search、edit、command、test、web、parallel、tool、image、export、background、agent、near-miss。作者可以增加 `vendor:semantic` 等命名空间标签；未来事件通过 semantic 选择它，无匹配时退回 working 或其他当前 role。
 
-待机与用户确认分开；取消/中断退回安静，失败/断线/重试/未知结束退回 error，不播放成功。quiet 待机固定 idle fallback，不定时轮换。空闲互动预算到达时才从 greeting 候选选取，遵守最大 6 秒；静默期间再多动作也不轮播。正式运行自然档至少约 12 秒切换，活泼档至少约 6 秒；到期后等待循环边界。一次性动作 loop:false 播完后保持末帧，不因定时轮换重新播放同一 ID。工具语义变化等待当前循环边界，最长 1.2 秒；一次性动作最长等待 6 秒。确认、失败、完成、取消等角色状态切换及用户改变动作设置立即响应，并优先于残留工具标签。播放时钟累积速度变化，恢复后台页面不追赶暂停时间。选择会优先避开最近 3 个动作，候选不足时按冷却和当前动作回退。逐个动作预览允许完整展示所有强度，与实际设置的策略预览区分。
+待机与用户确认分开；取消/中断退回安静，失败/断线/重试/未知结束退回 error，不播放成功。quiet 待机固定 idle fallback，不定时轮换。空闲互动预算到达时才从 greeting 候选选取，动作预算为 12 秒、气泡最多 6 秒（安静模式首次动作 5 秒）；静默期间再多动作也不轮播。正式运行自然档至少约 18 秒切换，活泼档至少约 12 秒；到期后等待循环边界。一次性动作 loop:false 播完后至少保持末帧 2.5 秒，不因定时轮换重新播放同一 ID。普通工具语义变化先保证当前动作至少展示 4 秒，然后等待循环边界；长循环最多延后 6 秒，一次性长动作最多延后 10 秒。同一 greeting ID 在新的空闲互动预算内可以重新播放。空挥时暂停普通动作播放时钟；空挥结束后保持角色反应的末帧 2.5 秒。确认、失败、完成、取消等角色状态切换及用户改变动作设置立即响应，并优先于残留工具标签。播放时钟累积速度变化，恢复后台页面不追赶暂停时间。选择会优先避开最近 3 个动作，候选不足时按冷却和当前动作回退。逐个动作预览允许完整展示所有强度，与实际设置的策略预览区分。
 
 可选 frame.sign：`{"x":25,"y":88,"width":78,"height":18,"angle":0}`，角色画布内的文字矩形，角度 -45..45。素材中的牌面应为空白；文字由程序绘制，最多显示 20 字符并适配宽度。字体/文字颜色由插件统一提供，1.0 不支持透视变形。举牌角色不用绑定大肥鱼的手/尾巴结构。
 
@@ -60,7 +60,7 @@ near-miss 是专用互动反应标签，不进入普通工作动作随机池；�
 
 ## dialogue.json
 
-对象，键为事件类别，值为最多 30 条非空短句，每句 ≤160 字符。支持 `{tool}`、`{file}`、`{elapsed}`、`{activeCount}`、`{completedCount}`。当前显示类别与插件一致：idle/start/thinking/writing/read/search/edit/command/test/web/parallel/tool/waiting/error/complete/stopped/image/export/background/agent。未知键保留作未来扩展；不执行模板代码。
+对象，键为事件类别，值为最多 30 条非空短句，每句 ≤160 字符。支持 `{task}`（0.5.2 起，当前用户任务短提示）、`{tool}`、`{file}`、`{elapsed}`、`{activeCount}`、`{completedCount}`。当前显示类别与插件一致：idle/start/thinking/writing/read/search/edit/command/test/web/parallel/tool/waiting/error/complete/stopped/image/export/background/agent。未知键保留作未来扩展；不执行模板代码。
 
 用户显式台词（包括 [] 关闭） > 当前角色台词 > 插件通用台词。切换不覆盖用户自定义。频率、静默、声音、位置、大小和速度基准仍归用户设置。
 

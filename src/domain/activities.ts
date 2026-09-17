@@ -1,6 +1,6 @@
 import {categories, classifyTool, type Category, type ToolRule} from '../contract/dialogue.js';
 export interface Activity { semantic?:string; id:string; parent?:string|undefined; name:string; file?:string|undefined; at:number; category?:Category; label?:string; progress?:number|undefined }
-export interface ActivitySummary { semantic?:string; toolName?:string; category:Category; label:string; file?:string|undefined; elapsed:number; activeCount:number; completedCount:number; progress?:number|undefined; motion?:string }
+export interface ActivitySummary { id?:string; semantic?:string; toolName?:string; category:Category; label:string; file?:string|undefined; elapsed:number; activeCount:number; completedCount:number; progress?:number|undefined; motion?:string }
 export function toolResults(data:any): {id:string;error:boolean}[] {
  const blocks=data?.message?.content;
  if(Array.isArray(blocks))return blocks.filter(b=>b?.type==='tool-result'&&typeof b.toolCallId==='string').map(b=>({id:b.toolCallId,error:b.isError===true}));
@@ -35,6 +35,6 @@ export class Activities {
   if(this.failed&&now<this.failed.until)return {category:'error',label:this.failed.label,elapsed:0,activeCount:this.items.size,completedCount:this.completed};
   const all=[...this.items.values()];const leaves=all.filter(a=>!all.some(b=>b.parent===a.id));const a=leaves.at(-1);if(!a)return null;
   const kind=a.category?{category:a.category,label:a.label??a.name}:classifyTool(a.name,rules);
-  return {...kind,...(a.semantic?{semantic:a.semantic}:{}),toolName:a.name,category:leaves.length>1?'parallel':kind.category,file:a.file,elapsed:Math.max(0,now-a.at),activeCount:leaves.length,completedCount:this.completed,progress:a.progress};
+  return {id:a.id,...kind,...(a.semantic?{semantic:a.semantic}:{}),toolName:a.name,category:leaves.length>1?'parallel':kind.category,file:a.file,elapsed:Math.max(0,now-a.at),activeCount:leaves.length,completedCount:this.completed,progress:a.progress};
  }
 }

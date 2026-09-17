@@ -48,7 +48,7 @@ export function parsePet(files:Record<string,Uint8Array>):PetBundle {
  object(p.fallbacks);for(const role of requiredRoles){const a=animations.find(a=>a.id===p.fallbacks[role]);if(!a||!a.tags.includes(role))throw Error(`缺少 ${role} 基础动作映射`);if(a.intensity!==0)throw Error(`基础动作 ${role} 必须支持轻柔模式`);}
  if(p.scenes)for(const [key,s]of Object.entries(object(p.scenes))){id(key);if(!Object.hasOwn(assets,object(s).asset))throw Error('场景资源不存在');}
  const dialogue=p.dialogue?object(json(files,str(p.dialogue))):{};
- for(const [key,lines]of Object.entries(dialogue)){id(key);if(!Array.isArray(lines)||lines.length>30||lines.some((s:any)=>typeof s!=='string'||!s.trim()||s.length>160||/\{(?!tool\}|file\}|elapsed\}|activeCount\}|completedCount\})[^}]*\}/.test(s)))throw Error('角色台词格式无效');}
+ for(const [key,lines]of Object.entries(dialogue)){id(key);if(!Array.isArray(lines)||lines.length>30||lines.some((s:any)=>typeof s!=='string'||!s.trim()||s.length>160||/\{(?!task\}|tool\}|file\}|elapsed\}|activeCount\}|completedCount\})[^}]*\}/.test(s)))throw Error('角色台词格式无效');}
  if(p.capabilities.includes('air-swing')&&!animations.some(a=>a.tags.includes('near-miss')))throw Error('空挥互动需要 near-miss 反应动画');
  if(p.capabilities.includes('sign')&&!animations.some(a=>a.frames.some(f=>f.sign)))throw Error('举牌能力需要牌面锚点');
  const optional=['read','search','edit','test','greeting'];for(const tag of optional)if(!animations.some(a=>a.tags.includes(tag)))warnings.push(`${tag} 使用基础动作回退`);

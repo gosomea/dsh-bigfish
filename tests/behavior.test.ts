@@ -6,7 +6,7 @@ import {Director,seeded} from '../src/domain/director.js';import {parsePack} fro
 import manifest from '../packs/classic/manifest.json' with {type:'json'};
 const pack=parsePack(manifest,()=>true);
 test('quiet idle has one greeting then no speech, signs or actions for ten minutes',()=>{
- const d=new IdleDirector(undefined,()=>0),p={...defaults,richness:2};
+ const d=new IdleDirector(undefined,()=>0),p={...defaults,richness:2,idleMode:'quiet' as const};
  assert.equal(d.tick(0,true,true,p).motion,'wait-sign');assert.equal(d.tick(5000,true,true,p).motion,'breathe');
  for(let now=8000;now<=600000;now+=200){const v=d.tick(now,true,true,p);assert.equal(v.active,false);assert.equal(v.showText,false);assert.equal(v.motion,'breathe');}
  const restored=new IdleDirector(d.memory);assert.equal(restored.tick(601000,true,true,p).showText,false);
@@ -17,10 +17,10 @@ test('idle modes share a single bounded burst, honor custom fixed/random lines, 
   const d=new IdleDirector({greeted:true},()=>.5),p={...defaults,idleMode,idleRandomText:true,dialogueJson:'{"idle":["A","B"]}'};
   d.tick(0,true,true,p);assert.ok(d.memory.nextAt>=min&&d.memory.nextAt<=max);const next=d.memory.nextAt;
   assert.equal(d.tick(next-1,true,true,p).active,false);const v=d.tick(next,true,true,p);assert.equal(v.active,true);assert.equal(v.showText,true);
-  assert.equal(d.tick(next+6000,true,true,p).active,false);const second=d.tick(d.memory.nextAt,true,true,p);assert.notEqual(second.text,v.text);
+  assert.equal(d.tick(next+6000,true,true,p).active,true);assert.equal(d.tick(next+6000,true,true,p).showText,false);assert.equal(d.tick(next+12000,true,true,p).active,false);const second=d.tick(d.memory.nextAt,true,true,p);assert.notEqual(second.text,v.text);
   assert.equal(d.tick(d.memory.nextAt+1,false,true,p).active,false);
  }
- const d=new IdleDirector(),p={...defaults,dialogueJson:'{"idle":["固定一句","另一句"]}'};assert.equal(d.tick(0,true,true,p).text,'固定一句');
+ const d=new IdleDirector(),p={...defaults,idleRandomText:false,dialogueJson:'{"idle":["固定一句","另一句"]}'};assert.equal(d.tick(0,true,true,p).text,'固定一句');
 });
 test('hidden time, folding, restored cooldown and disabled greeting never replay idle bursts',()=>{
  const p={...defaults,idleMode:'frequent' as const},d=new IdleDirector();d.tick(0,true,true,p);d.tick(1000,true,false,p);

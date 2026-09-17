@@ -119,3 +119,13 @@ test('native real result shape ends tools and updates dialogue category for nest
  assert.equal(f.controller.getSnapshot().snapshot.state,'awaiting-output');
  }finally{f.controller.dispose();}
 });
+
+test('native task context follows live user messages, ignores prepended history and honors display preference',async()=>{
+ const user=(text:string)=>({role:'user',source:{kind:'user'},content:[{type:'text',text}]});
+ const f=fixture([entry('user/message',user('旧任务'))]);try{
+  assert.equal(f.controller.getSnapshot().task,'旧任务');f.append('user/message',user('优化游戏'));f.append('turn/start',{turn:1});assert.equal(f.controller.getSnapshot().task,'优化游戏');
+  const prev=f.source.getSnapshot();f.source.set({...prev,revision:prev.revision+1,change:{kind:'prepend',entries:[entry('user/message',user('更老任务'))]}});assert.equal(f.controller.getSnapshot().task,'优化游戏');
+  f.chunk('助手内容');assert.equal(f.controller.getSnapshot().task,'优化游戏');await f.controller.preferences.update({showTask:false});assert.equal(f.controller.getSnapshot().task,undefined);
+  await f.controller.preferences.update({showTask:true});assert.equal(f.controller.getSnapshot().task,'优化游戏');
+ }finally{f.controller.dispose();}
+});

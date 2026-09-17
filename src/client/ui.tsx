@@ -134,6 +134,7 @@ export function Widget({ controller, t }: UIProps) {
         snapshot={s}
         prefs={p}
         activity={view.activity}
+        task={view.task}
         status={t(s.state)}
         idle={idle}
         actions={
@@ -185,7 +186,7 @@ export function Widget({ controller, t }: UIProps) {
         pack={pack}
         dragging={dragging}
         idle={idle}
-        previewMotion={
+        activityMotion={
           view.activity && s.state === "tool-running"
             ? categoryMotions[dialogueCategory(s, view.activity)]
             : ""
