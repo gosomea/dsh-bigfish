@@ -9,7 +9,7 @@ dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
 
-安装指定版本可使用 `dsh-bigfish@0.5.1`。升级运行 `dsh plugin --profile web add dsh-bigfish@latest`，在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
+安装指定版本可使用 `dsh-bigfish@0.5.2`。升级运行 `dsh plugin --profile web add dsh-bigfish@latest`，在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
 
 npm 包内含完整 `dsh-bigfish-pet-maker` Skill。按需启用：
 
@@ -23,10 +23,10 @@ npx --yes dsh-bigfish install-skill
 
 ## 安装本地交付包
 
-确保使用 Node 22.19+ 或 24+，并已安装 dsh。在联网机器执行 `npm pack dsh-bigfish@0.5.1` 可取得安装包，再用绝对路径传入：
+确保使用 Node 22.19+ 或 24+，并已安装 dsh。在联网机器执行 `npm pack dsh-bigfish@0.5.2` 可取得安装包，再用绝对路径传入：
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.1.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.2.tgz
 dsh --profile web
 ```
 
@@ -37,7 +37,7 @@ dsh --profile web
 ```sh
 export DSH_HOME=/absolute/path/to/bigfish-trial-home
 dsh --profile bigfish-trial --from-default-profile web --dump-config > /dev/null
-dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.5.1.tgz
+dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.5.2.tgz
 dsh --profile bigfish-trial --port 4180 --no-open
 ```
 

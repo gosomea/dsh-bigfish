@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {Activities,extensionActivity,toolResults} from '../src/domain/activities.js';
-import {classifyTool,parseLines,parseRules,formatLine} from '../src/contract/dialogue.js';
+import {categories,defaultLines,classifyTool,parseLines,parseRules,formatLine} from '../src/contract/dialogue.js';
 import {Speech} from '../src/domain/speech.js';import {AirSwing} from '../src/domain/air-swing.js';
 test('native result blocks retire root and nested tools, without keeping arguments',()=>{
  const a=new Activities();a.accept('tool/call',{callId:'root',name:'run_code',arguments:'secret'},0);
@@ -36,3 +36,9 @@ test('short output does not flash a whip; scene changes do not rewind a running 
  v=w.tick(.1,2,false,false);assert.equal(v.responding,false);assert.ok(v.opacity<1);
  w.tick(.1,2,false,false);assert.equal(w.tick(.1,2,false,false).visible,false);assert.equal(w.tick(.1,2,true,true,true).visible,false);
 });
+
+ test('all shipped dialogue categories offer eight valid distinct lines and match the editable template',async()=>{
+  const {readFile}=await import('node:fs/promises');assert.deepEqual(JSON.parse(await readFile('docs/default-dialogue.json','utf8')),defaultLines);
+  const validated=parseLines(JSON.stringify(defaultLines));assert.deepEqual(Object.keys(validated),[...categories]);
+  for(const c of categories){assert.equal(validated[c]!.length,8,c);assert.equal(new Set(validated[c]).size,8,c);for(const line of validated[c]!)assert.ok(!/\{[^}]+\}/.test(formatLine(line,{task:'制作小游戏',tool:'Bash',file:'app.ts',elapsed:'12 秒',activeCount:2,completedCount:1})),c);}
+ });

@@ -7,7 +7,7 @@ export function DialogueSettings({prefs,save,preview,recentTools}:{recentTools:r
  const library=parseLines(prefs.dialogueJson),rules=parseRules(prefs.toolRulesJson);const lines=draft??(library[category]??defaultLines[category]).join('\n');
  const commit=async(p:Partial<Preferences>)=>{try{await save(p);setMessage('已保存');return true;}catch{setMessage('保存失败，请检查内容或刷新后重试');return false;}};
  return <fieldset className="bf-dialogue-settings"><legend>自定义台词</legend>
- <p className="bf-help">空闲等候类同时用于气泡和举牌。何时出现由“空闲互动”决定；固定文字时使用第一句。其他类别用于工作提示。</p>
+ <p className="bf-help">空闲等候类同时用于气泡和举牌。何时出现由“空闲互动”决定；固定文字时使用第一句。其他类别用于工作提示。内置 20 类台词，每类 8 句；已保存的自定义内容优先。想采用新版台词，可点“恢复这一类默认”。</p>
  <label className="bf-field"><span>台词分类</span><select aria-label="台词分类" value={category} onChange={e=>{setCategory(e.target.value as Category);setDraft(null);setMessage('');}}>{categories.map(c=><option key={c} value={c}>{categoryLabels[c]}</option>)}</select></label>
  <label className="bf-lines-label">台词列表 · 每行一句<textarea aria-label="台词列表" rows={5} maxLength={4800} value={lines} onChange={e=>setDraft(e.target.value)}/></label>
  <p className="bf-help">随机轮换且避免连着重复。留空可关闭此类台词。变量：{'{task} {tool} {file} {elapsed} {activeCount} {completedCount}'}</p>
