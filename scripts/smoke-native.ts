@@ -69,6 +69,30 @@ try {
     await page.reload();await expect(page.locator('.bf-widget canvas')).not.toHaveAttribute('data-pet');await settings();
     checks.push('upgrade from previous tarball preserves Host preferences, role bytes and selected character');
   }
+  // Exercise new fields through the real Host schema, not only the demo store.
+  const saveSetting = async (change: () => Promise<unknown>) => {
+    const response = page.waitForResponse(r => new URL(r.url()).pathname === '/api/settings/mutate');
+    await change();
+    expect((await (await response).json()).result.ok).toBe(true);
+  };
+  await saveSetting(() => page.getByLabel('空闲互动').selectOption('custom'));
+  await saveSetting(() => page.getByRole('slider',{name:'最短休息时间 · 秒'}).fill('12'));
+  await saveSetting(() => page.getByRole('slider',{name:'最长休息时间 · 秒'}).fill('15'));
+  await page.getByText('消息内容与空闲习惯',{exact:true}).click();
+  await saveSetting(() => page.getByLabel('举牌偏好').selectOption('none'));
+  await saveSetting(() => page.getByRole('slider',{name:'每次空闲动作展示 · 秒'}).fill('18'));
+  await page.reload();await settings();
+  await expect(page.getByLabel('空闲互动')).toHaveValue('custom');
+  await expect(page.getByRole('slider',{name:'最短休息时间 · 秒'})).toHaveValue('12');
+  await expect(page.getByRole('slider',{name:'最长休息时间 · 秒'})).toHaveValue('15');
+  await page.getByText('消息内容与空闲习惯',{exact:true}).click();
+  await expect(page.getByLabel('举牌偏好')).toHaveValue('none');
+  await expect(page.getByRole('slider',{name:'每次空闲动作展示 · 秒'})).toHaveValue('18');
+  await page.screenshot({path:'artifacts/settings-review-native.png'});
+  await saveSetting(() => page.getByLabel('举牌偏好').selectOption('prefer'));
+  await saveSetting(() => page.getByRole('slider',{name:'每次空闲动作展示 · 秒'}).fill('12'));
+  await saveSetting(() => page.getByLabel('空闲互动').selectOption('frequent'));
+  checks.push('new idle frequency, coupled bounds, sign preference and hold duration persist through native Host schema');
   await page.getByRole('button', { name: 'Close', exact: true }).first().click();
   const workspace = resolve(home, 'workspace'); await mkdir(workspace);
   const remote = async (method: string, request: unknown) => page.evaluate(async ({ method, request }) => {

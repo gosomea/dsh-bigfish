@@ -1,3 +1,4 @@
+import {idleSignFrame} from '../domain/idle-frames.js';
 import {WorkMotion} from '../domain/work-motion.js';
 import {IdleDirector, type IdlePresentation} from '../domain/idle.js';
 import {motionAllowed,motionReduced} from '../domain/motion-policy.js';
@@ -130,8 +131,9 @@ export class FishRenderer {
     c.globalAlpha = .7 + .3 * transition;
     c.translate(236 + dx, 213 + dy); c.rotate(rotation); c.scale(1, sy);
     const reacting = allowed && p.richness > 0;
-    const animation = reacting ? { atlas: 'motions' as const, frames: [beat.pose], fps: 1, pingPong: false, loop: true }
+    let animation = reacting ? { atlas: 'motions' as const, frames: [beat.pose], fps: 1, pingPong: false, loop: true }
       : p.richness === 0 && active.has(input.state) ? undefined : action.animation;
+    if (input.state==='idle' && idle.active && !this.previewMotion && animation && (action.motion==='wait-sign'||action.motion.startsWith('sign-'))) animation={...animation,loop:false,pingPong:false};
     const sequenceAtlas = this.images[animation?.atlas??'motions'];
     const animated = Boolean(animation && sequenceAtlas.complete && sequenceAtlas.naturalWidth);
     let frame = sprite;
@@ -142,6 +144,7 @@ export class FishRenderer {
       if(animation.loop===false&&this.animationCursor>=frames.length&&this.finishedAt===undefined)this.finishedAt=now;
       this.cycleComplete=reacting?false:animation.loop===false?this.finishedAt!==undefined&&now-this.finishedAt>=2500:Math.floor(before/frames.length)!==Math.floor(this.animationCursor/frames.length);
       frame = frames[reduced ? 0 : animation.loop===false?Math.min(frames.length-1,Math.floor(this.animationCursor)):Math.floor(this.animationCursor)%frames.length]!;
+      if(!reduced && input.state==='idle' && idle.active && !this.previewMotion && (action.motion==='wait-sign'||action.motion.startsWith('sign-'))) frame=frames[idleSignFrame(actionTime,fps,frames.length,p.idleMode==='quiet'?5:p.idleHoldSeconds)]!;
     }
     if(!animated)this.cycleComplete=actionTime*1000>=action.durationMs;
     const source = animated ? sequenceAtlas : this.atlas;

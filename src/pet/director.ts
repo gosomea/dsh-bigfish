@@ -1,7 +1,7 @@
 import type {PetBundle, PetAnimation, Role} from './contract.js';
 import type {Snapshot} from '../contract/types.js';
 import type {IdlePresentation} from '../domain/idle.js';
-export interface PetInput {state:Snapshot['state'];tag?:string;richness:number;reduced:boolean;idle?:IdlePresentation|undefined;activity:number;preview?:string;pressure:number;whipHz?:number;reactionActive?:boolean}
+export interface PetInput {state:Snapshot['state'];tag?:string;richness:number;reduced:boolean;idle?:IdlePresentation|undefined;activity:number;preview?:string;pressure:number;whipHz?:number;reactionActive?:boolean;signPreference?:'balanced'|'prefer'|'none'}
 export function roleFor(state:Snapshot['state']):Role {
  if(state==='idle'||state==='cancelled'||state==='interrupted')return 'idle';if(state==='completed')return 'success';if(state==='waiting-user')return 'attention';
  if(['failed','blocked','retrying','disconnected','limited','unknown-end'].includes(state))return 'error';return 'working';
@@ -30,8 +30,15 @@ export class PetDirector {
   let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag));
   if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role));
   if(!pool.length||quiet||still)pool=[fallback];
+  if(idleBurst && !still){
+   const sign=(a:PetAnimation)=>a.frames.some(f=>Boolean(f.sign));
+   const eligible=pool.filter(a=>input.idle?.text&&input.signPreference!=='none'||!sign(a));
+   const signs=eligible.filter(sign);
+   if(input.signPreference==='prefer'&&signs.length&&(input.idle?.motion==='wait-sign'||input.idle?.motion.startsWith('sign-')))pool=signs;
+   else pool=eligible.length?eligible:[fallback];
+  }
   const explicit=input.preview&&this.pet.animations.find(a=>a.id===input.preview);if(explicit)pool=[explicit];
-  const policy=[input.richness,still,input.preview??''].join(':');
+  const policy=[input.richness,still,input.preview??'',input.signPreference??'prefer'].join(':');
   const key=[role,tag,quiet,policy,idleBurst?input.idle?.serial:0].join(':');
   const duration=current?animationDuration(current):1;
   if(current&&!current.loop&&this.playhead>=duration&&this.completedAt===undefined)this.completedAt=now;

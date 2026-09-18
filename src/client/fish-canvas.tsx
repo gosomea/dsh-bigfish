@@ -116,6 +116,7 @@ export function FishCanvas(
         richness: props.prefs.richness,
         reduced,
         idle: props.idle,
+        signPreference: props.prefs.idleSignPreference,
         activity: shown.activity,
         pressure: shown.pressure,
         whipHz: shown.whipHz,

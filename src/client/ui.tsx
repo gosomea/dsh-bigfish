@@ -200,7 +200,7 @@ export function Widget({ controller, t }: UIProps) {
               ×
             </button>
           </div>
-          <SettingsPanel controller={controller} t={t} compact={!full} />
+          <SettingsPanel controller={controller} t={t} compact={!full} idle={idle} />
           <button className="bf-text-button" onClick={() => setFull(!full)}>
             {full ? "返回快捷设置" : t("openSettings")}
           </button>

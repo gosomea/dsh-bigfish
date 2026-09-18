@@ -33,9 +33,14 @@ export class PreferenceStore {
     } catch { this.publish({ error: 'preferencesRead' }); }
   }
   update(patch: Partial<Preferences>, expected?: string): Promise<void> {
+    const requested = { ...patch };
     const job = this.tail.then(async () => {
       if (this.disposed) throw new Error('Settings store disposed');
       if(expected!==undefined&&JSON.stringify(this.value.value)!==expected)throw new Error('偏好在预览后已变化，请重新选择备份');
+      // Couple a single slider to the latest confirmed bounds, not a stale UI render.
+      const patch = { ...requested };
+      if (patch.idleMinSeconds !== undefined && patch.idleMaxSeconds === undefined && patch.idleMinSeconds > this.value.value.idleMaxSeconds) patch.idleMaxSeconds = patch.idleMinSeconds;
+      if (patch.idleMaxSeconds !== undefined && patch.idleMinSeconds === undefined && patch.idleMaxSeconds < this.value.value.idleMinSeconds) patch.idleMinSeconds = patch.idleMaxSeconds;
       const next = decodePreferences({ ...this.value.value, ...patch });
       this.publish({ saving: true, error: null });
       try {

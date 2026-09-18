@@ -13,7 +13,7 @@ test('quiet idle has one greeting then no speech, signs or actions for ten minut
  d.tick(602000,false,true,p);assert.equal(d.tick(603000,true,true,p).showText,false);
 });
 test('idle modes share a single bounded burst, honor custom fixed/random lines, and stop for work',()=>{
- for(const [idleMode,min,max] of [['occasional',120000,300000],['frequent',20000,40000]] as const){
+ for(const [idleMode,min,max] of [['occasional',60000,120000],['natural',15000,30000],['frequent',5000,10000],['continuous',1000,3000]] as const){
   const d=new IdleDirector({greeted:true},()=>.5),p={...defaults,idleMode,idleRandomText:true,dialogueJson:'{"idle":["A","B"]}'};
   d.tick(0,true,true,p);assert.ok(d.memory.nextAt>=min&&d.memory.nextAt<=max);const next=d.memory.nextAt;
   assert.equal(d.tick(next-1,true,true,p).active,false);const v=d.tick(next,true,true,p);assert.equal(v.active,true);assert.equal(v.showText,true);
@@ -22,9 +22,9 @@ test('idle modes share a single bounded burst, honor custom fixed/random lines, 
  }
  const d=new IdleDirector(),p={...defaults,idleRandomText:false,dialogueJson:'{"idle":["固定一句","另一句"]}'};assert.equal(d.tick(0,true,true,p).text,'固定一句');
 });
-test('hidden time, folding, restored cooldown and disabled greeting never replay idle bursts',()=>{
+test('returning from hidden resumes one due gesture without replaying a backlog',()=>{
  const p={...defaults,idleMode:'frequent' as const},d=new IdleDirector();d.tick(0,true,true,p);d.tick(1000,true,false,p);
- assert.equal(d.tick(600000,true,true,p).active,false);assert.ok(d.memory.nextAt>600000);
+ assert.equal(d.tick(600000,true,true,p).active,true);assert.ok(d.memory.nextAt>612000);
  const restored=new IdleDirector(d.memory);assert.equal(restored.tick(600100,true,true,p).active,false);
  assert.equal(new IdleDirector().tick(0,true,true,{...defaults,greetOnOpen:false}).showText,false);
  assert.equal(new IdleDirector().tick(0,true,true,defaults,true).active,false);

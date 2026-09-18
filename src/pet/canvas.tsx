@@ -14,9 +14,9 @@ export function PetCanvas({loaded,input,prefs,paused=false}:{loaded:LoadedPet;in
    const {input:i,prefs:p,paused}=live.current,dt=previous?Math.min(.1,(now-previous)/1000):0;previous=now;
    const m=loaded.pet.manifest;
    const reactions=loaded.pet.animations.filter(a=>a.tags.includes('near-miss')&&a.intensity<=i.richness);
-   const canSwing=reactions.length>0&&m.capabilities.includes('air-swing')&&p.whipEnabled&&!i.reduced&&!paused;
+   const canSwing=reactions.length>0&&m.capabilities.includes('air-swing')&&p.enabled&&p.whipEnabled&&!i.reduced&&!paused;
    const work=['generating','reasoning','streaming-gap'].includes(i.state)&&!i.preview;
-   const motion=swing.tick(dt,Math.min(p.maxWhipHz,i.whipHz??0)*p.intensity,canSwing&&work,canSwing&&work,!canSwing||!work);
+   const motion=swing.tick(dt,Math.min(p.maxWhipHz,(i.whipHz??0)*p.intensity),canSwing&&work,canSwing&&work,!canSwing||!work);
    const selected=director.choose({...i,reactionActive:motion.responding},now);let a=selected.animation,f=frameAt({...a,speed:[1,1]},selected.time,0,selected.still);
    if(motion.responding){const reaction=reactions[Math.floor(motion.cycles)%reactions.length];if(reaction){a=reaction;f=frameAt({...a,loop:false,speed:[1,1]},(motion.cycles%1)*a.frames.reduce((n,f)=>n+f.durationMs,0));}}
    c.clearRect(0,0,340,250);

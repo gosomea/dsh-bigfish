@@ -1,3 +1,4 @@
+import type {IdlePresentation} from '../domain/idle.js';
 import { petLibrary } from "../pet/library.js";
 import { RoleSettings } from "../pet/settings.js";
 import { motionAllowed, motionReduced } from "../domain/motion-policy.js";
@@ -29,7 +30,8 @@ export function SettingsPanel({
   controller,
   t,
   compact = false,
-}: UIProps & { compact?: boolean }) {
+  idle,
+}: UIProps & { compact?: boolean; idle?: IdlePresentation }) {
   useSyncExternalStore(petLibrary.subscribe, petLibrary.getSnapshot);
   const live = useSyncExternalStore(
     controller.subscribe,
@@ -100,6 +102,7 @@ export function SettingsPanel({
       </select>
     </label>
   );
+  const reduced = motionReduced(p, matchMedia("(prefers-reduced-motion: reduce)").matches);
   const role = petLibrary.active?.pet;
   const availableCount = role
     ? role.animations.filter(
@@ -123,17 +126,17 @@ export function SettingsPanel({
       role.animations.some(
         (a) => a.tags.includes("near-miss") && a.intensity <= p.richness,
       ));
-  const display = !p.bubbleEnabled
+  const display = !p.bubbleEnabled || (!p.bubbleText && !p.bubbleStatus)
     ? "buttons"
     : p.bubbleText
-      ? "both"
+      ? p.bubbleStatus ? "both" : "text"
       : "status";
   return (
     <div className={`bf-settings ${compact ? "bf-compact" : ""}`}>
       {!compact && (
         <header>
           <h2>{t("title")}</h2>
-          <p>闲时安静陪着，忙时及时回应。</p>
+          <p>闲时按你的节奏陪伴，忙时及时回应。</p>
         </header>
       )}
       <fieldset>
@@ -144,16 +147,25 @@ export function SettingsPanel({
           p.idleMode,
           [
             ["quiet", "安静陪着"],
-            ["occasional", "偶尔互动 · 2–5 分钟"],
-            ["frequent", "经常互动 · 20–40 秒"],
+            ["occasional", "偶尔活动 · 休息 60–120 秒"],
+            ["natural", "自然陪伴 · 休息 15–30 秒"],
+            ["frequent", "活泼陪伴 · 休息 5–10 秒"],
+            ["continuous", "持续活动 · 休息 1–3 秒"],
+            ["custom", "自定义休息时间"],
           ],
           (v) => update({ idleMode: v as Preferences["idleMode"] }),
         )}
         <p className="bf-help">
-          {p.idleMode === "quiet"
-            ? "首次问候后安静休息，不反复举牌或换台词。"
-            : "每次动作展示约 12 秒，气泡最多 6 秒；内置大肥鱼有台词时，每两次互动至少一次举牌。其他角色使用角色包提供的问候动作。"}
+          {p.idleMode === "quiet" ? "只保留轻微生命感；首次问候可在完整设置中单独关闭。" : `每次动作展示约 ${p.idleHoldSeconds} 秒，完整播放后再休息；提高频率不会加快动画。气泡最多显示 6 秒。`}
         </p>
+        {p.idleMode === "custom" && <>
+          {slider("idleMinSeconds", "最短休息时间 · 秒", 1)}
+          {slider("idleMaxSeconds", "最长休息时间 · 秒", 1)}
+        </>}
+        {idle && <p className="bf-help" data-testid="idle-status">
+          {idle.reason === "reduced" ? "当前：减弱动态已生效，暂停主动互动。" : idle.reason === "hidden" ? "当前：宠物隐藏，保留下一次互动时间。" : idle.reason === "work" ? "当前：跟随任务状态，空闲互动暂未开始。" : idle.active ? "当前：正在播放空闲动作。" : idle.reason === "quiet" ? "当前：安静陪伴，不主动轮换。" : `当前：休息中，约 ${idle.nextInSeconds ?? 0} 秒后开始下一个动作。`}
+        </p>}
+        {reduced && <p className="bf-help">系统或动画设置正在减弱动态；下列频率与动作偏好会在恢复正常播放后生效。</p>}
         {select(
           "动作表现",
           p.richness,
@@ -175,21 +187,22 @@ export function SettingsPanel({
           空闲频率独立控制。
         </p>
         <p className="bf-help" data-testid="motion-availability">
-          当前角色在此档有 {availableCount} 类动作可用，实际动作随任务状态选择。
+          {reduced ? "当前减弱动态：使用稳定姿态，暂停动作轮换。" : `当前角色在此档有 ${availableCount} 类候选动作，实际选择取决于任务状态与角色能力。`}
         </p>
         {select(
           "消息显示",
           display,
           [
             ["both", "台词和状态"],
+            ["text", "仅台词"],
             ["status", "仅状态"],
             ["buttons", "仅按钮"],
           ],
           (v) =>
             update({
               bubbleEnabled: v !== "buttons",
-              bubbleText: v === "both",
-              bubbleStatus: v !== "buttons",
+              bubbleText: v === "both" || v === "text",
+              bubbleStatus: v === "both" || v === "status",
             }),
         )}
         {slider("size", "角色大小", 10)}
@@ -208,7 +221,7 @@ export function SettingsPanel({
               ["rhythm", "跟着速度动"],
             ],
             (v) => update({ mode: v as Preferences["mode"] }),
-            !swingAvailable,
+            !swingAvailable || reduced,
           )}
         {role && p.whipEnabled && (
           <p className="bf-help">
@@ -228,8 +241,12 @@ export function SettingsPanel({
           </details>
           <details className="bf-disclosure">
             <summary>消息内容与空闲习惯</summary>
-            {toggle("showTask", "文案关联本轮任务摘要")}
-            {toggle("greetOnOpen", "首次出现时打招呼")}
+            {p.bubbleEnabled && p.bubbleText && toggle("showTask", "显示本轮任务提示（用户消息短摘）")}
+            <p className="bf-help">任务提示来自当前用户消息，不额外调用模型。</p>
+            {toggle("greetOnOpen", "每个标签页首次空闲时打招呼")}
+            {select("举牌偏好", p.idleSignPreference, [["prefer", "多举牌"], ["balanced", "均衡轮换"], ["none", "不举牌"]], v => update({idleSignPreference:v as Preferences["idleSignPreference"]}))}
+            <p className="bf-help">多举牌：有台词和素材时，每两次互动至少一次举牌；不举牌不影响其他日常动作。外部角色需要提供牌面锚点。</p>
+            {p.idleMode !== "quiet" && slider("idleHoldSeconds", "每次空闲动作展示 · 秒", 1)}
             {toggle("idleHideMessage", "安静休息时隐藏消息文字")}
             {select(
               "空闲文字",
@@ -243,7 +260,7 @@ export function SettingsPanel({
             <p className="bf-help">
               在下方“自定义台词 → 空闲等候”编辑，同时用于气泡与牌子。
             </p>
-            {display === "both" &&
+            {(display === "both" || display === "text") &&
               select(
                 "工作台词",
                 p.talkLevel,
@@ -254,6 +271,8 @@ export function SettingsPanel({
                 ],
                 (v) => update({ talkLevel: +v }),
               )}
+            {p.bubbleEnabled && p.bubbleText && slider("speechSeconds", "工作台词最短停留 · 秒", 0.5)}
+            <p className="bf-help">工作台词频率控制同一状态下的换句；新工具和重要事件仍会及时更新。</p>
             {display !== "buttons" && (
               <>
                 {toggle("showTool", "显示工具名称")}
@@ -266,7 +285,7 @@ export function SettingsPanel({
             <summary>外观与动画</summary>
             {select(
               "动画",
-              p.reducedMotion ? "reduced" : p.motionPolicy,
+              p.motionPolicy === "system" && p.reducedMotion ? "reduced" : p.motionPolicy,
               [
                 ["system", "跟随系统"],
                 ["normal", "正常播放"],
@@ -308,7 +327,7 @@ export function SettingsPanel({
               </>
             )}
             {select(
-              "任务结束后",
+              "成功完成后",
               p.completionMode,
               [
                 ["celebrate", "简短庆祝"],
@@ -318,10 +337,11 @@ export function SettingsPanel({
               (v) =>
                 update({ completionMode: v as Preferences["completionMode"] }),
             )}
+            <p className="bf-help">取消或中断先提示 4 秒再休息；错误与等待确认保留明确状态。</p>
             {p.completionMode !== "quiet" &&
               slider("completionSeconds", "完成提示时长 · 秒", 1)}
           </details>
-          {p.whipEnabled && swingAvailable && (
+          {p.whipEnabled && swingAvailable && !reduced && (
             <details className="bf-disclosure">
               <summary>空挥节奏与声音</summary>
               {select(
@@ -399,22 +419,22 @@ export function SettingsPanel({
           </details>
           <details className="bf-disclosure">
             <summary>高级与重置</summary>
-            <details className="bf-disclosure">
+            {!role && <details className="bf-disclosure">
               <summary>内置大肥鱼动作编排（JSON）</summary>
               <PackSettings t={t} />
-            </details>
+            </details>}
             {toggle("autoSpeed", "按模型自动校准")}
             {!p.autoSpeed && slider("targetRate", "手动基准速度 · tok/s", 1)}
             {toggle("includeReasoning", "计入可见推理输出")}
-            {toggle("learnHistory", "跨会话记住模型速度")}
+            {p.autoSpeed && toggle("learnHistory", "跨会话记住模型速度")}
             <p className="bf-help">
-              只影响宠物的速度估算。关闭记忆会清空已记住的速度，当前运行仍可学习。
+              {p.autoSpeed ? "关闭记忆会清空已记住的模型基准；当前运行仍可学习。" : "手动模式固定使用基准速度，已有模型速度记忆暂不参与判断。"}
             </p>
             {slider("windowSeconds", "速度估算窗口 · 秒", 0.5)}
             <p className="bf-help">窗口越长越平稳，越短越灵敏。</p>
-            {p.whipEnabled && swingAvailable && (
+            {p.whipEnabled && swingAvailable && !reduced && (
               <>
-                {slider("intensity", "空挥强度", 0.05)}
+                {slider("intensity", "空挥驱动力", 0.05)}
                 {slider("maxWhipHz", "空挥调度频率上限", 0.1)}
                 <p className="bf-help">
                   完整动作会限制实际频率，不会截短动作来追赶数值。
@@ -424,12 +444,11 @@ export function SettingsPanel({
                   slider("referenceSeconds", "开始加强催促的工作时长 · 秒", 10)}
               </>
             )}
-            {slider("fatigueSeconds", "疲惫积累周期 · 秒", 30)}
-            <p className="bf-help">
-              周期的 40% 起可随机出现擦汗，不保证立即触发。
-            </p>
+            {!role && <>{slider("fatigueSeconds", "疲惫积累周期 · 秒", 30)}
+            <p className="bf-help">影响内置角色的工作动作选择；轻柔模式不按疲惫切换，其他档位也不保证立即擦汗。</p></>}
+            {role && <p className="bf-help">外部角色使用角色包定义的动作；内置布景、疲惫动作编排与音效设置暂不适用。</p>}
             <div className="bf-button-row">
-              <button onClick={() => controller.resetLearning()}>
+              <button disabled={!live.snapshot.modelKey} onClick={() => controller.resetLearning()}>
                 {t("resetLearning")}
               </button>
               <button onClick={() => controller.resetLearning(true)}>

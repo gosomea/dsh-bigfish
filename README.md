@@ -15,7 +15,7 @@
 
 ## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前版本为 **0.5.2**（体验版）；动画与文案改进见 [本轮说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/review-0.5.2.md)。完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前 npm 版本为 **0.5.3**（体验版）；本版的配置与空闲轮转优化见 [设置审查](docs/review-0.5.3.md)，动画与文案改进见 [0.5.2 说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/review-0.5.2.md)。完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
 
 直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
@@ -46,7 +46,7 @@ npx --yes dsh-bigfish install-skill
 
 | 当你…… | 大肥鱼会…… |
 | --- | --- |
-| 还没开始工作 | 举牌打个招呼，然后安静陪着；也可以设置为偶尔互动 |
+| 还没开始工作 | 按所选频率举牌、喝茶或休息；支持安静陪伴和自定义间隔 |
 | 提交任务、等待首段输出 | 立即切换到工作准备状态，不再举着“我在等哦” |
 | 看着模型输出 | 敲键盘、思考，跟随当前模型的相对速度调整节奏 |
 | 让 Agent 读文件、搜索、执行工具 | 切换相应动作，在气泡里显示工具状态和可自定义的台词 |
@@ -61,7 +61,7 @@ npx --yes dsh-bigfish install-skill
 
 <table>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/waiting.png" width="330" alt="举牌等候的大肥鱼"><br><b>我在等哦</b><br>首次问候后安静陪伴</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/waiting.png" width="330" alt="举牌等候的大肥鱼"><br><b>我在等哦</b><br>按你的频率举牌与休息</td>
 <td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/working.png" width="330" alt="大肥鱼打字，气泡显示输出状态和速度"><br><b>认真开工</b><br>气泡、速度和状态放在一起</td>
 </tr>
 <tr>
@@ -85,9 +85,9 @@ npx --yes dsh-bigfish install-skill
 ## 按你的习惯陪伴
 
 - **想让她多说几种话**：内置 **20 类 × 8 句，共 160 句**可编辑台词，覆盖思考、输出、各类工具、等待确认和任务结束。支持 `{task}`、`{tool}`、`{file}` 等变量；已有自定义内容优先，想用新版可在该类别点“恢复这一类默认”。[完整台词库](https://github.com/gosomea/dsh-bigfish/blob/main/docs/default-dialogue.json)
-- **想看更多互动**：新安装默认「经常互动 + 活泼」，每 20–40 秒来一次举牌或生活小动作；动作展示 12 秒、气泡最多 6 秒。工作时动作完整播放，空挥后保持恢复姿态 2.5 秒。已有设置保留，不强制改动。
+- **想看更多互动**：默认「活泼陪伴 + 活泼」，每次动作展示 12 秒后休息 5–10 秒；气泡最多 6 秒，举牌会在举稳时停留再放下。工作空挥后保持恢复姿态 2.5 秒。旧模式选择保留，0.5.3 的频率按新的休息间隔计算。
 - **想安静一点**：选择「安静陪着」，首次问候后不反复举牌、换台词。空闲互动、动作表现和说话频率分别控制。
-- **想热闹一点**：开启偶尔互动或更活泼的动作。完整设置里可直接预览行为，先看再选。
+- **想热闹一点**：选择「持续活动」，或自定义 1–600 秒休息间隔；可选「多举牌／均衡轮换／不举牌」，每次展示时长可调 5–30 秒。浮层设置显示当前状态和下一次互动倒计时。
 - **不喜欢鞭策**：关闭「启用鞭策动作」。设置会保存，刷新或换角色后继续生效。
 - **挡住内容了**：拖动宠物或气泡换位置；点 `−` 收起为图标，图标同样可以拖动。支持调整大小和透明度。
 - **想换句台词**：在「自定义台词与工具」编辑工作、等待、完成等台词，给工具名称或前缀配置专属规则。
@@ -119,7 +119,7 @@ npx --yes dsh-bigfish install-skill
 
 默认安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。安装 Skill 后请新建 DSH 会话；宠物插件本身的安装不会自动修改技能目录。
 
-其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.2/dsh-bigfish-pet-maker-1.0.3.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
+其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.3/dsh-bigfish-pet-maker-1.0.3.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
 
 然后直接和 Agent 说：
 

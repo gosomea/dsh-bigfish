@@ -1,6 +1,6 @@
 {
   "name": "dsh-bigfish",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Adaptive DSH companion with replaceable, extensible character packs",
   "type": "module",
   "exports": {
