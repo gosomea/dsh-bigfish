@@ -15,7 +15,7 @@
 
 ## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。当前 npm 版本为 **0.5.3**（体验版）；本版的配置与空闲轮转优化见 [设置审查](docs/review-0.5.3.md)，动画与文案改进见 [0.5.2 说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/review-0.5.2.md)。完整原生安装已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`。Node 要求 `^22.19.0 || >=24.0.0`。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。稳定版 `0.5.3` 已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`；预发布版 **`0.5.4-next.1`** 同时验证 `0.1.5-rc.2` 和 `0.1.6-alpha.2`。它根据宿主实际提供的会话能力选择兼容桥接，不把 DSH 核心包带入插件。移动中的 `master` 不属于支持承诺。Node 要求 `^22.19.0 || >=24.0.0`。
 
 直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
@@ -23,6 +23,14 @@
 dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
+
+想验证新的双版本 session bridge，请显式安装预发布包：
+
+```sh
+dsh plugin --profile web add dsh-bigfish@next
+```
+
+遇到未来不兼容的 DSH 时，大肥鱼会停在空闲状态，并在宠物气泡和完整设置中说明检测到的会话接口与升级建议；不会猜测任务状态。
 
 打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。
 

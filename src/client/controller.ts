@@ -5,9 +5,10 @@ import { HarnessAdapter, type AgentHandle } from '../host/adapter.js';
 import { engineConfig } from '../contract/preferences.js';
 import type { Channel, ObservedOutput, Snapshot, WorkState } from '../contract/types.js';
 import type { Binding, Entry, NativeServices } from './native-contract.js';
+import { DshSessionBridge, type DshBridgeStatus } from './dsh-session-bridge.js';
 import { PreferenceStore } from './preferences-store.js';
 
-export interface CompanionView { task?:string|undefined; recentTools?:readonly string[]; activity?: ActivitySummary | null; snapshot: Snapshot; model: string; issue: string | null; demo: boolean }
+export interface CompanionView { task?:string|undefined; recentTools?:readonly string[]; activity?: ActivitySummary | null; snapshot: Snapshot; model: string; issue: string | null; compatibility: DshBridgeStatus; demo: boolean }
 export interface Companion {
   preferences: PreferenceStore; getSnapshot(): CompanionView; subscribe(fn: () => void): () => void;
   resetLearning(all?: boolean): void; dispose(): void;
@@ -38,6 +39,7 @@ export class NativeCompanion implements Companion {
   private historyKey: string;
   private historyIssue: string | null = null;
   private now: () => number;
+  private bridge: DshSessionBridge;
   constructor(private ctx: NativeServices, private storage: Storage | null) {
     const epoch = Date.now(), mono = performance.now(); this.now = () => epoch + performance.now() - mono;
     this.preferences = new PreferenceStore(ctx.settingsScope.bind({ namespace: 'bigfish', decode: value => value }), storage);
@@ -50,7 +52,9 @@ export class NativeCompanion implements Companion {
       try { const raw = storage.getItem(this.historyKey); if (raw) this.adapter.history.restore(JSON.parse(raw), this.now()); }
       catch { this.historyIssue = 'historyRead'; }
     }
-    this.view = { snapshot: this.adapter.session('idle').snapshot(), model: '', issue: this.historyIssue, demo: false };
+    this.bridge = new DshSessionBridge(ctx);
+    if (!this.bridge.status.supported) console.warn('[dsh-bigfish] unsupported DSH session surface', this.bridge.status);
+    this.view = { snapshot: this.adapter.session('idle').snapshot(), model: '', issue: this.historyIssue, compatibility: this.bridge.status, demo: false };
     let previous = this.preferences.getSnapshot().value;
     this.globalOff.push(this.preferences.subscribe(() => {
       const next = this.preferences.getSnapshot().value;
@@ -63,8 +67,7 @@ export class NativeCompanion implements Companion {
       previous = next;
       if (rebind) this.select(true); else this.publish();
     }));
-    this.globalOff.push(ctx.sessions.list.subscribe(() => this.select()));
-    this.globalOff.push(ctx.uiSession.pendingInteractions.subscribe(() => this.interaction()));
+    this.globalOff.push(this.bridge.subscribe(() => { this.select(); this.interaction(); }));
     this.globalOff.push(ctx.connection.state.subscribe(() => {
       if (this.binding) this.adapter.session(this.binding.sessionId).accept({ type: 'connection', active: ctx.connection.state.getSnapshot() === 'connected' });
       this.publish();
@@ -87,11 +90,29 @@ export class NativeCompanion implements Companion {
   }
   private select(force = false) {
     if (this.disposed) return;
-    const id = this.preferences.getSnapshot().value.enabled ? this.ctx.sessions.list.getSnapshot().current : undefined;
-    const next = id === undefined ? undefined : this.ctx.sessions.binding(id);
+    const enabled = this.preferences.getSnapshot().value.enabled;
+    const sessionId = enabled ? this.bridge.currentSessionId() : undefined;
+    const next = sessionId === undefined ? undefined : this.bridge.currentBinding();
+    // alpha.2 publishes the main-view identity before its retained controller
+    // binding is observable on every list transition. Keep the existing
+    // foreground stream through that short gap; a real switch/empty state
+    // changes adapter.current's key and will still detach immediately.
+    if (!force && next === undefined && sessionId !== undefined && this.binding?.sessionId === sessionId) return;
     if (!force && next === this.binding) return;
+    const sameSession = next !== undefined && next.sessionId === this.binding?.sessionId;
     for (const off of this.bindingOff.splice(0)) off();
-    if (this.binding) { this.persist(); this.adapter.disposeSession(this.binding.sessionId); }
+    // alpha.2 can refresh a retained Binding object for the same foreground
+    // session. Replace its observers but keep the adapter's accumulated turn
+    // state; disposing here turns a just-finished turn back into local
+    // "awaiting output" and loses its completion animation.
+    if (this.binding && !sameSession) { this.persist(); this.adapter.disposeSession(this.binding.sessionId); }
+    if (next && sameSession) {
+      this.binding = next;
+      this.bindingOff.push(next.eventSource.subscribe(() => this.changed()));
+      this.bindingOff.push(next.session.subscribe(() => this.publish()));
+      this.publish();
+      return;
+    }
     this.activities.clear(); this.taskContext.clear();
     this.binding = next; this.agent = null; this.attempt = null; this.windowRevision = -1; this.waiting = false;
     this.starting = false; this.hostRunning = next?.session.getSnapshot().running ?? false;
@@ -161,7 +182,7 @@ export class NativeCompanion implements Companion {
   }
   private interaction() {
     if (!this.binding) return;
-    const waiting = this.ctx.uiSession.pendingInteractions.getSnapshot().has(this.binding.sessionId);
+    const waiting = this.bridge.waiting(this.binding.sessionId);
     if (waiting !== this.waiting) { this.waiting = waiting; this.adapter.session(this.binding.sessionId).accept({ type: 'waiting', active: waiting }); this.publish(); }
   }
   private changed() {
@@ -212,7 +233,7 @@ export class NativeCompanion implements Companion {
         workElapsed: 0, generationElapsed: 0, pressure: 0, whipHz: 0, modelKey: null, baseline: null };
     }
     this.view = { snapshot, task:!localSubmission&&this.preferences.getSnapshot().value.showTask?this.taskContext.text:undefined, recentTools:this.activities.recentTools, activity: this.activities.summary(this.now(), parseRules(this.preferences.getSnapshot().value.toolRulesJson)), model: this.agent?.options.model ?? '',
-      issue: session?.openState === 'error' ? 'connectionError' : this.historyIssue, demo: false };
+      issue: session?.openState === 'error' ? 'connectionError' : this.historyIssue, compatibility: this.bridge.status, demo: false };
     for (const fn of this.listeners) fn();
   }
   resetLearning(all = false): void {

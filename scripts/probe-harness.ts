@@ -33,7 +33,12 @@ declare const adapter: HarnessAdapter;
 const compatibleContext: EventContext = ctx;
 declare const connection: import(${native('packages/client/connection/lib/types/client/index.js')}).ConnectionHandle;
 declare const sessions: import(${native('packages/api/session-controller/lib/types/client/index.js')}).ISessions;
-const compatibleClient: NativeServices = { sessions, uiSession: ctx.uiSession, settingsScope: ctx.settingsScope, connection };
+// Some published DSH tags do not merge the browser service augmentations into
+// the root Context declaration. Probe the exported browser contracts directly:
+// this verifies the actual plugin-facing types on both supported tags.
+declare const uiSession: import(${native('packages/client/ui-session/lib/types/client/index.js')}).UiSession;
+declare const settingsScope: import(${native('packages/client/ui-settings/lib/types/client/settings-scope.js')}).SettingsScopeBinder;
+const compatibleClient: NativeServices = { sessions, uiSession, settingsScope, connection };
 void compatibleClient;
 const compatibleAgent: AgentHandle = agent;
 const compatibleFrame: StreamFrame = frame;

@@ -63,6 +63,52 @@ test('native pending interaction and connection recovery stop whip and discard s
     f.chunk('继续'); assert.equal(f.controller.getSnapshot().snapshot.state, 'generating');
   } finally { f.controller.dispose(); }
 });
+test('alpha.2 bridge waits for the retained UI binding, then follows sessionStatus', () => {
+  const source = new Store<EventWindow>({ revision: 0, entries: [], change: { kind: 'replace' } });
+  const session = Object.assign(new Store({ running: false, openState: 'open', lastAgentError: null }), { projections: { faceOf: () => new Store({ lastUsed: { provider: 'alpha', model: 'test' } }) } });
+  const current = new Store<{ key?: unknown }>({});
+  const status = new Store<ReadonlyMap<string, { pendingInteraction?: unknown } | undefined>>(new Map());
+  const list = new Store({});
+  const connection = new Store<string | undefined>('connected');
+  const preferences = new Store({ status: 'ready', writable: true, value: { ...preferenceDefaults }, mode: 'host', revision: 1 });
+  const scope = Object.assign(preferences, { mutate: async () => {} });
+  let retained = false;
+  let binding = { sessionId: 's1', session, eventSource: source };
+  const services: NativeServices = {
+    sessions: { list, binding: id => retained && id === 's1' ? binding : undefined },
+    uiSession: { adapter: { current }, sessionStatus: status }, connection: { state: connection }, settingsScope: { bind: () => scope },
+  };
+  const controller = new NativeCompanion(services, null);
+  try {
+    assert.equal(controller.getSnapshot().compatibility.kind, 'alpha16');
+    assert.equal(controller.getSnapshot().snapshot.sessionId, 'idle');
+    retained = true; current.set({ key: 's1' });
+    const first = { type: 'event', event: { type: 'turn/start', seq: 1, time: Date.now(), data: { turn: 1 } } } as Entry;
+    source.set({ revision: 1, entries: [first], change: { kind: 'append', entries: [first] } });
+    assert.equal(controller.getSnapshot().snapshot.sessionId, 's1');
+    binding = { ...binding }; list.set({ refreshed: true });
+    assert.equal(controller.getSnapshot().snapshot.sessionId, 's1');
+    // During an alpha.2 list publication the retained UI binding can be
+    // momentarily unavailable. The foreground identity has not changed, so
+    // the companion must not tear down and replay its local-submit state.
+    retained = false; list.set({});
+    assert.equal(controller.getSnapshot().snapshot.sessionId, 's1');
+    retained = true;
+    status.set(new Map([['s1', { pendingInteraction: {} }]]));
+    assert.equal(controller.getSnapshot().snapshot.state, 'waiting-user');
+  } finally { controller.dispose(); }
+});
+test('unknown session surface stays idle and reports compatibility diagnostics', () => {
+  const list = new Store({});
+  const connection = new Store<string | undefined>('connected');
+  const preferences = new Store({ status: 'ready', writable: true, value: { ...preferenceDefaults }, mode: 'host', revision: 1 });
+  const scope = Object.assign(preferences, { mutate: async () => {} });
+  const controller = new NativeCompanion({ sessions: { list, binding: () => undefined }, uiSession: {}, connection: { state: connection }, settingsScope: { bind: () => scope } }, null);
+  try {
+    assert.equal(controller.getSnapshot().compatibility.supported, false);
+    assert.equal(controller.getSnapshot().snapshot.state, 'idle');
+  } finally { controller.dispose(); }
+});
 test('disable unsubscribes from session stream and teardown removes every observer', async () => {
   const f = fixture();
   await f.controller.preferences.update({ enabled: false }); assert.equal(f.source.listeners.size, 0);

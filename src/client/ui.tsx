@@ -177,6 +177,11 @@ export function Widget({ controller, t }: UIProps) {
             {t(view.issue as Key)}
           </p>
         )}
+        {!view.compatibility.supported && (
+          <p className="bf-compatibility" role="status" data-testid="compatibility-warning">
+            {t("compatibilityUnsupported")}
+          </p>
+        )}
       </DialogueBubble>
       <FishCanvas
         snapshot={s}

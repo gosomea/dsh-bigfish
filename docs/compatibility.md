@@ -1,4 +1,4 @@
-# 兼容性与验证范围 · 0.5.0
+# 兼容性与验证范围 · 0.5.4-next.1
 
 本版本面向首版体验发布。实际验证与计划验证分开记录，最终时间、数量、安装包 SHA256 见 `dist/verification-0.5.0.json`。
 
@@ -9,7 +9,9 @@
 | Linux arm64，Debian bookworm 容器，Node 24.21.0 | 同上，另跑真实 Chromium 浏览器回归；Docker 镜像由实际拉取的 Node 24 tag 提供 | Linux 原生 DSH Web Host、x86_64、NFS/SMB |
 | Windows | 已提供下方可复现命令 | 本轮无可用 Windows 执行环境，没有通过结论 |
 
-原生 DSH 实测两版：日常本地构建 `0.1.5-rc.2`（`c291e7961a515f6d7af9304e7fd1d257929aef26`），以及从本地 Git 标签隔离构建的 `0.1.5-rc.1`（`183f08e9c6dde7e36cd2318eaee70b0da08fb35e`）。两版均执行公开类型探针和 tarball 原生安装/双会话/角色/备份/卸载检查；更早的 rc/alpha 不推定兼容。
+`0.5.4-next.1` 的正式支持矩阵是 npm stable `0.1.5-rc.2` 与已发布 tag `0.1.6-alpha.2`。前者通过 `sessions.list.current` / `pendingInteractions` 选择前台会话；后者通过 `uiSession.adapter.current` / `sessionStatus` 使用 UI 已 retain 的 main binding。Bigfish 不主动 retain session，也不携带 DSH runtime dependency。移动中的 `master` 只用于持续探测，不构成发布承诺。
+
+无法识别以上任一能力组合时，客户端保持 idle 并展示兼容诊断；不读取不确定的 session stream，也不伪造工作状态。稳定版 `0.5.3` 的历史验证范围仍见其 release 文档。
 
 ## 测试范围
 

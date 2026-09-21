@@ -71,6 +71,10 @@ body[data-ds-dark-theme] .bf-surface {
 .bf-save { font-size: 11px; }
 .bf-error { color: var(--bf-error); font-size: 12px; }
 .bf-widget > .bf-error { margin-left: 30%; background: var(--bf-panel); padding: 6px; border-radius: 8px; }
+.bf-compatibility { margin: 0 0 0 24px; max-width: 280px; padding: 7px 9px; border: 1px solid #c68a28; border-radius: 8px; background: #c68a2816; color: var(--bf-text); font-size: .82em; }
+.bf-compatibility-card { margin-top: 12px; padding: 12px; border: 1px solid #c68a28; border-radius: 8px; background: #c68a2810; }
+.bf-compatibility-card p { margin: 6px 0; }
+.bf-compatibility-card code { display: block; overflow-wrap: anywhere; color: var(--bf-muted); font-size: .78em; }
 .bf-demo { min-height: 100dvh; background: #f6f8fc; padding: 32px clamp(20px, 5vw, 90px) 60px; }
 .bf-demo-nav { display: flex; justify-content: space-between; align-items: center; color: var(--bf-muted); font-size: 12px; max-width: 1300px; margin: auto; }
 .bf-wordmark { color: #345584; display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: .03em; }

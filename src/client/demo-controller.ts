@@ -4,6 +4,7 @@ import { modelKey, type WorkState, type ModelIdentity } from '../contract/types.
 import { engineConfig } from '../contract/preferences.js';
 import { PreferenceStore } from './preferences-store.js';
 import type { Companion, CompanionView } from './controller.js';
+const demoCompatibility = { kind: 'rc15' as const, supported: true, capabilities: ['demo'], missing: [] };
 export class DemoCompanion implements Companion {
   preferences: PreferenceStore;
   base = 100; ratio = 1; state: WorkState = 'generating';
@@ -15,7 +16,7 @@ export class DemoCompanion implements Companion {
     this.preferences = new PreferenceStore(null, storage, 'bigfish.demo.preferences.v1');
     const config = engineConfig(this.preferences.getSnapshot().value);
     this.history = new Baselines(config); this.engine = new SessionTelemetry('demo', { now: () => this.clock }, this.history, config);
-    this.view = { snapshot: this.engine.snapshot(), model: 'Demo · 100 tok/s', issue: null, demo: true };
+    this.view = { snapshot: this.engine.snapshot(), model: 'Demo · 100 tok/s', issue: null, compatibility: demoCompatibility, demo: true };
     this.setState('idle');
     this.off = this.preferences.subscribe(() => { Object.assign(this.engine.config, engineConfig(this.preferences.getSnapshot().value)); this.publish(); });
     this.timer = setInterval(() => this.tick(), 100);
@@ -51,7 +52,7 @@ export class DemoCompanion implements Companion {
       tokens: this.base * this.ratio / 10, quality: 'exact', channel: this.state === 'reasoning' ? 'reasoning' : 'text' });
     this.publish();
   }
-  private publish() { this.view = { snapshot: this.engine.snapshot(), model: `Demo · ${this.base} tok/s`, issue: null, demo: true }; for (const fn of this.listeners) fn(); }
+  private publish() { this.view = { snapshot: this.engine.snapshot(), model: `Demo · ${this.base} tok/s`, issue: null, compatibility: demoCompatibility, demo: true }; for (const fn of this.listeners) fn(); }
   resetLearning(all = false) { this.history.reset(all ? undefined : this.view.snapshot.modelKey ?? undefined); this.restart(false); }
   dispose() { clearInterval(this.timer); this.off(); this.preferences.dispose(); this.listeners.clear(); }
 }

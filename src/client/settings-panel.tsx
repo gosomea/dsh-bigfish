@@ -137,6 +137,14 @@ export function SettingsPanel({
         <header>
           <h2>{t("title")}</h2>
           <p>闲时按你的节奏陪伴，忙时及时回应。</p>
+          {!live.compatibility.supported && (
+            <section className="bf-compatibility-card" role="status" data-testid="compatibility-card">
+              <strong>{t("compatibilityTitle")}</strong>
+              <p>{t("compatibilityUnsupported")}</p>
+              <p>{t("compatibilityAdvice")}</p>
+              <code>{live.compatibility.missing.join("; ")}</code>
+            </section>
+          )}
         </header>
       )}
       <fieldset>
