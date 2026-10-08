@@ -1,0 +1,15 @@
+{
+  "version": "0.6.0-next.1",
+  "recordedAt": "2026-10-08T09:48:00.754Z",
+  "source": "Offline built preview, actual PetCanvas sampled at six authored poses; Playwright virtual clock, no model calls, no chat content.",
+  "actions": [
+    "bigfish:sign-flip",
+    "bigfish:biscuit-share",
+    "bigfish:paper-fish",
+    "bigfish:search-magnifier",
+    "bigfish:image-palette",
+    "bigfish:success-paper-confetti"
+  ],
+  "frames": 36,
+  "errors": []
+}
