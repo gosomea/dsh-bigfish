@@ -1,5 +1,7 @@
 # 动作设计与场景扩展
 
+后续素材与轮转设计见 [动画扩展提案](animation-expansion-design.md)：36 个待制作演出概念、首批 12 段及实现边界。提案中的动作尚未加入现有素材库。
+
 v0.5.0：6 场景、29 类运动、72 张角色姿态。六张透明 PNG：classic 12 姿态、motions 16 连续动作帧、signs 16 举牌帧、work 8 阅读/工具姿态、quiet 8 待机/确认姿态、daily 12 喝茶/擦汗/伸展姿态。`assets/sprites/atlas-layout.json` 记录逐帧实际取图矩形，避免生成图集非等距排布造成串帧。
 
 ## 演出表

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { NativeCompanion } from '../src/client/controller.js';
+import { createPreferenceBridge } from '../src/client/dsh-preference-bridge.js';
 import { preferenceDefaults } from '../src/contract/preferences.js';
 import type { Binding, EventWindow, Entry, NativeServices } from '../src/client/native-contract.js';
 class Store<T> {
@@ -34,8 +35,9 @@ function fixture() {
   const connection = new Store<string | undefined>('connected');
   const preferences = Object.assign(new Store({ status: 'ready', writable: true, value: { ...preferenceDefaults }, mode: 'host', revision: 1 }), { mutate: async () => {} });
   const services: NativeServices = { sessions: { list, binding: id => id === 'a' ? a.binding : b.binding },
-    uiSession: { pendingInteractions: pending }, connection: { state: connection }, settingsScope: { bind: () => preferences } };
-  const controller = new NativeCompanion(services, null);
+    uiSession: { pendingInteractions: pending }, connection: { state: connection } };
+  const preferenceScope = createPreferenceBridge({ settingsScope: { bind: () => preferences } }).scope;
+  const controller = new NativeCompanion(services, null, preferenceScope);
   return { a, b, list, pending, connection, preferences, controller, view: () => controller.getSnapshot(), select: (current: string | undefined) => list.set({ current }) };
 }
 

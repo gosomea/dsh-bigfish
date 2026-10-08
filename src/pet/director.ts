@@ -14,10 +14,13 @@ export class PetDirector {
  private current:PetAnimation|undefined;
  private since=0; private last:number|undefined; private playhead=0; private key=''; private policy=''; private role:Role|undefined;
  private completedAt:number|undefined; private pending=''; private pendingAt=0; private recent:string[]=[]; private played=new Map<string,number>();
+ private lastFamily='';
+ private nextEasterAt:number|undefined;
  constructor(readonly pet:PetBundle,private random=()=>Math.random()){}
  resume(){this.last=undefined;}
  choose(input:PetInput,now:number):{animation:PetAnimation;time:number;still:boolean}{
   const current=this.current, previousTime=this.playhead;
+  this.nextEasterAt??=now+600000;
   if(current&&this.last!==undefined&&!input.reactionActive)this.playhead+=Math.max(0,now-this.last)*playbackSpeed(current,input.activity);
   this.last=now;
   const role=roleFor(input.state);
@@ -26,15 +29,18 @@ export class PetDirector {
   const declared=this.pet.animations.find(a=>a.id===this.pet.manifest.fallbacks[role])!;
   const fallback=normal.find(a=>a.id===declared.id)??normal.find(a=>a.tags.includes(role))??normal.find(a=>a.id===this.pet.manifest.fallbacks.idle)??normal[0]??declared;
   const idleBurst=input.state==='idle'&&input.idle?.active;
-  const tag=role==='working'?(input.tag??(input.state==='reasoning'?'thinking':role)):role, quiet=role==='idle'&&!idleBurst, still=input.reduced||normal.length===0;
+  const tag=role==='working'?(input.tag??(input.state==='reasoning'?'thinking':input.state==='awaiting-output'?'start':role)):input.state==='retrying'?'retry':role, quiet=role==='idle'&&!idleBurst, still=input.reduced||normal.length===0;
   let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag));
   if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role));
   if(!pool.length||quiet||still)pool=[fallback];
   if(idleBurst && !still){
+   const ordinary=pool.filter(a=>a.family!=='easter'||now>=this.nextEasterAt!);
+   pool=ordinary.length?ordinary:[fallback];
    const sign=(a:PetAnimation)=>a.frames.some(f=>Boolean(f.sign));
    const eligible=pool.filter(a=>input.idle?.text&&input.signPreference!=='none'||!sign(a));
    const signs=eligible.filter(sign);
    if(input.signPreference==='prefer'&&signs.length&&(input.idle?.motion==='wait-sign'||input.idle?.motion.startsWith('sign-')))pool=signs;
+   else if(input.signPreference==='balanced'&&signs.length&&eligible.some(a=>!sign(a)))pool=(input.idle?.motion==='wait-sign'||input.idle?.motion.startsWith('sign-'))?signs:eligible.filter(a=>!sign(a));
    else pool=eligible.length?eligible:[fallback];
   }
   const explicit=input.preview&&this.pet.animations.find(a=>a.id===input.preview);if(explicit)pool=[explicit];
@@ -54,12 +60,19 @@ export class PetDirector {
   if((changed&&(immediate||(!input.reactionActive&&now-this.since>=4000&&(boundary||overdue))))||(rotate&&boundary&&!input.reactionActive)){
    const available=pool.filter(a=>a.id!==current?.id&&now-(this.played.get(a.id)??-Infinity)>=a.cooldownMs);
    const fresh=available.filter(a=>!this.recent.includes(a.id));
-   const candidates=fresh.length?fresh:available;
+   let candidates=fresh.length?fresh:available;
+   if(idleBurst&&candidates.some(a=>a.family)){
+    const families=[...new Set(candidates.map(a=>a.family??a.id))];
+    const alternatives=families.filter(f=>f!==this.lastFamily);
+    const choices=alternatives.length?alternatives:families;
+    const family=choices[Math.min(choices.length-1,Math.floor(this.random()*choices.length))];
+    candidates=candidates.filter(a=>(a.family??a.id)===family);
+   }
    let next:PetAnimation;
    if(candidates.length){let r=this.random()*candidates.reduce((n,a)=>n+a.weight,0);next=candidates.find(a=>(r-=a.weight)<=0)??candidates[0]!;}
    else next=pool.find(a=>a.id===current?.id)??pool[0]!;
    // Staying on the same animation never rewinds a gesture or restarts a one-shot.
-   if(next.id!==current?.id||(idleBurst&&changed)){this.current=next;this.playhead=0;this.completedAt=undefined;this.since=now;this.played.set(next.id,now);this.recent=[...this.recent.filter(id=>id!==next.id),next.id].slice(-3);}
+   if(next.id!==current?.id||(idleBurst&&changed)){this.current=next;this.playhead=0;this.completedAt=undefined;this.since=now;this.played.set(next.id,now);this.recent=[...this.recent.filter(id=>id!==next.id),next.id].slice(-3);if(idleBurst){this.lastFamily=next.family??next.id;if(next.family==='easter'&&!explicit)this.nextEasterAt=now+600000;}}
    this.key=key;this.policy=policy;this.role=role;this.pending='';
   }
   return {animation:this.current!,time:this.playhead,still};
@@ -69,4 +82,20 @@ export function frameAt(animation:PetAnimation,time:number,activity=0,still=fals
  if(still)return animation.frames[0]!;const total=animationDuration(animation);
  let t=animation.loop?(time*playbackSpeed(animation,activity))%total:Math.min(time*playbackSpeed(animation,activity),total-1);
  for(const f of animation.frames){if(t<f.durationMs)return f;t-=f.durationMs;}return animation.frames.at(-1)!;
+}
+
+/** Stretch the display pose to the user's idle budget without speeding up the entry or exit. */
+export function idleFrameAt(animation:PetAnimation,time:number,budgetMs:number,still=false){
+ if(still||animation.holdFrame===undefined)return frameAt({...animation,speed:[1,1]},time,0,still);
+ const hold=animation.holdFrame;
+ const fixed=animation.frames.reduce((total,frame,index)=>total+(index===hold?0:frame.durationMs),0);
+ const minimumHold=250, factor=Math.min(1,Math.max(0,budgetMs-minimumHold)/Math.max(1,fixed));
+ let t=Math.max(0,time);
+ for(let index=0;index<animation.frames.length;index++){
+  const frame=animation.frames[index]!;
+  const duration=index===hold?Math.max(minimumHold,budgetMs-fixed*factor):frame.durationMs*factor;
+  if(t<duration)return frame;
+  t-=duration;
+ }
+ return animation.frames.at(-1)!;
 }

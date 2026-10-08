@@ -16,3 +16,6 @@ packs/classic/*.png
 packs/classic/atlas-layout.json
 __pycache__/
 *.pyc
+
+# Rebuilt from examples/bigfish-playful by scripts/build.ts
+packs/playful/bundle.dshpet

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { NativeCompanion } from '../src/client/controller.js';
+import { createPreferenceBridge } from '../src/client/dsh-preference-bridge.js';
 import { preferenceDefaults } from '../src/contract/preferences.js';
 import type { EventWindow, Entry, NativeServices } from '../src/client/native-contract.js';
 class Store<T> {
@@ -22,10 +23,11 @@ function fixture(history: Entry[] = []) {
     preferences.set({ ...s, value, revision: s.revision + 1 });
   } });
   const services: NativeServices = { sessions: { list, binding: () => ({ sessionId: 's1', session, eventSource: source }) },
-    uiSession: { pendingInteractions: pending }, connection: { state: connection }, settingsScope: { bind: () => scope } };
+    uiSession: { pendingInteractions: pending }, connection: { state: connection } };
   // Real ISessions returns the same retained binding until a lifecycle replacement.
   const binding = services.sessions.binding('s1'); services.sessions.binding = () => binding;
-  const controller = new NativeCompanion(services, null);
+  const preferenceScope = createPreferenceBridge({ settingsScope: { bind: () => scope } }).scope;
+  const controller = new NativeCompanion(services, null, preferenceScope);
   let seq = history.length + 1;
   const append = (type: string, data: any) => {
     const e = entry(type, data, seq++), prev = source.getSnapshot();
@@ -63,7 +65,7 @@ test('native pending interaction and connection recovery stop whip and discard s
     f.chunk('继续'); assert.equal(f.controller.getSnapshot().snapshot.state, 'generating');
   } finally { f.controller.dispose(); }
 });
-test('alpha.2 bridge waits for the retained UI binding, then follows sessionStatus', () => {
+test('current bridge waits for the retained UI binding, then follows sessionStatus', () => {
   const source = new Store<EventWindow>({ revision: 0, entries: [], change: { kind: 'replace' } });
   const session = Object.assign(new Store({ running: false, openState: 'open', lastAgentError: null }), { projections: { faceOf: () => new Store({ lastUsed: { provider: 'alpha', model: 'test' } }) } });
   const current = new Store<{ key?: unknown }>({});
@@ -76,11 +78,12 @@ test('alpha.2 bridge waits for the retained UI binding, then follows sessionStat
   let binding = { sessionId: 's1', session, eventSource: source };
   const services: NativeServices = {
     sessions: { list, binding: id => retained && id === 's1' ? binding : undefined },
-    uiSession: { adapter: { current }, sessionStatus: status }, connection: { state: connection }, settingsScope: { bind: () => scope },
+    uiSession: { adapter: { current }, sessionStatus: status }, connection: { state: connection },
   };
-  const controller = new NativeCompanion(services, null);
+  const preferenceScope = createPreferenceBridge({ settingsScope: { bind: () => scope } }).scope;
+  const controller = new NativeCompanion(services, null, preferenceScope);
   try {
-    assert.equal(controller.getSnapshot().compatibility.kind, 'alpha16');
+    assert.equal(controller.getSnapshot().compatibility.kind, 'ui-current-binding');
     assert.equal(controller.getSnapshot().snapshot.sessionId, 'idle');
     retained = true; current.set({ key: 's1' });
     const first = { type: 'event', event: { type: 'turn/start', seq: 1, time: Date.now(), data: { turn: 1 } } } as Entry;
@@ -88,7 +91,7 @@ test('alpha.2 bridge waits for the retained UI binding, then follows sessionStat
     assert.equal(controller.getSnapshot().snapshot.sessionId, 's1');
     binding = { ...binding }; list.set({ refreshed: true });
     assert.equal(controller.getSnapshot().snapshot.sessionId, 's1');
-    // During an alpha.2 list publication the retained UI binding can be
+    // During a current-host list publication the retained UI binding can be
     // momentarily unavailable. The foreground identity has not changed, so
     // the companion must not tear down and replay its local-submit state.
     retained = false; list.set({});
@@ -102,8 +105,9 @@ test('unknown session surface stays idle and reports compatibility diagnostics',
   const list = new Store({});
   const connection = new Store<string | undefined>('connected');
   const preferences = new Store({ status: 'ready', writable: true, value: { ...preferenceDefaults }, mode: 'host', revision: 1 });
-  const scope = Object.assign(preferences, { mutate: async () => {} });
-  const controller = new NativeCompanion({ sessions: { list, binding: () => undefined }, uiSession: {}, connection: { state: connection }, settingsScope: { bind: () => scope } }, null);
+  const scope = Object.assign(preferences, { mutate: async () => true });
+  const preferenceScope = createPreferenceBridge({ configForms: { get: () => scope } }).scope;
+  const controller = new NativeCompanion({ sessions: { list, binding: () => undefined }, uiSession: {}, connection: { state: connection } }, null, preferenceScope);
   try {
     assert.equal(controller.getSnapshot().compatibility.supported, false);
     assert.equal(controller.getSnapshot().snapshot.state, 'idle');

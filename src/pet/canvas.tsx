@@ -1,14 +1,14 @@
 import React,{useEffect,useRef} from 'react';
 import type {LoadedPet} from './library.js';
-import {PetDirector,frameAt,type PetInput} from './director.js';
+import {PetDirector,frameAt,idleFrameAt,type PetInput} from './director.js';
 import type {Preferences} from '../contract/preferences.js';
 import {AirSwing} from '../domain/air-swing.js';
 import {whipBeat} from '../client/whip-choreography.js';
 import {drawAirSwing} from '../client/draw-air-swing.js';
-export function PetCanvas({loaded,input,prefs,paused=false}:{loaded:LoadedPet;input:PetInput;prefs:Preferences;paused?:boolean}){
- const canvas=useRef<HTMLCanvasElement>(null),live=useRef({input,prefs,paused});live.current={input,prefs,paused};
+export function PetCanvas({loaded,input,prefs,paused=false,onAnimation}:{loaded:LoadedPet;input:PetInput;prefs:Preferences;paused?:boolean;onAnimation?:((id:string)=>void)|undefined}){
+ const canvas=useRef<HTMLCanvasElement>(null),live=useRef({input,prefs,paused,onAnimation});live.current={input,prefs,paused,onAnimation};
  useEffect(()=>{
-  const el=canvas.current!,c=el.getContext('2d')!,dpr=Math.min(2,devicePixelRatio||1),director=new PetDirector(loaded.pet),swing=new AirSwing();let frame=0,previous=0,disposed=false,last=0;
+  const el=canvas.current!,c=el.getContext('2d')!,dpr=Math.min(2,devicePixelRatio||1),director=new PetDirector(loaded.pet),swing=new AirSwing();let frame=0,previous=0,disposed=false,last=0,announced="";
   el.width=340*dpr;el.height=250*dpr;c.scale(dpr,dpr);
   const draw=(now:number)=>{frame=0;if(disposed||document.hidden)return;if(now-last<1000/30){frame=requestAnimationFrame(draw);return;}last=now;
    const {input:i,prefs:p,paused}=live.current,dt=previous?Math.min(.1,(now-previous)/1000):0;previous=now;
@@ -17,7 +17,8 @@ export function PetCanvas({loaded,input,prefs,paused=false}:{loaded:LoadedPet;in
    const canSwing=reactions.length>0&&m.capabilities.includes('air-swing')&&p.enabled&&p.whipEnabled&&!i.reduced&&!paused;
    const work=['generating','reasoning','streaming-gap'].includes(i.state)&&!i.preview;
    const motion=swing.tick(dt,Math.min(p.maxWhipHz,(i.whipHz??0)*p.intensity),canSwing&&work,canSwing&&work,!canSwing||!work);
-   const selected=director.choose({...i,reactionActive:motion.responding},now);let a=selected.animation,f=frameAt({...a,speed:[1,1]},selected.time,0,selected.still);
+   const selected=director.choose({...i,reactionActive:motion.responding},now);let a=selected.animation,f=i.state==='idle'&&i.idle?.active?idleFrameAt(a,selected.time,i.idle.durationMs??12000,selected.still):frameAt({...a,speed:[1,1]},selected.time,0,selected.still);
+   if(selected.animation.id!==announced){announced=selected.animation.id;live.current.onAnimation?.(announced);}
    if(motion.responding){const reaction=reactions[Math.floor(motion.cycles)%reactions.length];if(reaction){a=reaction;f=frameAt({...a,loop:false,speed:[1,1]},(motion.cycles%1)*a.frames.reduce((n,f)=>n+f.durationMs,0));}}
    c.clearRect(0,0,340,250);
    const scene=m.scenes?.[a.scene??''];if(scene){const im=loaded.images[scene.asset]!;c.drawImage(im,0,0,340,250);}

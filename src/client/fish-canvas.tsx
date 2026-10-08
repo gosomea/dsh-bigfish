@@ -82,6 +82,7 @@ function LegacyFishCanvas({
 export function FishCanvas(
   props: Parameters<typeof LegacyFishCanvas>[0] & {
     activityTag?: string | undefined;
+    onAnimation?: (id: string) => void;
   },
 ) {
   useSyncExternalStore(petLibrary.subscribe, petLibrary.getSnapshot);
@@ -109,6 +110,7 @@ export function FishCanvas(
   return (
     <PetCanvas
       loaded={pet}
+      onAnimation={props.onAnimation}
       prefs={props.prefs}
       paused={props.dragging ?? false}
       input={{

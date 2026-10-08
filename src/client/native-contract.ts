@@ -17,17 +17,28 @@ export interface PreferenceScope {
   subscribe(fn: () => void): () => void;
   mutate(ops: readonly { op: 'set'; path: string[]; value: any }[], revision?: number): Promise<void>;
 }
+/** Raw 0.1.7 ConfigForm face: `configForms.get(entryId)`; mutate reports acceptance by boolean. */
+export interface PreferenceForm {
+  getSnapshot(): { status: string; value: unknown; writable: boolean; mode: string; revision: number | undefined };
+  subscribe(fn: () => void): () => void;
+  mutate(ops: readonly { op: 'set'; path: string[]; value: any }[], expectedRevision?: number): Promise<boolean>;
+}
+export interface SettingsServices {
+  /** DSH 0.1.5/0.1.6 browser settings surface. */
+  settingsScope?: { bind(spec: { namespace: string; decode: (value: unknown) => any }): PreferenceScope } | undefined;
+  /** DSH 0.1.7+ browser settings surface. */
+  configForms?: { get(entryId: string): PreferenceForm } | undefined;
+}
 export interface SessionStatus { pendingInteraction?: unknown }
 export interface UiSessionAdapter { current: Observable<{ key?: unknown }> }
 export interface NativeServices {
-  /** The list schema differs between rc.2 and alpha.2; the bridge narrows only the optional legacy current field. */
+  /** The list schema differs between legacy and current DSH; only legacy exposes current here. */
   sessions: { list: Observable<object>; binding(id: any): Binding | undefined };
-  /** rc.2 exposes pendingInteractions; alpha.2 moves it into sessionStatus and owns selection through adapter.current. */
+  /** Legacy exposes pendingInteractions; current DSH moves it into sessionStatus and adapter.current. */
   uiSession: {
     pendingInteractions?: Observable<ReadonlyMap<any, unknown>>;
     sessionStatus?: Observable<ReadonlyMap<any, SessionStatus | undefined>>;
     adapter?: UiSessionAdapter;
   };
   connection: { state: Observable<string | undefined> };
-  settingsScope: { bind(spec: { namespace: string; decode: (value: unknown) => any }): PreferenceScope };
 }

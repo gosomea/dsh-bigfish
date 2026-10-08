@@ -1,0 +1,154 @@
+{
+  "format": "dsh-pet",
+  "formatVersion": 1,
+  "id": "bigfish-playful",
+  "name": "大肥鱼 · 趣味版",
+  "version": "1.0.0",
+  "author": "Codex / gosomea",
+  "description": "72 段六姿态演出：举牌小剧场、尾巴日常、工具专属动作与收工反馈；另含五类基础回退。",
+  "canvas": {
+    "width": 256,
+    "height": 256
+  },
+  "assets": {
+    "sheet01": {
+      "path": "sheet-01.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet02": {
+      "path": "sheet-02.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet03": {
+      "path": "sheet-03.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet04": {
+      "path": "sheet-04.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet05": {
+      "path": "sheet-05.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet06": {
+      "path": "sheet-06.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet07": {
+      "path": "sheet-07.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet08": {
+      "path": "sheet-08.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet09": {
+      "path": "sheet-09.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet10": {
+      "path": "sheet-10.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet11": {
+      "path": "sheet-11.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet12": {
+      "path": "sheet-12.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet13": {
+      "path": "sheet-13.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet14": {
+      "path": "sheet-14.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet15": {
+      "path": "sheet-15.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet16": {
+      "path": "sheet-16.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet17": {
+      "path": "sheet-17.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet18": {
+      "path": "sheet-18.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet19": {
+      "path": "sheet-19.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet20": {
+      "path": "sheet-20.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet21": {
+      "path": "sheet-21.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet22": {
+      "path": "sheet-22.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet23": {
+      "path": "sheet-23.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "sheet24": {
+      "path": "sheet-24.webp",
+      "width": 1536,
+      "height": 768
+    },
+    "base": {
+      "path": "base.webp",
+      "width": 1024,
+      "height": 1280
+    }
+  },
+  "thumbnail": "thumbnail.png",
+  "animations": "animations.json",
+  "fallbacks": {
+    "idle": "bigfish:base-idle",
+    "working": "bigfish:base-working",
+    "attention": "bigfish:base-attention",
+    "success": "bigfish:base-success",
+    "error": "bigfish:base-error"
+  },
+  "dialogue": "dialogue.json",
+  "capabilities": [
+    "sign",
+    "air-swing"
+  ]
+}

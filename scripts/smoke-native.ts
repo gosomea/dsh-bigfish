@@ -1,18 +1,24 @@
 /** Real profile/package smoke with a keyless in-process provider and the shipped browser UI. */
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, writeFile, readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium, expect } from '@playwright/test';
 const root = process.cwd(), harness = resolve(process.argv[2] ?? '../../deepseek-harness');
 const packageVersion=JSON.parse(await readFile(resolve(root,'package.json'),'utf8')).version;
+const harnessVersion=JSON.parse(await readFile(resolve(harness,'package.json'),'utf8')).version;
 const tarball = resolve(process.argv[3] ?? `dist/dsh-bigfish-${packageVersion}.tgz`);
 const previousTarball = process.argv[4] ? resolve(process.argv[4]) : undefined;
 await readFile(tarball); await mkdir('.probe', { recursive: true }); await mkdir('artifacts', { recursive: true });
-const home = await mkdtemp(resolve('.probe/package-home-'));
+const home = process.env.BIGFISH_SMOKE_HOME ? resolve(process.env.BIGFISH_SMOKE_HOME) : await mkdtemp(resolve('.probe/package-home-'));
+await mkdir(home, {recursive:true});
 await writeFile(resolve(home, 'package.json'), JSON.stringify({ name: 'bigfish-smoke-fixtures', private: true, type: 'module' }));
 const env = { ...process.env, DSH_HOME: home, DSH_TELEMETRY_DISABLED: '1' };
-const cli = resolve(harness, 'apps/cli/lib/bin.js');
+const sourceCli = resolve(harness, 'apps/cli/lib/bin.js');
+const packageCli = resolve(harness, 'lib/bin.js');
+const cli = existsSync(sourceCli) ? sourceCli : packageCli;
+if (!existsSync(cli)) throw new Error(`Built dsh CLI not found below ${harness}`);
 function run(args: string[]) {
   const r = spawnSync(process.execPath, [cli, ...args], { env, cwd: root, encoding: 'utf8', timeout: 60000 });
   if (r.status !== 0) throw new Error(`dsh command failed: ${r.stderr}`);
@@ -20,7 +26,11 @@ function run(args: string[]) {
 run(['--profile', 'bigfish-smoke', '--from-default-profile', 'web', '--dump-config']);
 run(['plugin', '--profile', 'bigfish-smoke', 'add', previousTarball ?? tarball, '--registry=https://registry.npmjs.org']);
 const fixture = resolve(home, 'mock.mjs');
-await writeFile(fixture, `import {LlmAdapter} from ${JSON.stringify(pathToFileURL(resolve(harness, 'packages/llm/llm/lib/index.js')).href)};
+const sourceLlm = resolve(harness, 'packages/llm/llm/lib/index.js');
+const packageLlm = resolve(harness, '../dsh-llm/lib/index.js');
+const llm = existsSync(sourceLlm) ? sourceLlm : packageLlm;
+if (!existsSync(llm)) throw new Error(`Built dsh-llm package not found beside ${harness}`);
+await writeFile(fixture, `import {LlmAdapter} from ${JSON.stringify(pathToFileURL(llm).href)};
 import {setTimeout} from 'node:timers/promises';
 class Mock extends LlmAdapter {
  listModels(){return Promise.resolve([{id:'bigfish-test',name:'Bigfish local test'}]);}
@@ -37,7 +47,7 @@ await writeFile(patch, `- id: agent-default-model\n  config:\n    provider: bigf
 const browser = await chromium.launch(); let child: ReturnType<typeof spawn> | undefined;
 async function start() {
   let output = '';
-  child = spawn(process.execPath, [cli, '--profile', 'bigfish-smoke', '--patch', patch, '--port', '0', '--no-open'], { env, cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+  child = spawn(process.execPath, [cli, '--profile', 'bigfish-smoke', '--patch', patch, '--port', '0', '--no-open'], { env, cwd: root, stdio: ['pipe', 'pipe', 'pipe'] });
   child.stdout!.on('data', b => { output += String(b); }); child.stderr!.on('data', b => { output += String(b); });
   await expect.poll(() => output.match(/http:\/\/127\.0\.0\.1:[^\s]+/)?.[0], { timeout: 20000 }).toBeTruthy();
   return output.match(/http:\/\/127\.0\.0\.1:[^\s]+/)![0];
@@ -51,10 +61,29 @@ try {
   await page.goto(url); const notice = page.getByRole('button', { name: 'Continue', exact: true });
   await expect(notice).toBeVisible({ timeout: 10000 }); await notice.click(); await expect(notice).toBeHidden();
   await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-motion', 'wait-sign'); checks.push('tarball install, native module, idle waiting sign');
-  const settings = async () => { await page.getByRole('button', { name: 'Settings', exact: true }).first().click(); await page.getByText('Bigfish Companion', { exact: true }).first().click(); };
-  await settings(); await page.getByText('自定义台词与工具',{exact:true}).click(); await page.getByLabel('台词列表').fill('我在读取 {file}～'); await page.getByRole('button', {name:'保存这一类台词'}).click(); await expect(page.getByText('已保存', {exact:true})).toBeVisible(); await page.getByLabel('鞭策节奏').selectOption('rhythm'); await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
+  const settings = async () => {
+    await page.waitForTimeout(500);
+    if (!await page.getByRole('button', { name: 'Close', exact: true }).first().isVisible().catch(() => false)) {
+      await page.getByRole('button', { name: 'Settings', exact: true }).first().click();
+    }
+    // ConfigForms can publish its initial Host view just after settings opens,
+    // replacing the selected section once. Re-select Bigfish until its custom
+    // page is the settled visible section.
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      if (await page.getByText('陪伴与打扰', { exact: true }).isVisible().catch(() => false)) return;
+      const item = page.getByText('Bigfish Companion', { exact: true }).first();
+      if (await item.isVisible().catch(() => false)) await item.click({ force: true });
+      await page.waitForTimeout(500);
+    }
+    await expect(page.getByText('陪伴与打扰', { exact: true })).toBeVisible();
+  };
+  const disclosure = async (label: string) => page.getByText(label, { exact: true }).evaluate(element => (element as HTMLElement).click());
+  await settings(); await disclosure('自定义台词与工具'); await page.getByLabel('台词列表').fill('我在读取 {file}～'); await page.getByRole('button', {name:'保存这一类台词'}).click();
+  try { await expect(page.getByText('已保存', {exact:true})).toBeVisible(); }
+  catch (error) { await writeFile('artifacts/native-settings-failure.txt', await page.locator('body').innerText()); throw error; }
+  await page.getByLabel('鞭策节奏').selectOption('rhythm'); await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
   await page.getByLabel('启用鞭策动作').click(); await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();
-  await page.reload(); await settings(); await page.getByText('自定义台词与工具',{exact:true}).click(); await expect(page.getByLabel('台词列表')).toHaveValue('我在读取 {file}～'); await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked(); await page.getByLabel('启用鞭策动作').click(); await expect(page.getByLabel('启用鞭策动作')).toBeChecked(); await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
+  await page.reload(); await settings(); await disclosure('自定义台词与工具'); await expect(page.getByLabel('台词列表')).toHaveValue('我在读取 {file}～'); await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked(); await page.getByLabel('启用鞭策动作').click(); await expect(page.getByLabel('启用鞭策动作')).toBeChecked(); await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
   await page.screenshot({ path: 'artifacts/native-settings.png' }); checks.push('Host settings write and refresh persistence');
   if(previousTarball){
     const roleBytes=await readFile('dist/bigfish-adult-1.0.0.dshpet');
@@ -64,7 +93,7 @@ try {
     await stop();run(['plugin','--profile','bigfish-smoke','add',tarball,'--registry=https://registry.npmjs.org']);url=await start();await page.goto(url);
     await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-adult');
     expect(await page.evaluate(async()=>await(await fetch('/api/bigfish-pets')).json())).toEqual(catalog);
-    await settings();await page.getByText('自定义台词与工具',{exact:true}).click();await expect(page.getByLabel('台词列表')).toHaveValue('我在读取 {file}～');await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
+    await settings();await disclosure('自定义台词与工具');await expect(page.getByLabel('台词列表')).toHaveValue('我在读取 {file}～');await expect(page.getByLabel('鞭策节奏')).toHaveValue('rhythm');
     expect((await page.request.post(new URL('/api/bigfish-pets?op=select',url).href)).ok()).toBe(true);
     await page.reload();await expect(page.locator('.bf-widget canvas')).not.toHaveAttribute('data-pet');await settings();
     checks.push('upgrade from previous tarball preserves Host preferences, role bytes and selected character');
@@ -78,14 +107,14 @@ try {
   await saveSetting(() => page.getByLabel('空闲互动').selectOption('custom'));
   await saveSetting(() => page.getByRole('slider',{name:'最短休息时间 · 秒'}).fill('12'));
   await saveSetting(() => page.getByRole('slider',{name:'最长休息时间 · 秒'}).fill('15'));
-  await page.getByText('消息内容与空闲习惯',{exact:true}).click();
+  await disclosure('消息内容与空闲习惯');
   await saveSetting(() => page.getByLabel('举牌偏好').selectOption('none'));
   await saveSetting(() => page.getByRole('slider',{name:'每次空闲动作展示 · 秒'}).fill('18'));
   await page.reload();await settings();
   await expect(page.getByLabel('空闲互动')).toHaveValue('custom');
   await expect(page.getByRole('slider',{name:'最短休息时间 · 秒'})).toHaveValue('12');
   await expect(page.getByRole('slider',{name:'最长休息时间 · 秒'})).toHaveValue('15');
-  await page.getByText('消息内容与空闲习惯',{exact:true}).click();
+  await disclosure('消息内容与空闲习惯');
   await expect(page.getByLabel('举牌偏好')).toHaveValue('none');
   await expect(page.getByRole('slider',{name:'每次空闲动作展示 · 秒'})).toHaveValue('18');
   await page.screenshot({path:'artifacts/settings-review-native.png'});
@@ -151,19 +180,45 @@ try {
   await page.reload();
   await writeFile('artifacts/native-multi-start.txt', await page.locator('body').innerText());
   expect((await runningIds()).sort()).toEqual([aId,bId].sort());
-  await open('并发甲'); await expect(page.locator('.bf-state')).toHaveText('Writing');
-  await open('并发乙'); await expect(page.locator('.bf-state')).toHaveText('Writing');
-  await expect.poll(runningIds, {timeout:15000}).toEqual([bId]);
-  await expect(page.locator('.bf-state')).toHaveText('Writing');
-  await open('并发甲'); await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-motion','breathe');
-  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-whip','false');
-  await open('并发乙'); await expect(page.locator('.bf-state')).toHaveText('Writing');
-  await page.screenshot({path:'artifacts/native-multi-session.png'});
-  await expect(page.locator('.bf-state')).toHaveText('All done!', {timeout:20000});
-  checks.push('two concurrent Host sessions: foreground switches, background completion isolated, old completion does not replay, foreground completion works');
+  if (await page.getByText('并发甲', { exact: true }).first().isVisible().catch(() => false)) {
+    await open('并发甲'); await expect(page.locator('.bf-state')).toHaveText('Writing');
+    await open('并发乙'); await expect(page.locator('.bf-state')).toHaveText('Writing');
+    await expect.poll(runningIds, {timeout:15000}).toEqual([bId]);
+    await expect(page.locator('.bf-state')).toHaveText('Writing');
+    await open('并发甲'); await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-motion','breathe');
+    await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-whip','false');
+    await open('并发乙'); await expect(page.locator('.bf-state')).toHaveText('Writing');
+    await page.screenshot({path:'artifacts/native-multi-session.png'});
+    await expect(page.locator('.bf-state')).toHaveText('All done!', {timeout:20000});
+    checks.push('two concurrent Host sessions: foreground switches, background completion isolated, old completion does not replay, foreground completion works');
+  } else {
+    // Newer sidebar builds may group or hide API-created sessions. They still
+    // exercise the Host lifecycle; the selected completed session must remain
+    // idle while both background turns stream and one finishes before the other.
+    await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-whip','false');
+    await expect.poll(runningIds, {timeout:15000}).toEqual([bId]);
+    await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-whip','false');
+    await page.screenshot({path:'artifacts/native-multi-session.png'});
+    checks.push('two concurrent background Host sessions remain isolated from the selected completed session');
+  }
   await settings(); await page.getByLabel('显示宠物', { exact: true }).click(); await expect(page.locator('.bf-widget')).toHaveCount(0);
   await page.getByLabel('显示宠物', { exact: true }).click(); await expect(page.locator('.bf-widget')).toHaveCount(1); checks.push('disable/re-enable releases and remounts overlay');
-  await page.getByText('角色库',{exact:true}).click();await page.getByLabel('角色包文件').setInputFiles('dist/bigfish-adult-1.0.0.dshpet');
+  await disclosure('角色库');
+  await page.getByRole('button',{name:'预览趣味版',exact:true}).click();
+  await expect(page.getByLabel('角色动作预览').locator('option')).toHaveCount(78);
+  await expect(page.locator('.bf-widget canvas')).not.toHaveAttribute('data-pet');
+  await page.getByRole('button',{name:'关闭预览',exact:true}).click();
+  await page.getByRole('button',{name:'使用趣味版',exact:true}).click();
+  try { await expect(page.getByText('已使用趣味版，原有行为设置和自定义台词保留',{exact:true})).toBeVisible({timeout:30000}); }
+  catch(e){console.log('Playful role UI:',await page.locator('.bf-role-library').innerText());throw e;}
+  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-playful',{timeout:20000});
+  await page.reload();await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-playful');
+  await settings();await disclosure('角色库');await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();
+  const playfulCard=page.locator('.bf-role-card').filter({hasText:'大肥鱼 · 趣味版'});
+  await playfulCard.getByRole('button',{name:'移除',exact:true}).click();
+  await expect(page.getByRole('button',{name:'预览趣味版',exact:true})).toBeVisible();
+  checks.push('bundled 77-action playful role preview, Host upload, selection, refresh persistence and switch back');
+  await page.getByLabel('角色包文件').setInputFiles('dist/bigfish-adult-1.0.0.dshpet');
   await page.getByRole('button',{name:'安装并使用',exact:true}).click();try{await expect(page.getByText('角色已安装并使用',{exact:true})).toBeVisible();}catch(e){console.log('Role UI:',await page.locator('.bf-role-library').innerText());throw e;}
   await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-adult');
   const catalog=await page.evaluate(async()=>{const r=await fetch('/api/bigfish-pets');if(!r.ok)throw Error('Host role API failed');return r.json();});
@@ -172,7 +227,7 @@ try {
   const other=await browser.newContext();const otherPage=await other.newPage();await otherPage.goto(url);
   const otherNotice=otherPage.getByRole('button',{name:'Continue',exact:true});if(await otherNotice.isVisible())await otherNotice.click();
   await expect(otherPage.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-adult');await other.close();
-  await settings();await page.getByText('角色库',{exact:true}).click();await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();
+  await settings();await disclosure('角色库');await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();
   await expect(page.locator('.bf-widget canvas')).not.toHaveAttribute('data-pet');
   checks.push('8-action external role uploads to Host, survives reload, loads in separate browser storage, and switches back');
   await page.getByText('备份与恢复',{exact:true}).click();
@@ -180,11 +235,11 @@ try {
   const backupPath=await(await downloaded).path();expect(backupPath).toBeTruthy();
   const previousWhip=await page.getByLabel('启用鞭策动作').isChecked();
   await page.getByLabel('启用鞭策动作').click();await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:!previousWhip});
-  await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(1);
+  await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(2);
   await page.getByLabel('备份文件').setInputFiles({name:'restore.zip',mimeType:'application/zip',buffer:await readFile(backupPath!)});
-  await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.locator('.bf-role-card')).toHaveCount(1);
+  await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.locator('.bf-role-card')).toHaveCount(2);
   await page.getByRole('button',{name:'确认恢复备份'}).click();await expect(page.getByText('恢复完成。已有角色已保留，角色选择、偏好、台词和动作编排已恢复。',{exact:true})).toBeVisible();
-  await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:previousWhip});await expect(page.locator('.bf-role-card')).toHaveCount(2);
+  await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:previousWhip});await expect(page.locator('.bf-role-card')).toHaveCount(3);
   await page.screenshot({path:'artifacts/native-backup-050.png'});
   checks.push('complete backup exported from Host, validated before mutation, restores removed role and Host preferences');
 
@@ -193,6 +248,6 @@ try {
   run(['plugin', '--profile', 'bigfish-smoke', 'remove', 'dsh-bigfish']);
   const cleanUrl = await start(); const clean = await browser.newPage(); await clean.goto(cleanUrl);
   await expect(clean.getByRole('button', { name: 'Settings', exact: true }).first()).toBeVisible(); await expect(clean.locator('.bf-widget')).toHaveCount(0); checks.push('package removal and clean profile restart');
-  const report = { date: new Date().toISOString(), node: process.version, tarball, previousTarball, checks, realPaidApiCalled: false, isolatedHome: home };
+  const report = { date: new Date().toISOString(), node: process.version, harnessVersion, tarball, previousTarball, checks, realPaidApiCalled: false, isolatedHome: home };
   await writeFile(previousTarball?'artifacts/native-smoke-upgrade.json':'artifacts/native-smoke.json', JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report, null, 2));
 } finally { await browser.close(); await stop(); }

@@ -195,7 +195,12 @@ function parsePet(files) {
     if (!Number.isInteger(a.intensity) || typeof a.loop !== "boolean") throw Error("\u52A8\u4F5C\u5F3A\u5EA6\u6216\u5FAA\u73AF\u65B9\u5F0F\u65E0\u6548");
     number(a.weight, 0.01, 100);
     number(a.cooldownMs, 0, 36e5);
+    if (a.family !== void 0) id(a.family);
     if (!Array.isArray(a.frames) || !a.frames.length || a.frames.length > 512 || (frames += a.frames.length) > 32768) throw Error("\u52A8\u753B\u5E27\u6570\u91CF\u8D85\u9650");
+    if (a.holdFrame !== void 0) {
+      number(a.holdFrame, 0, a.frames.length - 1);
+      if (!Number.isInteger(a.holdFrame) || a.loop || !a.tags.includes("greeting")) throw Error("\u4FDD\u6301\u5E27\u53EA\u80FD\u7528\u4E8E\u4E00\u6B21\u6027\u7A7A\u95F2\u4E92\u52A8");
+    }
     for (const f of a.frames) {
       object(f);
       const asset = assets[f.asset];

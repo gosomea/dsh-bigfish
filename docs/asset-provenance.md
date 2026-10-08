@@ -49,3 +49,11 @@ All signs wide enough for 5 Chinese characters later, fully blank. Friendly play
 ## 0.5.0 日常动作精修
 
 新增 `assets/sprites/bigfish-daily.png`，1448×1086 原生 RGBA PNG，12 个新姿态：喝茶、擦汗、伸懒腰各 4 帧。参考仅为项目原始萌化大肥鱼图集；保留鲸尾、女仆服与围裙鲸鱼标志。未改写生成图像，按 alpha 间隔登记 source rect。累计 6 图集、72 姿态、29 类动作。按透明间隔修正逐行取图边界，避免下一行头饰漏入上一行脚底；daily 全帧使用同一比例与独立脚底锚点，避免各格宽度不同导致左右漂移。以重复帧作自然停留，再放下手或杯子，`loop:false` 收尾保持；完整提示词见 [本轮生成记录](daily-generation.json)。
+
+## 0.6.0 趣味版
+
+2026-10-08 使用宿主内置 image_gen，以原始萌化大肥鱼图集作为唯一角色参考生成 24 张透明 PNG。每张三行、每行六个连续关键姿态，合计 72 段新演出、432 个新姿态。保留蓝发、鲸尾、女仆服与围裙鲸鱼标志；未使用被否定的成年参考。
+
+完整提示词在 `assets/expansion/generation.json`，动作与台词在 `assets/expansion/actions.json`。`scripts/assemble-playful.py` 按透明间隔分格，统一脚底基线、编码 WebP 并登记牌文区域；它只处理已生成素材，不绘制新姿态。原始 PNG 留在源码，运行时无需访问生成缓存或远程资源。文件摘要与组装计数记录在 `assets/expansion/assembly.json`。
+
+`examples/bigfish-playful` 含 72 段新演出和五类复用基础回退，共 77 个动作、452 个帧引用。角色图集解码像素约 2825 万，素材文件约 13.1 MiB；旧成年版素材没有在本轮扩充。生成过程记录不等于原始角色来源授权声明，来源边界继续见 NOTICE。

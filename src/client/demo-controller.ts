@@ -4,7 +4,7 @@ import { modelKey, type WorkState, type ModelIdentity } from '../contract/types.
 import { engineConfig } from '../contract/preferences.js';
 import { PreferenceStore } from './preferences-store.js';
 import type { Companion, CompanionView } from './controller.js';
-const demoCompatibility = { kind: 'rc15' as const, supported: true, capabilities: ['demo'], missing: [] };
+const demoCompatibility = { kind: 'legacy-list-current' as const, supported: true, capabilities: ['demo'], missing: [] };
 export class DemoCompanion implements Companion {
   preferences: PreferenceStore;
   base = 100; ratio = 1; state: WorkState = 'generating';

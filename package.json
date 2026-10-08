@@ -1,6 +1,6 @@
 {
   "name": "dsh-bigfish",
-  "version": "0.5.4-next.1",
+  "version": "0.6.0-next.1",
   "description": "Adaptive DSH companion with replaceable, extensible character packs",
   "type": "module",
   "exports": {
@@ -42,7 +42,7 @@
     "prepack": "pnpm check && pnpm build"
   },
   "devDependencies": {
-    "@deepseek-ai/schemastery": "3.18.2",
+    "@deepseek-ai/schemastery": "3.18.4",
     "@playwright/test": "1.58.2",
     "@types/node": "22.20.0",
     "@types/proper-lockfile": "4.1.4",

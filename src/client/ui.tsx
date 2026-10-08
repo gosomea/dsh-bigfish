@@ -1,3 +1,4 @@
+import { actionIdle } from "../pet/action-dialogue.js";
 import { isBuiltinAsset } from "../contract/builtin-assets.js";
 import { petLibrary } from "../pet/library.js";
 import { useIdle } from "./use-idle.js";
@@ -34,6 +35,7 @@ export function Widget({ controller, t }: UIProps) {
     controller.preferences.subscribe,
     controller.preferences.getSnapshot,
   );
+  const [animation, setAnimation] = useState({ key: "", id: "" });
   const [open, setOpen] = useState(false),
     [full, setFull] = useState(false),
     [collapsed, setCollapsed] = useState(false);
@@ -86,12 +88,21 @@ export function Widget({ controller, t }: UIProps) {
     return () => removeEventListener("keydown", escape);
   }, []);
   const shown = usePresentation(view.snapshot, p);
-  const idle = useIdle(
+  const scheduledIdle = useIdle(
     shown.state === "idle",
     p.enabled && !collapsed,
     p,
     petLibrary.active?.pet.dialogue.idle,
   );
+  const currentAnimation = animation.key === petLibrary.active?.key
+    ? petLibrary.active?.pet.animations.find(a => a.id === animation.id)
+    : undefined;
+  const category = dialogueCategory(shown, view.activity);
+  const semantic = shown.state === 'retrying' ? 'retry' : ({ complete: 'success', waiting: 'attention', start: 'start' } as Record<string, string>)[category] ?? view.activity?.semantic ?? category;
+  const matchingAnimation = currentAnimation?.tags.includes(semantic) ? currentAnimation.id : undefined;
+  const idle = petLibrary.active && matchingAnimation
+    ? actionIdle(scheduledIdle, petLibrary.active.pet.dialogue, matchingAnimation, p.dialogueJson)
+    : scheduledIdle;
   if (!p.enabled) return null;
   if (collapsed)
     return (
@@ -131,6 +142,7 @@ export function Widget({ controller, t }: UIProps) {
       <DialogueBubble
         key={petLibrary.active?.key ?? "bigfish"}
         roleLines={petLibrary.active?.pet.dialogue}
+        animation={matchingAnimation}
         snapshot={s}
         prefs={p}
         activity={view.activity}
@@ -185,6 +197,7 @@ export function Widget({ controller, t }: UIProps) {
       </DialogueBubble>
       <FishCanvas
         snapshot={s}
+        onAnimation={(id) => setAnimation({ key: petLibrary.active?.key ?? "", id })}
         prefs={p}
         t={t}
         activityTag={view.activity?.semantic ?? view.activity?.category}

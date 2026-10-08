@@ -1,0 +1,1 @@
+Generated with built-in image_gen using original Bigfish sprite art as identity reference. Original reference creator remains unconfirmed; see project NOTICE and docs/asset-provenance.md. Five base fallback sequences reuse established project art.

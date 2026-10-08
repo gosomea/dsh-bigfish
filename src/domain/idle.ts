@@ -3,7 +3,7 @@ import { defaultLines, parseLines } from '../contract/dialogue.js';
 import { motionAllowed } from './motion-policy.js';
 
 export interface IdleMemory { greeted: boolean; nextAt: number; lastMotion: number; lastLine: number; nonSignStreak?: number; lastMotionId?: string }
-export interface IdlePresentation { active: boolean; showText: boolean; motion: string; text: string; serial: number; nextInSeconds?: number; reason?: 'work'|'hidden'|'reduced'|'quiet'|'rest'|'active' }
+export interface IdlePresentation { active: boolean; showText: boolean; motion: string; text: string; serial: number; durationMs?: number; nextInSeconds?: number; reason?: 'work'|'hidden'|'reduced'|'quiet'|'rest'|'active' }
 const resting: IdlePresentation = { active: false, showText: false, motion: 'breathe', text: '', serial: 0 };
 export const isSign = (motion: string) => motion === 'wait-sign' || motion.startsWith('sign-');
 export function idleInterval(p: Preferences): [number, number] {
@@ -71,7 +71,7 @@ export class IdleDirector {
       this.schedule(this.until, p);
     }
     const active = now < this.until;
-    return { active, showText: now < this.textUntil && Boolean(this.text), motion: active ? this.motion : 'breathe', text: this.text, serial: this.serial,
+    return { active, showText: now < this.textUntil && Boolean(this.text), motion: active ? this.motion : 'breathe', text: this.text, serial: this.serial, durationMs: (p.idleMode === 'quiet' ? 5 : p.idleHoldSeconds) * 1000,
       reason: active ? 'active' : p.idleMode === 'quiet' ? 'quiet' : 'rest',
       ...(p.idleMode !== 'quiet' && !active ? { nextInSeconds: Math.max(0, Math.ceil((this.memory.nextAt - now) / 1000)) } : {}) };
   }

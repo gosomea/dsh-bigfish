@@ -1,0 +1,6142 @@
+[
+  {
+    "id": "bigfish:sign-flip",
+    "label": "牌子拿反了",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet01",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 90,
+          "y": 140,
+          "width": 54,
+          "height": 39,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 89,
+          "y": 138,
+          "width": 56,
+          "height": 38,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-stamp",
+    "label": "值班鲸鱼盖章",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet01",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 86,
+          "y": 130,
+          "width": 47,
+          "height": 42,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 102,
+          "y": 137,
+          "width": 41,
+          "height": 35,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-tail-stand",
+    "label": "尾巴当支架",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet01",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 102,
+          "y": 140,
+          "width": 50,
+          "height": 31,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 104,
+          "y": 144,
+          "width": 48,
+          "height": 33,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet01",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-curtain",
+    "label": "小幕布揭牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet02",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 82,
+          "y": 136,
+          "width": 76,
+          "height": 35,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 137,
+          "y": 112,
+          "width": 49,
+          "height": 48,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-paper-plane",
+    "label": "纸飞机送信",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet02",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 91,
+          "y": 132,
+          "width": 43,
+          "height": 25,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-pop-up",
+    "label": "弹出式请帖",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet02",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 97,
+          "y": 125,
+          "width": 43,
+          "height": 26,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 106,
+          "y": 132,
+          "width": 34,
+          "height": 22,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet02",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:tail-polish",
+    "label": "擦亮尾巴",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet03",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:biscuit-share",
+    "label": "分你半块饼干",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet03",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:bubble-chase",
+    "label": "追一颗泡泡",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet03",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet03",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:pillow-nest",
+    "label": "给尾巴铺小窝",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet04",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:badge-care",
+    "label": "整理鲸鱼徽章",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet04",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:paper-fish",
+    "label": "折一只纸鱼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet04",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet04",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:typing-notes",
+    "label": "便签打字",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet05",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:thinking-puzzle",
+    "label": "拼起思路",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet05",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:typing-sleeves",
+    "label": "挽袖开工",
+    "tags": [
+      "start"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet05",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet05",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:thinking-scratchpad",
+    "label": "草稿演算",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet06",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:typing-tail-rhythm",
+    "label": "尾巴打拍子",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet06",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:notes-sort",
+    "label": "整理便签",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet06",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet06",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:read-bookmark",
+    "label": "阅读夹书签",
+    "tags": [
+      "read",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet07",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:search-magnifier",
+    "label": "放大镜找线索",
+    "tags": [
+      "search",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet07",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:edit-pencil",
+    "label": "铅笔修改",
+    "tags": [
+      "edit",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet07",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet07",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:command-lever",
+    "label": "启动小控制台",
+    "tags": [
+      "command",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet08",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:test-checklist",
+    "label": "测试巡检",
+    "tags": [
+      "test",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet08",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:export-parcel",
+    "label": "整理交付包",
+    "tags": [
+      "export",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet08",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet08",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:attention-choice",
+    "label": "把选择递给你",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet09",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:attention-bell",
+    "label": "轻摆提示铃",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet09",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:success-whale-stamp",
+    "label": "鲸鱼验收章",
+    "tags": [
+      "success"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet09",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet09",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:success-desk-tidy",
+    "label": "开心收工",
+    "tags": [
+      "success"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet10",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:error-inspect",
+    "label": "戴眼镜排查",
+    "tags": [
+      "error"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet10",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:retry-reset",
+    "label": "清理后再试",
+    "tags": [
+      "retry"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet10",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet10",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:easter-oversized-sign",
+    "label": "牌子太大了",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet11",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 38,
+          "y": 165,
+          "width": 55,
+          "height": 34,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 93,
+          "y": 151,
+          "width": 38,
+          "height": 27,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:easter-badge-salute",
+    "label": "小鲸鱼敬礼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet11",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:easter-chair-spin",
+    "label": "转椅半圈",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet11",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet11",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:near-miss-protect-tea",
+    "label": "先保住茶杯",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "reaction",
+    "frames": [
+      {
+        "asset": "sheet12",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 220
+      }
+    ]
+  },
+  {
+    "id": "bigfish:near-miss-tail-hide",
+    "label": "尾巴先收好",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "reaction",
+    "frames": [
+      {
+        "asset": "sheet12",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      }
+    ]
+  },
+  {
+    "id": "bigfish:near-miss-determined",
+    "label": "深吸气再开工",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "reaction",
+    "frames": [
+      {
+        "asset": "sheet12",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet12",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      }
+    ]
+  },
+  {
+    "id": "bigfish:sign-puzzle",
+    "label": "拼出等候牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet13",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 116,
+          "y": 168,
+          "width": 45,
+          "height": 11,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-calendar",
+    "label": "翻到等你这一页",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet13",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 85,
+          "y": 152,
+          "width": 49,
+          "height": 28,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 83,
+          "y": 151,
+          "width": 49,
+          "height": 28,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-origami",
+    "label": "折叠小横幅",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet13",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 74,
+          "y": 162,
+          "width": 86,
+          "height": 23,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 49,
+          "y": 136,
+          "width": 127,
+          "height": 31,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet13",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-balloon",
+    "label": "气球托起牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet14",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 91,
+          "y": 154,
+          "width": 45,
+          "height": 32,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 94,
+          "y": 152,
+          "width": 47,
+          "height": 33,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-chalkboard",
+    "label": "擦干净再举牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet14",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800,
+        "sign": {
+          "x": 75,
+          "y": 143,
+          "width": 67,
+          "height": 42,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:sign-pocket",
+    "label": "口袋里掏出小牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "sign",
+    "frames": [
+      {
+        "asset": "sheet14",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800,
+        "sign": {
+          "x": 93,
+          "y": 132,
+          "width": 40,
+          "height": 30,
+          "angle": 0
+        }
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet14",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:water-plant",
+    "label": "浇一盆小水草",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet15",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:tail-comb",
+    "label": "梳梳尾巴边",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet15",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:knit-scarf",
+    "label": "织一条鲸鱼围巾",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet15",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet15",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:windup-whale",
+    "label": "上发条小鲸鱼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet16",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:shell-juggle",
+    "label": "贝壳小把戏",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet16",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:leaf-umbrella",
+    "label": "荷叶小伞",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet16",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet16",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:thinking-abacus",
+    "label": "算盘推演",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet17",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:thinking-sandglass",
+    "label": "观察沙漏",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet17",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:read-books-sort",
+    "label": "书堆找答案",
+    "tags": [
+      "read",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet17",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet17",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:thinking-flowchart",
+    "label": "画一张路线图",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet18",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:thinking-gears",
+    "label": "齿轮咔哒转",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet18",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:writing-ink",
+    "label": "蘸墨写草稿",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "work",
+    "frames": [
+      {
+        "asset": "sheet18",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet18",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:web-telescope",
+    "label": "望远镜看网页",
+    "tags": [
+      "web",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet19",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:image-palette",
+    "label": "调色画画",
+    "tags": [
+      "image",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet19",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:agent-director",
+    "label": "小导演带队",
+    "tags": [
+      "agent",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet19",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet19",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:parallel-trays",
+    "label": "多任务分篮",
+    "tags": [
+      "parallel",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet20",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:background-terrarium",
+    "label": "看守小生态箱",
+    "tags": [
+      "background",
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet20",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:export-suitcase",
+    "label": "打包小行李箱",
+    "tags": [
+      "export",
+      "working"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "tools",
+    "frames": [
+      {
+        "asset": "sheet20",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet20",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:success-ribbon",
+    "label": "交付小礼物",
+    "tags": [
+      "success"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet21",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:success-paper-confetti",
+    "label": "纸花庆祝",
+    "tags": [
+      "success"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet21",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:error-cable-check",
+    "label": "检查小接线",
+    "tags": [
+      "error"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet21",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet21",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:attention-envelope",
+    "label": "递来确认信",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet22",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:retry-eraser",
+    "label": "擦掉重画",
+    "tags": [
+      "retry"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet22",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:error-question-map",
+    "label": "困惑地图",
+    "tags": [
+      "error"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "outcome",
+    "frames": [
+      {
+        "asset": "sheet22",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 650
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 900
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1200
+      },
+      {
+        "asset": "sheet22",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 850
+      }
+    ]
+  },
+  {
+    "id": "bigfish:easter-bubble-hat",
+    "label": "泡泡落在头上",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 2,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet23",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:easter-shell-listen",
+    "label": "听听贝壳",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet23",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:easter-self-portrait",
+    "label": "画一张小自画像",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 45000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "daily",
+    "frames": [
+      {
+        "asset": "sheet23",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet23",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:easter-paper-fleet",
+    "label": "纸鱼小船队",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 600000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "easter",
+    "frames": [
+      {
+        "asset": "sheet24",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 450
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 550
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 4800
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1024,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 1800
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1280,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 700
+      }
+    ],
+    "holdFrame": 3
+  },
+  {
+    "id": "bigfish:near-miss-glasses",
+    "label": "扶好眼镜再写",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 1,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "reaction",
+    "frames": [
+      {
+        "asset": "sheet24",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1024,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1280,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 220
+      }
+    ]
+  },
+  {
+    "id": "bigfish:near-miss-startle",
+    "label": "眨眼稳住节奏",
+    "tags": [
+      "near-miss"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 12000,
+    "speed": [
+      1,
+      1
+    ],
+    "family": "reaction",
+    "frames": [
+      {
+        "asset": "sheet24",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 140
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1024,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "sheet24",
+        "rect": [
+          1280,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 220
+      }
+    ]
+  },
+  {
+    "id": "bigfish:base-idle",
+    "label": "安静眨眼（基础）",
+    "tags": [
+      "idle"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 0,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "base",
+        "rect": [
+          0,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 2200
+      },
+      {
+        "asset": "base",
+        "rect": [
+          256,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 130
+      },
+      {
+        "asset": "base",
+        "rect": [
+          512,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 180
+      },
+      {
+        "asset": "base",
+        "rect": [
+          768,
+          0,
+          256,
+          256
+        ],
+        "durationMs": 130
+      }
+    ]
+  },
+  {
+    "id": "bigfish:base-working",
+    "label": "稳定打字（基础）",
+    "tags": [
+      "working"
+    ],
+    "intensity": 0,
+    "loop": true,
+    "weight": 1,
+    "cooldownMs": 0,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "base",
+        "rect": [
+          0,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "base",
+        "rect": [
+          256,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "base",
+        "rect": [
+          512,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1000
+      },
+      {
+        "asset": "base",
+        "rect": [
+          768,
+          256,
+          256,
+          256
+        ],
+        "durationMs": 1500
+      }
+    ]
+  },
+  {
+    "id": "bigfish:base-attention",
+    "label": "等待确认（基础）",
+    "tags": [
+      "attention"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 0,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "base",
+        "rect": [
+          0,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "base",
+        "rect": [
+          256,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "base",
+        "rect": [
+          512,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1000
+      },
+      {
+        "asset": "base",
+        "rect": [
+          768,
+          512,
+          256,
+          256
+        ],
+        "durationMs": 1500
+      }
+    ]
+  },
+  {
+    "id": "bigfish:base-success",
+    "label": "成功收工（基础）",
+    "tags": [
+      "success"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 0,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "base",
+        "rect": [
+          0,
+          768,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "base",
+        "rect": [
+          256,
+          768,
+          256,
+          256
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "base",
+        "rect": [
+          512,
+          768,
+          256,
+          256
+        ],
+        "durationMs": 1000
+      },
+      {
+        "asset": "base",
+        "rect": [
+          768,
+          768,
+          256,
+          256
+        ],
+        "durationMs": 1500
+      }
+    ]
+  },
+  {
+    "id": "bigfish:base-error",
+    "label": "困惑检查（基础）",
+    "tags": [
+      "error"
+    ],
+    "intensity": 0,
+    "loop": false,
+    "weight": 1,
+    "cooldownMs": 0,
+    "speed": [
+      1,
+      1
+    ],
+    "frames": [
+      {
+        "asset": "base",
+        "rect": [
+          0,
+          1024,
+          256,
+          256
+        ],
+        "durationMs": 600
+      },
+      {
+        "asset": "base",
+        "rect": [
+          256,
+          1024,
+          256,
+          256
+        ],
+        "durationMs": 700
+      },
+      {
+        "asset": "base",
+        "rect": [
+          512,
+          1024,
+          256,
+          256
+        ],
+        "durationMs": 1000
+      },
+      {
+        "asset": "base",
+        "rect": [
+          768,
+          1024,
+          256,
+          256
+        ],
+        "durationMs": 1500
+      }
+    ]
+  }
+]

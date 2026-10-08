@@ -20,3 +20,9 @@ Keep feet and subject scale aligned across every frame. Playback integrates spee
 Make `attention` distinct from quiet idle. Its final frame should communicate waiting without repetitive beckoning. For `near-miss`, use a preparation pose first, anticipation around 26–36% of the clip, the main dodge around 46–72%, and recovery to work by the final frame. Keep the entire silhouette inside the declared canvas; the shared rope is clipped outside the character compartment. Preview quiet rest as well as active work.
 
 Keep `near-miss` exclusive to optional air-swing reactions, not normal work or required role fallbacks. Provide independent normal work frames so users can disable encouragement without losing work animation. Verify the pet with “启用鞭策动作” both off and on; asset preview may explicitly inspect a reaction while daily encouragement stays off.
+
+## Idle budgets and action dialogue
+
+For one-shot `greeting` animations, optional `holdFrame` selects the zero-based display pose. The runtime stretches that pose to the user's 5–30 second idle budget while retaining entry and recovery. Never set it on work loops or reactions. Optional `family` groups idle variants (`sign`, `daily`, `tail`, `easter`) so a large sign collection does not overwhelm other scenes; `easter` has a ten-minute global cooldown. Legacy packs without these fields continue playing.
+
+Dialogue may use an exact animation ID as a key. Supply lines that describe the visible action without claiming an unobserved tool result; explicit user category overrides, including empty arrays for silence, take priority. Validate a short and long idle budget, sign off, quiet mode and reduced motion. The full bundled protocol is in pack-spec.md.

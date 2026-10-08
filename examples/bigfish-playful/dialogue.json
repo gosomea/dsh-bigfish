@@ -1,0 +1,276 @@
+{
+  "bigfish:sign-flip": [
+    "这面才对～",
+    "翻过来就能看见我啦！"
+  ],
+  "bigfish:sign-stamp": [
+    "今日也在岗！",
+    "鲸鱼值班章，盖好了～"
+  ],
+  "bigfish:sign-tail-stand": [
+    "尾巴帮我托着，你慢慢想～",
+    "腾出一只手，跟你打个招呼！"
+  ],
+  "bigfish:sign-curtain": [
+    "小幕布打开，等你开场～",
+    "今天的主角是你的新点子！"
+  ],
+  "bigfish:sign-paper-plane": [
+    "给你寄来一架小纸飞机～",
+    "有事就把任务送过来呀！"
+  ],
+  "bigfish:sign-pop-up": [
+    "这张小请帖留给你～",
+    "打开就是：随时开工！"
+  ],
+  "bigfish:tail-polish": [
+    "把尾巴擦亮，准备下一次出发～",
+    "尾巴也要好好保养呀。"
+  ],
+  "bigfish:biscuit-share": [
+    "给你留了一半～",
+    "一起吃块小饼干，慢慢来。"
+  ],
+  "bigfish:bubble-chase": [
+    "抓到一颗小泡泡！",
+    "泡泡跑得比我尾巴快一点～"
+  ],
+  "bigfish:pillow-nest": [
+    "给尾巴铺个软软的小窝。",
+    "休息一下，你需要我时再开工～"
+  ],
+  "bigfish:badge-care": [
+    "小鲸鱼徽章，要摆正。",
+    "整理好啦，继续陪着你。"
+  ],
+  "bigfish:paper-fish": [
+    "给你折了一只小纸鱼～",
+    "小纸鱼也在等下一个冒险。"
+  ],
+  "bigfish:typing-notes": [
+    "看一眼便签，继续写～",
+    "这段先写稳，思路跟上啦。"
+  ],
+  "bigfish:thinking-puzzle": [
+    "思路一点点拼起来～",
+    "我再对一下这两块拼图。"
+  ],
+  "bigfish:typing-sleeves": [
+    "袖口收好，准备开工！",
+    "键盘摆正，收到你的任务啦～"
+  ],
+  "bigfish:thinking-scratchpad": [
+    "先在草稿上理一下～",
+    "这一步再看仔细一点。"
+  ],
+  "bigfish:typing-tail-rhythm": [
+    "尾巴打拍子，手上继续写～",
+    "跟着节奏，一段一段来。"
+  ],
+  "bigfish:notes-sort": [
+    "把思路摆整齐，再继续。",
+    "这张放这里，顺一点啦～"
+  ],
+  "bigfish:read-bookmark": [
+    "在读 {file}，夹个书签～",
+    "我盯着 {tool} 的内容呢～"
+  ],
+  "bigfish:search-magnifier": [
+    "拿放大镜，找找线索～",
+    "{tool} 跑起来啦，我仔细找。"
+  ],
+  "bigfish:edit-pencil": [
+    "正在跟着 {tool} 修改～",
+    "这几笔要写仔细，盯住 {file}。"
+  ],
+  "bigfish:command-lever": [
+    "{tool} 启动，我看着仪表～",
+    "小控制台亮起来啦，等执行结果。"
+  ],
+  "bigfish:test-checklist": [
+    "我盯着 {tool} 的检查结果呢～",
+    "逐项看看，先等真实结果。"
+  ],
+  "bigfish:export-parcel": [
+    "整理 {tool} 的交付材料～",
+    "文件装好，等这一项结束。"
+  ],
+  "bigfish:attention-choice": [
+    "这一步需要你选一下～",
+    "我先停住，等你的决定。"
+  ],
+  "bigfish:attention-bell": [
+    "这里需要你确认，我等着～",
+    "提醒一次就好，慢慢看。"
+  ],
+  "bigfish:success-whale-stamp": [
+    "本轮完成，盖个小鲸鱼章！",
+    "完成啦，把成果递给你～"
+  ],
+  "bigfish:success-desk-tidy": [
+    "收工啦，桌面也整理好了～",
+    "这轮完成，可以抱抱尾巴放松啦。"
+  ],
+  "bigfish:error-inspect": [
+    "这里遇到问题，我仔细看看。",
+    "先检查一下，等下一步处理。"
+  ],
+  "bigfish:retry-reset": [
+    "重新摆好工具，准备再试。",
+    "清理一下草稿，等重试开始。"
+  ],
+  "bigfish:easter-oversized-sign": [
+    "这块牌子太大啦，换一块～",
+    "小一点，也能装下我的期待！"
+  ],
+  "bigfish:easter-badge-salute": [
+    "大肥鱼报到！",
+    "小鲸鱼也一起敬个礼～"
+  ],
+  "bigfish:easter-chair-spin": [
+    "转半圈，还是回到你这里～",
+    "椅子转好了，任务还没到呀。"
+  ],
+  "bigfish:sign-puzzle": [
+    "两半拼起来，就是等你～",
+    "拼好了，空位留给新任务！"
+  ],
+  "bigfish:sign-calendar": [
+    "翻到今天这一页，等你开工～",
+    "这一页专门给你留着。"
+  ],
+  "bigfish:sign-origami": [
+    "折好的小横幅，展开给你看！",
+    "慢慢展开，慢慢等你～"
+  ],
+  "bigfish:sign-balloon": [
+    "气球帮我举牌，我帮你盯任务～",
+    "别飘太高，等候牌要看得见呀。"
+  ],
+  "bigfish:sign-chalkboard": [
+    "擦干净啦，准备写新任务～",
+    "空白的小牌，留给你的点子。"
+  ],
+  "bigfish:sign-pocket": [
+    "口袋里藏着一张等候牌！",
+    "随时掏出来，告诉你我在～"
+  ],
+  "bigfish:water-plant": [
+    "给小水草浇一点水～",
+    "等你时，我也照顾一下小盆栽。"
+  ],
+  "bigfish:tail-comb": [
+    "梳一梳，尾巴边边也要整齐。",
+    "收拾好自己，再陪你开工～"
+  ],
+  "bigfish:knit-scarf": [
+    "织一条蓝蓝的小围巾～",
+    "又多一针，慢慢织。"
+  ],
+  "bigfish:windup-whale": [
+    "小鲸鱼上发条，走两步～",
+    "别跑远，还要一起等任务！"
+  ],
+  "bigfish:shell-juggle": [
+    "两枚小贝壳，接住啦！",
+    "手忙一点，贝壳没有掉～"
+  ],
+  "bigfish:leaf-umbrella": [
+    "撑起荷叶小伞，借你一点凉快～",
+    "伞也准备好了，随时出发。"
+  ],
+  "bigfish:thinking-abacus": [
+    "拨一拨算盘，理清这一步～",
+    "数珠归位，思路再对一遍。"
+  ],
+  "bigfish:thinking-sandglass": [
+    "慢慢看，先理清思路。",
+    "沙漏只是小道具，我还在想呢～"
+  ],
+  "bigfish:read-books-sort": [
+    "翻翻这一本，再看看那一本。",
+    "读到这里，夹好继续看～"
+  ],
+  "bigfish:thinking-flowchart": [
+    "把路径画下来，再理一下～",
+    "圈和箭头先排清楚。"
+  ],
+  "bigfish:thinking-gears": [
+    "让这两只小齿轮对上～",
+    "转一转，再看看思路。"
+  ],
+  "bigfish:writing-ink": [
+    "蘸一点墨，把草稿写下去～",
+    "这一笔先写稳。"
+  ],
+  "bigfish:web-telescope": [
+    "望远镜架好，看看 {tool} 的页面～",
+    "网页这边，我正在看。"
+  ],
+  "bigfish:image-palette": [
+    "调一点蓝色，跟着 {tool} 画起来～",
+    "颜料准备好，等图像结果。"
+  ],
+  "bigfish:agent-director": [
+    "小导演就位，盯着 {tool} 的进展！",
+    "任务卡摆好，一起往下做～"
+  ],
+  "bigfish:parallel-trays": [
+    "左右分篮，盯住这几项～",
+    "同时在跑的任务，我先摆整齐。"
+  ],
+  "bigfish:background-terrarium": [
+    "我守着 {tool} 的后台进展～",
+    "这边继续观察，有变化再告诉你。"
+  ],
+  "bigfish:export-suitcase": [
+    "把 {tool} 的材料整理进小箱子～",
+    "带子扣好，继续等交付结果。"
+  ],
+  "bigfish:success-ribbon": [
+    "完成啦，给你一份小礼物！",
+    "本轮成果，打好蝴蝶结啦～"
+  ],
+  "bigfish:success-paper-confetti": [
+    "完成！开两朵小纸花～",
+    "为这一轮开个小花！"
+  ],
+  "bigfish:error-cable-check": [
+    "接线这里有问题，先检查。",
+    "我先停住，看看连接怎么了。"
+  ],
+  "bigfish:attention-envelope": [
+    "有封确认信，请你看一下～",
+    "这一步需要你点头，我等着。"
+  ],
+  "bigfish:retry-eraser": [
+    "擦掉旧草稿，等重试开始。",
+    "整理好纸笔，再试一遍。"
+  ],
+  "bigfish:error-question-map": [
+    "这里没走通，检查一下路径。",
+    "先停住，等问题处理好。"
+  ],
+  "bigfish:easter-bubble-hat": [
+    "泡泡怎么落到头上了！",
+    "噗，破掉啦～"
+  ],
+  "bigfish:easter-shell-listen": [
+    "听一听贝壳里的声音～",
+    "海的声音，有点像在等你。"
+  ],
+  "bigfish:easter-self-portrait": [
+    "画一张小小的我，尾巴也在！",
+    "自画像画好了，给你看看～"
+  ],
+  "bigfish:easter-paper-fleet": [
+    "三只小纸鱼，排队出发！",
+    "小船队准备好，一起等新点子。"
+  ],
+  "idle": [
+    "我在这里，随时可以开工～",
+    "给你的新点子留个位置！",
+    "今天也一起做点有趣的事～",
+    "小鲸鱼值班中，有事叫我呀！"
+  ]
+}

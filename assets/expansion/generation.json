@@ -1,0 +1,247 @@
+{
+  "date": "2026-10-08",
+  "generator": "built-in image_gen",
+  "canonicalReference": "assets/sprites/bigfish-atlas.png",
+  "records": [
+    {
+      "sheet": 1,
+      "path": "assets/expansion/source/sheet-01.png",
+      "codes": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production animation keyframe sheet for an existing DSH virtual pet. Reference image is IDENTITY ONLY: preserve the original chibi Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress and white apron with blue WHALE emblem, large blue whale tail, clean polished anime sticker illustration. Do not turn her into an adult or change costume.\nGenerate exactly 6 columns by 3 rows, 18 equal square cells, genuine transparent background and gutters. Full body same scale and feet baseline in every cell, at least 8 percent empty margin, no grid lines, labels, words, numbers, bubbles, whip or watermark. Each row is ONE coherent six-keyframe action left to right; distinct hand positions, head expressions, props and tail movement. All signs cream blank rectangular front face for runtime text.\nRow1 SIGN HELD BACKWARDS: 1 holding board low facing backwards; 2 raises and looks puzzled; 3 rotates board edge-on; 4 correct blank cream face at chest; 5 holds proudly with wink; 6 lowers board toward waist.\nRow2 WHALE STAMP: 1 blank board on tiny lap desk and stamp in right hand; 2 lifts stamp; 3 stamps lower CORNER with small blue whale emblem leaving center blank; 4 lifts board chest height; 5 proudly displays blank cream center and corner emblem; 6 lowers board and puts stamp away.\nRow3 TAIL SUPPORT SIGN: 1 holds blank cream board waist height; 2 lifts board chest height; 3 blue whale tail gently supports its lower corner; 4 left hand waves while other hand steadies board; 5 small wink while tail supports; 6 hand takes board back and lowers. Tail anatomy stays recognizable.\nMake three rows separated by wide fully transparent horizontal gutters. Do not reuse a single still across frames. Crisp readable poses at small UI size."
+    },
+    {
+      "sheet": 2,
+      "path": "assets/expansion/source/sheet-02.png",
+      "codes": [
+        "A4",
+        "A5",
+        "A6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 小幕布揭牌 / bigfish:sign-curtain: frame1 hold closed miniature curtain frame; frame2 lift chest high; frame3 pull curtain to side; frame4 show blank cream board; frame5 peek beside open curtain; frame6 close curtain.\nROW 2, 纸飞机送信 / bigfish:sign-paper-plane: frame1 hold paper plane with small blank cream tag; frame2 lightly toss; frame3 follow plane; frame4 catch returned plane; frame5 lift blank tag front-facing; frame6 lower tag.\nROW 3, 弹出式请帖 / bigfish:sign-pop-up: frame1 closed booklet; frame2 open slightly; frame3 unfold blank popup cream rectangle; frame4 lift front-facing popup board; frame5 smile holding; frame6 close booklet.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 3,
+      "path": "assets/expansion/source/sheet-03.png",
+      "codes": [
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 擦亮尾巴 / bigfish:tail-polish: frame1 hold small cloth near tail; frame2 wipe tail tip; frame3 wipe middle; frame4 inspect tip; frame5 satisfied smile; frame6 put cloth away.\nROW 2, 分你半块饼干 / bigfish:biscuit-share: frame1 hold biscuit and plate; frame2 look at biscuit; frame3 break into two halves; frame4 offer half forward; frame5 friendly smile holding; frame6 return biscuit to plate.\nROW 3, 追一颗泡泡 / bigfish:bubble-chase: frame1 hold bubble wand; frame2 blow one bubble; frame3 eyes follow bubble; frame4 tail tip touches; frame5 bubble vanishes surprised; frame6 gentle smile lower wand.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 4,
+      "path": "assets/expansion/source/sheet-04.png",
+      "codes": [
+        "B4",
+        "B5",
+        "B6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 给尾巴铺小窝 / bigfish:pillow-nest: frame1 hold small cushion; frame2 place beside feet; frame3 settle tail on cushion; frame4 sit comfortably; frame5 sleepy blink; frame6 rise and pick cushion.\nROW 2, 整理鲸鱼徽章 / bigfish:badge-care: frame1 look down apron emblem; frame2 touch emblem; frame3 straighten apron; frame4 wipe emblem gently; frame5 pat apron proud; frame6 hands rest.\nROW 3, 折一只纸鱼 / bigfish:paper-fish: frame1 hold flat paper; frame2 fold in half; frame3 fold corners; frame4 finish small paper fish; frame5 show paper fish; frame6 lower into tiny box.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 5,
+      "path": "assets/expansion/source/sheet-05.png",
+      "codes": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 便签打字 / bigfish:typing-notes: frame1 hands on tiny keyboard; frame2 left hand types; frame3 right hand types; frame4 glance at sticky note; frame5 nod; frame6 both hands return keyboard.\nROW 2, 拼起思路 / bigfish:thinking-puzzle: frame1 two puzzle pieces on lap tray; frame2 contemplate; frame3 lift pieces; frame4 turn one piece; frame5 fit pieces together; frame6 thoughtful look at joined pieces.\nROW 3, 挽袖开工 / bigfish:typing-sleeves: frame1 hands near loose cuffs; frame2 straighten left cuff; frame3 straighten right cuff; frame4 align tiny keyboard; frame5 fingers poised; frame6 begin typing.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 6,
+      "path": "assets/expansion/source/sheet-06.png",
+      "codes": [
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 草稿演算 / bigfish:thinking-scratchpad: frame1 hold pencil and scratchpad; frame2 write abstract mark; frame3 pause chin touch; frame4 inspect scratchpad; frame5 circle small symbol; frame6 continue writing.\nROW 2, 尾巴打拍子 / bigfish:typing-tail-rhythm: frame1 keyboard focused; frame2 left hand types tail low; frame3 right hand types tail slightly up; frame4 both hands typing tail sideways; frame5 glance up; frame6 return focused.\nROW 3, 整理便签 / bigfish:notes-sort: frame1 two plain sticky notes on tray; frame2 lift left note; frame3 compare notes; frame4 swap position; frame5 press aligned notes; frame6 hands ready for work.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 7,
+      "path": "assets/expansion/source/sheet-07.png",
+      "codes": [
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 阅读夹书签 / bigfish:read-bookmark: frame1 hold open book; frame2 scan left page; frame3 scan right page; frame4 turn page; frame5 place bookmark; frame6 continue reading.\nROW 2, 放大镜找线索 / bigfish:search-magnifier: frame1 hold magnifier and cards; frame2 scan left card; frame3 scan center; frame4 inspect right card; frame5 lean closer; frame6 return center scanning.\nROW 3, 铅笔修改 / bigfish:edit-pencil: frame1 hold manuscript and pencil; frame2 inspect; frame3 strike one abstract line; frame4 write replacement abstract line; frame5 adjust paper clip; frame6 inspect again.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 8,
+      "path": "assets/expansion/source/sheet-08.png",
+      "codes": [
+        "D4",
+        "D5",
+        "D6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 启动小控制台 / bigfish:command-lever: frame1 hand near small console lever; frame2 pull lever; frame3 watch tiny dial; frame4 adjust knob; frame5 watch dial carefully; frame6 hand ready on console.\nROW 2, 测试巡检 / bigfish:test-checklist: frame1 hold inspection clipboard without checkmarks; frame2 examine first item; frame3 examine second; frame4 pencil records small dots; frame5 look closely; frame6 wait observing clipboard.\nROW 3, 整理交付包 / bigfish:export-parcel: frame1 stack papers and open small box; frame2 align papers; frame3 place inside box; frame4 fold lid; frame5 tie ribbon; frame6 hold package waiting.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 9,
+      "path": "assets/expansion/source/sheet-09.png",
+      "codes": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 把选择递给你 / bigfish:attention-choice: frame1 put tool aside; frame2 take two blank cards; frame3 raise cards; frame4 hold forward; frame5 look to user; frame6 hold patiently.\nROW 2, 轻摆提示铃 / bigfish:attention-bell: frame1 notice user; frame2 pick small bell; frame3 move bell once; frame4 lower bell; frame5 set beside feet; frame6 open hands wait calmly.\nROW 3, 鲸鱼验收章 / bigfish:success-whale-stamp: frame1 hold completed folder and whale stamp; frame2 lift stamp; frame3 stamp folder; frame4 present blue whale seal; frame5 happy smile; frame6 polite small bow.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 10,
+      "path": "assets/expansion/source/sheet-10.png",
+      "codes": [
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 开心收工 / bigfish:success-desk-tidy: frame1 finish at tiny keyboard; frame2 place pencil down; frame3 close notebook; frame4 align keyboard; frame5 stretch relaxed; frame6 hug tail smile.\nROW 2, 戴眼镜排查 / bigfish:error-inspect: frame1 puzzled look at small dial; frame2 pick reading glasses; frame3 wear glasses; frame4 open inspection booklet; frame5 compare dial and booklet; frame6 thoughtful puzzled hold.\nROW 3, 清理后再试 / bigfish:retry-reset: frame1 puzzled with old scratchpad; frame2 put old paper aside; frame3 lay fresh paper; frame4 straighten pencil; frame5 ready tools; frame6 attentive waiting.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 11,
+      "path": "assets/expansion/source/sheet-11.png",
+      "codes": [
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 牌子太大了 / bigfish:easter-oversized-sign: frame1 carry big blank board below face; frame2 raise board briefly eyes peek; frame3 realize too large; frame4 put big board aside; frame5 hold smaller blank board; frame6 smile display small board.\nROW 2, 小鲸鱼敬礼 / bigfish:easter-badge-salute: frame1 hands relaxed; frame2 straighten whale apron badge; frame3 raise salute hand; frame4 tail tip rises; frame5 smile salute; frame6 lower hand and tail.\nROW 3, 转椅半圈 / bigfish:easter-chair-spin: frame1 sit on tiny swivel chair; frame2 turn quarter profile; frame3 turn half-back; frame4 look back over shoulder; frame5 turn front; frame6 sit smiling.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 12,
+      "path": "assets/expansion/source/sheet-12.png",
+      "codes": [
+        "F4",
+        "F5",
+        "F6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 先保住茶杯 / bigfish:near-miss-protect-tea: frame1 working with teacup; frame2 glance left alert; frame3 hold cup firmly; frame4 lean slightly right cup protected; frame5 set cup aside; frame6 hands on keyboard calm.\nROW 2, 尾巴先收好 / bigfish:near-miss-tail-hide: frame1 hands keyboard tail right; frame2 glance left; frame3 tuck tail closer; frame4 lean right gently; frame5 settle tail safely; frame6 hands keyboard focused.\nROW 3, 深吸气再开工 / bigfish:near-miss-determined: frame1 typing; frame2 glance left; frame3 shift right slightly; frame4 take deep breath hands near chest; frame5 exhale resolute smile; frame6 hands back keyboard.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 13,
+      "path": "assets/expansion/source/sheet-13.png",
+      "codes": [
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 拼出等候牌 / bigfish:sign-puzzle: frame1 hold two blank cream board halves; frame2 compare halves; frame3 join edges; frame4 smooth joint; frame5 lift whole blank board; frame6 lower board.\nROW 2, 翻到等你这一页 / bigfish:sign-calendar: frame1 hold little desk flipbook; frame2 flip first page; frame3 flip second; frame4 reveal blank cream rectangular page; frame5 hold front-facing; frame6 close flipbook.\nROW 3, 折叠小横幅 / bigfish:sign-origami: frame1 hold accordion-fold cream strip; frame2 unfold first panel; frame3 open second; frame4 smooth broad blank rectangle; frame5 hold chest high; frame6 fold back.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 14,
+      "path": "assets/expansion/source/sheet-14.png",
+      "codes": [
+        "G4",
+        "G5",
+        "G6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 气球托起牌 / bigfish:sign-balloon: frame1 hold tiny blue whale balloon string and blank card; frame2 balloon gently rises; frame3 blank card rises chest high held steady; frame4 wave free hand; frame5 smile; frame6 gently lower card.\nROW 2, 擦干净再举牌 / bigfish:sign-chalkboard: frame1 hold cream framed board and cloth; frame2 wipe left; frame3 wipe center; frame4 wipe right; frame5 show completely blank cream board; frame6 lower and store cloth.\nROW 3, 口袋里掏出小牌 / bigfish:sign-pocket: frame1 look apron pocket; frame2 pull small folded cream board; frame3 unfold; frame4 lift blank face; frame5 playful wink; frame6 refold into pocket.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 15,
+      "path": "assets/expansion/source/sheet-15.png",
+      "codes": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 浇一盆小水草 / bigfish:water-plant: frame1 hold tiny seaweed pot and watering can; frame2 inspect plant; frame3 tilt can; frame4 small water droplets; frame5 admire plant; frame6 put can aside.\nROW 2, 梳梳尾巴边 / bigfish:tail-comb: frame1 hold soft grooming brush; frame2 smooth hair near tail; frame3 brush tail edge gently; frame4 inspect; frame5 proud smile; frame6 lower brush.\nROW 3, 织一条鲸鱼围巾 / bigfish:knit-scarf: frame1 two knitting needles blue yarn; frame2 knit left stitch; frame3 knit right stitch; frame4 lift small knitted scarf; frame5 inspect whale decoration; frame6 fold scarf.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 16,
+      "path": "assets/expansion/source/sheet-16.png",
+      "codes": [
+        "H4",
+        "H5",
+        "H6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 上发条小鲸鱼 / bigfish:windup-whale: frame1 hold tiny whale toy; frame2 turn winding key; frame3 set toy on lap tray; frame4 watch it waddle; frame5 catch toy gently; frame6 smile holding toy.\nROW 2, 贝壳小把戏 / bigfish:shell-juggle: frame1 hold two seashells; frame2 toss one slightly; frame3 catch left; frame4 toss other slightly; frame5 catch both surprised; frame6 show shells proudly.\nROW 3, 荷叶小伞 / bigfish:leaf-umbrella: frame1 hold folded leaf umbrella; frame2 unfold leaf; frame3 lift above head; frame4 tilt umbrella; frame5 amused look at leaf; frame6 fold and lower.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 17,
+      "path": "assets/expansion/source/sheet-17.png",
+      "codes": [
+        "I1",
+        "I2",
+        "I3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 算盘推演 / bigfish:thinking-abacus: frame1 hold miniature abacus; frame2 slide left beads; frame3 look thoughtful; frame4 slide right beads; frame5 compare rows; frame6 fingers ready abacus.\nROW 2, 观察沙漏 / bigfish:thinking-sandglass: frame1 hold tiny sandglass; frame2 turn it upright; frame3 watch sand; frame4 chin touch; frame5 look closer; frame6 keep watching calmly.\nROW 3, 书堆找答案 / bigfish:read-books-sort: frame1 three small books; frame2 select middle book; frame3 open book; frame4 read closely; frame5 place beside stack; frame6 open another book.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 18,
+      "path": "assets/expansion/source/sheet-18.png",
+      "codes": [
+        "I4",
+        "I5",
+        "I6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 画一张路线图 / bigfish:thinking-flowchart: frame1 hold drawing pad and pencil; frame2 draw abstract circle; frame3 draw connecting arrow; frame4 inspect; frame5 draw second circle; frame6 continue thoughtful drawing.\nROW 2, 齿轮咔哒转 / bigfish:thinking-gears: frame1 two toy gears on tray; frame2 pick one; frame3 fit gear teeth; frame4 gently rotate; frame5 watch gears; frame6 thoughtful smile inspecting.\nROW 3, 蘸墨写草稿 / bigfish:writing-ink: frame1 hold feather pen and notebook; frame2 dip pen in small bottle; frame3 write abstract stroke; frame4 pause and inspect; frame5 write again; frame6 pen ready above notebook.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 19,
+      "path": "assets/expansion/source/sheet-19.png",
+      "codes": [
+        "J1",
+        "J2",
+        "J3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 望远镜看网页 / bigfish:web-telescope: frame1 pick compact telescope; frame2 aim slightly left; frame3 look through; frame4 aim right; frame5 lower to compare blank notes; frame6 look through again.\nROW 2, 调色画画 / bigfish:image-palette: frame1 hold paint palette and small canvas; frame2 mix blue paint; frame3 add brushstroke; frame4 inspect; frame5 mix lighter paint; frame6 add small abstract shape.\nROW 3, 小导演带队 / bigfish:agent-director: frame1 hold tiny blank clapperboard; frame2 open clapper; frame3 gently close; frame4 gesture to small task cards; frame5 examine cards; frame6 hold board watching.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 20,
+      "path": "assets/expansion/source/sheet-20.png",
+      "codes": [
+        "J4",
+        "J5",
+        "J6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 多任务分篮 / bigfish:parallel-trays: frame1 two tiny trays and papers; frame2 put paper left; frame3 put paper right; frame4 compare trays; frame5 straighten both stacks; frame6 observe both calmly.\nROW 2, 看守小生态箱 / bigfish:background-terrarium: frame1 hold small closed glass terrarium; frame2 inspect left side; frame3 adjust tiny side knob; frame4 inspect right; frame5 note abstract dot; frame6 watch patiently.\nROW 3, 打包小行李箱 / bigfish:export-suitcase: frame1 open miniature suitcase; frame2 align folded papers; frame3 place in suitcase; frame4 secure strap; frame5 close suitcase; frame6 hold waiting.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 21,
+      "path": "assets/expansion/source/sheet-21.png",
+      "codes": [
+        "K1",
+        "K2",
+        "K3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 交付小礼物 / bigfish:success-ribbon: frame1 hold neatly wrapped gift; frame2 straighten ribbon; frame3 lift gift; frame4 present forward; frame5 happy smile; frame6 small bow holding gift.\nROW 2, 纸花庆祝 / bigfish:success-paper-confetti: frame1 hold two folded paper flowers; frame2 unfold left flower; frame3 unfold right; frame4 raise both; frame5 cheerful tiny hop; frame6 lower flowers smiling.\nROW 3, 检查小接线 / bigfish:error-cable-check: frame1 puzzled with tiny console cable; frame2 inspect connector; frame3 compare socket; frame4 check cable carefully; frame5 puzzled chin touch; frame6 hold cable awaiting help.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 22,
+      "path": "assets/expansion/source/sheet-22.png",
+      "codes": [
+        "K4",
+        "K5",
+        "K6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 递来确认信 / bigfish:attention-envelope: frame1 hands relaxed looking user; frame2 pick cream envelope; frame3 open envelope; frame4 hold blank card; frame5 offer card forward; frame6 remain waiting.\nROW 2, 擦掉重画 / bigfish:retry-eraser: frame1 puzzled scratchpad; frame2 pick eraser; frame3 erase abstract sketch; frame4 brush crumbs; frame5 lay pencil ready; frame6 look attentive.\nROW 3, 困惑地图 / bigfish:error-question-map: frame1 hold folded map; frame2 open map; frame3 look left; frame4 look right puzzled; frame5 point at abstract junction; frame6 look up awaiting help.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 23,
+      "path": "assets/expansion/source/sheet-23.png",
+      "codes": [
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 泡泡落在头上 / bigfish:easter-bubble-hat: frame1 hold bubble wand; frame2 blow one bubble; frame3 bubble lands near headband; frame4 eyes look upward; frame5 bubble pops surprised; frame6 laugh gently.\nROW 2, 听听贝壳 / bigfish:easter-shell-listen: frame1 hold seashell; frame2 lift to ear; frame3 listen tilting head; frame4 smile; frame5 switch other ear; frame6 lower shell.\nROW 3, 画一张小自画像 / bigfish:easter-self-portrait: frame1 hold blank sketchbook and pencil; frame2 sketch blue hair; frame3 add whale tail; frame4 inspect simple tiny whale-maid drawing; frame5 show sketch; frame6 lower sketchbook.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    },
+    {
+      "sheet": 24,
+      "path": "assets/expansion/source/sheet-24.png",
+      "codes": [
+        "L4",
+        "L5",
+        "L6"
+      ],
+      "prompt": "Use case: illustration-story. Asset type: production coherent animation keyframe strips for existing DSH pet. Reference is IDENTITY ONLY: SAME ORIGINAL CHIBI Bigfish blue-haired blue-eyed whale maid, white frilled headband, navy dress, white apron with small blue WHALE emblem, large visible blue whale tail. Preserve original face, clothing, blue palette and proportions; do not age up. Clean polished anime sticker sprites.\nExactly SIX columns by THREE rows =18 distinct full-body poses, equal cells. TRUE transparent alpha background and wide transparent gutters, absolutely NO grid, words, numbers, labels, watermark, speech bubble, rope or whip. Each row ONE action left to right, SIX genuinely different coherent keyframes. Same body scale and feet baseline throughout; whole character AND props fit within each cell with padding; keep hair and tail visible. Draw natural hands and anatomy. Full body frontal except intentional turn. Tiny readable props, not a cluttered setting. Signs must have wide blank cream front faces, never baked text. \nROW 1, 纸鱼小船队 / bigfish:easter-paper-fleet: frame1 hold tray with three tiny paper fish boats; frame2 align first; frame3 align second; frame4 align third; frame5 show little fleet; frame6 hold proudly.\nROW 2, 扶好眼镜再写 / bigfish:near-miss-glasses: frame1 typing with little glasses; frame2 glance left; frame3 small lean right; frame4 catch and straighten glasses; frame5 nod determined; frame6 hands keyboard.\nROW 3, 眨眼稳住节奏 / bigfish:near-miss-startle: frame1 focused typing; frame2 eyes widen looking left; frame3 shoulders tuck slight right lean; frame4 blink calmly; frame5 relax shoulders; frame6 resume typing.\nEvery row has clear preparation, visible main action and natural resting/recovery pose. No injury or contact. Output a transparent PNG."
+    }
+  ]
+}

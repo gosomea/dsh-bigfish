@@ -1,0 +1,1697 @@
+[
+  {
+    "code": "A1",
+    "id": "bigfish:sign-flip",
+    "label": "牌子拿反了",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "board low backwards",
+      "raise backwards puzzled",
+      "rotate edge-on",
+      "correct blank face chest high",
+      "proud wink showing blank face",
+      "lower board"
+    ],
+    "loop": false,
+    "lines": [
+      "这面才对～",
+      "翻过来就能看见我啦！"
+    ]
+  },
+  {
+    "code": "A2",
+    "id": "bigfish:sign-stamp",
+    "label": "值班鲸鱼盖章",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "board on lap table holding stamp",
+      "lift stamp",
+      "stamp whale in lower corner leaving center blank",
+      "lift board",
+      "show blank center proudly",
+      "lower and store stamp"
+    ],
+    "loop": false,
+    "lines": [
+      "今日也在岗！",
+      "鲸鱼值班章，盖好了～"
+    ]
+  },
+  {
+    "code": "A3",
+    "id": "bigfish:sign-tail-stand",
+    "label": "尾巴当支架",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "blank board waist",
+      "raise to chest",
+      "tail supports corner",
+      "free hand waves",
+      "wink still holding",
+      "take board back lower"
+    ],
+    "loop": false,
+    "lines": [
+      "尾巴帮我托着，你慢慢想～",
+      "腾出一只手，跟你打个招呼！"
+    ]
+  },
+  {
+    "code": "A4",
+    "id": "bigfish:sign-curtain",
+    "label": "小幕布揭牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "hold closed miniature curtain frame",
+      "lift chest high",
+      "pull curtain to side",
+      "show blank cream board",
+      "peek beside open curtain",
+      "close curtain"
+    ],
+    "loop": false,
+    "lines": [
+      "小幕布打开，等你开场～",
+      "今天的主角是你的新点子！"
+    ]
+  },
+  {
+    "code": "A5",
+    "id": "bigfish:sign-paper-plane",
+    "label": "纸飞机送信",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 2,
+    "beats": [
+      "hold paper plane with small blank cream tag",
+      "lightly toss",
+      "follow plane",
+      "catch returned plane",
+      "lift blank tag front-facing",
+      "lower tag"
+    ],
+    "loop": false,
+    "lines": [
+      "给你寄来一架小纸飞机～",
+      "有事就把任务送过来呀！"
+    ]
+  },
+  {
+    "code": "A6",
+    "id": "bigfish:sign-pop-up",
+    "label": "弹出式请帖",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "closed booklet",
+      "open slightly",
+      "unfold blank popup cream rectangle",
+      "lift front-facing popup board",
+      "smile holding",
+      "close booklet"
+    ],
+    "loop": false,
+    "lines": [
+      "这张小请帖留给你～",
+      "打开就是：随时开工！"
+    ]
+  },
+  {
+    "code": "B1",
+    "id": "bigfish:tail-polish",
+    "label": "擦亮尾巴",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold small cloth near tail",
+      "wipe tail tip",
+      "wipe middle",
+      "inspect tip",
+      "satisfied smile",
+      "put cloth away"
+    ],
+    "loop": false,
+    "lines": [
+      "把尾巴擦亮，准备下一次出发～",
+      "尾巴也要好好保养呀。"
+    ]
+  },
+  {
+    "code": "B2",
+    "id": "bigfish:biscuit-share",
+    "label": "分你半块饼干",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold biscuit and plate",
+      "look at biscuit",
+      "break into two halves",
+      "offer half forward",
+      "friendly smile holding",
+      "return biscuit to plate"
+    ],
+    "loop": false,
+    "lines": [
+      "给你留了一半～",
+      "一起吃块小饼干，慢慢来。"
+    ]
+  },
+  {
+    "code": "B3",
+    "id": "bigfish:bubble-chase",
+    "label": "追一颗泡泡",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 2,
+    "beats": [
+      "hold bubble wand",
+      "blow one bubble",
+      "eyes follow bubble",
+      "tail tip touches",
+      "bubble vanishes surprised",
+      "gentle smile lower wand"
+    ],
+    "loop": false,
+    "lines": [
+      "抓到一颗小泡泡！",
+      "泡泡跑得比我尾巴快一点～"
+    ]
+  },
+  {
+    "code": "B4",
+    "id": "bigfish:pillow-nest",
+    "label": "给尾巴铺小窝",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold small cushion",
+      "place beside feet",
+      "settle tail on cushion",
+      "sit comfortably",
+      "sleepy blink",
+      "rise and pick cushion"
+    ],
+    "loop": false,
+    "lines": [
+      "给尾巴铺个软软的小窝。",
+      "休息一下，你需要我时再开工～"
+    ]
+  },
+  {
+    "code": "B5",
+    "id": "bigfish:badge-care",
+    "label": "整理鲸鱼徽章",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 0,
+    "beats": [
+      "look down apron emblem",
+      "touch emblem",
+      "straighten apron",
+      "wipe emblem gently",
+      "pat apron proud",
+      "hands rest"
+    ],
+    "loop": false,
+    "lines": [
+      "小鲸鱼徽章，要摆正。",
+      "整理好啦，继续陪着你。"
+    ]
+  },
+  {
+    "code": "B6",
+    "id": "bigfish:paper-fish",
+    "label": "折一只纸鱼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold flat paper",
+      "fold in half",
+      "fold corners",
+      "finish small paper fish",
+      "show paper fish",
+      "lower into tiny box"
+    ],
+    "loop": false,
+    "lines": [
+      "给你折了一只小纸鱼～",
+      "小纸鱼也在等下一个冒险。"
+    ]
+  },
+  {
+    "code": "C1",
+    "id": "bigfish:typing-notes",
+    "label": "便签打字",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 0,
+    "beats": [
+      "hands on tiny keyboard",
+      "left hand types",
+      "right hand types",
+      "glance at sticky note",
+      "nod",
+      "both hands return keyboard"
+    ],
+    "loop": true,
+    "lines": [
+      "看一眼便签，继续写～",
+      "这段先写稳，思路跟上啦。"
+    ]
+  },
+  {
+    "code": "C2",
+    "id": "bigfish:thinking-puzzle",
+    "label": "拼起思路",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "two puzzle pieces on lap tray",
+      "contemplate",
+      "lift pieces",
+      "turn one piece",
+      "fit pieces together",
+      "thoughtful look at joined pieces"
+    ],
+    "loop": true,
+    "lines": [
+      "思路一点点拼起来～",
+      "我再对一下这两块拼图。"
+    ]
+  },
+  {
+    "code": "C3",
+    "id": "bigfish:typing-sleeves",
+    "label": "挽袖开工",
+    "tags": [
+      "start"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "hands near loose cuffs",
+      "straighten left cuff",
+      "straighten right cuff",
+      "align tiny keyboard",
+      "fingers poised",
+      "begin typing"
+    ],
+    "loop": false,
+    "lines": [
+      "袖口收好，准备开工！",
+      "键盘摆正，收到你的任务啦～"
+    ]
+  },
+  {
+    "code": "C4",
+    "id": "bigfish:thinking-scratchpad",
+    "label": "草稿演算",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 0,
+    "beats": [
+      "hold pencil and scratchpad",
+      "write abstract mark",
+      "pause chin touch",
+      "inspect scratchpad",
+      "circle small symbol",
+      "continue writing"
+    ],
+    "loop": true,
+    "lines": [
+      "先在草稿上理一下～",
+      "这一步再看仔细一点。"
+    ]
+  },
+  {
+    "code": "C5",
+    "id": "bigfish:typing-tail-rhythm",
+    "label": "尾巴打拍子",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "keyboard focused",
+      "left hand types tail low",
+      "right hand types tail slightly up",
+      "both hands typing tail sideways",
+      "glance up",
+      "return focused"
+    ],
+    "loop": true,
+    "lines": [
+      "尾巴打拍子，手上继续写～",
+      "跟着节奏，一段一段来。"
+    ]
+  },
+  {
+    "code": "C6",
+    "id": "bigfish:notes-sort",
+    "label": "整理便签",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "two plain sticky notes on tray",
+      "lift left note",
+      "compare notes",
+      "swap position",
+      "press aligned notes",
+      "hands ready for work"
+    ],
+    "loop": true,
+    "lines": [
+      "把思路摆整齐，再继续。",
+      "这张放这里，顺一点啦～"
+    ]
+  },
+  {
+    "code": "D1",
+    "id": "bigfish:read-bookmark",
+    "label": "阅读夹书签",
+    "tags": [
+      "read",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 0,
+    "beats": [
+      "hold open book",
+      "scan left page",
+      "scan right page",
+      "turn page",
+      "place bookmark",
+      "continue reading"
+    ],
+    "loop": true,
+    "lines": [
+      "在读 {file}，夹个书签～",
+      "我盯着 {tool} 的内容呢～"
+    ]
+  },
+  {
+    "code": "D2",
+    "id": "bigfish:search-magnifier",
+    "label": "放大镜找线索",
+    "tags": [
+      "search",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "hold magnifier and cards",
+      "scan left card",
+      "scan center",
+      "inspect right card",
+      "lean closer",
+      "return center scanning"
+    ],
+    "loop": true,
+    "lines": [
+      "拿放大镜，找找线索～",
+      "{tool} 跑起来啦，我仔细找。"
+    ]
+  },
+  {
+    "code": "D3",
+    "id": "bigfish:edit-pencil",
+    "label": "铅笔修改",
+    "tags": [
+      "edit",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 0,
+    "beats": [
+      "hold manuscript and pencil",
+      "inspect",
+      "strike one abstract line",
+      "write replacement abstract line",
+      "adjust paper clip",
+      "inspect again"
+    ],
+    "loop": true,
+    "lines": [
+      "正在跟着 {tool} 修改～",
+      "这几笔要写仔细，盯住 {file}。"
+    ]
+  },
+  {
+    "code": "D4",
+    "id": "bigfish:command-lever",
+    "label": "启动小控制台",
+    "tags": [
+      "command",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "hand near small console lever",
+      "pull lever",
+      "watch tiny dial",
+      "adjust knob",
+      "watch dial carefully",
+      "hand ready on console"
+    ],
+    "loop": true,
+    "lines": [
+      "{tool} 启动，我看着仪表～",
+      "小控制台亮起来啦，等执行结果。"
+    ]
+  },
+  {
+    "code": "D5",
+    "id": "bigfish:test-checklist",
+    "label": "测试巡检",
+    "tags": [
+      "test",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 0,
+    "beats": [
+      "hold inspection clipboard without checkmarks",
+      "examine first item",
+      "examine second",
+      "pencil records small dots",
+      "look closely",
+      "wait observing clipboard"
+    ],
+    "loop": true,
+    "lines": [
+      "我盯着 {tool} 的检查结果呢～",
+      "逐项看看，先等真实结果。"
+    ]
+  },
+  {
+    "code": "D6",
+    "id": "bigfish:export-parcel",
+    "label": "整理交付包",
+    "tags": [
+      "export",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "stack papers and open small box",
+      "align papers",
+      "place inside box",
+      "fold lid",
+      "tie ribbon",
+      "hold package waiting"
+    ],
+    "loop": false,
+    "lines": [
+      "整理 {tool} 的交付材料～",
+      "文件装好，等这一项结束。"
+    ]
+  },
+  {
+    "code": "E1",
+    "id": "bigfish:attention-choice",
+    "label": "把选择递给你",
+    "tags": [
+      "attention"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "put tool aside",
+      "take two blank cards",
+      "raise cards",
+      "hold forward",
+      "look to user",
+      "hold patiently"
+    ],
+    "loop": false,
+    "lines": [
+      "这一步需要你选一下～",
+      "我先停住，等你的决定。"
+    ]
+  },
+  {
+    "code": "E2",
+    "id": "bigfish:attention-bell",
+    "label": "轻摆提示铃",
+    "tags": [
+      "attention"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "notice user",
+      "pick small bell",
+      "move bell once",
+      "lower bell",
+      "set beside feet",
+      "open hands wait calmly"
+    ],
+    "loop": false,
+    "lines": [
+      "这里需要你确认，我等着～",
+      "提醒一次就好，慢慢看。"
+    ]
+  },
+  {
+    "code": "E3",
+    "id": "bigfish:success-whale-stamp",
+    "label": "鲸鱼验收章",
+    "tags": [
+      "success"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "hold completed folder and whale stamp",
+      "lift stamp",
+      "stamp folder",
+      "present blue whale seal",
+      "happy smile",
+      "polite small bow"
+    ],
+    "loop": false,
+    "lines": [
+      "本轮完成，盖个小鲸鱼章！",
+      "完成啦，把成果递给你～"
+    ]
+  },
+  {
+    "code": "E4",
+    "id": "bigfish:success-desk-tidy",
+    "label": "开心收工",
+    "tags": [
+      "success"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "finish at tiny keyboard",
+      "place pencil down",
+      "close notebook",
+      "align keyboard",
+      "stretch relaxed",
+      "hug tail smile"
+    ],
+    "loop": false,
+    "lines": [
+      "收工啦，桌面也整理好了～",
+      "这轮完成，可以抱抱尾巴放松啦。"
+    ]
+  },
+  {
+    "code": "E5",
+    "id": "bigfish:error-inspect",
+    "label": "戴眼镜排查",
+    "tags": [
+      "error"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "puzzled look at small dial",
+      "pick reading glasses",
+      "wear glasses",
+      "open inspection booklet",
+      "compare dial and booklet",
+      "thoughtful puzzled hold"
+    ],
+    "loop": false,
+    "lines": [
+      "这里遇到问题，我仔细看看。",
+      "先检查一下，等下一步处理。"
+    ]
+  },
+  {
+    "code": "E6",
+    "id": "bigfish:retry-reset",
+    "label": "清理后再试",
+    "tags": [
+      "retry"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "puzzled with old scratchpad",
+      "put old paper aside",
+      "lay fresh paper",
+      "straighten pencil",
+      "ready tools",
+      "attentive waiting"
+    ],
+    "loop": false,
+    "lines": [
+      "重新摆好工具，准备再试。",
+      "清理一下草稿，等重试开始。"
+    ]
+  },
+  {
+    "code": "F1",
+    "id": "bigfish:easter-oversized-sign",
+    "label": "牌子太大了",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 2,
+    "beats": [
+      "carry big blank board below face",
+      "raise board briefly eyes peek",
+      "realize too large",
+      "put big board aside",
+      "hold smaller blank board",
+      "smile display small board"
+    ],
+    "loop": false,
+    "lines": [
+      "这块牌子太大啦，换一块～",
+      "小一点，也能装下我的期待！"
+    ]
+  },
+  {
+    "code": "F2",
+    "id": "bigfish:easter-badge-salute",
+    "label": "小鲸鱼敬礼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 1,
+    "beats": [
+      "hands relaxed",
+      "straighten whale apron badge",
+      "raise salute hand",
+      "tail tip rises",
+      "smile salute",
+      "lower hand and tail"
+    ],
+    "loop": false,
+    "lines": [
+      "大肥鱼报到！",
+      "小鲸鱼也一起敬个礼～"
+    ]
+  },
+  {
+    "code": "F3",
+    "id": "bigfish:easter-chair-spin",
+    "label": "转椅半圈",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 2,
+    "beats": [
+      "sit on tiny swivel chair",
+      "turn quarter profile",
+      "turn half-back",
+      "look back over shoulder",
+      "turn front",
+      "sit smiling"
+    ],
+    "loop": false,
+    "lines": [
+      "转半圈，还是回到你这里～",
+      "椅子转好了，任务还没到呀。"
+    ]
+  },
+  {
+    "code": "F4",
+    "id": "bigfish:near-miss-protect-tea",
+    "label": "先保住茶杯",
+    "tags": [
+      "near-miss"
+    ],
+    "family": "reaction",
+    "intensity": 1,
+    "beats": [
+      "working with teacup",
+      "glance left alert",
+      "hold cup firmly",
+      "lean slightly right cup protected",
+      "set cup aside",
+      "hands on keyboard calm"
+    ],
+    "loop": false,
+    "lines": []
+  },
+  {
+    "code": "F5",
+    "id": "bigfish:near-miss-tail-hide",
+    "label": "尾巴先收好",
+    "tags": [
+      "near-miss"
+    ],
+    "family": "reaction",
+    "intensity": 1,
+    "beats": [
+      "hands keyboard tail right",
+      "glance left",
+      "tuck tail closer",
+      "lean right gently",
+      "settle tail safely",
+      "hands keyboard focused"
+    ],
+    "loop": false,
+    "lines": []
+  },
+  {
+    "code": "F6",
+    "id": "bigfish:near-miss-determined",
+    "label": "深吸气再开工",
+    "tags": [
+      "near-miss"
+    ],
+    "family": "reaction",
+    "intensity": 0,
+    "beats": [
+      "typing",
+      "glance left",
+      "shift right slightly",
+      "take deep breath hands near chest",
+      "exhale resolute smile",
+      "hands back keyboard"
+    ],
+    "loop": false,
+    "lines": []
+  },
+  {
+    "code": "G1",
+    "id": "bigfish:sign-puzzle",
+    "label": "拼出等候牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "hold two blank cream board halves",
+      "compare halves",
+      "join edges",
+      "smooth joint",
+      "lift whole blank board",
+      "lower board"
+    ],
+    "loop": false,
+    "lines": [
+      "两半拼起来，就是等你～",
+      "拼好了，空位留给新任务！"
+    ]
+  },
+  {
+    "code": "G2",
+    "id": "bigfish:sign-calendar",
+    "label": "翻到等你这一页",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "hold little desk flipbook",
+      "flip first page",
+      "flip second",
+      "reveal blank cream rectangular page",
+      "hold front-facing",
+      "close flipbook"
+    ],
+    "loop": false,
+    "lines": [
+      "翻到今天这一页，等你开工～",
+      "这一页专门给你留着。"
+    ]
+  },
+  {
+    "code": "G3",
+    "id": "bigfish:sign-origami",
+    "label": "折叠小横幅",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "hold accordion-fold cream strip",
+      "unfold first panel",
+      "open second",
+      "smooth broad blank rectangle",
+      "hold chest high",
+      "fold back"
+    ],
+    "loop": false,
+    "lines": [
+      "折好的小横幅，展开给你看！",
+      "慢慢展开，慢慢等你～"
+    ]
+  },
+  {
+    "code": "G4",
+    "id": "bigfish:sign-balloon",
+    "label": "气球托起牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 2,
+    "beats": [
+      "hold tiny blue whale balloon string and blank card",
+      "balloon gently rises",
+      "blank card rises chest high held steady",
+      "wave free hand",
+      "smile",
+      "gently lower card"
+    ],
+    "loop": false,
+    "lines": [
+      "气球帮我举牌，我帮你盯任务～",
+      "别飘太高，等候牌要看得见呀。"
+    ]
+  },
+  {
+    "code": "G5",
+    "id": "bigfish:sign-chalkboard",
+    "label": "擦干净再举牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "hold cream framed board and cloth",
+      "wipe left",
+      "wipe center",
+      "wipe right",
+      "show completely blank cream board",
+      "lower and store cloth"
+    ],
+    "loop": false,
+    "lines": [
+      "擦干净啦，准备写新任务～",
+      "空白的小牌，留给你的点子。"
+    ]
+  },
+  {
+    "code": "G6",
+    "id": "bigfish:sign-pocket",
+    "label": "口袋里掏出小牌",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "sign",
+    "intensity": 1,
+    "beats": [
+      "look apron pocket",
+      "pull small folded cream board",
+      "unfold",
+      "lift blank face",
+      "playful wink",
+      "refold into pocket"
+    ],
+    "loop": false,
+    "lines": [
+      "口袋里藏着一张等候牌！",
+      "随时掏出来，告诉你我在～"
+    ]
+  },
+  {
+    "code": "H1",
+    "id": "bigfish:water-plant",
+    "label": "浇一盆小水草",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold tiny seaweed pot and watering can",
+      "inspect plant",
+      "tilt can",
+      "small water droplets",
+      "admire plant",
+      "put can aside"
+    ],
+    "loop": false,
+    "lines": [
+      "给小水草浇一点水～",
+      "等你时，我也照顾一下小盆栽。"
+    ]
+  },
+  {
+    "code": "H2",
+    "id": "bigfish:tail-comb",
+    "label": "梳梳尾巴边",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 0,
+    "beats": [
+      "hold soft grooming brush",
+      "smooth hair near tail",
+      "brush tail edge gently",
+      "inspect",
+      "proud smile",
+      "lower brush"
+    ],
+    "loop": false,
+    "lines": [
+      "梳一梳，尾巴边边也要整齐。",
+      "收拾好自己，再陪你开工～"
+    ]
+  },
+  {
+    "code": "H3",
+    "id": "bigfish:knit-scarf",
+    "label": "织一条鲸鱼围巾",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "two knitting needles blue yarn",
+      "knit left stitch",
+      "knit right stitch",
+      "lift small knitted scarf",
+      "inspect whale decoration",
+      "fold scarf"
+    ],
+    "loop": false,
+    "lines": [
+      "织一条蓝蓝的小围巾～",
+      "又多一针，慢慢织。"
+    ]
+  },
+  {
+    "code": "H4",
+    "id": "bigfish:windup-whale",
+    "label": "上发条小鲸鱼",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 1,
+    "beats": [
+      "hold tiny whale toy",
+      "turn winding key",
+      "set toy on lap tray",
+      "watch it waddle",
+      "catch toy gently",
+      "smile holding toy"
+    ],
+    "loop": false,
+    "lines": [
+      "小鲸鱼上发条，走两步～",
+      "别跑远，还要一起等任务！"
+    ]
+  },
+  {
+    "code": "H5",
+    "id": "bigfish:shell-juggle",
+    "label": "贝壳小把戏",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 2,
+    "beats": [
+      "hold two seashells",
+      "toss one slightly",
+      "catch left",
+      "toss other slightly",
+      "catch both surprised",
+      "show shells proudly"
+    ],
+    "loop": false,
+    "lines": [
+      "两枚小贝壳，接住啦！",
+      "手忙一点，贝壳没有掉～"
+    ]
+  },
+  {
+    "code": "H6",
+    "id": "bigfish:leaf-umbrella",
+    "label": "荷叶小伞",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold folded leaf umbrella",
+      "unfold leaf",
+      "lift above head",
+      "tilt umbrella",
+      "amused look at leaf",
+      "fold and lower"
+    ],
+    "loop": false,
+    "lines": [
+      "撑起荷叶小伞，借你一点凉快～",
+      "伞也准备好了，随时出发。"
+    ]
+  },
+  {
+    "code": "I1",
+    "id": "bigfish:thinking-abacus",
+    "label": "算盘推演",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "hold miniature abacus",
+      "slide left beads",
+      "look thoughtful",
+      "slide right beads",
+      "compare rows",
+      "fingers ready abacus"
+    ],
+    "loop": true,
+    "lines": [
+      "拨一拨算盘，理清这一步～",
+      "数珠归位，思路再对一遍。"
+    ]
+  },
+  {
+    "code": "I2",
+    "id": "bigfish:thinking-sandglass",
+    "label": "观察沙漏",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 0,
+    "beats": [
+      "hold tiny sandglass",
+      "turn it upright",
+      "watch sand",
+      "chin touch",
+      "look closer",
+      "keep watching calmly"
+    ],
+    "loop": true,
+    "lines": [
+      "慢慢看，先理清思路。",
+      "沙漏只是小道具，我还在想呢～"
+    ]
+  },
+  {
+    "code": "I3",
+    "id": "bigfish:read-books-sort",
+    "label": "书堆找答案",
+    "tags": [
+      "read",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "three small books",
+      "select middle book",
+      "open book",
+      "read closely",
+      "place beside stack",
+      "open another book"
+    ],
+    "loop": true,
+    "lines": [
+      "翻翻这一本，再看看那一本。",
+      "读到这里，夹好继续看～"
+    ]
+  },
+  {
+    "code": "I4",
+    "id": "bigfish:thinking-flowchart",
+    "label": "画一张路线图",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 0,
+    "beats": [
+      "hold drawing pad and pencil",
+      "draw abstract circle",
+      "draw connecting arrow",
+      "inspect",
+      "draw second circle",
+      "continue thoughtful drawing"
+    ],
+    "loop": true,
+    "lines": [
+      "把路径画下来，再理一下～",
+      "圈和箭头先排清楚。"
+    ]
+  },
+  {
+    "code": "I5",
+    "id": "bigfish:thinking-gears",
+    "label": "齿轮咔哒转",
+    "tags": [
+      "thinking",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "two toy gears on tray",
+      "pick one",
+      "fit gear teeth",
+      "gently rotate",
+      "watch gears",
+      "thoughtful smile inspecting"
+    ],
+    "loop": true,
+    "lines": [
+      "让这两只小齿轮对上～",
+      "转一转，再看看思路。"
+    ]
+  },
+  {
+    "code": "I6",
+    "id": "bigfish:writing-ink",
+    "label": "蘸墨写草稿",
+    "tags": [
+      "writing",
+      "working"
+    ],
+    "family": "work",
+    "intensity": 1,
+    "beats": [
+      "hold feather pen and notebook",
+      "dip pen in small bottle",
+      "write abstract stroke",
+      "pause and inspect",
+      "write again",
+      "pen ready above notebook"
+    ],
+    "loop": true,
+    "lines": [
+      "蘸一点墨，把草稿写下去～",
+      "这一笔先写稳。"
+    ]
+  },
+  {
+    "code": "J1",
+    "id": "bigfish:web-telescope",
+    "label": "望远镜看网页",
+    "tags": [
+      "web",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "pick compact telescope",
+      "aim slightly left",
+      "look through",
+      "aim right",
+      "lower to compare blank notes",
+      "look through again"
+    ],
+    "loop": true,
+    "lines": [
+      "望远镜架好，看看 {tool} 的页面～",
+      "网页这边，我正在看。"
+    ]
+  },
+  {
+    "code": "J2",
+    "id": "bigfish:image-palette",
+    "label": "调色画画",
+    "tags": [
+      "image",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "hold paint palette and small canvas",
+      "mix blue paint",
+      "add brushstroke",
+      "inspect",
+      "mix lighter paint",
+      "add small abstract shape"
+    ],
+    "loop": true,
+    "lines": [
+      "调一点蓝色，跟着 {tool} 画起来～",
+      "颜料准备好，等图像结果。"
+    ]
+  },
+  {
+    "code": "J3",
+    "id": "bigfish:agent-director",
+    "label": "小导演带队",
+    "tags": [
+      "agent",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "hold tiny blank clapperboard",
+      "open clapper",
+      "gently close",
+      "gesture to small task cards",
+      "examine cards",
+      "hold board watching"
+    ],
+    "loop": true,
+    "lines": [
+      "小导演就位，盯着 {tool} 的进展！",
+      "任务卡摆好，一起往下做～"
+    ]
+  },
+  {
+    "code": "J4",
+    "id": "bigfish:parallel-trays",
+    "label": "多任务分篮",
+    "tags": [
+      "parallel",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "two tiny trays and papers",
+      "put paper left",
+      "put paper right",
+      "compare trays",
+      "straighten both stacks",
+      "observe both calmly"
+    ],
+    "loop": true,
+    "lines": [
+      "左右分篮，盯住这几项～",
+      "同时在跑的任务，我先摆整齐。"
+    ]
+  },
+  {
+    "code": "J5",
+    "id": "bigfish:background-terrarium",
+    "label": "看守小生态箱",
+    "tags": [
+      "background",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 0,
+    "beats": [
+      "hold small closed glass terrarium",
+      "inspect left side",
+      "adjust tiny side knob",
+      "inspect right",
+      "note abstract dot",
+      "watch patiently"
+    ],
+    "loop": true,
+    "lines": [
+      "我守着 {tool} 的后台进展～",
+      "这边继续观察，有变化再告诉你。"
+    ]
+  },
+  {
+    "code": "J6",
+    "id": "bigfish:export-suitcase",
+    "label": "打包小行李箱",
+    "tags": [
+      "export",
+      "working"
+    ],
+    "family": "tools",
+    "intensity": 1,
+    "beats": [
+      "open miniature suitcase",
+      "align folded papers",
+      "place in suitcase",
+      "secure strap",
+      "close suitcase",
+      "hold waiting"
+    ],
+    "loop": false,
+    "lines": [
+      "把 {tool} 的材料整理进小箱子～",
+      "带子扣好，继续等交付结果。"
+    ]
+  },
+  {
+    "code": "K1",
+    "id": "bigfish:success-ribbon",
+    "label": "交付小礼物",
+    "tags": [
+      "success"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "hold neatly wrapped gift",
+      "straighten ribbon",
+      "lift gift",
+      "present forward",
+      "happy smile",
+      "small bow holding gift"
+    ],
+    "loop": false,
+    "lines": [
+      "完成啦，给你一份小礼物！",
+      "本轮成果，打好蝴蝶结啦～"
+    ]
+  },
+  {
+    "code": "K2",
+    "id": "bigfish:success-paper-confetti",
+    "label": "纸花庆祝",
+    "tags": [
+      "success"
+    ],
+    "family": "outcome",
+    "intensity": 1,
+    "beats": [
+      "hold two folded paper flowers",
+      "unfold left flower",
+      "unfold right",
+      "raise both",
+      "cheerful tiny hop",
+      "lower flowers smiling"
+    ],
+    "loop": false,
+    "lines": [
+      "完成！开两朵小纸花～",
+      "为这一轮开个小花！"
+    ]
+  },
+  {
+    "code": "K3",
+    "id": "bigfish:error-cable-check",
+    "label": "检查小接线",
+    "tags": [
+      "error"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "puzzled with tiny console cable",
+      "inspect connector",
+      "compare socket",
+      "check cable carefully",
+      "puzzled chin touch",
+      "hold cable awaiting help"
+    ],
+    "loop": false,
+    "lines": [
+      "接线这里有问题，先检查。",
+      "我先停住，看看连接怎么了。"
+    ]
+  },
+  {
+    "code": "K4",
+    "id": "bigfish:attention-envelope",
+    "label": "递来确认信",
+    "tags": [
+      "attention"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "hands relaxed looking user",
+      "pick cream envelope",
+      "open envelope",
+      "hold blank card",
+      "offer card forward",
+      "remain waiting"
+    ],
+    "loop": false,
+    "lines": [
+      "有封确认信，请你看一下～",
+      "这一步需要你点头，我等着。"
+    ]
+  },
+  {
+    "code": "K5",
+    "id": "bigfish:retry-eraser",
+    "label": "擦掉重画",
+    "tags": [
+      "retry"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "puzzled scratchpad",
+      "pick eraser",
+      "erase abstract sketch",
+      "brush crumbs",
+      "lay pencil ready",
+      "look attentive"
+    ],
+    "loop": false,
+    "lines": [
+      "擦掉旧草稿，等重试开始。",
+      "整理好纸笔，再试一遍。"
+    ]
+  },
+  {
+    "code": "K6",
+    "id": "bigfish:error-question-map",
+    "label": "困惑地图",
+    "tags": [
+      "error"
+    ],
+    "family": "outcome",
+    "intensity": 0,
+    "beats": [
+      "hold folded map",
+      "open map",
+      "look left",
+      "look right puzzled",
+      "point at abstract junction",
+      "look up awaiting help"
+    ],
+    "loop": false,
+    "lines": [
+      "这里没走通，检查一下路径。",
+      "先停住，等问题处理好。"
+    ]
+  },
+  {
+    "code": "L1",
+    "id": "bigfish:easter-bubble-hat",
+    "label": "泡泡落在头上",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 2,
+    "beats": [
+      "hold bubble wand",
+      "blow one bubble",
+      "bubble lands near headband",
+      "eyes look upward",
+      "bubble pops surprised",
+      "laugh gently"
+    ],
+    "loop": false,
+    "lines": [
+      "泡泡怎么落到头上了！",
+      "噗，破掉啦～"
+    ]
+  },
+  {
+    "code": "L2",
+    "id": "bigfish:easter-shell-listen",
+    "label": "听听贝壳",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 0,
+    "beats": [
+      "hold seashell",
+      "lift to ear",
+      "listen tilting head",
+      "smile",
+      "switch other ear",
+      "lower shell"
+    ],
+    "loop": false,
+    "lines": [
+      "听一听贝壳里的声音～",
+      "海的声音，有点像在等你。"
+    ]
+  },
+  {
+    "code": "L3",
+    "id": "bigfish:easter-self-portrait",
+    "label": "画一张小自画像",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "daily",
+    "intensity": 1,
+    "beats": [
+      "hold blank sketchbook and pencil",
+      "sketch blue hair",
+      "add whale tail",
+      "inspect simple tiny whale-maid drawing",
+      "show sketch",
+      "lower sketchbook"
+    ],
+    "loop": false,
+    "lines": [
+      "画一张小小的我，尾巴也在！",
+      "自画像画好了，给你看看～"
+    ]
+  },
+  {
+    "code": "L4",
+    "id": "bigfish:easter-paper-fleet",
+    "label": "纸鱼小船队",
+    "tags": [
+      "greeting",
+      "idle"
+    ],
+    "family": "easter",
+    "intensity": 1,
+    "beats": [
+      "hold tray with three tiny paper fish boats",
+      "align first",
+      "align second",
+      "align third",
+      "show little fleet",
+      "hold proudly"
+    ],
+    "loop": false,
+    "lines": [
+      "三只小纸鱼，排队出发！",
+      "小船队准备好，一起等新点子。"
+    ]
+  },
+  {
+    "code": "L5",
+    "id": "bigfish:near-miss-glasses",
+    "label": "扶好眼镜再写",
+    "tags": [
+      "near-miss"
+    ],
+    "family": "reaction",
+    "intensity": 1,
+    "beats": [
+      "typing with little glasses",
+      "glance left",
+      "small lean right",
+      "catch and straighten glasses",
+      "nod determined",
+      "hands keyboard"
+    ],
+    "loop": false,
+    "lines": []
+  },
+  {
+    "code": "L6",
+    "id": "bigfish:near-miss-startle",
+    "label": "眨眼稳住节奏",
+    "tags": [
+      "near-miss"
+    ],
+    "family": "reaction",
+    "intensity": 0,
+    "beats": [
+      "focused typing",
+      "eyes widen looking left",
+      "shoulders tuck slight right lean",
+      "blink calmly",
+      "relax shoulders",
+      "resume typing"
+    ],
+    "loop": false,
+    "lines": []
+  }
+]

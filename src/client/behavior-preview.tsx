@@ -1,7 +1,8 @@
 import { petLibrary } from "../pet/library.js";
+import { actionIdle } from "../pet/action-dialogue.js";
 import { IdleDirector } from "../domain/idle.js";
 import { motionReduced } from "../domain/motion-policy.js";
-import { DialogueBubble } from "./dialogue-view.js";
+import { DialogueBubble, dialogueCategory } from "./dialogue-view.js";
 import React, { useEffect, useRef, useState } from "react";
 import type { Companion } from "./controller.js";
 import { type Preferences } from "../contract/preferences.js";
@@ -37,12 +38,13 @@ function BehaviorPreview({
     [offset, setOffset] = useState(0),
     [now, setNow] = useState(Date.now());
   const director = useRef(new IdleDirector());
+  const [animation, setAnimation] = useState({ key: '', id: '' });
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 200);
     return () => clearInterval(timer);
   }, []);
   const time = now + offset;
-  const idle = director.current.tick(
+  const scheduledIdle = director.current.tick(
     time,
     state === "idle",
     true,
@@ -65,6 +67,13 @@ function BehaviorPreview({
     whipHz: 1.5,
     completionSerial: 1,
   };
+  const current = animation.key === petLibrary.active?.key
+    ? petLibrary.active?.pet.animations.find(a => a.id === animation.id) : undefined;
+  const category = dialogueCategory(snapshot);
+  const semantic = ({ writing: 'working', complete: 'success', waiting: 'attention', thinking: 'thinking' } as Record<string, string>)[category] ?? category;
+  const matchingAnimation = current?.tags.includes(semantic) ? current.id : undefined;
+  const idle = petLibrary.active && matchingAnimation
+    ? actionIdle(scheduledIdle, petLibrary.active.pet.dialogue, matchingAnimation, prefs.dialogueJson) : scheduledIdle;
   return (
     <section className="bf-behavior-preview" aria-label="行为预览">
       <strong>即时预览</strong>
@@ -114,6 +123,7 @@ function BehaviorPreview({
       </div>
       <p className="bf-help">已快进 {offset / 1000} 秒</p>
       <DialogueBubble
+        animation={matchingAnimation}
         roleLines={petLibrary.active?.pet.dialogue}
         snapshot={snapshot}
         prefs={prefs}
@@ -125,6 +135,7 @@ function BehaviorPreview({
         {null}
       </DialogueBubble>
       <FishCanvas
+        onAnimation={id => setAnimation({ key: petLibrary.active?.key ?? '', id })}
         snapshot={snapshot}
         prefs={{ ...prefs, sound: false }}
         t={t}

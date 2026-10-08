@@ -31,6 +31,7 @@ export function PetPreview({ loaded }: { loaded: LoadedPet }) {
           activity: 0.5,
           pressure: 0,
           preview: motion,
+          idle: motion ? { active: true, showText: true, motion: "preview", text: loaded.pet.dialogue[motion]?.[0] ?? "我在等哦", serial: 1, durationMs: 12000 } : undefined,
         }}
       />
       <p className="bf-help">

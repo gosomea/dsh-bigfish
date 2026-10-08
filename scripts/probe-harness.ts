@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
@@ -13,15 +14,24 @@ if (git.status !== 0) throw new Error(git.stderr);
 const pkg = JSON.parse(await readFile(resolve(harness, 'package.json'), 'utf8')) as { version: string };
 const scratch = resolve(root, '.probe'); await mkdir(scratch, { recursive: true });
 const native = (p: string) => JSON.stringify(resolve(harness, p));
+const legacySettings = resolve(harness, 'packages/client/ui-settings/lib/types/client/settings-scope.js');
+const currentSettings = resolve(harness, 'packages/client/ui-settings/lib/types/client/config-form.js');
+if (!existsSync(legacySettings) && !existsSync(currentSettings)) {
+  throw new Error('Unsupported DSH settings surface: neither settingsScope nor configForms declarations were found');
+}
+const settingsProbe = existsSync(currentSettings)
+  ? `declare const configForms: import(${JSON.stringify(currentSettings)}).ConfigForms;
+const compatibleSettings: SettingsServices = { configForms };`
+  : `declare const settingsScope: import(${JSON.stringify(legacySettings)}).SettingsScopeBinder;
+const compatibleSettings: SettingsServices = { settingsScope };`;
 const source = `
 import type { Context } from ${native('vendor/cordis/lib/types/index.js')};
 import type { Agent, AssistantStreamFrame } from ${native('packages/core/agent/lib/types/index.js')};
 import type { Session, SessionEvent } from ${native('packages/core/session/lib/types/index.js')};
 import type {} from ${native('packages/api/session-controller/lib/types/client/index.js')};
 import type {} from ${native('packages/client/ui-session/lib/types/client/index.js')};
-import type {} from ${native('packages/client/ui-settings/lib/types/client/settings-scope.js')};
 import type {} from ${native('packages/client/connection/lib/types/client/index.js')};
-import type { NativeServices } from '../src/client/native-contract.js';
+import type { NativeServices, SettingsServices } from '../src/client/native-contract.js';
 import type { EventContext } from '../src/host/attach.js';
 import type { HarnessAdapter, AgentHandle, StreamFrame } from '../src/host/adapter.js';
 declare const ctx: Context;
@@ -37,9 +47,9 @@ declare const sessions: import(${native('packages/api/session-controller/lib/typ
 // the root Context declaration. Probe the exported browser contracts directly:
 // this verifies the actual plugin-facing types on both supported tags.
 declare const uiSession: import(${native('packages/client/ui-session/lib/types/client/index.js')}).UiSession;
-declare const settingsScope: import(${native('packages/client/ui-settings/lib/types/client/settings-scope.js')}).SettingsScopeBinder;
-const compatibleClient: NativeServices = { sessions, uiSession, settingsScope, connection };
-void compatibleClient;
+const compatibleClient: NativeServices = { sessions, uiSession, connection };
+${settingsProbe}
+void compatibleClient; void compatibleSettings;
 const compatibleAgent: AgentHandle = agent;
 const compatibleFrame: StreamFrame = frame;
 adapter.frame(agent, frame);
@@ -78,7 +88,7 @@ if (diagnostics.length) {
   assert.equal(adapter.sessionCount, 0); assert.deepEqual(errors, []);
   const report = { date: new Date().toISOString(), harness: relative(root, harness), version: pkg.version,
     commit: git.stdout.trim(), node: process.version,
-    checks: ['native Host frame and Browser session/settings/connection type assignability', 'real Cordis emitter → Host adapter → token/turn projection', 'listener disposal'],
+    checks: ['native Host frame and Browser session/settings/connection type assignability', `settings bridge: ${existsSync(currentSettings) ? 'configForms' : 'settingsScope'}`, 'real Cordis emitter → Host adapter → token/turn projection', 'listener disposal'],
     notVerifiedByThisProbe: ['browser/runtime/package checks are covered separately by smoke:native', 'paid provider API'],
   };
   await writeFile(resolve(scratch, 'result.json'), JSON.stringify(report, null, 2) + '\n');

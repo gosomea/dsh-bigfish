@@ -1,14 +1,16 @@
 import {petLibrary} from '../pet/library.js';
 import React from 'react';
 import { NativeCompanion } from './controller.js';
-import type { NativeServices } from './native-contract.js';
+import type { NativeServices, SettingsServices } from './native-contract.js';
+import { createPreferenceBridge } from './dsh-preference-bridge.js';
 import { SettingsPanel, Widget, type UIProps } from './ui.js';
 import { zh, en, type Translate } from './locales.js';
 import css from './styles.css';
-export const inject = ['slots', 'locale', 'sessions', 'uiSession', 'settingsScope', 'connection'];
+export const inject = ['slots', 'locale', 'sessions', 'uiSession', 'connection'];
 export interface ClientContext extends NativeServices {
   slots: { inject(name: any, callback: () => unknown): unknown; register(spec: any, component: any): () => void };
   locale: { register(namespace: any, dictionaries: any): () => void; bind(namespace: any): any };
+  get<K extends keyof SettingsServices>(name: K): SettingsServices[K] | undefined;
   effect(effect: () => () => void, label?: string): unknown;
 }
 function Overlay(props: UIProps) { return <div className="bf-surface"><Widget {...props} /></div>; }
@@ -23,7 +25,11 @@ export function apply(ctx: ClientContext): void {
   }, 'bigfish styles');
   let storage: Storage | null = null;
   try { storage = localStorage; } catch { /* Browsers may disallow persistence. */ }
-  const controller = new NativeCompanion(ctx, storage);
+  const preferenceBridge = createPreferenceBridge({
+    configForms: ctx.get('configForms'),
+    settingsScope: ctx.get('settingsScope'),
+  });
+  const controller = new NativeCompanion(ctx, storage, preferenceBridge.scope);
   ctx.effect(() => () => controller.dispose(), 'bigfish controller');
   const t = ctx.locale.bind('bigfish') as Translate;
   const injected = () => ({ controller, t });

@@ -12,13 +12,13 @@ export function dialogueCategory(s:Snapshot,a?:ActivitySummary|null):Category {
  if(s.state==='idle')return 'idle';
  if(a)return a.category;if(s.state==='tool-running')return 'tool';if(s.state==='reasoning')return 'thinking';return 'writing';
 }
-export function DialogueBubble({snapshot,prefs,activity,status,actions,children,idle,now=Date.now(),roleLines,task}:{snapshot:Snapshot;prefs:Preferences;activity?:ActivitySummary|null|undefined;status:string;actions:ReactNode;children:ReactNode;idle?:IdlePresentation;now?:number;roleLines?:Record<string,string[]>|undefined;task?:string|undefined}) {
+export function DialogueBubble({snapshot,prefs,activity,status,actions,children,idle,now=Date.now(),roleLines,task,animation}:{snapshot:Snapshot;prefs:Preferences;activity?:ActivitySummary|null|undefined;status:string;actions:ReactNode;children:ReactNode;idle?:IdlePresentation;now?:number;roleLines?:Record<string,string[]>|undefined;task?:string|undefined;animation?:string|undefined}) {
  const director=useRef(new Speech());const category=dialogueCategory(snapshot,activity);
- const lines=parseLines(prefs.dialogueJson)[category]??roleLines?.[activity?.semantic??category]??roleLines?.[category]??defaultLines[category];
+ const lines=parseLines(prefs.dialogueJson)[category]??roleLines?.[animation??'']??roleLines?.[activity?.semantic??category]??roleLines?.[category]??defaultLines[category];
  const tool=activity?.label===categoryLabels[category]?activity.toolName??activity.label:activity?.label;
  const taskText=prefs.showTask&&task?task:'这次任务';
  const values={task:taskText,tool:prefs.showTool?tool??'工具':'工具',file:prefs.showFile?activity?.file??'这个文件':'这个文件',elapsed:Math.floor((activity?.elapsed??snapshot.wallElapsed)/1000)+' 秒',activeCount:activity?.activeCount??0,completedCount:activity?.completedCount??0};
- const spoken=director.current.choose(snapshot.sessionId+':'+snapshot.turn,category,lines,now,prefs.speechSeconds,prefs.talkLevel,values,activity?.id??'');
+ const spoken=director.current.choose(snapshot.sessionId+':'+snapshot.turn,category,lines,now,prefs.speechSeconds,prefs.talkLevel,values,(activity?.id??'')+':'+(animation??''));
  const resting=category==='idle'&&idle&&!idle.showText;
  const text=category==='idle'&&idle?(idle.showText?idle.text:prefs.idleHideMessage?'':lines[0]??''):spoken;
  const detail=[categoryLabels[category],prefs.showTool&&tool!==categoryLabels[category]?tool:null,prefs.showFile?activity?.file:null,activity&&activity.activeCount>1?`${activity.activeCount} 项`:null,activity?.progress!==undefined?`${Math.round(activity.progress*100)}%`:null].filter(Boolean).join(' · ');

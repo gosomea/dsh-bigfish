@@ -3,7 +3,7 @@ export const PET_FORMAT_VERSION=1;
 export const requiredRoles=['idle','working','attention','success','error'] as const;
 export type Role=typeof requiredRoles[number];
 export interface PetFrame {asset:string;rect:[number,number,number,number];durationMs:number;sign?:{x:number;y:number;width:number;height:number;angle:number}}
-export interface PetAnimation {id:string;label:string;tags:string[];intensity:number;loop:boolean;weight:number;cooldownMs:number;frames:PetFrame[];speed:[number,number];scene?:string}
+export interface PetAnimation {id:string;label:string;tags:string[];intensity:number;loop:boolean;weight:number;cooldownMs:number;frames:PetFrame[];speed:[number,number];scene?:string;family?:string;holdFrame?:number}
 export interface PetManifest {format:'dsh-pet';formatVersion:1;id:string;name:string;version:string;author:string;description:string;canvas:{width:number;height:number};assets:Record<string,{path:string;width:number;height:number}>;thumbnail:string;animations:string;fallbacks:Record<Role,string>;dialogue?:string;scenes?:Record<string,{asset:string}>;capabilities:string[]}
 export interface PetBundle {manifest:PetManifest;animations:PetAnimation[];dialogue:Record<string,string[]>;files:Record<string,Uint8Array>;warnings:string[]}
 function object(v:any):Record<string,any>{if(!v||typeof v!=='object'||Array.isArray(v))throw Error('应为对象');return v;}
@@ -38,7 +38,9 @@ export function parsePet(files:Record<string,Uint8Array>):PetBundle {
  for(const value of raw){const a=object(value);id(a.id);if(ids.has(a.id))throw Error('动作 ID 重复');ids.add(a.id);str(a.label,80);
   if(!Array.isArray(a.tags)||!a.tags.length||a.tags.length>32)throw Error('缺少动作用途标签');a.tags.forEach(id);number(a.intensity,0,2);if(!Number.isInteger(a.intensity)||typeof a.loop!=='boolean')throw Error('动作强度或循环方式无效');
   number(a.weight,0.01,100);number(a.cooldownMs,0,3600000);
+  if(a.family!==undefined)id(a.family);
   if(!Array.isArray(a.frames)||!a.frames.length||a.frames.length>512||(frames+=a.frames.length)>32768)throw Error('动画帧数量超限');
+  if(a.holdFrame!==undefined){number(a.holdFrame,0,a.frames.length-1);if(!Number.isInteger(a.holdFrame)||a.loop||!a.tags.includes('greeting'))throw Error('保持帧只能用于一次性空闲互动');}
   for(const f of a.frames){object(f);const asset=assets[f.asset];if(!Object.hasOwn(assets,f.asset)||!asset||!Array.isArray(f.rect)||f.rect.length!==4)throw Error('帧资源或矩形无效');const [x,y,w,h]=f.rect;number(x,0,asset.width);number(y,0,asset.height);number(w,1,asset.width);number(h,1,asset.height);if(x+w>asset.width||y+h>asset.height)throw Error('帧超出图集');if(w!==p.canvas.width||h!==p.canvas.height)throw Error('每帧尺寸必须等于角色逻辑画布（制作时先对齐）');number(f.durationMs,16,10000);
    if(f.sign){const s=object(f.sign);number(s.x,0,w);number(s.y,0,h);number(s.width,1,w);number(s.height,1,h);number(s.angle,-45,45);if(s.x+s.width>w||s.y+s.height>h)throw Error('牌面超出画布');}
   }

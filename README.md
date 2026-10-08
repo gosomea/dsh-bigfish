@@ -15,7 +15,7 @@
 
 ## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。稳定版 `0.5.3` 已验证 DSH `0.1.5-rc.1` / `0.1.5-rc.2`；预发布版 **`0.5.4-next.1`** 同时验证 `0.1.5-rc.2` 和 `0.1.6-alpha.2`。它根据宿主实际提供的会话能力选择兼容桥接，不把 DSH 核心包带入插件。移动中的 `master` 不属于支持承诺。Node 要求 `^22.19.0 || >=24.0.0`。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。2026-10-08 查验时，DSH 的 npm `latest` 为 `0.2.0-rc.2`；Bigfish 稳定版为 **`0.5.3`**，新增 72 段动作的体验版为 **`0.6.0-next.1`**（`next`）。插件按宿主能力选择设置与会话桥接，不把 DSH 核心包带入插件。Node 要求 `^22.19.0 || >=24.0.0`。精确实测范围见[兼容性记录](docs/compatibility.md)。
 
 直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
@@ -24,10 +24,11 @@ dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
 
-想验证新的双版本 session bridge，请显式安装预发布包：
+使用当前 DSH 或想体验 72 段新动作时，安装 npm `next`：
 
 ```sh
 dsh plugin --profile web add dsh-bigfish@next
+dsh --profile web
 ```
 
 遇到未来不兼容的 DSH 时，大肥鱼会停在空闲状态，并在宠物气泡和完整设置中说明检测到的会话接口与升级建议；不会猜测任务状态。
@@ -37,12 +38,24 @@ dsh plugin --profile web add dsh-bigfish@next
 **插件里还附带 `dsh-bigfish-pet-maker` Skill，可用来制作、替换和扩展角色包。** 想启用它，再执行一次：
 
 ```sh
-npx --yes dsh-bigfish install-skill
+npx --yes dsh-bigfish@next install-skill
 ```
 
 安装后新建 DSH 会话，即可让 Agent 使用 `$dsh-bigfish-pet-maker` 制作新角色或扩展动作，再从「完整设置 → 角色库」导入生成的 `.dshpet`。详见[角色制作示例](#做一只属于你的宠物)。
 
 [详细安装、升级与卸载](https://github.com/gosomea/dsh-bigfish/blob/main/docs/installation.md) · [常见问题](https://github.com/gosomea/dsh-bigfish/blob/main/docs/faq.md) · [npm 包页面](https://www.npmjs.com/package/dsh-bigfish)
+
+## 新增趣味动作
+
+`0.6.0-next.1` 提供 **大肥鱼 · 趣味版**：72 段六姿态演出，包括牌子拿反了、尾巴托牌、分饼干、折纸鱼、放大镜搜索、测试巡检、调色画画和开心收工。另有五类基础回退，角色包共 77 个动作。
+
+安装 `dsh-bigfish@next` 后，在 **完整设置 → 角色库 → 使用趣味版** 即可切换；也可以先逐个预览。已有角色和行为设置保留。举牌适配展示时长，动作专属台词跟随画面；安静陪伴、减弱动态和关闭鞭策仍生效。
+
+![趣味版六个动作：翻牌、分饼干、折纸鱼、放大镜、调色和庆祝](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-motions.gif)
+
+> 来自插件实际 Canvas 动作预览，按关键姿态时间采样；展示原始萌化角色的连续六帧动作，没有调用模型。
+
+[新版说明](docs/release-notes-0.6.0-next.1.md) · [第二批 36 个设计](docs/animation-expansion-design-2.md)
 
 ## 动画展示
 
@@ -122,12 +135,12 @@ Release 另附 **大肥鱼 · 成年版**：沿用原始鲸鱼女仆形象，保
 npm 包已经包含完整 Skill，不必另下 ZIP：
 
 ```sh
-npx --yes dsh-bigfish install-skill
+npx --yes dsh-bigfish@next install-skill
 ```
 
 默认安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。安装 Skill 后请新建 DSH 会话；宠物插件本身的安装不会自动修改技能目录。
 
-其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.3/dsh-bigfish-pet-maker-1.0.3.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
+其他 Agent 可使用 `npx --yes dsh-bigfish@next install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.5.3/dsh-bigfish-pet-maker-1.0.3.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
 
 然后直接和 Agent 说：
 
@@ -168,7 +181,7 @@ Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准�
 
 ## 验证与边界
 
-0.5.0 已完成 macOS 的 108 项单元测试和 28 项浏览器回归；Linux arm64 的 Node 22.19.0 / 24.21.0 干净安装、构建和单元测试，Node 24 另跑了浏览器回归。两版 DSH 完成原生安装、实时任务、多会话、备份恢复及卸载检查；另有约 30 分钟、180 轮切换的渲染生命周期检查。
+`0.5.4-next.1` 当前通过 142 项单元测试；四个 npm DSH 版本分别完成隔离安装、Host 设置写入与刷新、真实流式任务、并发会话隔离、角色包、备份恢复及卸载检查。此前还完成 macOS 浏览器回归、Linux arm64 的 Node 22.19.0 / 24.21.0 干净安装与构建，以及约 30 分钟、180 轮切换的渲染生命周期检查。
 
 这不代表所有平台都已支持：Windows、x86、Safari / Firefox、网络共享文件系统及跨天运行尚未完成验证。共享同一 `DSH_HOME` 的多个实例需要全部升级到支持跨进程锁的版本。备份恢复包含冲突保护与回滚，但跨 Host 和浏览器存储不构成一个整体原子事务。
 

@@ -4,7 +4,7 @@ import { parseRules } from '../contract/dialogue.js';
 import { HarnessAdapter, type AgentHandle } from '../host/adapter.js';
 import { engineConfig } from '../contract/preferences.js';
 import type { Channel, ObservedOutput, Snapshot, WorkState } from '../contract/types.js';
-import type { Binding, Entry, NativeServices } from './native-contract.js';
+import type { Binding, Entry, NativeServices, PreferenceScope } from './native-contract.js';
 import { DshSessionBridge, type DshBridgeStatus } from './dsh-session-bridge.js';
 import { PreferenceStore } from './preferences-store.js';
 
@@ -40,9 +40,9 @@ export class NativeCompanion implements Companion {
   private historyIssue: string | null = null;
   private now: () => number;
   private bridge: DshSessionBridge;
-  constructor(private ctx: NativeServices, private storage: Storage | null) {
+  constructor(private ctx: NativeServices, private storage: Storage | null, preferenceScope: PreferenceScope | null) {
     const epoch = Date.now(), mono = performance.now(); this.now = () => epoch + performance.now() - mono;
-    this.preferences = new PreferenceStore(ctx.settingsScope.bind({ namespace: 'bigfish', decode: value => value }), storage);
+    this.preferences = new PreferenceStore(preferenceScope, storage);
     this.historyKey = `bigfish.history.v1:${typeof location === 'undefined' ? 'test' : location.origin}`;
     this.adapter = new HarnessAdapter({ now: this.now }, engineConfig(this.preferences.getSnapshot().value), undefined, (agent, counter) => ({
       endpointId: agent.options.provider ?? 'unknown', model: agent.options.model ?? 'unknown', reasoning: agent.options.reasoningEffort ?? 'default',
@@ -93,7 +93,7 @@ export class NativeCompanion implements Companion {
     const enabled = this.preferences.getSnapshot().value.enabled;
     const sessionId = enabled ? this.bridge.currentSessionId() : undefined;
     const next = sessionId === undefined ? undefined : this.bridge.currentBinding();
-    // alpha.2 publishes the main-view identity before its retained controller
+    // Current DSH publishes the main-view identity before its retained controller
     // binding is observable on every list transition. Keep the existing
     // foreground stream through that short gap; a real switch/empty state
     // changes adapter.current's key and will still detach immediately.
@@ -101,7 +101,7 @@ export class NativeCompanion implements Companion {
     if (!force && next === this.binding) return;
     const sameSession = next !== undefined && next.sessionId === this.binding?.sessionId;
     for (const off of this.bindingOff.splice(0)) off();
-    // alpha.2 can refresh a retained Binding object for the same foreground
+    // Current DSH can refresh a retained Binding object for the same foreground
     // session. Replace its observers but keep the adapter's accumulated turn
     // state; disposing here turns a just-finished turn back into local
     // "awaiting output" and loses its completion animation.
