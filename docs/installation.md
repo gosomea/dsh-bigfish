@@ -1,6 +1,6 @@
 # 安装与卸载
 
-当前 npm 上 `dsh-bigfish@latest` 是 `0.5.3`，新动作体验版 `dsh-bigfish@next` 是 `0.6.0-next.1`。DSH 当前 npm `latest` 为 `0.2.0-rc.2`。本轮使用 macOS / Node 24.19.0 验证；此前兼容版 `0.5.4-next.1` 在 `0.1.5-rc.3`、`0.1.6-alpha.2`、`0.1.7-rc.2` 和 `0.2.0-rc.1` 上有隔离原生验收记录。精确版本与结果见 [兼容性](compatibility.md)，历史结果不代替本轮验收。矩阵外版本应先在隔离 profile 验证。
+当前 npm 稳定版为 `dsh-bigfish@0.6.0`，新增动作直接集成在内置大肥鱼中，无需安装 `@next` 或切换角色。DSH 当前 npm `latest` 为 `0.2.0-rc.2`。本轮使用 macOS / Node 24.19.0 验证；此前兼容版 `0.5.4-next.1` 在 `0.1.5-rc.3`、`0.1.6-alpha.2`、`0.1.7-rc.2` 和 `0.2.0-rc.1` 上有隔离原生验收记录。精确版本与结果见 [兼容性](compatibility.md)，历史结果不代替本轮验收。矩阵外版本应先在隔离 profile 验证。
 
 ## 从 npm 快速安装（推荐）
 
@@ -9,7 +9,7 @@ dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
 
-安装指定版本可使用 `dsh-bigfish@0.5.3`。需要跨版本兼容预览版时运行 `dsh plugin --profile web add dsh-bigfish@next`。升级后在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
+安装指定版本可使用 `dsh-bigfish@0.6.0`。普通安装命令同时包含跨版本能力检测和新增动作。升级后在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
 
 npm 包内含完整 `dsh-bigfish-pet-maker` Skill。按需启用：
 
@@ -23,10 +23,10 @@ npx --yes dsh-bigfish install-skill
 
 ## 安装本地交付包
 
-确保使用 Node 22.19+ 或 24+，并已安装 dsh。在联网机器执行 `npm pack dsh-bigfish@0.5.3` 可取得当前 npm 安装包，再用绝对路径传入：
+确保使用 Node 22.19+ 或 24+，并已安装 dsh。在联网机器执行 `npm pack dsh-bigfish@0.6.0` 可取得当前 npm 安装包，再用绝对路径传入：
 
 ```sh
-dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.5.3.tgz
+dsh plugin --profile web add /absolute/path/to/dsh-bigfish-0.6.0.tgz
 dsh --profile web
 ```
 
@@ -37,7 +37,7 @@ dsh --profile web
 ```sh
 export DSH_HOME=/absolute/path/to/bigfish-trial-home
 dsh --profile bigfish-trial --from-default-profile web --dump-config > /dev/null
-dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.5.3.tgz
+dsh plugin --profile bigfish-trial add /absolute/path/to/dsh-bigfish-0.6.0.tgz
 dsh --profile bigfish-trial --port 4180 --no-open
 ```
 

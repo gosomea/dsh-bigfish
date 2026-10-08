@@ -5,7 +5,7 @@
 - `bigfish-demo.gif`：README 首屏精华循环，剪辑举牌、打字、空挥、工具与完成的录屏片段；完整时间顺序保留在 MP4 中。
 - `bigfish-demo.mp4`：完整工作流程录屏，H.264、无声、真实时间播放。
 - `playful-motions.gif`：`0.6.0-next.1` 趣味版的六段动作：翻牌、分饼干、折纸鱼、放大镜搜索、调色画画、纸花庆祝。实际 Canvas 预览按各段六个关键姿态采样，使用虚拟播放时钟；没有调用模型。采样记录见 `playful-capture.json`。
-- `playful-sign.png` / `playful-preview-dark.png`：趣味版角色局部图和深色模式的逐动作预览界面。
+- `playful-sign.png` / `playful-preview-dark.png`：内置大肥鱼的新增动作局部图和 0.6.0 深色模式 101 类动作预览界面。
 - `daily-motions.gif`：喝茶、擦汗、伸懒腰，使用动作预览逐个播放。
 - PNG：宠物区域截图；深色图通过插件支持的宿主主题标志切换。
 - `capture.json`：录制版本、日期、章节时间与数据来源。

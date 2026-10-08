@@ -1,4 +1,3 @@
-import playfulBytes from "../../packs/playful/bundle.dshpet";
 import { PetPreview } from "./preview.js";
 import React, {
   useEffect,
@@ -75,7 +74,7 @@ export function RoleSettings() {
       />
       <div className="bf-role-card">
         <strong>大肥鱼 · 内置</strong>
-        <span>29 类动作 · 5 种举牌 · 支持空挥反应</span>
+        <span>101 类动作 · 原有 29 类 + 新增 72 段 · 18 种举牌</span>
         <div className="bf-button-row">
           <button
             disabled={busy}
@@ -100,22 +99,6 @@ export function RoleSettings() {
           </button>
         </div>
       </div>
-      {!petLibrary.catalog.entries.some(e => e.key === "bigfish-playful@1.0.0") && <div className="bf-role-card" data-testid="playful-role-card">
-        <strong>大肥鱼 · 趣味版</strong>
-        <span>72 段六姿态演出 · 13 种举牌小剧场 · 动作专属台词</span>
-        <div className="bf-button-row">
-          <button disabled={busy} onClick={() => void run(async () => {
-            const loaded = await loadImages("bundled-playful", await decodePet(playfulBytes));
-            if (!mounted.current) { loaded.release(); return; }
-            setBuiltinPreview(false); setPreview(loaded); setPending(playfulBytes);
-          })}>预览趣味版</button>
-          <button disabled={busy || petLibrary.catalog.selected === "bigfish-playful@1.0.0"} onClick={() => void run(async () => {
-            const key = await petLibrary.import(playfulBytes);
-            await petLibrary.select(key);
-            setMessage("已使用趣味版，原有行为设置和自定义台词保留");
-          })}>{petLibrary.catalog.selected === "bigfish-playful@1.0.0" ? "使用中" : "使用趣味版"}</button>
-        </div>
-      </div>}
       {builtinPreview && (
         <div className="bf-pet-import">
           <strong>大肥鱼 · 内置</strong>

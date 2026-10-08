@@ -1,3 +1,4 @@
+import {builtinExtensionData} from './builtin-extension.js';
 import { actionIdle } from "../pet/action-dialogue.js";
 import { isBuiltinAsset } from "../contract/builtin-assets.js";
 import { petLibrary } from "../pet/library.js";
@@ -94,14 +95,15 @@ export function Widget({ controller, t }: UIProps) {
     p,
     petLibrary.active?.pet.dialogue.idle,
   );
-  const currentAnimation = animation.key === petLibrary.active?.key
-    ? petLibrary.active?.pet.animations.find(a => a.id === animation.id)
+  const roleData=petLibrary.active?.pet??builtinExtensionData();
+  const currentAnimation = animation.key === (petLibrary.active?.key??"")
+    ? roleData?.animations.find(a => a.id === animation.id)
     : undefined;
   const category = dialogueCategory(shown, view.activity);
   const semantic = shown.state === 'retrying' ? 'retry' : ({ complete: 'success', waiting: 'attention', start: 'start' } as Record<string, string>)[category] ?? view.activity?.semantic ?? category;
   const matchingAnimation = currentAnimation?.tags.includes(semantic) ? currentAnimation.id : undefined;
-  const idle = petLibrary.active && matchingAnimation
-    ? actionIdle(scheduledIdle, petLibrary.active.pet.dialogue, matchingAnimation, p.dialogueJson)
+  const idle = roleData && matchingAnimation
+    ? actionIdle(scheduledIdle, roleData.dialogue, matchingAnimation, p.dialogueJson)
     : scheduledIdle;
   if (!p.enabled) return null;
   if (collapsed)
@@ -141,7 +143,7 @@ export function Widget({ controller, t }: UIProps) {
     >
       <DialogueBubble
         key={petLibrary.active?.key ?? "bigfish"}
-        roleLines={petLibrary.active?.pet.dialogue}
+        roleLines={roleData?.dialogue}
         animation={matchingAnimation}
         snapshot={s}
         prefs={p}

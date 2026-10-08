@@ -16,7 +16,7 @@ export class PetDirector {
  private completedAt:number|undefined; private pending=''; private pendingAt=0; private recent:string[]=[]; private played=new Map<string,number>();
  private lastFamily='';
  private nextEasterAt:number|undefined;
- constructor(readonly pet:PetBundle,private random=()=>Math.random()){}
+ constructor(readonly pet:PetBundle,private random=()=>Math.random(),private eligible:(animation:PetAnimation,input:PetInput)=>boolean=()=>true){}
  resume(){this.last=undefined;}
  choose(input:PetInput,now:number):{animation:PetAnimation;time:number;still:boolean}{
   const current=this.current, previousTime=this.playhead;
@@ -30,8 +30,8 @@ export class PetDirector {
   const fallback=normal.find(a=>a.id===declared.id)??normal.find(a=>a.tags.includes(role))??normal.find(a=>a.id===this.pet.manifest.fallbacks.idle)??normal[0]??declared;
   const idleBurst=input.state==='idle'&&input.idle?.active;
   const tag=role==='working'?(input.tag??(input.state==='reasoning'?'thinking':input.state==='awaiting-output'?'start':role)):input.state==='retrying'?'retry':role, quiet=role==='idle'&&!idleBurst, still=input.reduced||normal.length===0;
-  let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag));
-  if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role));
+  let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag)&&this.eligible(a,input));
+  if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role)&&this.eligible(a,input));
   if(!pool.length||quiet||still)pool=[fallback];
   if(idleBurst && !still){
    const ordinary=pool.filter(a=>a.family!=='easter'||now>=this.nextEasterAt!);

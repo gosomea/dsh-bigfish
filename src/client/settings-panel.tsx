@@ -1,3 +1,4 @@
+import {newBuiltinMotions} from './builtin-extension.js';
 import type {IdlePresentation} from '../domain/idle.js';
 import { petLibrary } from "../pet/library.js";
 import { RoleSettings } from "../pet/settings.js";
@@ -119,7 +120,7 @@ export function SettingsPanel({
               (p.whipEnabled || !["flinch", "dodge"].includes(a.motion)),
           )
           .map((a) => a.motion),
-      ).size;
+      ).size + newBuiltinMotions.filter(a=>a.intensity<=p.richness&&(p.whipEnabled||!a.tags.includes("near-miss"))).length;
   const swingAvailable =
     !role ||
     (role.manifest.capabilities.includes("air-swing") &&

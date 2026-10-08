@@ -5,7 +5,7 @@
 **让等待 Agent 工作的时间，多一只陪着你的大肥鱼。**
 
 她会敲键盘、翻书、修工具、举牌等你，也会在任务结束时开心收工。<br>
-**新增 72 段趣味动画 · 432 个新绘制姿态 · 13 种举牌小剧场**（`next` 体验版）<br>
+**新增 72 段趣味动画 · 432 个新绘制姿态 · 13 种举牌小剧场**，直接加入内置大肥鱼<br>
 一个装在 **DeepSeek Harness Web** 里的可拖动宠物，支持替换角色、制作动作和自定义台词。
 
 [npm 安装](#快速安装) · [看新动画](#72-段新动画从等你到收工) · [观看录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4) · [制作自己的角色](#做一只属于你的宠物)
@@ -16,19 +16,12 @@
 
 ## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。2026-10-08 查验时，DSH 的 npm `latest` 为 `0.2.0-rc.2`；Bigfish 稳定版为 **`0.5.3`**，新增 72 段动作的体验版为 **`0.6.0-next.1`**（`next`）。插件按宿主能力选择设置与会话桥接，不把 DSH 核心包带入插件。Node 要求 `^22.19.0 || >=24.0.0`。精确实测范围见[兼容性记录](docs/compatibility.md)。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。2026-10-08 查验时，DSH 的 npm `latest` 为 `0.2.0-rc.2`；Bigfish 稳定版为 **`0.6.0`**，内置 **101 类动作**（原有 29 类 + 新增 72 段）。插件按宿主能力选择设置与会话桥接，不把 DSH 核心包带入插件。Node 要求 `^22.19.0 || >=24.0.0`。精确实测范围见[兼容性记录](docs/compatibility.md)。
 
 直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
 ```sh
 dsh plugin --profile web add dsh-bigfish
-dsh --profile web
-```
-
-使用当前 DSH 或想体验 72 段新动作时，安装 npm `next`：
-
-```sh
-dsh plugin --profile web add dsh-bigfish@next
 dsh --profile web
 ```
 
@@ -39,7 +32,7 @@ dsh --profile web
 **插件里还附带 `dsh-bigfish-pet-maker` Skill，可用来制作、替换和扩展角色包。** 想启用它，再执行一次：
 
 ```sh
-npx --yes dsh-bigfish@next install-skill
+npx --yes dsh-bigfish install-skill
 ```
 
 安装后新建 DSH 会话，即可让 Agent 使用 `$dsh-bigfish-pet-maker` 制作新角色或扩展动作，再从「完整设置 → 角色库」导入生成的 `.dshpet`。详见[角色制作示例](#做一只属于你的宠物)。
@@ -48,7 +41,7 @@ npx --yes dsh-bigfish@next install-skill
 
 ## 72 段新动画，从等你到收工
 
-**大肥鱼 · 趣味版** 沿用蓝发、鲸鱼尾巴和围裙标志，把两批各 36 个设计做成 **72 段新动画**。每段包含六个不同关键姿态，共 **432 个新绘制姿态**；另有五个基础回退动作，角色包合计 **77 个可预览动作**。
+新增动作直接加入 **大肥鱼 · 内置**，保留蓝发、鲸鱼尾巴与围裙标志，也保留原有 29 类动作。两批各 36 个设计共 **72 段新动画、432 个新绘制姿态**；升级后共 **101 类动作、18 种举牌演出**，无需另选角色。
 
 ![大肥鱼新增动画实拍：牌子拿反了、分饼干、折纸鱼、放大镜搜索、调色画画和纸花庆祝](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-motions.gif)
 
@@ -66,20 +59,20 @@ npx --yes dsh-bigfish@next install-skill
 
 ### 安装之后，怎样看到新动作？
 
-1. 使用上面的 `dsh-bigfish@next` 安装命令；已有用户在任务空闲时重启 Host，再刷新网页。
-2. 打开宠物齿轮 → **完整设置 → 角色库 → 大肥鱼 · 趣味版 → 使用趣味版**。升级保留原角色，不会自动替你切换。
-3. 在角色库的动作预览中逐个挑选 **77 个动作**；日常使用时按当前会话状态、动作档位和互动频率选择演出。
+1. 使用上面的普通 npm 安装命令；已有用户在任务空闲时重启 Host，再刷新网页。
+2. 正在使用内置大肥鱼时，新动作自动参加轮转；已经选择的自定义角色与行为偏好继续保留。
+3. 在「完整设置 → 角色库 → 大肥鱼 · 内置 → 预览」逐个查看 **101 类动作**。日常按任务状态、动作档位和互动频率选择演出。
 
 举牌会拿出、举稳停留、再收好，适配 5–30 秒展示时长；气泡可以使用当前动作的专属台词。彩蛋至少间隔十分钟。想安静时仍可选择「安静陪着」或减弱动态；关闭鞭策后，五种空挥反应一并停用。
 
 <table>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-sign.png" width="285" alt="趣味版大肥鱼：牌子拿反了，保留蓝发、鲸鱼尾巴和围裙标志"><br><b>13 种举牌小剧场</b><br>不只站着等你</td>
-<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-preview-dark.png" width="390" alt="深色模式角色库：逐个预览全部 77 个趣味版动作"><br><b>每个动作都能预览</b><br>挑喜欢的，再切换角色</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-sign.png" width="285" alt="内置大肥鱼：牌子拿反了，保留蓝发、鲸鱼尾巴和围裙标志"><br><b>13 种举牌小剧场</b><br>不只站着等你</td>
+<td align="center"><img src="https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/playful-preview-dark.png" width="390" alt="深色模式角色库：逐个预览全部 101 类内置动作"><br><b>每个动作都能预览</b><br>原有与新增动作一起预览</td>
 </tr>
 </table>
 
-[查看全部 72 个新动画](https://github.com/gosomea/dsh-bigfish/blob/main/docs/animation-gallery.md) · [趣味版安装与版本说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/release-notes-0.6.0-next.1.md) · [下载独立角色包](https://github.com/gosomea/dsh-bigfish/releases/download/v0.6.0-next.1/bigfish-playful-1.0.0.dshpet)
+[查看全部 72 个新动画](https://github.com/gosomea/dsh-bigfish/blob/main/docs/animation-gallery.md) · [0.6.0 稳定版说明](https://github.com/gosomea/dsh-bigfish/blob/main/docs/release-notes-0.6.0.md)
 
 ## 动画展示
 
@@ -117,9 +110,9 @@ npx --yes dsh-bigfish@next install-skill
 
 **[▶ 观看 / 下载完整 MP4 录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4)**：举牌 → 工作 → 速度变化 → 调用工具 → 等待确认 → 完成 → 关闭鞭策 → 深色模式。无需声音也能看懂。
 
-### 原版大肥鱼也保留
+### 原有动作继续保留
 
-原版内置大肥鱼有 **29 类动作、72 个绘制姿态、6 个场景、5 种举牌演出**。阅读、工具操作、打字、等待确认等使用连续图像帧；部分动作结合程序位移与场景道具。这里的 72 个原版姿态，与上面的 72 段新增趣味动画是两套不同素材。
+原有 **29 类动作、72 个绘制姿态、6 个场景、5 种举牌演出**继续保留，与新动作一起轮转。阅读、工具操作、打字、等待确认等使用连续图像帧；部分动作结合程序位移与场景道具。这里的 72 个原版姿态，与上面的 72 段新增趣味动画是两套不同素材。
 
 最近精修了喝茶、擦汗和伸懒腰，让动作有准备、过程和收尾：
 
@@ -159,12 +152,12 @@ Release 另附 **大肥鱼 · 成年版**：沿用原始鲸鱼女仆形象，保
 npm 包已经包含完整 Skill，不必另下 ZIP：
 
 ```sh
-npx --yes dsh-bigfish@next install-skill
+npx --yes dsh-bigfish install-skill
 ```
 
 默认安装到 `$DSH_HOME/skills/dsh-bigfish-pet-maker`；未设置 `DSH_HOME` 时使用 `~/.dsh/skills/dsh-bigfish-pet-maker`。已有相同内容会跳过，不同内容会保留并提示，不会覆盖你的修改。安装 Skill 后请新建 DSH 会话；宠物插件本身的安装不会自动修改技能目录。
 
-其他 Agent 可使用 `npx --yes dsh-bigfish@next install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.6.0-next.1/dsh-bigfish-pet-maker-0.6.0-next.1.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
+其他 Agent 可使用 `npx --yes dsh-bigfish install-skill --skills-dir /absolute/path/to/agent/skills` 指定技能目录。也保留 [独立 Skill ZIP](https://github.com/gosomea/dsh-bigfish/releases/download/v0.6.0/dsh-bigfish-pet-maker-0.6.0.zip) 供手工安装。具体宿主的技能目录和发现方式请以其配置为准。
 
 然后直接和 Agent 说：
 
@@ -188,7 +181,7 @@ pnpm build
 pnpm preview
 ```
 
-打开 `http://127.0.0.1:4178`。构建也会生成 `dist/preview.html`、趣味版和成年版角色包。
+打开 `http://127.0.0.1:4178`。构建也会生成 `dist/preview.html`以及成年版等角色包。
 
 检查与打包：
 
@@ -205,7 +198,7 @@ Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准�
 
 ## 验证与边界
 
-`0.6.0-next.1` 在 macOS Apple Silicon / Node 24.19.0 完成 **147 项单元测试、34 项 Chromium 浏览器回归、DSH `0.2.0-rc.2` 的 15 组隔离原生流程**；覆盖趣味版预览、角色切换、设置持久化、实时任务、并发会话、备份与卸载。原生任务使用本地无密钥流式提供器，没有付费模型调用。旧版 DSH、Linux arm64 和约 30 分钟渲染检查属于此前版本的历史验证，详见兼容性记录。
+`0.6.0` 在 macOS Apple Silicon / Node 24.19.0 完成 **151 项单元测试、34 项 Chromium 浏览器回归、DSH `0.2.0-rc.2` 的 15 组隔离原生流程**；覆盖内置 101 类动作预览、角色切换、设置持久化、实时任务、并发会话、备份与卸载。原生任务使用本地无密钥流式提供器，没有付费模型调用。旧版 DSH、Linux arm64 和约 30 分钟渲染检查属于此前版本的历史验证，详见兼容性记录。
 
 这不代表所有平台都已支持：Windows、x86、Safari / Firefox、网络共享文件系统及跨天运行尚未完成验证。共享同一 `DSH_HOME` 的多个实例需要全部升级到支持跨进程锁的版本。备份恢复包含冲突保护与回滚，但跨 Host 和浏览器存储不构成一个整体原子事务。
 

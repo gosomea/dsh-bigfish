@@ -1,3 +1,4 @@
+import {newBuiltinMotions} from './builtin-extension.js';
 import {petLibrary} from '../pet/library.js';
 import React, { useEffect, useState, useSyncExternalStore } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -34,7 +35,7 @@ function App() {
       <div className="bf-segments">{[.5, 1, 1.25].map(ratio => <button key={ratio} onClick={() => controller.setRatio(ratio)}>{ratio}×</button>)}</div>
       <label htmlFor="demo-state">{t('state')}</label><select id="demo-state" value={controller.state} onChange={e => controller.setState(e.target.value as WorkState)}>{(['idle', 'awaiting-output', 'reasoning', 'generating', 'tool-running', 'waiting-user', 'retrying', 'disconnected', 'completed', 'cancelled', 'failed'] as const).map(state => <option key={state} value={state}>{t(state)}</option>)}</select>
       <label htmlFor="demo-scene">{t('scene')}</label><select id="demo-scene" value={p.scene} onChange={e => { void controller.preferences.update({ scene: e.target.value }); }}>{['auto', 'desk', 'library', 'workshop', 'treadmill', 'rest', 'delivery'].map(scene => <option key={scene} value={scene}>{t(scene as Key)}</option>)}</select>
-      <label htmlFor="demo-motion">{t('motionCatalog')}</label><select id="demo-motion" value={motion} onChange={e => setMotion(e.target.value)}><option value="">{t('follow')}</option>{petLibrary.active?petLibrary.active.pet.animations.map(a=><option key={a.id} value={a.id}>{a.label}</option>):Object.entries(motionLabels).map(([id, labels]) => <option key={id} value={id}>{labels[english ? 1 : 0]}</option>)}</select>
+      <label htmlFor="demo-motion">{t('motionCatalog')}</label><select id="demo-motion" value={motion} onChange={e => setMotion(e.target.value)}><option value="">{t('follow')}</option>{petLibrary.active?petLibrary.active.pet.animations.map(a=><option key={a.id} value={a.id}>{a.label}</option>):[...Object.entries(motionLabels).map(([id, labels]) => <option key={id} value={id}>{labels[english ? 1 : 0]}</option>),...newBuiltinMotions.map(a=><option key={a.id} value={a.id}>{a.label}</option>)]}</select>
       <div className="bf-button-row"><button onClick={() => controller.restart()}>{t('restart')}</button><button onClick={() => setSettings(true)}>{t('openSettings')}</button></div>
       <button className="bf-text-button" onClick={() => setWidget(!widget)}>{t(widget ? 'collapse' : 'expand')}</button>
     </aside></div>

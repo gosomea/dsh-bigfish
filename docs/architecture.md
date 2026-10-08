@@ -20,6 +20,8 @@ shell.overlay / settings.section ← 同一个 controller/preferences
 - `src/host/adapter.ts`：公开帧的结构适配，可单独复用于 Host 观察；生产 UI 在浏览器复用该纯适配器。
 - `src/client/controller.ts`：当前会话绑定、原生流、用户等待、连接状态、设备速度历史。
 - `src/client/ui.tsx`：浮动宠物与交互；`settings-panel.tsx`、`backup-settings.tsx`、`behavior-preview.tsx` 分别负责设置、备份和行为预览；`restore-backup.ts` 独立处理恢复顺序与并发安全的回滚；`fish-canvas.tsx` 选择渲染器。
+- `src/domain/builtin-animations.ts`：将原有 29 类与新增 72 段动作接入共同调度，保留旧动作约束。
+- `src/client/builtin-extension.ts`：验证后的新增素材与图集共享加载，按画布持有数量释放。
 - `src/client/renderer.ts`：连续帧、独立裁剪、声音、30 FPS/后台停绘；`sprite-assets.ts` 集中资源，`motion-transform.ts` 管理次级位移，`draw-scene.ts` 绘制布景。
 - `src/pet/host-store.ts`：带目录 revision 的整批角色写入；`store-lock.ts` 提供跨进程心跳锁；`backup.ts` 是两端共用的有界备份解析；`preview.tsx` 与角色管理界面分离。
 - `src/pet/`：角色包解析、归档限制、Host 存储、浏览器加载、通用动作调度及角色库界面。

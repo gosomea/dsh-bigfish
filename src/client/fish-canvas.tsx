@@ -23,6 +23,8 @@ function LegacyFishCanvas({
   previewMotion = "",
   activityMotion = "",
   idle,
+  activityTag = "",
+  onAnimation,
 }: {
   snapshot: Snapshot;
   prefs: Preferences;
@@ -32,6 +34,8 @@ function LegacyFishCanvas({
   previewMotion?: string;
   activityMotion?: string;
   idle?: IdlePresentation;
+  activityTag?: string | undefined;
+  onAnimation?: ((id: string) => void) | undefined;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const renderer = useRef<FishRenderer>();
@@ -53,6 +57,8 @@ function LegacyFishCanvas({
       renderer.current.idlePresentation = idle;
       renderer.current.previewMotion = previewMotion;
       renderer.current.activityMotion = activityMotion;
+      renderer.current.activityTag = activityTag;
+      renderer.current.onAnimation = onAnimation;
       renderer.current.signText = t("waitSign");
       renderer.current.signAlternatives = [
         t("waitSign"),

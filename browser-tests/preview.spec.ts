@@ -45,6 +45,7 @@ test('narrow screen keeps preview controls in the viewport', async ({ page }) =>
 });
 
 test('five sign routines play actual image frames and remain non-contact', async ({ page }) => {
+ await page.addInitScript(()=>{Math.random=()=>0;});
   await page.goto('/');
   await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('动作表现').selectOption('2');await page.getByRole('button',{name:'关闭',exact:true}).click();
   await page.locator('#demo-state').selectOption('idle');
@@ -152,6 +153,7 @@ test('quiet companion does not rotate signs or messages over ten minutes and rel
 });
 
 test('settings preview shares idle budget and display-only-buttons has no status leakage',async({page})=>{
+ await page.addInitScript(()=>{Math.random=()=>0;});
  await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByText('预览当前效果',{exact:true}).click();const preview=page.getByLabel('行为预览');
  await expect(preview.locator('canvas')).toHaveAttribute('data-motion','wait-sign');await preview.getByRole('button',{name:'快进 30 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
  await page.getByLabel('空闲互动',{exact:true}).selectOption('frequent');await preview.getByRole('button',{name:'重新预览',exact:true}).click();await preview.getByRole('button',{name:'快进 120 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-idle-active','true');
@@ -169,6 +171,7 @@ test('animation tiers, reduced motion, explicit whip off and saved preferences c
 
 
 test('lively defaults keep the sign after speech hides and schedule another complete idle gesture',async({page})=>{
+ await page.addInitScript(()=>{Math.random=()=>0;});
  await page.clock.install();await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget'),canvas=widget.locator('canvas');
  await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(1);
  await page.clock.fastForward(7000);await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(canvas).toHaveAttribute('data-idle-active','true');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);

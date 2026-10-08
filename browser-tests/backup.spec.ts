@@ -9,9 +9,9 @@ test('backup exports, previews without mutation and restores roles, settings and
  const download=page.waitForEvent('download');await page.getByRole('button',{name:'导出完整备份'}).click();const file=await download,path=await file.path();expect(path).toBeTruthy();
  await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();await page.getByRole('button',{name:'移除',exact:true}).click();await page.getByLabel('启用鞭策动作').check();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');
  await page.getByLabel('备份文件').setInputFiles({name:'backup.zip',mimeType:'application/zip',buffer:await readFile(path!)});
- await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.getByLabel('启用鞭策动作')).toBeChecked();await expect(page.locator('.bf-role-card')).toHaveCount(2);
+ await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.getByLabel('启用鞭策动作')).toBeChecked();await expect(page.locator('.bf-role-card')).toHaveCount(1);
  await page.getByRole('button',{name:'确认恢复备份'}).click();await expect(page.getByText('恢复完成。已有角色已保留，角色选择、偏好、台词和动作编排已恢复。',{exact:true})).toBeVisible();
- await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByLabel('空闲互动',{exact:true})).toHaveValue('frequent');await expect(page.locator('.bf-role-card')).toHaveCount(3);
+ await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByLabel('空闲互动',{exact:true})).toHaveValue('frequent');await expect(page.locator('.bf-role-card')).toHaveCount(2);
  await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-pet','bigfish-adult');await page.locator('.bf-modal').screenshot({path:'artifacts/backup-restored-050.png'});
  await page.getByRole('button',{name:'关闭',exact:true}).click();await page.reload();await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-pet','bigfish-adult');
  await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByText('备份与恢复',{exact:true}).click();await page.getByLabel('备份文件').setInputFiles({name:'broken.zip',mimeType:'application/zip',buffer:Buffer.from('bad')});await expect(page.getByText(/无法恢复：/)).toBeVisible();await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByRole('button',{name:'确认恢复备份'})).toHaveCount(0);

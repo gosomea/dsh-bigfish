@@ -1,0 +1,41 @@
+{
+  "version": "0.6.0",
+  "date": "2026-10-08",
+  "node": "v24.19.0",
+  "harness": "0.2.0-rc.2",
+  "platform": "macOS Apple Silicon",
+  "unitTests": 151,
+  "browserTests": 34,
+  "nativeChecks": [
+    "tarball install, native module, idle waiting sign",
+    "Host settings write and refresh persistence",
+    "new idle frequency, coupled bounds, sign preference and hold duration persist through native Host schema",
+    "local submit responds before the prompt request reaches Host",
+    "native user-message task cue rendered with actual current turn",
+    "custom dialogue Host persistence and extension start/progress/end UI",
+    "real dsh session → live chunks → rate → completion → idle",
+    "refresh does not replay historical completion",
+    "two concurrent background Host sessions remain isolated from the selected completed session",
+    "disable/re-enable releases and remounts overlay",
+    "101 built-in actions available after installation and reload without installing or selecting a separate role",
+    "8-action external role uploads to Host, survives reload, loads in separate browser storage, and switches back",
+    "complete backup exported from Host, validated before mutation, restores removed role and Host preferences",
+    "no browser runtime errors",
+    "package removal and clean profile restart"
+  ],
+  "realPaidApiCalled": false,
+  "builtInActions": 101,
+  "originalActions": 29,
+  "newAnimations": 72,
+  "newAuthoredPoses": 432,
+  "signRoutines": 18,
+  "nativeRuntimeDigest": "7db597bded934788cb33b6745689740ca74320b14447cf22ef9b962244eb62cd",
+  "notRetested": [
+    "older DSH versions",
+    "Linux",
+    "Windows",
+    "Safari",
+    "Firefox",
+    "cross-day usage"
+  ]
+}

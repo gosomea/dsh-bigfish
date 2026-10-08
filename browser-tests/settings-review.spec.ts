@@ -33,6 +33,7 @@ test('cancelled task returns to idle interaction and reduced motion clearly expl
 });
 
 test('text-only display accurately round-trips and sign finishes rather than repeatedly lifting',async({page})=>{
+ await page.addInitScript(()=>{Math.random=()=>0;});
  await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();
  const widget=page.getByTestId('bigfish-widget'),canvas=widget.locator('canvas');
  await expect(canvas).toHaveAttribute('data-motion','wait-sign');

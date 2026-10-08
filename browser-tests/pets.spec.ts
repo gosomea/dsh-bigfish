@@ -6,7 +6,7 @@ test('import custom role, preview custom actions, persist, switch back and keep 
  await expect(page.getByLabel('角色动作预览').locator('option')).toHaveCount(9);await page.getByLabel('角色动作预览').selectOption('adult:read');await expect(page.locator('.bf-pet-preview canvas')).toHaveAttribute('data-motion','adult:read');
  const f=await page.locator('.bf-pet-preview canvas').getAttribute('data-frame');await expect.poll(()=>page.locator('.bf-pet-preview canvas').getAttribute('data-frame')).not.toBe(f);
  await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByLabel('启用鞭策动作',{exact:true}).check();await page.getByLabel('动作表现',{exact:true}).selectOption('0');await page.getByRole('button',{name:'关闭',exact:true}).click();await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-pet','bigfish-adult');
- await page.reload();await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-pet','bigfish-adult');await library(page);await expect(page.getByLabel('动作表现',{exact:true})).toHaveValue('0');await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();await expect(page.locator('.bf-demo-stage canvas')).not.toHaveAttribute('data-pet');await expect(page.getByLabel('空闲互动',{exact:true})).toHaveValue('quiet');await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(2);expect(errors).toEqual([]);
+ await page.reload();await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-pet','bigfish-adult');await library(page);await expect(page.getByLabel('动作表现',{exact:true})).toHaveValue('0');await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();await expect(page.locator('.bf-demo-stage canvas')).not.toHaveAttribute('data-pet');await expect(page.getByLabel('空闲互动',{exact:true})).toHaveValue('quiet');await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(1);expect(errors).toEqual([]);
 });
 test('new role honors quiet idle, real frame changes, reduced mode, drag and icon',async({page})=>{
  await page.goto('/');await install(page);await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByLabel('动作表现',{exact:true}).selectOption('2');await page.getByRole('button',{name:'关闭',exact:true}).click();await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget'),canvas=widget.locator('canvas');await expect(canvas).toHaveAttribute('data-pet','bigfish-adult');
@@ -18,14 +18,14 @@ test('new role honors quiet idle, real frame changes, reduced mode, drag and ico
 });
 test('invalid role archive keeps current pet and shows a useful error',async({page})=>{await page.goto('/');await library(page);await page.getByLabel('角色包文件').setInputFiles({name:'bad.dshpet',mimeType:'application/zip',buffer:Buffer.from('invalid')});await expect(page.getByText('角色包大小无效（最大 32 MB）')).toBeVisible();await expect(page.locator('.bf-demo-stage canvas')).not.toHaveAttribute('data-pet');});
 
-test('built-in role previews all 29 motions without changing the selected role or preferences', async ({page}) => {
+test('built-in role previews all 101 motions without changing the selected role or preferences', async ({page}) => {
  await page.goto('/');await install(page);
  await page.getByLabel('启用鞭策动作',{exact:true}).check();await page.getByLabel('动作表现',{exact:true}).selectOption('0');
  const card=page.locator('.bf-role-card').filter({hasText:'大肥鱼 · 内置'});
  await expect(card).not.toContainText('保留旧动作包');await card.getByRole('button',{name:'预览',exact:true}).click();
  await expect(page.getByLabel('角色动作预览',{exact:true})).toHaveCount(0);
  const select=page.getByLabel('内置角色动作预览'),preview=page.getByTestId('builtin-pet-preview'),canvas=preview.locator('canvas');
- await expect(select.locator('option')).toHaveCount(29);
+ await expect(select.locator('option')).toHaveCount(101);
  const values=await select.locator('option').evaluateAll(options=>options.map(option=>(option as HTMLOptionElement).value));
  for(const value of values){await select.selectOption(value);await expect(canvas).toHaveAttribute('data-motion',value);}
  await select.selectOption('sign-overhead');const frame=await canvas.getAttribute('data-frame');await expect.poll(()=>canvas.getAttribute('data-frame')).not.toBe(frame);
@@ -67,9 +67,9 @@ test('refined reading, repair and quiet frames animate; confirmation finishes an
  await page.addInitScript(()=>localStorage.setItem('bigfish.demo.preferences.v1',JSON.stringify({idleMode:'quiet',greetOnOpen:false})));
  await page.goto('/');const canvas=page.locator('.bf-demo-stage canvas');
  for(const motion of ['read','repair']){await page.locator('#demo-motion').selectOption(motion);await expect(canvas).toHaveAttribute('data-atlas','work');const f=await canvas.getAttribute('data-frame');await expect.poll(()=>canvas.getAttribute('data-frame')).not.toBe(f);}
- await page.locator('#demo-motion').selectOption('');await page.locator('#demo-state').selectOption('waiting-user');await expect(canvas).toHaveAttribute('data-motion','confirm');await expect(canvas).toHaveAttribute('data-atlas','quiet');await expect(canvas).toHaveAttribute('data-whip','false');
+ await page.locator('#demo-motion').selectOption('confirm');await page.locator('#demo-state').selectOption('waiting-user');await expect(canvas).toHaveAttribute('data-motion','confirm');await expect(canvas).toHaveAttribute('data-atlas','quiet');await expect(canvas).toHaveAttribute('data-whip','false');
  await page.clock.install();await page.clock.runFor(4000);await expect(canvas).toHaveAttribute('data-frame','7');await page.clock.runFor(15000);await expect(canvas).toHaveAttribute('data-frame','7');
- await page.locator('#demo-state').selectOption('idle');await page.clock.runFor(9000);await expect(canvas).toHaveAttribute('data-motion','breathe');await expect(canvas).toHaveAttribute('data-atlas','quiet');
+ await page.locator('#demo-motion').selectOption('');await page.locator('#demo-state').selectOption('idle');await page.clock.runFor(9000);await expect(canvas).toHaveAttribute('data-motion','breathe');await expect(canvas).toHaveAttribute('data-atlas','quiet');
  const frames=new Set<string|null>();for(let i=0;i<20;i++){await page.clock.runFor(300);frames.add(await canvas.getAttribute('data-frame'));}expect(frames.size).toBeGreaterThan(1);
 });
 
@@ -80,8 +80,10 @@ test('closing settings during image decode releases the pending preview object U
   URL.createObjectURL=value=>{const url=created(value);live.add(url);return url;};URL.revokeObjectURL=url=>{live.delete(url);revoke(url);};
   const decode=HTMLImageElement.prototype.decode;HTMLImageElement.prototype.decode=async function(){await decode.call(this);await new Promise(r=>setTimeout(r,1500));};
  });
- await page.goto('/');await library(page);await page.getByLabel('角色包文件').setInputFiles('dist/bigfish-adult-1.0.0.dshpet');
- await expect.poll(()=>page.evaluate(()=>(window as any).__livePetUrls.size)).toBeGreaterThan(0);
+ await page.goto('/');await expect(page.locator('.bf-demo-stage canvas')).toHaveAttribute('data-action-count','101');
+ const baseline=await page.evaluate(()=>(window as any).__livePetUrls.size);
+ await library(page);await page.getByLabel('角色包文件').setInputFiles('dist/bigfish-adult-1.0.0.dshpet');
+ await expect.poll(()=>page.evaluate(()=>(window as any).__livePetUrls.size)).toBeGreaterThan(baseline);
  await page.getByRole('button',{name:'关闭',exact:true}).click();
- await expect.poll(()=>page.evaluate(()=>(window as any).__livePetUrls.size),{timeout:7000}).toBe(0);
+ await expect.poll(()=>page.evaluate(()=>(window as any).__livePetUrls.size),{timeout:7000}).toBe(baseline);
 });

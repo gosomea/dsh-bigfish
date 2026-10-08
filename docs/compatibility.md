@@ -1,8 +1,8 @@
-# 兼容性与验证范围 · 0.6.0-next.1
+# 兼容性与验证范围 · 0.6.0
 
-本轮在 macOS Apple Silicon / Node 24.19.0 验证新的趣味角色包：147 项单元测试、34 项 Chromium 浏览器测试，以及 npm DSH `0.2.0-rc.2` 的 15 组隔离原生流程。原生测试使用无密钥的本地流式 LlmAdapter，确实经过 DSH Host 会话与 Web 客户端，没有调用付费模型。新增角色的逐动作预览、Host 上传、切换、刷新恢复、关闭鞭策、举牌停留和动作台词均有覆盖。
+本轮在 macOS Apple Silicon / Node 24.19.0 验证内置大肥鱼的 101 类动作：151 项单元测试、34 项 Chromium 浏览器测试，以及 npm DSH `0.2.0-rc.2` 的 15 组隔离原生流程。原生测试使用无密钥的本地流式 LlmAdapter，确实经过 DSH Host 会话与 Web 客户端，没有调用付费模型。内置新旧动作的逐动作预览、外部角色 Host 上传、切换、刷新恢复、关闭鞭策、举牌停留和动作台词均有覆盖。
 
-2026-10-08 查验时，DSH 的 npm `latest` 与 `next` 均为 `0.2.0-rc.2`。Bigfish `latest` 保持 `0.5.3`，本轮新增动作版发布到 `next`。以下旧环境矩阵属于 `0.5.4-next.1` 的历史验收；本轮没有重新跑四个旧 DSH 或 Linux，不能把历史结果当成 0.6 的完整实测。
+2026-10-08 查验时，DSH 的 npm `latest` 与 `next` 均为 `0.2.0-rc.2`。Bigfish 稳定版为 `0.6.0`，普通安装包含全部 101 类内置动作。以下旧环境矩阵属于 `0.5.4-next.1` 的历史验收；本轮没有重新跑四个旧 DSH 或 Linux，不能把历史结果当成 0.6 的完整实测。
 
 ## 历史兼容版验证
 
@@ -69,8 +69,8 @@ Docker Linux 干净检查：`bash scripts/test-linux.sh 22.19.0` 或 `bash scrip
 
 ```sh
 pnpm probe:harness ../../deepseek-harness
-pnpm smoke:native /path/to/npm-dsh-package dist/dsh-bigfish-0.6.0-next.1.tgz
-pnpm smoke:native ../../deepseek-harness dist/dsh-bigfish-0.6.0-next.1.tgz
+pnpm smoke:native /path/to/npm-dsh-package dist/dsh-bigfish-0.6.0.tgz
+pnpm smoke:native ../../deepseek-harness dist/dsh-bigfish-0.6.0.tgz
 ```
 
 smoke 使用隔离 DSH_HOME 和无密钥本地 LlmAdapter，不向日常模型提交任务。测试目录、聊天和日志不会进入交付包。

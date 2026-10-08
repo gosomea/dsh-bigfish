@@ -60,7 +60,7 @@ try {
   page.on('response',async r=>{if(r.url().includes('/api/bigfish-pets')&&!r.ok())console.log('Role API failure',r.status(),await r.text());});
   await page.goto(url); const notice = page.getByRole('button', { name: 'Continue', exact: true });
   await expect(notice).toBeVisible({ timeout: 10000 }); await notice.click(); await expect(notice).toBeHidden();
-  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-motion', 'wait-sign'); checks.push('tarball install, native module, idle waiting sign');
+  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-motion', /^(wait-sign|sign-|bigfish:sign-)/); checks.push('tarball install, native module, idle waiting sign');
   const settings = async () => {
     await page.waitForTimeout(500);
     if (!await page.getByRole('button', { name: 'Close', exact: true }).first().isVisible().catch(() => false)) {
@@ -204,20 +204,15 @@ try {
   await settings(); await page.getByLabel('显示宠物', { exact: true }).click(); await expect(page.locator('.bf-widget')).toHaveCount(0);
   await page.getByLabel('显示宠物', { exact: true }).click(); await expect(page.locator('.bf-widget')).toHaveCount(1); checks.push('disable/re-enable releases and remounts overlay');
   await disclosure('角色库');
-  await page.getByRole('button',{name:'预览趣味版',exact:true}).click();
-  await expect(page.getByLabel('角色动作预览').locator('option')).toHaveCount(78);
-  await expect(page.locator('.bf-widget canvas')).not.toHaveAttribute('data-pet');
+  await page.locator('.bf-role-card').filter({hasText:'大肥鱼 · 内置'}).getByRole('button',{name:'预览',exact:true}).click();
+  await expect(page.getByLabel('内置角色动作预览').locator('option')).toHaveCount(101);
+  await page.getByLabel('内置角色动作预览').selectOption('bigfish:sign-flip');
+  await expect(page.getByTestId('builtin-pet-preview').locator('canvas')).toHaveAttribute('data-motion','bigfish:sign-flip');
   await page.getByRole('button',{name:'关闭预览',exact:true}).click();
-  await page.getByRole('button',{name:'使用趣味版',exact:true}).click();
-  try { await expect(page.getByText('已使用趣味版，原有行为设置和自定义台词保留',{exact:true})).toBeVisible({timeout:30000}); }
-  catch(e){console.log('Playful role UI:',await page.locator('.bf-role-library').innerText());throw e;}
-  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-playful',{timeout:20000});
-  await page.reload();await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-playful');
-  await settings();await disclosure('角色库');await page.getByRole('button',{name:'使用大肥鱼',exact:true}).click();
-  const playfulCard=page.locator('.bf-role-card').filter({hasText:'大肥鱼 · 趣味版'});
-  await playfulCard.getByRole('button',{name:'移除',exact:true}).click();
-  await expect(page.getByRole('button',{name:'预览趣味版',exact:true})).toBeVisible();
-  checks.push('bundled 77-action playful role preview, Host upload, selection, refresh persistence and switch back');
+  await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-action-count','101');
+  await page.reload();await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-action-count','101');
+  await settings();await disclosure('角色库');
+  checks.push('101 built-in actions available after installation and reload without installing or selecting a separate role');
   await page.getByLabel('角色包文件').setInputFiles('dist/bigfish-adult-1.0.0.dshpet');
   await page.getByRole('button',{name:'安装并使用',exact:true}).click();try{await expect(page.getByText('角色已安装并使用',{exact:true})).toBeVisible();}catch(e){console.log('Role UI:',await page.locator('.bf-role-library').innerText());throw e;}
   await expect(page.locator('.bf-widget canvas')).toHaveAttribute('data-pet','bigfish-adult');
@@ -235,11 +230,11 @@ try {
   const backupPath=await(await downloaded).path();expect(backupPath).toBeTruthy();
   const previousWhip=await page.getByLabel('启用鞭策动作').isChecked();
   await page.getByLabel('启用鞭策动作').click();await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:!previousWhip});
-  await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(2);
+  await page.getByRole('button',{name:'移除',exact:true}).click();await expect(page.locator('.bf-role-card')).toHaveCount(1);
   await page.getByLabel('备份文件').setInputFiles({name:'restore.zip',mimeType:'application/zip',buffer:await readFile(backupPath!)});
-  await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.locator('.bf-role-card')).toHaveCount(2);
+  await expect(page.getByText('校验通过，尚未修改任何设置。',{exact:true})).toBeVisible();await expect(page.locator('.bf-role-card')).toHaveCount(1);
   await page.getByRole('button',{name:'确认恢复备份'}).click();await expect(page.getByText('恢复完成。已有角色已保留，角色选择、偏好、台词和动作编排已恢复。',{exact:true})).toBeVisible();
-  await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:previousWhip});await expect(page.locator('.bf-role-card')).toHaveCount(3);
+  await expect(page.getByLabel('启用鞭策动作')).toBeChecked({checked:previousWhip});await expect(page.locator('.bf-role-card')).toHaveCount(2);
   await page.screenshot({path:'artifacts/native-backup-050.png'});
   checks.push('complete backup exported from Host, validated before mutation, restores removed role and Host preferences');
 

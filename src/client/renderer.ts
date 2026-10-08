@@ -1,3 +1,7 @@
+import {loadBuiltinExtension} from './builtin-extension.js';
+import {extendBuiltinAnimations,builtinAnimationAllowed} from '../domain/builtin-animations.js';
+import {PetDirector,frameAt,idleFrameAt,type PetInput} from '../pet/director.js';
+import type {LoadedPet} from '../pet/library.js';
 import {idleSignFrame} from '../domain/idle-frames.js';
 import {WorkMotion} from '../domain/work-motion.js';
 import {IdleDirector, type IdlePresentation} from '../domain/idle.js';
@@ -26,6 +30,15 @@ export class FishRenderer {
   private actionAt = 0;
   private lastAction = '';
   previewMotion = '';
+  activityTag = '';
+  onAnimation: ((id: string) => void) | undefined;
+  private extension: LoadedPet | undefined;
+  private extensionDirector: PetDirector | undefined;
+  private announced = '';
+  private reactionActive = false;
+  private makeExtensionDirector() {
+    if(this.extension) this.extensionDirector = new PetDirector(extendBuiltinAnimations(this.pack,this.extension.pet),Math.random,(animation,input)=>builtinAnimationAllowed(this.pack,animation,input,this.snapshot.fatigue));
+  }
   activityMotion = '';
   private workMotion = new WorkMotion();
   private finishedAt:number|undefined;
@@ -59,17 +72,21 @@ export class FishRenderer {
       const image=this.images[key];image.onload=()=>{this.onReady?.();this.schedule();};
       image.onerror=()=>{canvas.dataset.error='atlas';this.onReady?.();};image.src=spriteUrls[key];
     }
+    if(pack===classicPack) void loadBuiltinExtension().then(loaded=>{
+      if(this.disposed){loaded.release();return;}
+      this.extension=loaded;this.makeExtensionDirector();this.onReady?.();this.schedule();
+    }).catch(error=>{if(!this.disposed){this.canvas.dataset.extensionError='load';console.warn('Bigfish built-in animation loading failed',error);}});
     document.addEventListener('visibilitychange', this.visibility);
     document.addEventListener('pointerdown', this.audioGesture);
   }
   update(snapshot: Snapshot, prefs: Preferences): void { this.snapshot = snapshot; this.prefs = prefs; this.schedule(); }
-  setPaused(paused: boolean): void { this.paused = paused; if (paused) { cancelAnimationFrame(this.frame); this.frame = 0; } else this.schedule(); }
+  setPaused(paused: boolean): void { if (paused === this.paused) return; this.paused = paused; if (paused) { cancelAnimationFrame(this.frame); this.frame = 0; } else {this.extensionDirector?.resume();this.schedule();} }
   private audioGesture = () => this.unlockSound();
   unlockSound(): void {
     if (!this.prefs.sound) return;
     this.audio ??= new AudioContext(); void this.audio.resume();
   }
-  private visibility = () => { if (document.hidden) { cancelAnimationFrame(this.frame); this.frame = 0; } else { this.previous = 0; this.schedule(); } };
+  private visibility = () => { if (document.hidden) { cancelAnimationFrame(this.frame); this.frame = 0; } else { this.previous = 0; this.extensionDirector?.resume(); this.schedule(); } };
   private schedule() {
     if (!this.disposed && !this.frame && !this.paused && !document.hidden && this.atlas.complete && this.atlas.naturalWidth) this.frame = requestAnimationFrame(this.draw);
   }
@@ -90,15 +107,18 @@ export class FishRenderer {
     const reduced = motionReduced(p,matchMedia('(prefers-reduced-motion: reduce)').matches);
     const input = { ...this.snapshot, pressure: Math.min(1, this.snapshot.pressure * p.intensity) };
     const task = `${input.sessionId}:${input.turn}`;
-    if (task !== this.turn) { this.turn = task; this.phase = 0; this.swing.reset(); this.workMotion=new WorkMotion(); this.transitionStart = now; this.lastScene = ''; }
+    if (task !== this.turn) { this.turn = task; this.phase = 0; this.swing.reset(); this.workMotion=new WorkMotion(); this.transitionStart = now; this.lastScene = ''; this.makeExtensionDirector(); }
     const idle=this.idlePresentation??this.idleDirector.tick(Date.now(),input.state==='idle',!document.hidden,p,reduced);
     const idleMotion=input.state==='idle'?(this.previewMotion&&!reduced&&motionAllowed(this.previewMotion,p.richness,reduced)?this.previewMotion:idle.motion):'';
     const stillCompletion=input.state==='completed'&&p.completionMode!=='celebrate';
     const direction = this.director.tick(input, now, {richness:stillCompletion?0:p.richness,reduced:reduced||stillCompletion,idleMotion,switchReady:this.cycleComplete,whipEnabled:p.whipEnabled});
     const scene = this.pack.scenes.find(s => s.id === direction.sceneId)!;
     const toolMotion=this.workMotion.choose(input.state==='tool-running',this.activityMotion,now,this.cycleComplete);
-    const requestedMotion=this.previewMotion||toolMotion;
-    const action = (requestedMotion && !reduced && motionAllowed(requestedMotion,p.richness,reduced) ? this.pack.scenes.flatMap(s => s.actions).find(a => a.motion === requestedMotion) : undefined) ?? scene.actions.find(a => a.id === direction.actionId)!;
+    const extraInput: PetInput = {state:input.state,richness:p.richness,reduced:reduced||stillCompletion,idle,activity:input.activity,pressure:input.pressure,signPreference:p.idleSignPreference,tag:this.activityTag|| (input.state==='reasoning'?'thinking':input.state==='awaiting-output'?'start':input.state==='tool-running'?'working':'writing'),...(this.previewMotion?{preview:this.previewMotion.startsWith('bigfish:')?this.previewMotion:'classic:'+this.previewMotion}:{})};
+    const extraChoice=this.extensionDirector?.choose({...extraInput,reactionActive:this.reactionActive},now);
+    const originalMotion=extraChoice?.animation.id.startsWith('classic:')?extraChoice.animation.id.slice('classic:'.length):'';
+    const requestedMotion=this.previewMotion.startsWith('bigfish:')?originalMotion:this.previewMotion||originalMotion||toolMotion;
+    const action = (requestedMotion && !reduced && motionAllowed(requestedMotion,p.richness,reduced) ? this.pack.scenes.flatMap(s => s.actions).find(a => a.motion === requestedMotion && a.states.includes(input.state)) ?? this.pack.scenes.flatMap(s => s.actions).find(a => a.motion === requestedMotion) : undefined) ?? scene.actions.find(a => a.id === direction.actionId)!;
     const actionKey = `${task}:${action.id}`;
     if (actionKey !== this.lastAction) { this.lastAction = actionKey; this.actionAt = now; this.finishedAt=undefined; this.animationCursor=0; this.cycleComplete=false; this.transitionStart=now; }
     const actionTime = (now - this.actionAt) / 1000;
@@ -111,6 +131,16 @@ export class FishRenderer {
     const working = active.has(input.state) && safe && !reduced && !this.paused && p.enabled && p.whipEnabled;
     const swing = this.swing.tick(dt, hz, working && direction.whipAllowed, working,
       reduced || this.paused || !p.enabled || !p.whipEnabled || ['waiting-user','cancelled','interrupted','disconnected','failed','blocked','limited'].includes(input.state));
+    this.reactionActive=swing.responding;
+    let extraAnimation=extraChoice?.animation.id.startsWith('bigfish:')?extraChoice.animation:undefined;
+    let extraFrame=extraAnimation&&extraChoice?(input.state==='idle'&&idle.active?idleFrameAt(extraAnimation,extraChoice.time,idle.durationMs??12000,extraChoice.still):frameAt({...extraAnimation,speed:[1,1]},extraChoice.time,0,extraChoice.still)):undefined;
+    if(swing.responding&&this.extension&&!reduced&&p.richness>0){
+      const reactions=this.extension.pet.animations.filter(a=>a.tags.includes('near-miss')&&a.intensity<=p.richness);
+      const reaction=reactions[Math.floor(swing.cycles)%reactions.length];
+      if(reaction){extraAnimation=reaction;extraFrame=frameAt({...reaction,loop:false,speed:[1,1]},(swing.cycles%1)*reaction.frames.reduce((n,f)=>n+f.durationMs,0));}
+    }
+    const animationId=extraChoice?.animation.id??'classic:'+action.motion;
+    if(animationId!==this.announced){this.announced=animationId;this.onAnimation?.(animationId);}
     const previousPhase = this.phase; this.phase = swing.cycles;
     const allowed = swing.responding;
     if (allowed && Math.floor(this.phase + .58) !== Math.floor(previousPhase + .58)) this.swoosh(now);
@@ -149,6 +179,11 @@ export class FishRenderer {
     if(!animated)this.cycleComplete=actionTime*1000>=action.durationMs;
     const source = animated ? sequenceAtlas : this.atlas;
     const layout = layouts[animated ? animation!.atlas : 'classic'].frames[frame]!;
+    if(extraAnimation&&extraFrame&&this.extension){
+      const [sx,sy,sw,sh]=extraFrame.rect;const scale=190/this.extension.pet.manifest.canvas.width;
+      c.drawImage(this.extension.images[extraFrame.asset]!,sx,sy,sw,sh,-95,-190,190,190);
+      if(extraFrame.sign){const sign=extraFrame.sign;c.save();c.translate(-95+sign.x*scale,-190+sign.y*scale);c.rotate(sign.angle*Math.PI/180);c.fillStyle='#263b63';c.font=`${Math.max(8,Math.min(14,sign.height*scale*.65))}px sans-serif`;c.textAlign='center';c.textBaseline='middle';c.fillText(idle.text.slice(0,20),sign.width*scale/2,sign.height*scale/2,sign.width*scale*.9);c.restore();}
+    } else {
     if(animated&&animation!.atlas==='daily'){
       const frameLayout=layouts.daily.frames[frame]!,scale=.52;
       c.drawImage(source,layout.x,layout.y,layout.width,layout.height,-frameLayout.anchor.x*scale,-frameLayout.anchor.y*scale,layout.width*scale,layout.height*scale);
@@ -165,6 +200,7 @@ export class FishRenderer {
     }
     if (action.motion === 'tea' && animation?.atlas!=='daily') { c.fillStyle = '#d2b68e'; c.fillRect(-17, -64, 23, 17); c.strokeStyle = '#a98b65'; c.strokeRect(5, -60, 7, 9); }
     if (action.motion === 'stamp') { c.fillStyle = '#759a82'; c.font = '22px sans-serif'; c.fillText('✓', 0, -61); }
+    }
     c.restore();
     drawSceneProps(c,theme, reduced ? 0 : t, input.activity, true);
     if (swing.visible) { c.save(); c.globalAlpha = swing.opacity; drawAirSwing(c, beat); c.restore(); }
@@ -172,11 +208,13 @@ export class FishRenderer {
     Object.assign(this.stats, { frames: this.stats.frames + 1, lastMs: performance.now() - started, sprite, motion: action.motion, scene: theme, whipAllowed: allowed });
     this.canvas.dataset.idleActive=String(idle.active);this.canvas.dataset.richness=String(p.richness);this.canvas.dataset.reduced=String(reduced);
     this.canvas.dataset.renderMs = String(this.stats.lastMs); this.canvas.dataset.renderCount = String(this.stats.frames);
-    this.canvas.dataset.motion = action.motion; this.canvas.dataset.frame = String(frame); this.canvas.dataset.atlas = animated ? animation!.atlas : 'classic';
+    const displayedMotion=extraAnimation?.id??action.motion;
+    this.canvas.dataset.actionCount=String(this.extensionDirector?.pet.animations.length??29);
+    this.canvas.dataset.motion = displayedMotion; this.canvas.dataset.frame = String(extraAnimation&&extraFrame?extraAnimation.frames.indexOf(extraFrame):frame); this.canvas.dataset.atlas = extraFrame?'extension':animated ? animation!.atlas : 'classic';
     this.canvas.dataset.scene = theme; this.canvas.dataset.expression = String(sprite); this.canvas.dataset.whip = String(swing.visible);
     this.canvas.dataset.beat = swing.holding ? 'hold' : allowed ? beat.stage : swing.visible ? 'retract' : 'rest';
     this.canvas.dataset.reaction = reacting ? ['dodge', 'tail-cover', 'type-faster'][beat.variant]! : 'none';
-    this.canvas.dataset.beatPose = reacting ? String(beat.pose) : '';
+    this.canvas.dataset.beatPose = reacting ? String(extraAnimation&&extraFrame?extraAnimation.frames.indexOf(extraFrame):beat.pose) : '';
     this.schedule();
   };
   private particles(input: Snapshot, t: number) {
@@ -194,6 +232,7 @@ export class FishRenderer {
   dispose(): void {
     this.disposed = true; cancelAnimationFrame(this.frame); document.removeEventListener('visibilitychange', this.visibility); document.removeEventListener('pointerdown', this.audioGesture);
     for(const image of Object.values(this.images))image.onload=image.onerror=null;
+    this.extension?.release();
     if (this.audio) void this.audio.close();
   }
 }
