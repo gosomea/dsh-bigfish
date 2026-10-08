@@ -25,6 +25,8 @@ dsh plugin --profile web add dsh-bigfish
 dsh --profile web
 ```
 
+发布首日若仍装到旧版，请查看[刚发布版本的安装说明](docs/installation.md#刚发布的版本没有装上)：pnpm 11 默认有 24 小时发布冷却。
+
 遇到未来不兼容的 DSH 时，大肥鱼会停在空闲状态，并在宠物气泡和完整设置中说明检测到的会话接口与升级建议；不会猜测任务状态。
 
 打开或刷新 dsh-web，右下角就能找到她。`web` 请换成你的实际 profile 名称。

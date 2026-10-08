@@ -11,6 +11,18 @@ dsh --profile web
 
 安装指定版本可使用 `dsh-bigfish@0.6.0`。普通安装命令同时包含跨版本能力检测和新增动作。升级后在任务空闲时重启 DSH 并刷新页面。插件必须装在实际使用的 Web profile；无需单独运行 `npm install -g`。
 
+### 刚发布的版本没有装上
+
+pnpm 11 默认等待版本发布满 24 小时再安装，因此普通命令在发布首日可能选择较旧的版本。这是 [pnpm 的发布冷却规则](https://pnpm.io/settings/dependency-resolution#minimumreleaseage)。可以等待冷却结束；若要立即体验本次稳定版，使用已在 DSH `0.2.0-rc.2` / pnpm `11.7.0` 验证的命令：
+
+```sh
+dsh plugin --profile web add dsh-bigfish@0.6.0 --registry=https://registry.npmjs.org --config.minimum-release-age-exclude=dsh-bigfish@0.6.0
+```
+
+该命令把 `dsh-bigfish@0.6.0` 加入目标 profile 的冷却例外，不修改全局设置或其他依赖的冷却规则。安装后在任务空闲时重启 DSH 并刷新网页。npm 首页和镜像可能晚于官方 registry 更新，可查看 [0.6.0 的 npm 详情页](https://www.npmjs.com/package/dsh-bigfish/v/0.6.0)。
+
+### 启用角色制作 Skill
+
 npm 包内含完整 `dsh-bigfish-pet-maker` Skill。按需启用：
 
 ```sh
