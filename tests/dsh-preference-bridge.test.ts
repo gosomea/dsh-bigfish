@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createPreferenceBridge } from '../src/client/dsh-preference-bridge.js';
+import {PreferenceStore} from '../src/client/preferences-store.js';
+import {decodePreferences, preferenceDefaults} from '../src/contract/preferences.js';
+import {presetConfig} from '../src/companion/config.js';
 
 const snapshot = { status: 'ready', value: { enabled: true }, writable: true, mode: 'host', revision: 7 };
 
@@ -57,4 +60,60 @@ test('configForms wins during a transitional dual-service host and absence falls
   assert.equal(current.kind, 'config-forms');
   assert.equal(legacyBound, false);
   assert.deepEqual(createPreferenceBridge({}), { kind: 'local', scope: null });
+});
+
+test('current ConfigForm without mode persists disabled task and memory groups through the Host revision', async () => {
+  let value = {...preferenceDefaults}, revision = 11, writes = 0;
+  const listeners = new Set<() => void>();
+  const bridge = createPreferenceBridge({configForms: {get: () => ({
+    getSnapshot: () => ({status: 'ready', value, writable: true, revision}),
+    subscribe: listener => {listeners.add(listener); return () => {listeners.delete(listener);};},
+    mutate: async (ops, expected) => {
+      assert.equal(expected, revision);
+      writes++;
+      value = decodePreferences({...value, ...Object.fromEntries(ops.map(op => [op.path[0], op.value]))});
+      revision++;
+      for (const listener of listeners) listener();
+      return true;
+    },
+  })}});
+  const store = new PreferenceStore(bridge.scope, null);
+  try {
+    assert.equal(store.getSnapshot().persistence, 'host');
+    const lifestyle = presetConfig('balanced');
+    lifestyle.groups.steward = false;
+    lifestyle.groups.memory = false;
+    const lifestyleJson = JSON.stringify(lifestyle);
+    await store.update({lifestyleJson});
+    assert.equal(writes, 1);
+    assert.equal(value.lifestyleJson, lifestyleJson);
+    assert.equal(store.getSnapshot().persistence, 'host');
+    const reopened = new PreferenceStore(bridge.scope, null);
+    try {
+      const saved = JSON.parse(reopened.getSnapshot().value.lifestyleJson);
+      assert.equal(saved.groups.steward, false);
+      assert.equal(saved.groups.memory, false);
+    } finally {reopened.dispose();}
+  } finally {store.dispose();}
+});
+
+test('loading or refused mode-less ConfigForms fail visibly instead of saving memory-only preferences', async () => {
+  let status = 'loading', writes = 0;
+  const bridge = createPreferenceBridge({configForms: {get: () => ({
+    getSnapshot: () => ({status, value: preferenceDefaults, writable: true, revision: 4}),
+    subscribe: () => () => {},
+    mutate: async () => {writes++; return false;},
+  })}});
+  const store = new PreferenceStore(bridge.scope, null);
+  try {
+    await assert.rejects(store.update({size: 220}), /Read-only host settings/);
+    assert.equal(writes, 0);
+    assert.equal(store.getSnapshot().value.size, preferenceDefaults.size);
+    assert.equal(store.getSnapshot().error, 'preferencesWrite');
+    status = 'ready';
+    await assert.rejects(store.update({size: 220}), /Host rejected settings mutation/);
+    assert.equal(writes, 1);
+    assert.equal(store.getSnapshot().value.size, preferenceDefaults.size);
+    assert.equal(store.getSnapshot().persistence, 'host');
+  } finally {store.dispose();}
 });

@@ -1,0 +1,53 @@
+import {test,expect} from '@playwright/test';
+import {fileURLToPath} from 'node:url';
+
+for(const dark of [false,true])test(`the ${dark?'dark':'light'} full settings start with navigation and keep local play inside companionship`,async({page})=>{
+ await page.setViewportSize({width:1280,height:720});
+ await page.addInitScript(()=>localStorage.setItem('bigfish.demo.preferences.v1',JSON.stringify({greetOnOpen:false,idleMode:'occasional'})));
+ await page.goto('/');await page.addStyleTag({path:fileURLToPath(new URL('./fixtures/dsh-theme.css',import.meta.url))});
+ await page.evaluate(value=>document.body.toggleAttribute('data-ds-dark-theme',value),dark);
+ await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget');
+ await expect(widget.locator('.bf-pet-stage')).not.toHaveAttribute('title',/.+/);
+ await expect(widget.getByRole('button',{name:'叫回来',exact:true})).toHaveText('回家');
+ await widget.getByRole('button',{name:'设置',exact:true}).click();
+ const popup=widget.locator('.bf-popover'),quickPlay=popup.getByTestId('life-actions');
+ await expect(quickPlay).not.toHaveAttribute('open','');
+ for(const name of ['活跃程度','活动范围','显示场景','启用鞭策动作'])await expect(popup.getByLabel(name,{exact:true})).toBeInViewport({ratio:1});
+ const cadence=popup.getByRole('combobox',{name:'活跃程度',exact:true}).locator('.bf-select-value');
+ expect(await cadence.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);
+ await expect(popup.getByRole('button',{name:'安静 30 分钟',exact:true})).toBeInViewport({ratio:1});
+ await expect(popup.getByRole('button',{name:'完整设置',exact:true})).toBeInViewport({ratio:1});
+ expect(await popup.evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
+ await popup.getByRole('button',{name:'安静 30 分钟',exact:true}).click();
+ await expect(popup.getByRole('status').filter({hasText:'安静模式期间暂停散步'})).toBeVisible();
+ await expect(popup.getByLabel('活动范围',{exact:true})).toHaveAttribute('data-value','nearby');
+ await popup.getByRole('button',{name:'恢复活动',exact:true}).click();
+ await quickPlay.locator(':scope > summary').click();
+ await expect(quickPlay.getByRole('button',{name:'摸摸头',exact:true})).toBeVisible();
+ await expect(popup.getByRole('button',{name:'完整设置',exact:true})).toBeInViewport({ratio:1});
+ await popup.getByRole('button',{name:'完整设置',exact:true}).click();
+ await expect(popup).toHaveAttribute('data-mode','full');
+ const nav=popup.getByRole('navigation',{name:'大肥鱼设置分区'}),header=popup.locator('.bf-popover-top');
+ const n=(await nav.boundingBox())!,h=(await header.boundingBox())!;
+ expect(n.y).toBeGreaterThanOrEqual(h.y+h.height-1);expect(n.y).toBeLessThan(h.y+h.height+32);
+ await expect(popup.locator('.bf-quick-interactions')).toHaveCount(0);
+ const actions=popup.locator('[data-settings-page="companionship"]').getByTestId('life-actions');
+ await expect(actions).not.toHaveAttribute('open','');await expect(actions.locator(':scope > summary')).toHaveText('一起玩');
+ await expect(actions.getByRole('button',{name:'摸摸头',exact:true})).not.toBeVisible();
+ await popup.screenshot({path:`artifacts/companion/settings-layout-${dark?'dark':'light'}.png`});
+ await actions.locator(':scope > summary').click();await expect(actions.getByRole('button',{name:'摸摸头',exact:true})).toBeVisible();
+ await popup.getByRole('button',{name:'智能管家',exact:true}).click();await expect(actions).not.toBeVisible();
+ await expect(popup.getByTestId('intelligence-settings')).toContainText('模拟演示');
+});
+
+test('return-home failure has a direct route to the visible area editor and does not pretend to wave',async({page})=>{
+ await page.addInitScript(()=>{localStorage.setItem('bigfish.demo.preferences.v1',JSON.stringify({greetOnOpen:false,idleMode:'occasional',lifestyleJson:JSON.stringify({version:1,preset:'custom',basedOn:'balanced',movement:'screen'})}));localStorage.setItem('bigfish.activity-area.v1',JSON.stringify({revision:1,config:{version:1,enabled:true,allowed:null,forbidden:[{x:.45,y:0,width:.1,height:1}],home:{x:.15,y:.8}}}));});
+ await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget');
+ await widget.getByRole('button',{name:'叫回来',exact:true}).click();await expect(widget.getByTestId('activity-area-status')).toContainText('回家点无法安全到达');
+ await expect(widget.locator('canvas')).not.toHaveAttribute('data-motion','wave');
+ await widget.getByRole('button',{name:'设置回家点',exact:true}).click();
+ const popup=widget.locator('.bf-popover'),details=popup.getByTestId('activity-area-disclosure'),save=popup.getByRole('button',{name:'保存活动区域',exact:true});
+ await expect(details).toHaveAttribute('open','');await expect(save).toBeInViewport();
+ await expect(popup.getByRole('button',{name:'日常陪伴',exact:true})).toHaveAttribute('aria-current','page');
+ expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('bigfish.activity-area.v1')!).config.home)).toEqual({x:.15,y:.8});
+});

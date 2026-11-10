@@ -1,6 +1,7 @@
 import { decodePreferences, preferenceDefaults, type Preferences } from '../contract/preferences.js';
 import type { PreferenceScope } from './native-contract.js';
 export interface PreferenceView { value: Preferences; error: string | null; saving: boolean; persistence: 'host' | 'local' | 'memory' }
+export type PreferenceUpdate=Partial<Preferences>|((current:Readonly<Preferences>)=>Partial<Preferences>);
 /** Both UI entry points share the same confirmed state and serialized write path. */
 export class PreferenceStore {
   private listeners = new Set<() => void>();
@@ -32,13 +33,13 @@ export class PreferenceStore {
         persistence: s.mode === 'host' ? 'host' : 'memory' });
     } catch { this.publish({ error: 'preferencesRead' }); }
   }
-  update(patch: Partial<Preferences>, expected?: string): Promise<void> {
-    const requested = { ...patch };
+  update(patch: PreferenceUpdate, expected?: string): Promise<void> {
+    const requested = typeof patch==='function'?patch:{ ...patch };
     const job = this.tail.then(async () => {
       if (this.disposed) throw new Error('Settings store disposed');
       if(expected!==undefined&&JSON.stringify(this.value.value)!==expected)throw new Error('偏好在预览后已变化，请重新选择备份');
       // Couple a single slider to the latest confirmed bounds, not a stale UI render.
-      const patch = { ...requested };
+      const patch = { ...(typeof requested==='function'?requested(this.value.value):requested) };
       if (patch.idleMinSeconds !== undefined && patch.idleMaxSeconds === undefined && patch.idleMinSeconds > this.value.value.idleMaxSeconds) patch.idleMaxSeconds = patch.idleMinSeconds;
       if (patch.idleMaxSeconds !== undefined && patch.idleMinSeconds === undefined && patch.idleMaxSeconds < this.value.value.idleMinSeconds) patch.idleMinSeconds = patch.idleMaxSeconds;
       const next = decodePreferences({ ...this.value.value, ...patch });

@@ -1,0 +1,12 @@
+flowchart TD
+  foundation["foundation: stale"]
+  intelligence["intelligence: stale"]
+  foundation --> intelligence
+  desktop["desktop: failed"]
+  intelligence --> desktop
+  life["life: blocked"]
+  desktop --> life
+  perception["perception: blocked"]
+  life --> perception
+  delivery{{"delivery: blocked"}}
+  perception --> delivery

@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-10-29T15:49:45.106Z",
+  "version": "0.7.0-dev.0",
+  "sourceConfiguration": "passed",
+  "mainEntitlements": [
+    "com.apple.security.cs.allow-jit",
+    "com.apple.security.device.audio-input",
+    "com.apple.security.automation.apple-events"
+  ],
+  "inheritedEntitlements": [
+    "com.apple.security.cs.allow-jit",
+    "com.apple.security.device.audio-input"
+  ],
+  "packagedApp": {
+    "path": "./desktop/dist/mac-arm64/大肥鱼.app",
+    "infoPlist": "passed",
+    "main": {
+      "signature": "ad-hoc",
+      "strictSignatureValid": false,
+      "hardenedRuntime": false,
+      "requiredEntitlementsPresent": false,
+      "unexpectedEntitlements": [],
+      "permissionRuntimeAcceptance": "not-tested",
+      "note": "Unsigned or ad-hoc output cannot establish Developer ID permission behavior or distribution readiness."
+    },
+    "helpers": [
+      {
+        "name": "大肥鱼 Helper (GPU).app",
+        "signature": "ad-hoc",
+        "strictSignatureValid": false,
+        "hardenedRuntime": false,
+        "requiredEntitlementsPresent": false,
+        "unexpectedEntitlements": [],
+        "permissionRuntimeAcceptance": "not-tested",
+        "note": "Unsigned or ad-hoc output cannot establish Developer ID permission behavior or distribution readiness."
+      },
+      {
+        "name": "大肥鱼 Helper (Plugin).app",
+        "signature": "ad-hoc",
+        "strictSignatureValid": false,
+        "hardenedRuntime": false,
+        "requiredEntitlementsPresent": false,
+        "unexpectedEntitlements": [],
+        "permissionRuntimeAcceptance": "not-tested",
+        "note": "Unsigned or ad-hoc output cannot establish Developer ID permission behavior or distribution readiness."
+      },
+      {
+        "name": "大肥鱼 Helper (Renderer).app",
+        "signature": "ad-hoc",
+        "strictSignatureValid": false,
+        "hardenedRuntime": false,
+        "requiredEntitlementsPresent": false,
+        "unexpectedEntitlements": [],
+        "permissionRuntimeAcceptance": "not-tested",
+        "note": "Unsigned or ad-hoc output cannot establish Developer ID permission behavior or distribution readiness."
+      },
+      {
+        "name": "大肥鱼 Helper.app",
+        "signature": "ad-hoc",
+        "strictSignatureValid": false,
+        "hardenedRuntime": false,
+        "requiredEntitlementsPresent": false,
+        "unexpectedEntitlements": [],
+        "permissionRuntimeAcceptance": "not-tested",
+        "note": "Unsigned or ad-hoc output cannot establish Developer ID permission behavior or distribution readiness."
+      }
+    ]
+  }
+}

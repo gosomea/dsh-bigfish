@@ -1,0 +1,10 @@
+import {randomUUID} from 'node:crypto';
+export async function hostResponse(connection,path,init={},transport=fetch){
+ if(!connection.url)throw Error('尚未连接 DSH Host');
+ if(!path.startsWith('/api/'))throw Error('Host 路径无效');
+ return transport(connection.url+path,{...init,headers:{...(connection.cookie?{cookie:connection.cookie}:{}),...init.headers},signal:init.signal??AbortSignal.timeout(50000),redirect:'error'});
+}
+export async function hostJson(connection,path,body,transport=fetch){const response=await hostResponse(connection,path,{method:body?'POST':'GET',...(body?{headers:{'content-type':'application/json'},body:JSON.stringify(body)}:{})},transport);const value=await response.json();if(!response.ok)throw Error(response.status===401?'Host 登录已过期，请重新连接':typeof value.error==='string'?value.error:`Host 请求失败 (${response.status})`);return value;}
+export async function nativeRpc(connection,method,args,transport=fetch){const value=await hostJson(connection,'/api/'+method,{type:'client-request',rpcId:randomUUID(),method,payload:{args}},transport);if(!value.result?.ok)throw Error('Host 设置未接受修改，请刷新后重试');return value.result.value;}
+export async function readPreferences(connection,transport=fetch){const d=await nativeRpc(connection,'settings/describe',{},transport),namespace=d.namespaces?.find(n=>n.ns==='bigfish');if(!namespace)throw Error('当前 Host 未提供大肥鱼配置命名空间');return {status:'ready',mode:'host',writable:d.writable===true,revision:namespace.revision,value:namespace.value};}
+export function petQuery(query,bytes){if(typeof query!=='string'||query.length>2000||query&&!query.startsWith('?'))throw Error('角色请求无效');const p=new URLSearchParams(query);for(const key of p.keys())if(!['op','key','backup','revision'].includes(key)||p.getAll(key).length!==1)throw Error('角色请求无效');if(p.has('op')&&!['import','select','remove','preview-restore','restore'].includes(p.get('op')))throw Error('角色操作无效');if(bytes&&(!(bytes instanceof Uint8Array)||bytes.length>(['preview-restore','restore'].includes(p.get('op'))?128:32)*1024*1024))throw Error('角色文件超过限制');return '/api/bigfish-pets'+(bytes?'-upload':'')+query;}

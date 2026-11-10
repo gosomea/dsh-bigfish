@@ -10,6 +10,12 @@ function fixture(){
  return {manifest:{fallbacks:{idle:'idle',working:'work',attention:'attention',error:'error',success:'success'}},animations:[make('idle',['idle']),make('work',['working','read']),make('write',['writing']),make('attention',['attention'],false),make('error',['error'],false),make('success',['success'],false)]} as unknown as PetBundle;
 }
 const input={state:'tool-running' as const,tag:'read',richness:1,reduced:false,activity:0,pressure:0};
+test('an external energetic idle fallback becomes a still at low amplitude but manual/critical art remains available',()=>{
+ const pet=fixture();pet.animations.forEach(a=>a.intensity=2);const d=new PetDirector(pet,()=>0);
+ const low={...input,state:'idle' as const,richness:0};assert.equal(d.choose(low,0).still,true);
+ assert.equal(d.choose({...low,preview:'idle'},100).still,false);
+ const attention=d.choose({...low,state:'waiting-user'},200);assert.equal(attention.animation.id,'attention');assert.equal(attention.still,false);
+});
 test('ordinary tool semantics switch at cycle end; confirmation interrupts immediately',()=>{
  const d=new PetDirector(fixture(),()=>0);assert.equal(d.choose(input,0).animation.id,'work');
  assert.equal(d.choose({...input,tag:'writing'},300).animation.id,'work');

@@ -1,3 +1,4 @@
+import './sync-companion-clips.js';
 import {builtinAssets} from '../src/contract/builtin-assets.js';
 import {parsePet,encodePet} from '../src/pet/contract.js';
 import { build } from 'esbuild';
@@ -19,11 +20,11 @@ if (tsc.status !== 0) process.exit(tsc.status ?? 1);
 await mkdir('lib', { recursive: true }); await mkdir('dist', { recursive: true });
 await build({ entryPoints: ['src/index.ts'], outfile: 'lib/index.js', bundle: true, platform: 'node', format: 'esm', external: ['proper-lockfile'], target: 'node22', sourcemap: true });
 await build({ entryPoints: ['src/client/plugin.tsx'], outfile: 'lib/client.js', bundle: true, platform: 'browser', format: 'cjs', target: 'es2022',
-  loader: { '.png': 'dataurl', '.css': 'text', '.dshpet': 'binary' }, external: ['react', 'react/jsx-runtime'], minify: true,
+  loader: { '.webp': 'dataurl', '.png': 'dataurl', '.css': 'text', '.dshpet': 'binary' }, external: ['react', 'react/jsx-runtime'], minify: true,
   banner: { js: 'window.__ModuleLoader__.load({id:"dsh-bigfish",factory:(require)=>{var module={exports:{}};var exports=module.exports;' },
   footer: { js: 'return module.exports;}});' }, define: { 'process.env.NODE_ENV': '"production"' } });
 await build({ entryPoints: ['src/client/demo.tsx'], outfile: 'dist/demo.js', bundle: true, platform: 'browser', format: 'iife', target: 'es2022',
-  loader: { '.png': 'dataurl', '.css': 'text', '.dshpet': 'binary' }, minify: true, define: { 'process.env.NODE_ENV': '"production"' } });
+  loader: { '.webp': 'dataurl', '.png': 'dataurl', '.css': 'text', '.dshpet': 'binary' }, minify: true, define: { 'process.env.NODE_ENV': '"production"' } });
 const js = (await readFile('dist/demo.js', 'utf8')).replaceAll('</script', '<\\/script');
 await writeFile('dist/preview.html', `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bigfish · 大肥鱼的工作室</title><style>body{margin:0}</style></head><body><div id="root"></div><script>${js}</script></body></html>`);
 for (const name of builtinAssets) await cp(`assets/sprites/${name}`, `packs/classic/${name}`);

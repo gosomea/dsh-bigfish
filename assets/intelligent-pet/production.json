@@ -1,0 +1,560 @@
+{
+  "version": 1,
+  "sequenceCount": 32,
+  "frameCount": 256,
+  "note": "32 authored eight-frame sequences, including the walking cycle. Mirrored directions are not counted separately. artAccepted records runtime sprite usability; final author aesthetic approval remains pending.",
+  "sequences": [
+    {
+      "id": "walk",
+      "label": "散步",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "4fad2db7983afe1f17a47582777ad9a2cbdb34ef0a8220e8189385cb16344173",
+      "imageGenerator": "built-in image_gen",
+      "source": "walk-cycle.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "stop",
+      "label": "减速停步",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "c2495d118956fa3d2b9ede932dbb01e961a9b97c63d02ab436d6f37ef234d6a6",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/stop.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "start-step",
+      "label": "迈出第一步",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "b64e77dbb1f8efc93e17a21d7472d838dfd43c37233a702efc1f820ce42da88c",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/start-step.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "turn",
+      "label": "转身",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "9eccd74cd20e927d97a5efea06707e0a7c3ad6827f421fe1a53cee357651d28f",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/turn.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "tiptoe",
+      "label": "踮脚",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "9e63bc901abdf0c58b6217fb576e3dc78490b0d3800822fd7e079a64cf0f1926",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/tiptoe.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "edge-peek",
+      "label": "边缘探头",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "fed9d38b9a88cc09b1013073361f7e90f1b0ad9838bd28e54249bbd5890a0b80",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/edge-peek.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "tail-avoid",
+      "label": "收好尾巴",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "7558dec29f9df5291b451fb61f50ebd63da0c7747475045d0acfaf07853ab1fe",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/tail-avoid.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "recall",
+      "label": "叫回来",
+      "group": "body",
+      "frames": 8,
+      "sourceSha256": "1126f82d4b7c2ef98a5600959878d43ce0d5690db9977922c0c3912fa2d57fa8",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/recall.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-01.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "head-pat",
+      "label": "摸头",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "a53cd3326ef801d3013dd77c4cb206ce17dd598f085dcee921b4d7c706b50b83",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/head-pat.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "ball-catch",
+      "label": "接球",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "2011d4b001f29d67c8f5c5ccc474f72d36067f2d24c808d9f42e44561e02b48f",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/ball-catch.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "fish-toy",
+      "label": "逗纸鱼",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "764250091b623f513f28968d0ff085bef9e4b5ff3ed765a52638ad75a85c143b",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/fish-toy.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "tea",
+      "label": "喝茶",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "e33635ddf53c94336022b5e1ea00fdef59d38963b11401773770d00dcf3c2d74",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/tea.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "biscuit",
+      "label": "分享饼干",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "5d80fbe2f55e3630f482e1a6bc63b5cb6bd55e593b204705930e5fab472b3195",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/biscuit.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "tail-comb",
+      "label": "梳尾巴",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "369c0cc7b37a878d48de81689bb156602286d5e72e7928ef92a36ac0494eafbd",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/tail-comb.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "wave",
+      "label": "招手",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "b474489ac98e7673c3d3f21896ff6d893c849f0fbaeaa53aed52c20841044a24",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/wave.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "point",
+      "label": "指向卡片",
+      "group": "play",
+      "frames": 8,
+      "sourceSha256": "8ad93fa689fe1f3414e75a2e1d55071630513ae7e42b8a7e55ba6282e4f75ad1",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/point.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-02.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "sit-down",
+      "label": "坐下",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "b2fc852c933343a78f65fd02c6cbe03a613ec7f5c89b1d5d959620c63fb1d65d",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/sit-down.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "wake-up",
+      "label": "睡醒",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "185964def32f4005a3cf6ff9619147e77357a7dd116b8e6f7cba02fcaafe8441",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/wake-up.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "sleep",
+      "label": "入睡",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "b8c062c12d720e459a658920f78ceff56cda44514183d9075a2fd5e385848bea",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/sleep.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "stretch",
+      "label": "伸懒腰",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "ee66e55723516a60c276514c4f25d5ac78028e11ce7a8d929fad834600d62181",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/stretch.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "lie-down",
+      "label": "躺下",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "cff0e3d85267ace19c3c271b6dafcf7482db29d87821273d6079957bdc2ed0a9",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/lie-down.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "nest",
+      "label": "整理小床",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "1ce054871bf59019cb3871822370d7519fdf9c9e7a42583096e37929ff89955f",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/nest.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "desk-tidy",
+      "label": "整理书桌",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "f15eb5d4c50203ad0f811d41178c77eed59115a7d989fd6fc6bf3f462c6bb599",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/desk-tidy.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "lamp",
+      "label": "点灯",
+      "group": "life",
+      "frames": 8,
+      "sourceSha256": "1f03e39854087529049ad5fa26754d6c82792f93ac9acff3816dccb38005cdcd",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/lamp.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-03.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "task-cards",
+      "label": "分拣会话卡",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "720dce911743ea5ac30bc30b59977096dbcf1706d8c2140b32821b792a8b2f6d",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/task-cards.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "confirm-card",
+      "label": "递出确认卡",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "a84ca06d4c1888caba66597d0cf3ea90b39b2574d27f8f8f0fb72eb0430e19eb",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/confirm-card.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "book-close",
+      "label": "合上任务本",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "9e3bd3578f9dfefb3004da79fae0d4b4b6dba41e74f0a3bd6b7097cbdb097cb9",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/book-close.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "postcard",
+      "label": "递出明信片",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "55f0912f9383360ddeb0c88ab6a0c89bd49c431def4ad92c7ebc2e23b82588c4",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/postcard.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "screen-read",
+      "label": "阅读屏幕",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "9d534997b505a4dffd3304d08ae3f42667d568d2c5c15313bf81ff07377dfc4a",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/screen-read.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "think",
+      "label": "思考",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "f379c503f23b66cc4f2b764441937b0f7b9d7f2227ce7dbe680547be3cd1277e",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/think.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "success-bow",
+      "label": "完成鞠躬",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "57df8f30ddca7b1fdb43f6ecdc4e79246fa2bf49478a5145f9e340c19df011d8",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/success-bow.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    },
+    {
+      "id": "failure-check",
+      "label": "检查失败",
+      "group": "steward",
+      "frames": 8,
+      "sourceSha256": "05bd8dfc7f68600a71a2f6677ba278df8ece895eeb1689befbcfe07fb93c839b",
+      "imageGenerator": "built-in image_gen",
+      "source": "clips/failure-check.png",
+      "runtimeReviewed": true,
+      "artAccepted": true,
+      "artReview": {
+        "scope": "runtime-usability",
+        "frames": 8,
+        "evidence": "review/contact-04.png",
+        "authorFinalApproval": "pending"
+      }
+    }
+  ],
+  "artReview": {
+    "manifest": "review/review.json",
+    "scope": "runtime-usability",
+    "reviewedAt": "2026-10-29T15:30:20.334Z",
+    "sequenceCount": 32,
+    "frameCount": 256,
+    "authorFinalApproval": "pending"
+  }
+}

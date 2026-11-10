@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "registered isolated home identity and absence of its Host verified before installation",
+    "native Host has no active prior tasks before fixture mutation",
+    "real mock tool calls reach production timed question service; two continued waits survive turn end",
+    "one real late answer clears only its call; the other question remains waiting",
+    "second admitted answer settles final wait and real final turn completion",
+    "real Agent registry and projection readers retain running state and exact subagent parent metadata",
+    "native fork preserves isSeeded; pet does not invent a missing source-parent identity",
+    "ordinary tracking and runtime reads make zero pet model calls and do not change its token usage",
+    "native desktop namespace persists revision-fenced settings independently of model authorization",
+    "native desktop navigation admits only known source sessions and exactly one concurrent consumer",
+    "cross-site desktop mutation is rejected without a model request"
+  ],
+  "packageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "harnessVersion": "0.2.2-alpha.2",
+  "petModelRequests": 0,
+  "limitations": [
+    "startup reattachment before the plugin activates is not simulated",
+    "overlapping approvals are covered by controlled tests, not this native case"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "platform": "darwin",
+  "layer": "real Electron + local Host-contract fixture, not native DSH",
+  "checks": [
+    "offline built-in pet remains visible without a Host",
+    "authenticated main bridge reads the Host role library and shared preference namespace",
+    "renderer never receives the Host login cookie",
+    "shared Host behavior reaches authored desktop locomotion with stable feet",
+    "complete desktop chain publishes its finished rest over IPC without a new animation serial",
+    "desktop preference writes are revision fenced and update the same Host value Web reads",
+    "native resume path re-clamps an off-screen window into a real DIP work area",
+    "new device reads no window geometry and records no audio without explicit grants",
+    "explicit session jump posts a Host intent and opens only that Host",
+    "switching Hosts remounts Widget/settings, clears sensitive drafts and sends screenshot cancellation only to the old Host",
+    "desktop settings follow live OS dark/light preference with readable inherited foreground and background"
+  ],
+  "properties": {
+    "focusable": false,
+    "alwaysOnTop": true,
+    "bounds": {
+      "x": 1356,
+      "y": 554,
+      "width": 372,
+      "height": 510
+    }
+  },
+  "errors": [],
+  "pending": [
+    "Windows signed installer and hardware",
+    "physical multiple monitors / mixed DPI",
+    "real microphone + user-chosen ASR service"
+  ]
+}

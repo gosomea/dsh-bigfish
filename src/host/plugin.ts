@@ -1,3 +1,7 @@
+import {decodeLifestyle} from '../companion/config.js';
+import {CompanionHostStore} from '../companion/host-store.js';
+import { installCompanion } from '../companion/host.js';
+import {installDesktopSettings} from '../companion/desktop-settings.js';
 import {HostPetStore,petRoute} from '../pet/host-store.js';
 import z from '@deepseek-ai/schemastery';
 import { preferenceDefaults, preferenceRanges, decodePreferences } from '../contract/preferences.js';
@@ -33,8 +37,11 @@ function snapshotConfig(base: Record<string, unknown>): Record<string, unknown> 
   ]));
 }
 
-/** Native Host half: expose one durable namespace; no model calls or prompt mutations. */
+/** Native Host half: expose one durable namespace; intelligence stays opt-in and never mutates task prompts. */
 export function apply(ctx: { inject(keys: string[], callback: (ctx: any) => void): unknown; fiber?: unknown }, base: Record<string, unknown> = {}): void {
+  const companionStore=new CompanionHostStore();
+  installCompanion(ctx,companionStore,()=>decodeLifestyle(JSON.parse(String(snapshotConfig(base).lifestyleJson??preferenceDefaults.lifestyleJson))));
+  installDesktopSettings(ctx,async session=>(await companionStore.snapshot()).tasks.some(t=>t.session===session));
   ctx.inject(['connection'], scoped => {
     const fetch=petRoute(new HostPetStore());
     scoped.effect(() => scoped.connection.fetch.register({path:'/api/bigfish-pets',methods:['GET','POST'],requestBody:'buffered',fetch}), 'bigfish role library');

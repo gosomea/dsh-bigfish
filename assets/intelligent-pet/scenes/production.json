@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "sea",
+      "source": "sea.png",
+      "runtime": "sea.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "f857f8b09ffc99446f650350fd5b55abd5ac51f8da97b0cf5fba7bf747647901",
+      "runtimeSha256": "1536c3b5fb61947d42397ec6e90978e36d65edc573098a77be375ff3bb536e20",
+      "bytes": 397238,
+      "tool": "image_gen.imagegen",
+      "generated": "2026-10-29",
+      "alphaPreserved": true
+    },
+    {
+      "id": "night",
+      "source": "night.png",
+      "runtime": "night.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "3f4a70b0c3c489de53b0fee84d8cab79e9416d3c805601df7c0a1e6becc58bcb",
+      "runtimeSha256": "1569dd9211d16a21e9970849936104ef5e0b46978ecbe4e86538ed36a061935d",
+      "bytes": 441378,
+      "tool": "image_gen.imagegen",
+      "generated": "2026-10-29",
+      "alphaPreserved": true
+    },
+    {
+      "id": "garden",
+      "source": "garden.png",
+      "runtime": "garden.webp",
+      "size": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "c1c4431a551d22f337180fca90c0f6c71423947e6ad702677e18879aec72d6a2",
+      "runtimeSha256": "5f2051c70482330ef918df93b1ef81428d73e7b9805fee982788af61087cfbff",
+      "bytes": 535618,
+      "tool": "image_gen.imagegen",
+      "generated": "2026-10-29",
+      "alphaPreserved": true
+    },
+    {
+      "id": "props",
+      "source": "props.png",
+      "runtime": "props.webp",
+      "size": [
+        1774,
+        887
+      ],
+      "sourceSha256": "11cb11ddce3cc4d997e9dd9bc56e343d034b4dedc0b9a5709c4736b87ddcfc2a",
+      "runtimeSha256": "952a5f454ff4762c26e55b518bcfcfca736b2cf536e11628cd3ac59358e85a47",
+      "bytes": 409532,
+      "tool": "image_gen.imagegen",
+      "generated": "2026-10-29",
+      "alphaPreserved": true
+    }
+  ],
+  "artAccepted": true,
+  "reviewScope": "scene-compositing",
+  "reviewer": "Codex",
+  "checks": [
+    "Three illustrated themes composited on both light and dark backgrounds.",
+    "Every furniture item remains an independently clipped layer; no neighboring atlas object leaks.",
+    "Face, tail and emblem stay visible; the box front covers only the lower body.",
+    "Transparent standing compartment and source/runtime alpha were checked."
+  ],
+  "reviewImage": "artifacts/companion/scene-art-contact.png",
+  "reviewSha256": "2d449515a77dc6eebb35ee40ca7c05ead2824aaeee112bd46a522b9aa0bbb309"
+}

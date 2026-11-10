@@ -1,0 +1,105 @@
+{
+  "recordedAt": "2026-10-29T16:02:17.656715+00:00",
+  "testedPackageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "version": "0.7.0-dev.0",
+  "harnessVersion": "0.2.2-alpha.2",
+  "node": {
+    "total": 306,
+    "passed": 306,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "fullRun": {
+      "total": 52,
+      "passed": 49,
+      "failed": 3
+    },
+    "targetedRepair": {
+      "passed": 5,
+      "coversAllThreeOriginalFailures": true,
+      "changes": "test virtual-clock advancement and reload fixture initialization only"
+    },
+    "distinctScenariosCovered": 52,
+    "singleRunAllGreen": false
+  },
+  "native": {
+    "ledger": 11,
+    "quota": 6,
+    "screenshot": 9,
+    "adapter": "local fixtures; no paid provider"
+  },
+  "electron": {
+    "platform": "darwin",
+    "checks": 11,
+    "layer": "real Electron with local Host-contract fixture; native DSH interfaces separately covered by ledger"
+  },
+  "art": {
+    "sequences": 32,
+    "frames": 256,
+    "scope": "runtime-usability",
+    "evidence": "assets/intelligent-pet/review/review.json",
+    "authorFinalApproval": "pending"
+  },
+  "fourImplementationGroups": {
+    "movementAndFrames": "implemented",
+    "unifiedBehaviorRotation": "implemented",
+    "webAndDesktopIntegration": "implemented",
+    "lifeAndRolePackProtocol": "implemented"
+  },
+  "formalReleaseAccepted": false,
+  "remaining": [
+    "Windows real-device installation and behavior",
+    "physical multiple monitors, mixed DPI and hardware sleep/resume",
+    "real microphone, user-selected ASR and macOS Accessibility/Automation permission experience",
+    "valid Developer ID signature, macOS notarization and Windows signature",
+    "final signed artifacts: cross-platform installation, long-run test and actual recordings"
+  ],
+  "proofFiles": [
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+      "sha256": "8486da5c03563d47aa2dcbe60b200efb7a8ec2dbbf285b7ee8e62bb4b7d01e79",
+      "source": "artifacts/companion/ledger-native-smoke.json"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-quota.json",
+      "sha256": "0857bea175589c94d90ed789f86eeab1c3fe087b5fe5b020108b6df6f3f02288",
+      "source": "artifacts/companion/quota-native-smoke.json"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+      "sha256": "4ba768428c1ca8e719d75a8036cb06ecbd640e42628a52c686cbd216701add20",
+      "source": "artifacts/companion/screenshot-native-smoke.json"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-electron.json",
+      "sha256": "6de22477ede1920d4f559d528dd7650e1be4c32b83837e2597c12527304e8e49",
+      "source": "artifacts/companion/desktop-smoke.json"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-node.log",
+      "sha256": "18aba49dcfa246f17bab83a29c7406ab95e1afe875eceb73fbe5d2f33433fc97",
+      "source": "/private/tmp/bigfish-round4-unit-full.log"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+      "sha256": "ee8dbed2174437ca60f4b6c04af63e2dd991d6179bb9eb6db4a1ead82f8d67ad",
+      "source": "/private/tmp/bigfish-round4-browser-full.log"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+      "sha256": "dbc04573980c68a3239436152fb9d8be01bc5b8e9da25559d11f1b4be791727d",
+      "source": "/private/tmp/bigfish-round4-browser-repair.log"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+      "sha256": "589ad551aa182ce174bfab8dc5845caf48ed15bd2787b6f7564a2ea852a5c577",
+      "source": "/private/tmp/bigfish-round4-dmg-verify.log"
+    },
+    {
+      "path": "docs/plans/intelligent-pet/evidence/round4-permissions.json",
+      "sha256": "626ebae66c5ba21e5178e982273ee16cf221d06c61c079538d6304396b328be7",
+      "source": "/private/tmp/bigfish-round4-permissions-final.log"
+    }
+  ]
+}

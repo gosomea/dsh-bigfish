@@ -1,7 +1,9 @@
+import type {Outfit} from '../companion/life-options.js';
+import {petAnimationUnlocked} from './behaviors.js';
 import type {PetBundle, PetAnimation, Role} from './contract.js';
 import type {Snapshot} from '../contract/types.js';
 import type {IdlePresentation} from '../domain/idle.js';
-export interface PetInput {state:Snapshot['state'];tag?:string;richness:number;reduced:boolean;idle?:IdlePresentation|undefined;activity:number;preview?:string;pressure:number;whipHz?:number;reactionActive?:boolean;signPreference?:'balanced'|'prefer'|'none'}
+export interface PetInput {previewSerial?:string;outfit?:Outfit;growthUnlocks?:boolean;interactions?:number;state:Snapshot['state'];tag?:string;richness:number;reduced:boolean;idle?:IdlePresentation|undefined;activity:number;preview?:string;pressure:number;whipHz?:number;reactionActive?:boolean;signPreference?:'balanced'|'prefer'|'none'}
 export function roleFor(state:Snapshot['state']):Role {
  if(state==='idle'||state==='cancelled'||state==='interrupted')return 'idle';if(state==='completed')return 'success';if(state==='waiting-user')return 'attention';
  if(['failed','blocked','retrying','disconnected','limited','unknown-end'].includes(state))return 'error';return 'working';
@@ -13,10 +15,10 @@ export const playbackSpeed = (animation:PetAnimation, activity:number) => animat
 export class PetDirector {
  private current:PetAnimation|undefined;
  private since=0; private last:number|undefined; private playhead=0; private key=''; private policy=''; private role:Role|undefined;
- private completedAt:number|undefined; private pending=''; private pendingAt=0; private recent:string[]=[]; private played=new Map<string,number>();
- private lastFamily='';
+ private completedAt:number|undefined; private pending=''; private pendingAt=0; private recent:string[]=[];
+ private lastFamily='';private previewSerial='';
  private nextEasterAt:number|undefined;
- constructor(readonly pet:PetBundle,private random=()=>Math.random(),private eligible:(animation:PetAnimation,input:PetInput)=>boolean=()=>true){}
+ constructor(readonly pet:PetBundle,private random=()=>Math.random(),private eligible:(animation:PetAnimation,input:PetInput)=>boolean=()=>true,private played=new Map<string,number>()){}
  resume(){this.last=undefined;}
  choose(input:PetInput,now:number):{animation:PetAnimation;time:number;still:boolean}{
   const current=this.current, previousTime=this.playhead;
@@ -29,9 +31,13 @@ export class PetDirector {
   const declared=this.pet.animations.find(a=>a.id===this.pet.manifest.fallbacks[role])!;
   const fallback=normal.find(a=>a.id===declared.id)??normal.find(a=>a.tags.includes(role))??normal.find(a=>a.id===this.pet.manifest.fallbacks.idle)??normal[0]??declared;
   const idleBurst=input.state==='idle'&&input.idle?.active;
-  const tag=role==='working'?(input.tag??(input.state==='reasoning'?'thinking':input.state==='awaiting-output'?'start':role)):input.state==='retrying'?'retry':role, quiet=role==='idle'&&!idleBurst, still=input.reduced||normal.length===0;
-  let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag)&&this.eligible(a,input));
-  if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role)&&this.eligible(a,input));
+  const tag=role==='working'?(input.tag??(input.state==='reasoning'?'thinking':input.state==='awaiting-output'?'start':role)):input.state==='retrying'?'retry':role, quiet=role==='idle'&&!idleBurst;
+  let still=input.reduced||normal.length===0;
+  let pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(idleBurst?'greeting':tag)&&this.eligible(a,input)&&petAnimationUnlocked(a,input.interactions??0,input.growthUnlocks===true));
+  if(!pool.length)pool=normal.filter(a=>a.intensity<=input.richness&&a.tags.includes(role)&&this.eligible(a,input)&&petAnimationUnlocked(a,input.interactions??0,input.growthUnlocks===true));
+  // A pack with no gentle idle art may remain present as a meaningful still;
+  // its energetic fallback is not silently promoted into a low-amplitude loop.
+  if(role==='idle'&&fallback.intensity>input.richness&&(!pool.length||quiet))still=true;
   if(!pool.length||quiet||still)pool=[fallback];
   if(idleBurst && !still){
    const ordinary=pool.filter(a=>a.family!=='easter'||now>=this.nextEasterAt!);
@@ -43,8 +49,8 @@ export class PetDirector {
    else if(input.signPreference==='balanced'&&signs.length&&eligible.some(a=>!sign(a)))pool=(input.idle?.motion==='wait-sign'||input.idle?.motion.startsWith('sign-'))?signs:eligible.filter(a=>!sign(a));
    else pool=eligible.length?eligible:[fallback];
   }
-  const explicit=input.preview&&this.pet.animations.find(a=>a.id===input.preview);if(explicit)pool=[explicit];
-  const policy=[input.richness,still,input.preview??'',input.signPreference??'prefer'].join(':');
+  const explicit=input.preview&&this.pet.animations.find(a=>a.id===input.preview&&petAnimationUnlocked(a,input.interactions??0,input.growthUnlocks===true));if(explicit){pool=[explicit];still=input.reduced;}
+  const policy=[input.richness,still,input.preview??'',input.signPreference??'prefer',input.growthUnlocks===true,input.interactions??0,input.previewSerial??''].join(':');
   const key=[role,tag,quiet,policy,idleBurst?input.idle?.serial:0].join(':');
   const duration=current?animationDuration(current):1;
   if(current&&!current.loop&&this.playhead>=duration&&this.completedAt===undefined)this.completedAt=now;
@@ -61,6 +67,10 @@ export class PetDirector {
    const available=pool.filter(a=>a.id!==current?.id&&now-(this.played.get(a.id)??-Infinity)>=a.cooldownMs);
    const fresh=available.filter(a=>!this.recent.includes(a.id));
    let candidates=fresh.length?fresh:available;
+   if(candidates.length){
+    const oldest=Math.min(...candidates.map(a=>this.played.get(a.id)??-Infinity));
+    candidates=candidates.filter(a=>(this.played.get(a.id)??-Infinity)===oldest);
+   }
    if(idleBurst&&candidates.some(a=>a.family)){
     const families=[...new Set(candidates.map(a=>a.family??a.id))];
     const alternatives=families.filter(f=>f!==this.lastFamily);
@@ -72,8 +82,8 @@ export class PetDirector {
    if(candidates.length){let r=this.random()*candidates.reduce((n,a)=>n+a.weight,0);next=candidates.find(a=>(r-=a.weight)<=0)??candidates[0]!;}
    else next=pool.find(a=>a.id===current?.id)??pool[0]!;
    // Staying on the same animation never rewinds a gesture or restarts a one-shot.
-   if(next.id!==current?.id||(idleBurst&&changed)){this.current=next;this.playhead=0;this.completedAt=undefined;this.since=now;this.played.set(next.id,now);this.recent=[...this.recent.filter(id=>id!==next.id),next.id].slice(-3);if(idleBurst){this.lastFamily=next.family??next.id;if(next.family==='easter'&&!explicit)this.nextEasterAt=now+600000;}}
-   this.key=key;this.policy=policy;this.role=role;this.pending='';
+   if(next.id!==current?.id||(idleBurst&&changed)||(Boolean(explicit)&&input.previewSerial!==undefined&&input.previewSerial!==this.previewSerial)){this.current=next;this.playhead=0;this.completedAt=undefined;this.since=now;this.played.set(next.id,now);this.recent=[...this.recent.filter(id=>id!==next.id),next.id].slice(-3);if(idleBurst){this.lastFamily=next.family??next.id;if(next.family==='easter'&&!explicit)this.nextEasterAt=now+600000;}}
+   this.key=key;this.policy=policy;this.role=role;this.previewSerial=input.previewSerial??'';this.pending='';
   }
   return {animation:this.current!,time:this.playhead,still};
  }

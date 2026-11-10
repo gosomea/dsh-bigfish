@@ -41,6 +41,31 @@ test('native history hydration never recounts text or replays completion', () =>
   try { const s = f.controller.getSnapshot().snapshot; assert.equal(s.tokens, 0); assert.equal(s.completionSerial, 0); assert.equal(s.state, 'completed'); }
   finally { f.controller.dispose(); }
 });
+test('the model picker can read a completed session selection without starting or changing its task',()=>{
+ const f=fixture([entry('turn/end',{turn:1,reason:{kind:'completed'}})]);
+ try{
+  Object.assign(f.session.projections,{faceOf:()=>new Store({next:{provider:'next-provider',model:'next-model'},lastUsed:{provider:'old-provider',model:'old-model'}})});
+  const before=f.controller.getSnapshot();
+  assert.deepEqual(f.controller.currentModel(),{provider:'next-provider',model:'next-model'});
+  assert.equal(f.controller.getSnapshot(),before);assert.equal(f.source.getSnapshot().entries.length,1);
+ }finally{f.controller.dispose();}
+});
+test('model selection reading can fall back to a running agent on an older projection face',()=>{
+ const f=fixture();
+ try{
+  f.append('turn/start',{turn:1});f.chunk('hello');
+  Object.assign(f.session.projections,{faceOf:()=>{throw Error('No model selection projection');}});
+  assert.deepEqual(f.controller.currentModel(),{provider:'local',model:'test'});
+ }finally{f.controller.dispose();}
+});
+test('an explicit null next model follows the Host default instead of retaining the last used route',()=>{
+ const f=fixture();
+ try{
+  f.append('turn/start',{turn:1});f.chunk('hello');
+  Object.assign(f.session.projections,{faceOf:()=>new Store({next:null,lastUsed:{provider:'local',model:'test'}})});
+  assert.equal(f.controller.currentModel(),null);
+ }finally{f.controller.dispose();}
+});
 test('native append counts actual live text once and settles only at turn end', () => {
   const f = fixture();
   try {

@@ -1,0 +1,29 @@
+{
+  "phase": "delivery",
+  "accepted": false,
+  "implementationComplete": false,
+  "recordedAt": "2026-10-29T16:02:17.656715+00:00",
+  "checks": [
+    "All four requested implementation groups are complete in source.",
+    "Node 306/306, browser 52 distinct scenario coverage, native ledger11/quota6/screenshot9 and macOS Electron11 are recorded separately.",
+    "Development plugin/desktop/Skill artifacts exist; production signing and hardware acceptance remain open."
+  ],
+  "remaining": [
+    "Windows real-device installation and behavior",
+    "physical multiple monitors, mixed DPI and hardware sleep/resume",
+    "real microphone, user-selected ASR and macOS Accessibility/Automation permission experience",
+    "valid Developer ID signature, macOS notarization and Windows signature",
+    "final signed artifacts: cross-platform installation, long-run test and actual recordings",
+    "configurable companion counts beyond one invited partner"
+  ],
+  "snapshot": "round4-snapshot.json",
+  "testedPackageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "statusDocument": "../implementation-status.md",
+  "boundary": "Historical round4 evidence remains historical; current capabilities require the new source-bound automated and runtime receipts. Counts beyond one partner and formal hardware/signing delivery remain incomplete.",
+  "implementedSinceSnapshot": [
+    "device-local rectangular allowed and forbidden areas with safe home routing",
+    "retained task and memory provenance timeline",
+    "one selectable installed companion role with explicit artwork capability gating"
+  ],
+  "runtimeEvidence": "Current source/package/runtime consistency is enforced by release receipts and native report hashes; historical round4 counts do not grant release approval."
+}

@@ -1,6 +1,8 @@
 ---
 name: dsh-bigfish-pet-maker
 description: Create, extend, validate and package replaceable DSH web pets from descriptions, character references or existing pet packs. Supports arbitrary extra animations, role dialogue, props, Codex pet import and conditional Codex v2 export.
+metadata:
+  version: "1.1.0"
 ---
 
 # DSH Bigfish Pet Maker
@@ -21,3 +23,7 @@ For existing Codex pet import or dual-target export, read [codex-compat.md](refe
 For extensions, retain role ID, increase `version`, append independent animation IDs and reuse approved assets where appropriate. Packs may contain more actions than the built-in character. Resource caps in the spec remain enforced. Return the actual action/frame counts; distinguish distinct art sequences from aliases and shared fallback mappings.
 
 A successful result can be installed without editing the plugin, has no missing resources, keeps quiet idle quiet, has usable fallbacks for new tools, and visibly preserves character identity. Stop after two failed repair attempts on the same visual defect and report the specific unresolved artifact; do not loop generation indefinitely.
+
+## Intelligent companion development branch
+
+The 0.7 development runtime adds optional body bounds, foot anchors, movement and touch mappings; consult `references/pack-spec.md`. Only declare capabilities supported by the target runtime. Do not label a stationary translated image as walking. Keep generated drafts separate from accepted animations, and do not count mirrored directions as separately drawn clips. The development runtime accepts optional `life`, `home`, `voice-display` and `paired` capabilities, body/per-frame accessory anchors, and `unlockAt` growth gates. Each required capability needs actual packaged artwork and validated references. Use the updated protocol and bundled validator; an old npm 0.6 runtime cannot load these new required capabilities. Voice declarations are visual poses, never recording consent or credentials. Paired pets share one local chain, Host and budget; test both actors and the prop exchange in the plugin, not just the per-animation preview. Set `body.bounds` to the visible union of all poses, including extended tails and carried props. The offline preview plays individual source sequences and can show bounds/foot guides; it does not reproduce stage clipping, movement, worn accessories or complete home/paired chains. Check those in the plugin or desktop stage, especially extreme poses and transitions.

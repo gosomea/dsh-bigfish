@@ -1,6 +1,8 @@
 node_modules/
 lib/
 dist/
+dist.bak-*/
+lib.bak-*/
 coverage/
 *.tsbuildinfo
 .DS_Store
@@ -9,6 +11,8 @@ coverage/
 !.env.example
 .probe/
 artifacts/
+docs/handoff-*.md
+docs/plans/*/validation/
 
 # Private reference uploads and generated duplicate pack assets
 assets/references/
@@ -19,3 +23,7 @@ __pycache__/
 
 # Rebuilt from examples/bigfish-playful by scripts/build.ts
 packs/playful/bundle.dshpet
+
+# Independent desktop build outputs
+desktop/renderer/
+desktop/dist/

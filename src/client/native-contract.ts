@@ -1,4 +1,4 @@
-/** Structural read-only face, checked against the pinned dsh types by the native probe. */
+/** Structural observation and explicit navigation faces, checked by the native probe. */
 export interface Observable<T> { getSnapshot(): T; subscribe(fn: () => void): () => void }
 export interface Entry { type: string; event: { type: string; seq: number; time: number; data: any } }
 export interface EventWindow {
@@ -19,7 +19,7 @@ export interface PreferenceScope {
 }
 /** Raw 0.1.7 ConfigForm face: `configForms.get(entryId)`; mutate reports acceptance by boolean. */
 export interface PreferenceForm {
-  getSnapshot(): { status: string; value: unknown; writable: boolean; mode: string; revision: number | undefined };
+  getSnapshot(): { status: string; value: unknown; writable: boolean; mode?: string; revision: number | undefined };
   subscribe(fn: () => void): () => void;
   mutate(ops: readonly { op: 'set'; path: string[]; value: any }[], expectedRevision?: number): Promise<boolean>;
 }
@@ -31,7 +31,11 @@ export interface SettingsServices {
 }
 export interface SessionStatus { pendingInteraction?: unknown }
 export interface UiSessionAdapter { current: Observable<{ key?: unknown }> }
+/** uiSession.adapter is observational; navigation belongs to the Workspace UI service. */
+export interface UiWorkspaceNavigation { openSession(sessionId: string): void }
 export interface NativeServices {
+  /** Optional on older/minimal DSH compositions; never emulate by mutating a session store. */
+  uiWorkspace?: UiWorkspaceNavigation | undefined;
   /** The list schema differs between legacy and current DSH; only legacy exposes current here. */
   sessions: { list: Observable<object>; binding(id: any): Binding | undefined };
   /** Legacy exposes pendingInteractions; current DSH moves it into sessionStatus and adapter.current. */

@@ -1,0 +1,19 @@
+{
+  "phase": "perception",
+  "accepted": false,
+  "implementationComplete": true,
+  "recordedAt": "2026-10-29T16:02:17.656715+00:00",
+  "checks": [
+    "Press-to-talk and user-configured transcription implemented; no open microphone listener.",
+    "Explicit screenshot workflow passed all 9 native checks using a local image-capable adapter.",
+    "Window geometry reads require this device explicit authorization and do not read application contents."
+  ],
+  "remaining": [
+    "Required desktop predecessor acceptance has not passed; implementation completion does not bypass its formal gate.",
+    "Real microphone/ASR and macOS permission experience are not accepted."
+  ],
+  "snapshot": "round4-snapshot.json",
+  "testedPackageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "statusDocument": "../implementation-status.md",
+  "boundary": "Local/runtime/fixture evidence is distinct from formal dual-platform signed-release acceptance."
+}

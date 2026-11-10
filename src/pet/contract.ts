@@ -1,10 +1,11 @@
+import {validateBehaviors,validateAccessoryAnchors,type PetBody,type PetBehaviors,type PetHome,type AccessoryAnchors} from './capabilities.js';
 import {safePath,readZip,writeZip,MAX_ARCHIVE} from './archive.js';
 export const PET_FORMAT_VERSION=1;
 export const requiredRoles=['idle','working','attention','success','error'] as const;
 export type Role=typeof requiredRoles[number];
-export interface PetFrame {asset:string;rect:[number,number,number,number];durationMs:number;sign?:{x:number;y:number;width:number;height:number;angle:number}}
-export interface PetAnimation {id:string;label:string;tags:string[];intensity:number;loop:boolean;weight:number;cooldownMs:number;frames:PetFrame[];speed:[number,number];scene?:string;family?:string;holdFrame?:number}
-export interface PetManifest {format:'dsh-pet';formatVersion:1;id:string;name:string;version:string;author:string;description:string;canvas:{width:number;height:number};assets:Record<string,{path:string;width:number;height:number}>;thumbnail:string;animations:string;fallbacks:Record<Role,string>;dialogue?:string;scenes?:Record<string,{asset:string}>;capabilities:string[]}
+export interface PetFrame {accessories?:AccessoryAnchors;asset:string;rect:[number,number,number,number];durationMs:number;sign?:{x:number;y:number;width:number;height:number;angle:number}}
+export interface PetAnimation {id:string;label:string;tags:string[];intensity:number;loop:boolean;weight:number;cooldownMs:number;frames:PetFrame[];speed:[number,number];scene?:string;family?:string;holdFrame?:number;unlockAt?:number}
+export interface PetManifest {home?:PetHome;body?:PetBody;behaviors?:PetBehaviors;format:'dsh-pet';formatVersion:1;id:string;name:string;version:string;author:string;description:string;canvas:{width:number;height:number};assets:Record<string,{path:string;width:number;height:number}>;thumbnail:string;animations:string;fallbacks:Record<Role,string>;dialogue?:string;scenes?:Record<string,{asset:string}>;capabilities:string[]}
 export interface PetBundle {manifest:PetManifest;animations:PetAnimation[];dialogue:Record<string,string[]>;files:Record<string,Uint8Array>;warnings:string[]}
 function object(v:any):Record<string,any>{if(!v||typeof v!=='object'||Array.isArray(v))throw Error('应为对象');return v;}
 function str(v:any,max=160){if(typeof v!=='string'||!v.trim()||v.length>max)throw Error('文字字段无效');return v;}
@@ -32,22 +33,25 @@ export function parsePet(files:Record<string,Uint8Array>):PetBundle {
  for(const [key,a]of Object.entries(assets)){id(key);object(a);if(!safePath(a.path)||!files[a.path]||! /\.(png|webp)$/i.test(a.path))throw Error('图片资源路径无效');const size=imageSize(files[a.path]!);number(a.width,1,8192);number(a.height,1,8192);if(size.width!==a.width||size.height!==a.height)throw Error(`图片尺寸不符：${a.path}`);pixels+=a.width*a.height;}
  if(pixels>32*1024*1024)throw Error('总解码像素超过 32 M');
  if(!files[p.thumbnail]||!safePath(p.thumbnail))throw Error('缺少缩略图');const thumb=imageSize(files[p.thumbnail]!);if(thumb.width*thumb.height>32*1024*1024)throw Error("缩略图尺寸超限");
- if(!Array.isArray(p.capabilities)||p.capabilities.some((c:any)=>!['sign','air-swing','scenes','look'].includes(c)))throw Error('不支持的必要能力');
+ if(!Array.isArray(p.capabilities)||p.capabilities.some((c:any)=>!['sign','air-swing','scenes','look','movement','touch','life','home','voice-display','paired'].includes(c)))throw Error('不支持的必要能力');
  const raw=json(files,str(p.animations)),animations:PetAnimation[]=[],ids=new Set<string>();let frames=0;
  if(!Array.isArray(raw)||!raw.length||raw.length>2048)throw Error('动画数量应为 1–2048');
  for(const value of raw){const a=object(value);id(a.id);if(ids.has(a.id))throw Error('动作 ID 重复');ids.add(a.id);str(a.label,80);
   if(!Array.isArray(a.tags)||!a.tags.length||a.tags.length>32)throw Error('缺少动作用途标签');a.tags.forEach(id);number(a.intensity,0,2);if(!Number.isInteger(a.intensity)||typeof a.loop!=='boolean')throw Error('动作强度或循环方式无效');
   number(a.weight,0.01,100);number(a.cooldownMs,0,3600000);
   if(a.family!==undefined)id(a.family);
+  if(a.unlockAt!==undefined){number(a.unlockAt,0,10000);if(!Number.isInteger(a.unlockAt))throw Error('动作解锁次数必须为整数');}
   if(!Array.isArray(a.frames)||!a.frames.length||a.frames.length>512||(frames+=a.frames.length)>32768)throw Error('动画帧数量超限');
   if(a.holdFrame!==undefined){number(a.holdFrame,0,a.frames.length-1);if(!Number.isInteger(a.holdFrame)||a.loop||!a.tags.includes('greeting'))throw Error('保持帧只能用于一次性空闲互动');}
   for(const f of a.frames){object(f);const asset=assets[f.asset];if(!Object.hasOwn(assets,f.asset)||!asset||!Array.isArray(f.rect)||f.rect.length!==4)throw Error('帧资源或矩形无效');const [x,y,w,h]=f.rect;number(x,0,asset.width);number(y,0,asset.height);number(w,1,asset.width);number(h,1,asset.height);if(x+w>asset.width||y+h>asset.height)throw Error('帧超出图集');if(w!==p.canvas.width||h!==p.canvas.height)throw Error('每帧尺寸必须等于角色逻辑画布（制作时先对齐）');number(f.durationMs,16,10000);
+   if(f.accessories!==undefined)validateAccessoryAnchors(f.accessories,p.canvas.width,p.canvas.height);
    if(f.sign){const s=object(f.sign);number(s.x,0,w);number(s.y,0,h);number(s.width,1,w);number(s.height,1,h);number(s.angle,-45,45);if(s.x+s.width>w||s.y+s.height>h)throw Error('牌面超出画布');}
   }
   if(!a.speed)a.speed=[1,1];if(!Array.isArray(a.speed)||a.speed.length!==2)throw Error('速度范围无效');number(a.speed[0],.5,2);number(a.speed[1],a.speed[0],2);
   if(a.scene&&(!p.scenes||!Object.hasOwn(p.scenes,a.scene)))throw Error('动作引用的场景不存在');animations.push(a as PetAnimation);
  }
- object(p.fallbacks);for(const role of requiredRoles){const a=animations.find(a=>a.id===p.fallbacks[role]);if(!a||!a.tags.includes(role))throw Error(`缺少 ${role} 基础动作映射`);if(a.intensity!==0)throw Error(`基础动作 ${role} 必须支持轻柔模式`);}
+ validateBehaviors(p,animations);
+ object(p.fallbacks);for(const role of requiredRoles){const a=animations.find(a=>a.id===p.fallbacks[role]);if(!a||!a.tags.includes(role))throw Error(`缺少 ${role} 基础动作映射`);if(a.intensity!==0)throw Error(`基础动作 ${role} 必须支持轻柔模式`);if((a.unlockAt??0)>0)throw Error(`基础动作 ${role} 不能被成长锁定`);}
  if(p.scenes)for(const [key,s]of Object.entries(object(p.scenes))){id(key);if(!Object.hasOwn(assets,object(s).asset))throw Error('场景资源不存在');}
  const dialogue=p.dialogue?object(json(files,str(p.dialogue))):{};
  for(const [key,lines]of Object.entries(dialogue)){id(key);if(!Array.isArray(lines)||lines.length>30||lines.some((s:any)=>typeof s!=='string'||!s.trim()||s.length>160||/\{(?!task\}|tool\}|file\}|elapsed\}|activeCount\}|completedCount\})[^}]*\}/.test(s)))throw Error('角色台词格式无效');}

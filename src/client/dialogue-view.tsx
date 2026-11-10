@@ -12,7 +12,7 @@ export function dialogueCategory(s:Snapshot,a?:ActivitySummary|null):Category {
  if(s.state==='idle')return 'idle';
  if(a)return a.category;if(s.state==='tool-running')return 'tool';if(s.state==='reasoning')return 'thinking';return 'writing';
 }
-export function DialogueBubble({snapshot,prefs,activity,status,actions,children,idle,now=Date.now(),roleLines,task,animation}:{snapshot:Snapshot;prefs:Preferences;activity?:ActivitySummary|null|undefined;status:string;actions:ReactNode;children:ReactNode;idle?:IdlePresentation;now?:number;roleLines?:Record<string,string[]>|undefined;task?:string|undefined;animation?:string|undefined}) {
+export function DialogueBubble({snapshot,prefs,activity,status,actions,corner,children,idle,now=Date.now(),roleLines,task,animation,overrideText,overridePriority='ordinary'}:{snapshot:Snapshot;prefs:Preferences;activity?:ActivitySummary|null|undefined;status:string;actions:ReactNode;corner?:ReactNode;children:ReactNode;idle?:IdlePresentation;now?:number;roleLines?:Record<string,string[]>|undefined;task?:string|undefined;animation?:string|undefined;overrideText?:string|undefined;overridePriority?:'ordinary'|'notice'|'interaction'}) {
  const director=useRef(new Speech());const category=dialogueCategory(snapshot,activity);
  const lines=parseLines(prefs.dialogueJson)[category]??roleLines?.[animation??'']??roleLines?.[activity?.semantic??category]??roleLines?.[category]??defaultLines[category];
  const tool=activity?.label===categoryLabels[category]?activity.toolName??activity.label:activity?.label;
@@ -20,14 +20,17 @@ export function DialogueBubble({snapshot,prefs,activity,status,actions,children,
  const values={task:taskText,tool:prefs.showTool?tool??'工具':'工具',file:prefs.showFile?activity?.file??'这个文件':'这个文件',elapsed:Math.floor((activity?.elapsed??snapshot.wallElapsed)/1000)+' 秒',activeCount:activity?.activeCount??0,completedCount:activity?.completedCount??0};
  const spoken=director.current.choose(snapshot.sessionId+':'+snapshot.turn,category,lines,now,prefs.speechSeconds,prefs.talkLevel,values,(activity?.id??'')+':'+(animation??''));
  const resting=category==='idle'&&idle&&!idle.showText;
- const text=category==='idle'&&idle?(idle.showText?idle.text:prefs.idleHideMessage?'':lines[0]??''):spoken;
+ const ordinaryText=category==='idle'&&idle?(idle.showText?idle.text:prefs.idleHideMessage?'':lines[0]??''):spoken;
+ const text=overrideText??ordinaryText;
  const detail=[categoryLabels[category],prefs.showTool&&tool!==categoryLabels[category]?tool:null,prefs.showFile?activity?.file:null,activity&&activity.activeCount>1?`${activity.activeCount} 项`:null,activity?.progress!==undefined?`${Math.round(activity.progress*100)}%`:null].filter(Boolean).join(' · ');
- const enabled=prefs.bubbleEnabled&&(prefs.bubbleText||prefs.bubbleStatus)&&!(resting&&prefs.idleHideMessage);
- const detailText=activity?detail:status;
+ const direct=!!overrideText&&overridePriority!=='ordinary';
+ const enabled=direct||prefs.bubbleEnabled&&(prefs.bubbleText||prefs.bubbleStatus)&&!(resting&&!overrideText&&prefs.idleHideMessage);
+ const detailText=overrideText?'陪你一会儿':activity?detail:status;
  const taskVisible=prefs.showTask&&task&&['awaiting-output','reasoning','generating','streaming-gap','tool-running'].includes(snapshot.state);
- return <div className={`bf-card${enabled?' bf-bubble':''}`} data-category={category} style={{width:enabled?prefs.bubbleWidth:undefined,fontSize:prefs.bubbleFont,opacity:prefs.opacity}}>
-  {enabled&&prefs.bubbleText&&taskVisible&&<div className="bf-task-context" title={task}>正在处理：{task}</div>}
-  {enabled&&prefs.bubbleText&&text&&<div className="bf-dialogue-text" title={text} aria-live="polite">{text}</div>}
+ return <div className={`bf-card${enabled?' bf-bubble':''}${corner?' bf-resizable-card':''}`} data-category={category} style={{width:enabled?prefs.bubbleWidth:128,fontSize:prefs.bubbleFont,opacity:prefs.opacity}}>
+  {corner}
+  {enabled&&prefs.bubbleText&&taskVisible&&!overrideText&&<div className="bf-task-context" title={task}>正在处理：{task}</div>}
+  {enabled&&(prefs.bubbleText||direct)&&text&&<div className="bf-dialogue-text" title={text} aria-live="polite">{text}</div>}
   <div className="bf-card-footer">
    {(enabled&&prefs.bubbleStatus)&&<span className="bf-state" title={detailText}><i data-active={['generating','reasoning','tool-running','awaiting-output'].includes(snapshot.state)}/><span className="bf-activity">{detailText}</span></span>}
    <div className="bf-card-actions">{actions}</div>

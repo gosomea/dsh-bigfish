@@ -1,3 +1,4 @@
+import {actorFoot} from './actor-layout.js';
 import {loadBuiltinExtension} from './builtin-extension.js';
 import {extendBuiltinAnimations,builtinAnimationAllowed} from '../domain/builtin-animations.js';
 import {PetDirector,frameAt,idleFrameAt,type PetInput} from '../pet/director.js';
@@ -17,6 +18,7 @@ import {whipBeat} from './whip-choreography.js';
 import {drawAirSwing} from './draw-air-swing.js';
 import {motionTransform} from './motion-transform.js';
 import {drawSceneProps} from './draw-scene.js';
+import {drawSignText} from './sign-text.js';
 const active = new Set(['generating', 'reasoning', 'streaming-gap']);
 export interface RenderStats { frames: number; lastMs: number; sprite: number; motion: string; scene: string; whipAllowed: boolean }
 /** Sprite poses plus per-motion keyframes. Separate clips make non-contact invariant under every motion. */
@@ -37,9 +39,10 @@ export class FishRenderer {
   private announced = '';
   private reactionActive = false;
   private makeExtensionDirector() {
-    if(this.extension) this.extensionDirector = new PetDirector(extendBuiltinAnimations(this.pack,this.extension.pet),Math.random,(animation,input)=>builtinAnimationAllowed(this.pack,animation,input,this.snapshot.fatigue));
+    if(this.extension) this.extensionDirector = new PetDirector(extendBuiltinAnimations(this.pack,this.extension.pet),Math.random,(animation,input)=>builtinAnimationAllowed(this.pack,animation,input,this.snapshot.fatigue),this.rotationHistory);
   }
   activityMotion = '';
+  scenery = true;
   private workMotion = new WorkMotion();
   private finishedAt:number|undefined;
   signText = '我在等哦';
@@ -63,7 +66,7 @@ export class FishRenderer {
   private onReady: (() => void) | undefined;
   readonly stats: RenderStats = { frames: 0, lastMs: 0, sprite: 0, motion: 'breathe', scene: 'rest', whipAllowed: false };
   constructor(private canvas: HTMLCanvasElement, snapshot: Snapshot, prefs: Preferences,
-    private pack: ScenePack = classicPack, onReady?: () => void) {
+    private pack: ScenePack = classicPack, onReady?: () => void, private rotationHistory = new Map<string,number>()) {
     const ctx = canvas.getContext('2d'); if (!ctx) throw new Error('Canvas 2D unavailable'); this.ctx = ctx;
     this.snapshot = snapshot; this.prefs = prefs; this.director = new Director(pack, seeded(23)); this.onReady = onReady;
     const dpr = Math.min(2, globalThis.devicePixelRatio || 1);
@@ -125,7 +128,6 @@ export class FishRenderer {
     const theme = p.scene === 'auto' ? scene.theme : p.scene;
     if (direction.sceneId !== this.lastScene) { this.lastScene = direction.sceneId; this.transitionStart = now; }
     if (direction.transition && now - this.transitionStart >= 350) this.director.completeTransition();
-    const transition = Math.min(1, (now - this.transitionStart) / 350);
     const safe = canWhip({ x: 124, y: 0, width: 216, height: 230 }, { x: 0, y: 0, width: 103, height: 225 }, 18);
     const hz = Math.min(p.maxWhipHz, this.snapshot.whipHz * p.intensity);
     const working = active.has(input.state) && safe && !reduced && !this.paused && p.enabled && p.whipEnabled;
@@ -145,8 +147,9 @@ export class FishRenderer {
     const allowed = swing.responding;
     if (allowed && Math.floor(this.phase + .58) !== Math.floor(previousPhase + .58)) this.swoosh(now);
     const beat = whipBeat(this.phase, input.pressure);
-    c.clearRect(0, 0, 340, 250);
-    drawSceneProps(c,theme, reduced ? 0 : now / 1000, input.activity, false);
+    c.clearRect(0, 0, 340, 250);delete this.canvas.dataset.signText;delete this.canvas.dataset.signLines;delete this.canvas.dataset.signFont;this.canvas.removeAttribute('aria-description');
+    this.canvas.dataset.scenery=String(this.scenery&&p.sceneryVisible);
+    if(this.scenery&&p.sceneryVisible)drawSceneProps(c,theme, reduced||p.idleMode==='quiet' ? 0 : now / 1000, input.activity, false);
     let sprite = action.sprite;
     if (p.richness === 0 && active.has(input.state)) sprite = 3;
     const t = now / 1000, speed = .7 + input.activity * 1.8;
@@ -158,8 +161,8 @@ export class FishRenderer {
     }
     if(!reduced){const amplitude=[.2,.65,1][p.richness]!;dx*=amplitude;dy*=amplitude;rotation*=amplitude;sy=1+(sy-1)*amplitude;}
     c.save(); c.beginPath(); c.rect(124, 0, 216, 230); c.clip();
-    c.globalAlpha = .7 + .3 * transition;
-    c.translate(236 + dx, 213 + dy); c.rotate(rotation); c.scale(1, sy);
+    c.globalAlpha = 1;
+    c.translate(actorFoot.x + dx, actorFoot.y + dy); c.rotate(rotation); c.scale(1, sy);
     const reacting = allowed && p.richness > 0;
     let animation = reacting ? { atlas: 'motions' as const, frames: [beat.pose], fps: 1, pingPong: false, loop: true }
       : p.richness === 0 && active.has(input.state) ? undefined : action.animation;
@@ -182,7 +185,7 @@ export class FishRenderer {
     if(extraAnimation&&extraFrame&&this.extension){
       const [sx,sy,sw,sh]=extraFrame.rect;const scale=190/this.extension.pet.manifest.canvas.width;
       c.drawImage(this.extension.images[extraFrame.asset]!,sx,sy,sw,sh,-95,-190,190,190);
-      if(extraFrame.sign){const sign=extraFrame.sign;c.save();c.translate(-95+sign.x*scale,-190+sign.y*scale);c.rotate(sign.angle*Math.PI/180);c.fillStyle='#263b63';c.font=`${Math.max(8,Math.min(14,sign.height*scale*.65))}px sans-serif`;c.textAlign='center';c.textBaseline='middle';c.fillText(idle.text.slice(0,20),sign.width*scale/2,sign.height*scale/2,sign.width*scale*.9);c.restore();}
+      if(extraFrame.sign){const sign=extraFrame.sign;c.save();c.translate(-95+sign.x*scale,-190+sign.y*scale);c.rotate(sign.angle*Math.PI/180);drawSignText(c,idle.text||this.signText,sign.width*scale/2,sign.height*scale/2,sign.width*scale*.9,sign.height*scale*.9,{minFontSize:10,maxFontSize:12});c.restore();this.canvas.dataset.signText=idle.text||this.signText;this.canvas.setAttribute('aria-description',idle.text||this.signText);}
     } else {
     if(animated&&animation!.atlas==='daily'){
       const frameLayout=layouts.daily.frames[frame]!,scale=.52;
@@ -192,17 +195,18 @@ export class FishRenderer {
       const signSet = animation?.atlas === 'signs';
       const centerY = signSet ? [.385, .191, .190, .197, .643, .636, .638, .644, .682, .684, .682, .691, .565, .535, .543, .544][frame]! : animated ? [.716, .59, .605, .62][frame]! : .64;
       const angle = signSet ? [0, 0, -.055, .09, 0, 0, 0, 0, 0, 0, 0, 0, 0, .20, -.18, 0][frame]! : 0;
-      const text = input.state==='idle' ? idle.text.slice(0,20) : this.signText;
+      const text = input.state==='idle' ? idle.text||this.signText : this.signText;
       const centerX = signSet ? [.494, .465, .439, .513, .483, .475, .470, .503, .500, .497, .467, .523, .481, .461, .474, .479][frame]! : .49;
       c.save(); c.translate(-92 + centerX * 184, -190 + centerY * 190); c.rotate(angle);
-      c.fillStyle = '#435778'; c.font = '600 10px "PingFang SC", sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
-      c.fillText(text, 0, 0, signSet && frame >= 8 && frame <= 11 ? 58 : 83); c.restore();
+      const small=signSet&&frame>=8&&frame<=11;
+      const textLayout=drawSignText(c,text,0,0,small?58:88,small?25:33,{minFontSize:10.5,maxFontSize:12.5});
+      this.canvas.dataset.signText=text;this.canvas.dataset.signLines=String(textLayout.lines.length);this.canvas.dataset.signFont=String(textLayout.fontSize);this.canvas.setAttribute('aria-description',text);c.restore();
     }
     if (action.motion === 'tea' && animation?.atlas!=='daily') { c.fillStyle = '#d2b68e'; c.fillRect(-17, -64, 23, 17); c.strokeStyle = '#a98b65'; c.strokeRect(5, -60, 7, 9); }
     if (action.motion === 'stamp') { c.fillStyle = '#759a82'; c.font = '22px sans-serif'; c.fillText('✓', 0, -61); }
     }
     c.restore();
-    drawSceneProps(c,theme, reduced ? 0 : t, input.activity, true);
+    if(this.scenery&&p.sceneryVisible)drawSceneProps(c,theme, reduced||p.idleMode==='quiet' ? 0 : t, input.activity, true);
     if (swing.visible) { c.save(); c.globalAlpha = swing.opacity; drawAirSwing(c, beat); c.restore(); }
     if (p.richness > 0 && !reduced && !stillCompletion) this.particles(input, t);
     Object.assign(this.stats, { frames: this.stats.frames + 1, lastMs: performance.now() - started, sprite, motion: action.motion, scene: theme, whipAllowed: allowed });

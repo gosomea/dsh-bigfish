@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {AirSwing} from '../src/domain/air-swing.js';
 import {WorkMotion} from '../src/domain/work-motion.js';
-import {IdleDirector} from '../src/domain/idle.js';
+import {IdleDirector,idleInterval} from '../src/domain/idle.js';
 import {Speech} from '../src/domain/speech.js';
 import {TaskContext} from '../src/domain/task-context.js';
 import {preferenceDefaults as defaults,decodePreferences} from '../src/contract/preferences.js';
@@ -25,18 +25,18 @@ test('air swing never starts outside work and interrupts recovery for a tool or 
  for(let i=0;i<40;i++)d.tick(.05,2,true,true);
  assert.equal(d.tick(.05,0,false,false).responding,false);
 });
-test('frequent idle shows a 12-second gesture with a 6-second bubble; every two bursts contain a sign',()=>{
- const d=new IdleDirector(undefined,()=>.99),p={...defaults,idleRandomText:true};let now=0,lastNonSign=false,lastText='';
+test('frequent gestures keep signs rotating while occasional speech waits thirty seconds',()=>{
+ const d=new IdleDirector(undefined,()=>.99),p={...defaults,idleRandomText:true};let now=0,lastNonSign=false,lastText='',lastSpoken=-Infinity;
  for(let i=0;i<20;i++){
   const v=d.tick(now,true,true,p),sign=v.motion==='wait-sign'||v.motion.startsWith('sign-');assert.equal(v.active,true);assert.ok(sign||!lastNonSign);lastNonSign=!sign;
-  assert.notEqual(v.text,lastText);lastText=v.text;
+  if(v.showText){assert.ok(now-lastSpoken>=30000);assert.notEqual(v.text,lastText);lastText=v.text;lastSpoken=now;}else assert.equal(v.text,lastText);
   const midway=d.tick(now+7000,true,true,p);assert.equal(midway.active,true);assert.equal(midway.showText,false);assert.equal(midway.motion,v.motion);
   assert.equal(d.tick(now+12000,true,true,p).active,false);now=d.memory.nextAt;
  }
  const silent=new IdleDirector(undefined,()=>.9).tick(0,true,true,{...defaults,dialogueJson:'{"idle":[]}'});assert.equal(silent.active,true);assert.equal(silent.showText,false);assert.ok(!silent.motion.includes('sign'));
 });
-test('new defaults are lively while an explicitly quiet existing profile stays quiet',()=>{
- assert.equal(defaults.idleMode,'frequent');assert.equal(defaults.richness,2);assert.equal(defaults.talkLevel,1);
+test('fresh profiles rest for one to three seconds and existing quiet preferences stay quiet',()=>{
+ assert.equal(defaults.idleMode,'continuous');assert.deepEqual(idleInterval(defaults),[1,3]);assert.equal(defaults.richness,2);assert.equal(defaults.talkLevel,1);
  const saved=decodePreferences({...defaults,idleMode:'quiet',richness:0,talkLevel:0});assert.equal(saved.idleMode,'quiet');assert.equal(saved.richness,0);assert.equal(saved.talkLevel,0);
 });
 test('tool poses coalesce rapid changes, wait at least four seconds, and stop immediately',()=>{

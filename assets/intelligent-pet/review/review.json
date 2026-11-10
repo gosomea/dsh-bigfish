@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-29T15:30:20.334Z",
+  "scope": "runtime-usability",
+  "authorFinalApproval": "pending",
+  "sequenceCount": 32,
+  "frameCount": 256,
+  "method": "Chromium decoded the actual runtime WebP files, applied current source-frame bounds and non-overlapping source cutouts, and rendered every authored frame at the production sequence scale. All four contacts were visually inspected after corrections.",
+  "checks": [
+    "All eight frames of every sequence are present and in source order.",
+    "Blue hair, maid clothing, whale tail and whale emblem remain identifiable across all sequences.",
+    "Neighboring feet, tails, beds, balls and reaction marks are excluded without changing source PNG/WebP pixels.",
+    "Tall lying-down entries and wide ball/nest poses fit the 680 by 500 stage with a fixed scale per sequence."
+  ],
+  "corrections": [
+    "recall frame 8 starts at source y456 to exclude previous-row shoes.",
+    "Connected-component source cutouts remove neighboring frame fragments, including all eight nest frames.",
+    "ball-catch floating balls belong to frames 6 and 7; source bounds include those props and exclude them from preceding frames.",
+    "failure-check frame 1 excludes the next frame reaction mark; frame 2 source bounds include its own mark.",
+    "lie-down uses reviewed manual exclusions because adjacent source characters touch."
+  ],
+  "limitations": [
+    "The blue edge outline is retained as part of the generated source style.",
+    "Generated frame-to-frame perspective and proportions still vary; this review establishes basic sprite usability, not final author aesthetic approval or polished skeletal animation.",
+    "Ground alignment uses the sprite crop bottom and stable stage anchor; individual skeletal foot pivots have not been authored."
+  ],
+  "sheets": [
+    {
+      "file": "review/contact-01.png",
+      "sha256": "3afa6e9b771220afc2c5be006a54765ebd8f1f790a5e1cd452021c499dbad284",
+      "sequences": [
+        "walk",
+        "stop",
+        "start-step",
+        "turn",
+        "tiptoe",
+        "edge-peek",
+        "tail-avoid",
+        "recall"
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "review/contact-02.png",
+      "sha256": "7743b643cae38b363973e273a2c8ee8dd23b9c2a1100e639ed312bc903b39717",
+      "sequences": [
+        "head-pat",
+        "ball-catch",
+        "fish-toy",
+        "tea",
+        "biscuit",
+        "tail-comb",
+        "wave",
+        "point"
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "review/contact-03.png",
+      "sha256": "c495bfbd35208375e53f270ca9cae6a28206786ff132240b58255016241db5b0",
+      "sequences": [
+        "sit-down",
+        "wake-up",
+        "sleep",
+        "stretch",
+        "lie-down",
+        "nest",
+        "desk-tidy",
+        "lamp"
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "review/contact-04.png",
+      "sha256": "957828740febab191eff7057af77165b7c794723a3b867e961bafb12d28f7a20",
+      "sequences": [
+        "task-cards",
+        "confirm-card",
+        "book-close",
+        "postcard",
+        "screen-read",
+        "think",
+        "success-bow",
+        "failure-check"
+      ],
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "walk",
+      "source": "walk-cycle.png",
+      "sourceSha256": "4fad2db7983afe1f17a47582777ad9a2cbdb34ef0a8220e8189385cb16344173",
+      "runtime": "walk-cycle.webp",
+      "runtimeSha256": "8e1f538d956608941a925048532ffd83ee2891c9f8f4b741d1b9d7d27a5d4367"
+    },
+    {
+      "id": "stop",
+      "source": "clips/stop.png",
+      "sourceSha256": "c2495d118956fa3d2b9ede932dbb01e961a9b97c63d02ab436d6f37ef234d6a6",
+      "runtime": "clips/stop.webp",
+      "runtimeSha256": "187d491c471b84b9c24d7a1dfee75a4e0095a6fbfe94e62f925b5bec665ea205"
+    },
+    {
+      "id": "start-step",
+      "source": "clips/start-step.png",
+      "sourceSha256": "b64e77dbb1f8efc93e17a21d7472d838dfd43c37233a702efc1f820ce42da88c",
+      "runtime": "clips/start-step.webp",
+      "runtimeSha256": "ceb8648313294a3acff07327d052ad74801cfa5c641ff87e12412feda447d768"
+    },
+    {
+      "id": "turn",
+      "source": "clips/turn.png",
+      "sourceSha256": "9eccd74cd20e927d97a5efea06707e0a7c3ad6827f421fe1a53cee357651d28f",
+      "runtime": "clips/turn.webp",
+      "runtimeSha256": "90cf30e41a069dcff22da4ef5e2ef5e78292218ceab5fea3c72104a7a061ff2c"
+    },
+    {
+      "id": "tiptoe",
+      "source": "clips/tiptoe.png",
+      "sourceSha256": "9e63bc901abdf0c58b6217fb576e3dc78490b0d3800822fd7e079a64cf0f1926",
+      "runtime": "clips/tiptoe.webp",
+      "runtimeSha256": "ff313a3f5371f464470bd2df4b905bc7f41a44255995805b021822de4c70248f"
+    },
+    {
+      "id": "edge-peek",
+      "source": "clips/edge-peek.png",
+      "sourceSha256": "fed9d38b9a88cc09b1013073361f7e90f1b0ad9838bd28e54249bbd5890a0b80",
+      "runtime": "clips/edge-peek.webp",
+      "runtimeSha256": "0af159113dd367dff483b804855cef6756754325e503db578ee8ce227aa47eb3"
+    },
+    {
+      "id": "tail-avoid",
+      "source": "clips/tail-avoid.png",
+      "sourceSha256": "7558dec29f9df5291b451fb61f50ebd63da0c7747475045d0acfaf07853ab1fe",
+      "runtime": "clips/tail-avoid.webp",
+      "runtimeSha256": "35d20db4f4063bc6d20d2ab43bdcba7ca57cdc0610c3a17fccbf45722b9465e1"
+    },
+    {
+      "id": "recall",
+      "source": "clips/recall.png",
+      "sourceSha256": "1126f82d4b7c2ef98a5600959878d43ce0d5690db9977922c0c3912fa2d57fa8",
+      "runtime": "clips/recall.webp",
+      "runtimeSha256": "df2096373a3894fed9a4405f8d2729350c127da26b8ae34be842ab996912c5fd"
+    },
+    {
+      "id": "head-pat",
+      "source": "clips/head-pat.png",
+      "sourceSha256": "a53cd3326ef801d3013dd77c4cb206ce17dd598f085dcee921b4d7c706b50b83",
+      "runtime": "clips/head-pat.webp",
+      "runtimeSha256": "b664d8bb5cce32dbb2df6417023413480485c796096fa1c932160e91107321f9"
+    },
+    {
+      "id": "ball-catch",
+      "source": "clips/ball-catch.png",
+      "sourceSha256": "2011d4b001f29d67c8f5c5ccc474f72d36067f2d24c808d9f42e44561e02b48f",
+      "runtime": "clips/ball-catch.webp",
+      "runtimeSha256": "94077bbb71c68298e9976211e3c1185e1ebbe5637632bedd1ee793271ea36c00"
+    },
+    {
+      "id": "fish-toy",
+      "source": "clips/fish-toy.png",
+      "sourceSha256": "764250091b623f513f28968d0ff085bef9e4b5ff3ed765a52638ad75a85c143b",
+      "runtime": "clips/fish-toy.webp",
+      "runtimeSha256": "b9fb6b4477252ac3bd59146dca2f35df8052961f8ab941e4828c9ecf61c3a10b"
+    },
+    {
+      "id": "tea",
+      "source": "clips/tea.png",
+      "sourceSha256": "e33635ddf53c94336022b5e1ea00fdef59d38963b11401773770d00dcf3c2d74",
+      "runtime": "clips/tea.webp",
+      "runtimeSha256": "c9f799a665038b117d5f7946a702e7dc56bb6d61a46f3e52386c1fa9e0f0cc7b"
+    },
+    {
+      "id": "biscuit",
+      "source": "clips/biscuit.png",
+      "sourceSha256": "5d80fbe2f55e3630f482e1a6bc63b5cb6bd55e593b204705930e5fab472b3195",
+      "runtime": "clips/biscuit.webp",
+      "runtimeSha256": "88f5610345c3d1f837f5e3de0a3e58df0c2f3e11c4b741ac1d5af5de5e441627"
+    },
+    {
+      "id": "tail-comb",
+      "source": "clips/tail-comb.png",
+      "sourceSha256": "369c0cc7b37a878d48de81689bb156602286d5e72e7928ef92a36ac0494eafbd",
+      "runtime": "clips/tail-comb.webp",
+      "runtimeSha256": "5aa90b38966c63c46a932815ce709e4e4284b042de35a7950b930dc6d63282a5"
+    },
+    {
+      "id": "wave",
+      "source": "clips/wave.png",
+      "sourceSha256": "b474489ac98e7673c3d3f21896ff6d893c849f0fbaeaa53aed52c20841044a24",
+      "runtime": "clips/wave.webp",
+      "runtimeSha256": "04bf38d3df478711f1a7ed4d2c6d1678b766245d79758f033868b75d5d8c5aa0"
+    },
+    {
+      "id": "point",
+      "source": "clips/point.png",
+      "sourceSha256": "8ad93fa689fe1f3414e75a2e1d55071630513ae7e42b8a7e55ba6282e4f75ad1",
+      "runtime": "clips/point.webp",
+      "runtimeSha256": "5e52d1452190f27d6c48d68e8fe0bed6bd7e0b88ec2dde4ef11650325e1110e5"
+    },
+    {
+      "id": "sit-down",
+      "source": "clips/sit-down.png",
+      "sourceSha256": "b2fc852c933343a78f65fd02c6cbe03a613ec7f5c89b1d5d959620c63fb1d65d",
+      "runtime": "clips/sit-down.webp",
+      "runtimeSha256": "e048214701e2f7a726de6a08deda317b93971197c57df0e0104478a0b79065ea"
+    },
+    {
+      "id": "wake-up",
+      "source": "clips/wake-up.png",
+      "sourceSha256": "185964def32f4005a3cf6ff9619147e77357a7dd116b8e6f7cba02fcaafe8441",
+      "runtime": "clips/wake-up.webp",
+      "runtimeSha256": "fc6374928cf8ebea923f96a3ae6c661046d34cb7a935b14e89f73759e12a5f87"
+    },
+    {
+      "id": "sleep",
+      "source": "clips/sleep.png",
+      "sourceSha256": "b8c062c12d720e459a658920f78ceff56cda44514183d9075a2fd5e385848bea",
+      "runtime": "clips/sleep.webp",
+      "runtimeSha256": "b1014c636f002a20545f74c5023ef63363e24948e70e7267b78732e55d9f3fbf"
+    },
+    {
+      "id": "stretch",
+      "source": "clips/stretch.png",
+      "sourceSha256": "ee66e55723516a60c276514c4f25d5ac78028e11ce7a8d929fad834600d62181",
+      "runtime": "clips/stretch.webp",
+      "runtimeSha256": "cb8143a87f72f75c7807d674f3c3a6a7ca1818e0fc58133cdb97efc5ec4e54fa"
+    },
+    {
+      "id": "lie-down",
+      "source": "clips/lie-down.png",
+      "sourceSha256": "cff0e3d85267ace19c3c271b6dafcf7482db29d87821273d6079957bdc2ed0a9",
+      "runtime": "clips/lie-down.webp",
+      "runtimeSha256": "d11cb1266b183a7e127db5e3e1afa0dfd75897b80d6aacf29229e27baa0b631c"
+    },
+    {
+      "id": "nest",
+      "source": "clips/nest.png",
+      "sourceSha256": "1ce054871bf59019cb3871822370d7519fdf9c9e7a42583096e37929ff89955f",
+      "runtime": "clips/nest.webp",
+      "runtimeSha256": "ad67b3dc42ad4eb21d583990606f6e1220e18e46bc59c5b0e30bd5df4b3f5d1d"
+    },
+    {
+      "id": "desk-tidy",
+      "source": "clips/desk-tidy.png",
+      "sourceSha256": "f15eb5d4c50203ad0f811d41178c77eed59115a7d989fd6fc6bf3f462c6bb599",
+      "runtime": "clips/desk-tidy.webp",
+      "runtimeSha256": "cc9966ee7af992367f17e17e2ab28da877737977276b4d38f66ec0f2b1f10c49"
+    },
+    {
+      "id": "lamp",
+      "source": "clips/lamp.png",
+      "sourceSha256": "1f03e39854087529049ad5fa26754d6c82792f93ac9acff3816dccb38005cdcd",
+      "runtime": "clips/lamp.webp",
+      "runtimeSha256": "7e3e5fcd11a48ca160c9841f57096cb9caa96a920dc3a2222ebc49ecd0a5d0a9"
+    },
+    {
+      "id": "task-cards",
+      "source": "clips/task-cards.png",
+      "sourceSha256": "720dce911743ea5ac30bc30b59977096dbcf1706d8c2140b32821b792a8b2f6d",
+      "runtime": "clips/task-cards.webp",
+      "runtimeSha256": "3fbe8bfe1436c39a0170f40332f97d7e23c5e95067186e799889bb444538b064"
+    },
+    {
+      "id": "confirm-card",
+      "source": "clips/confirm-card.png",
+      "sourceSha256": "a84ca06d4c1888caba66597d0cf3ea90b39b2574d27f8f8f0fb72eb0430e19eb",
+      "runtime": "clips/confirm-card.webp",
+      "runtimeSha256": "12ea807b150b73f2c20476875cfa34299593e3635f696a62c49c6a637518ffeb"
+    },
+    {
+      "id": "book-close",
+      "source": "clips/book-close.png",
+      "sourceSha256": "9e3bd3578f9dfefb3004da79fae0d4b4b6dba41e74f0a3bd6b7097cbdb097cb9",
+      "runtime": "clips/book-close.webp",
+      "runtimeSha256": "be3dc034422a7accb9f6554703baceb27616a66dc13bc7e3b3a31cb1eb28ce35"
+    },
+    {
+      "id": "postcard",
+      "source": "clips/postcard.png",
+      "sourceSha256": "55f0912f9383360ddeb0c88ab6a0c89bd49c431def4ad92c7ebc2e23b82588c4",
+      "runtime": "clips/postcard.webp",
+      "runtimeSha256": "383969b66c293c5e99b48b479a50808b445edfc508f208ad088a45f4790ca9c5"
+    },
+    {
+      "id": "screen-read",
+      "source": "clips/screen-read.png",
+      "sourceSha256": "9d534997b505a4dffd3304d08ae3f42667d568d2c5c15313bf81ff07377dfc4a",
+      "runtime": "clips/screen-read.webp",
+      "runtimeSha256": "dd91f17aa04cfc45f45219042b5e0183b361959eee268a10b66e05edfd8841df"
+    },
+    {
+      "id": "think",
+      "source": "clips/think.png",
+      "sourceSha256": "f379c503f23b66cc4f2b764441937b0f7b9d7f2227ce7dbe680547be3cd1277e",
+      "runtime": "clips/think.webp",
+      "runtimeSha256": "44794fd114cf90ecd692c29372010efa7b8f0d6172a67532a4dd2569bcf59925"
+    },
+    {
+      "id": "success-bow",
+      "source": "clips/success-bow.png",
+      "sourceSha256": "57df8f30ddca7b1fdb43f6ecdc4e79246fa2bf49478a5145f9e340c19df011d8",
+      "runtime": "clips/success-bow.webp",
+      "runtimeSha256": "41dd90566d720a984a73f753079de7024fb6428a5d8d48493c665fc4a27bfdbf"
+    },
+    {
+      "id": "failure-check",
+      "source": "clips/failure-check.png",
+      "sourceSha256": "05bd8dfc7f68600a71a2f6677ba278df8ece895eeb1689befbcfe07fb93c839b",
+      "runtime": "clips/failure-check.webp",
+      "runtimeSha256": "63c8d76bd7787f80abfce1223143db2c330a6e463fcdf5a4efaa07ad02f5fe94"
+    }
+  ],
+  "frameBoundsSha256": "6f0bbf7bbc62d981e995c82aeef15f3212c76288f7699e043ca3bde51392649a"
+}

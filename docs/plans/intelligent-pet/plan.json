@@ -1,0 +1,404 @@
+{
+  "schema_version": 1,
+  "id": "bigfish-intelligent-pet",
+  "title": "大肥鱼智能宠物",
+  "objectives": {
+    "foundation": "配置与身体",
+    "intelligence": "管家与智能",
+    "desktop": "桌面",
+    "life": "完整生活",
+    "perception": "语音与感知",
+    "delivery": "全能交付"
+  },
+  "constraints": [
+    "费用与授权独立于方案",
+    "全能型须八组能力实际验收"
+  ],
+  "documents": [
+    "docs/plans/intelligent-pet/plans.md"
+  ],
+  "final": "delivery",
+  "nodes": [
+    {
+      "id": "foundation",
+      "title": "配置与身体",
+      "kind": "task",
+      "objectives": [
+        "foundation"
+      ],
+      "depends_on": [],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/foundation.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "foundation"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    },
+    {
+      "id": "intelligence",
+      "title": "管家与智能",
+      "kind": "task",
+      "objectives": [
+        "intelligence"
+      ],
+      "depends_on": [
+        "foundation"
+      ],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/intelligence.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "intelligence"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    },
+    {
+      "id": "desktop",
+      "title": "桌面",
+      "kind": "task",
+      "objectives": [
+        "desktop"
+      ],
+      "depends_on": [
+        "intelligence"
+      ],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/desktop.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "desktop"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    },
+    {
+      "id": "life",
+      "title": "完整生活",
+      "kind": "task",
+      "objectives": [
+        "life"
+      ],
+      "depends_on": [
+        "desktop"
+      ],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/life.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "life"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    },
+    {
+      "id": "perception",
+      "title": "语音与感知",
+      "kind": "task",
+      "objectives": [
+        "perception"
+      ],
+      "depends_on": [
+        "life"
+      ],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/perception.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "perception"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    },
+    {
+      "id": "delivery",
+      "title": "全能交付",
+      "kind": "gate",
+      "objectives": [
+        "foundation",
+        "intelligence",
+        "desktop",
+        "life",
+        "perception",
+        "delivery"
+      ],
+      "depends_on": [
+        "perception"
+      ],
+      "requires_gates": [],
+      "inputs": [
+        "package.json",
+        "tsconfig.json",
+        "docs/plans/intelligent-pet/verify.py",
+        "docs/plans/intelligent-pet/evidence/round4-snapshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-ledger.json",
+        "docs/plans/intelligent-pet/evidence/round4-quota.json",
+        "docs/plans/intelligent-pet/evidence/round4-screenshot.json",
+        "docs/plans/intelligent-pet/evidence/round4-electron.json",
+        "docs/plans/intelligent-pet/evidence/round4-node.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-full.log",
+        "docs/plans/intelligent-pet/evidence/round4-browser-repair.log",
+        "docs/plans/intelligent-pet/evidence/round4-dmg-verify.log",
+        "docs/plans/intelligent-pet/evidence/round4-permissions.json"
+      ],
+      "outputs": [
+        "docs/plans/intelligent-pet/evidence/delivery.json"
+      ],
+      "writes": [
+        "src",
+        "tests",
+        "browser-tests",
+        "desktop",
+        "assets",
+        "examples",
+        "packs",
+        "scripts",
+        "skills",
+        "docs",
+        "package.json",
+        "pnpm-lock.yaml",
+        "README.md",
+        ".gitignore"
+      ],
+      "resources": [
+        "bigfish-source"
+      ],
+      "checks": [
+        {
+          "id": "acceptance",
+          "argv": [
+            "{python}",
+            "docs/plans/intelligent-pet/verify.py",
+            "delivery"
+          ],
+          "cwd": ".",
+          "timeout": 60,
+          "expected_exit": 0
+        }
+      ],
+      "review": false
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+[WebServer] (node:19222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ tsx scripts/serve.ts
+[WebServer] (node:19235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19246) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 52 tests using 1 worker
+
+(node:19258) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19258) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 browser-tests/adventures.spec.ts:2:1 › three local adventures use real clips, honor reduced motion, and never request a model (12.2s)
+  ✓   2 browser-tests/backup.spec.ts:4:1 › backup exports, previews without mutation and restores roles, settings and choreography (11.5s)
+  ✓   3 browser-tests/backup.spec.ts:20:1 › restore refuses stale preview and rolls back preferences when browser catalog changed (5.7s)
+  ✓   4 browser-tests/backup.spec.ts:28:1 › tea, wipe and stretch use distinct authored frames and settle after finishing (14.7s)
+  ✓   5 browser-tests/close-settings.spec.ts:3:48 › popover close button stays visible and clickable at the bottom on desktop and mobile (3.5s)
+  ✓   6 browser-tests/close-settings.spec.ts:3:48 › modal close button stays visible and clickable at the bottom on desktop and mobile (3.4s)
+  ✓   7 browser-tests/companion-clips.spec.ts:3:1 › all 32 generated sequences load and play; one-shots hold their final pose (1.2m)
+  ✓   8 browser-tests/companion-clips.spec.ts:20:1 › direct head touch uses new frames; toy responds while settings remain open (7.8s)
+  ✘   9 browser-tests/companion-living.spec.ts:34:1 › local life plays an entry, holds the final pose, and yields without model calls (1.5m)
+(node:25871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:25871) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 browser-tests/companion-living.spec.ts:45:1 › new work immediately interrupts idle sleep instead of hiding output behind a wake-up scene (2.0m)
+(node:29424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 browser-tests/companion-living.spec.ts:55:1 › direct interaction and important waiting state take priority over a living scene (1.5m)
+  ✓  12 browser-tests/companion-living.spec.ts:65:1 › quiet idle does not start life scenes after long simulated rests or a reload (4.1s)
+  ✓  13 browser-tests/encouragement.spec.ts:2:1 › quick switch stops active whip and reaction, persists and preserves pace across role switches (8.1s)
+  ✓  14 browser-tests/life-programs.spec.ts:34:1 › a selected outfit is rendered on the actual Widget and survives reload without model calls (4.3s)
+  ✓  15 browser-tests/life-programs.spec.ts:46:1 › growth locks block an unearned paired chain and direct toy reaction; disabling locks really enables it (3.3s)
+  ✓  16 browser-tests/life-programs.spec.ts:64:1 › one Widget plays both real actors through greeting, exchange, tea and farewell then returns to quiet (35.0s)
+  ✓  17 browser-tests/life-programs.spec.ts:88:1 › direct interaction, a waiting task and new work preempt a paired performance without replaying it (13.1s)
+  ✓  18 browser-tests/lifestyle.spec.ts:2:1 › preset differences require application; custom naming persists without model calls (3.2s)
+  ✓  19 browser-tests/lifestyle.spec.ts:14:1 › quiet mode suppresses idle gestures and direct interaction remains available (2.0s)
+  ✓  20 browser-tests/lifestyle.spec.ts:20:1 › nearby walk uses authored frames, remains on screen, and stops when work starts (14.0s)
+  ✓  21 browser-tests/pets.spec.ts:4:1 › import custom role, preview custom actions, persist, switch back and keep preferences (9.5s)
+  ✓  22 browser-tests/pets.spec.ts:11:1 › new role honors quiet idle, real frame changes, reduced mode, drag and icon (4.9s)
+  ✓  23 browser-tests/pets.spec.ts:19:1 › invalid role archive keeps current pet and shows a useful error (2.1s)
+  ✓  24 browser-tests/pets.spec.ts:21:1 › built-in role previews all 101 motions without changing the selected role or preferences (16.6s)
+  ✓  25 browser-tests/pets.spec.ts:37:1 › adult Bigfish imports, previews every animation and preserves the original pet until selected (18.1s)
+  ✓  26 browser-tests/pets.spec.ts:56:1 › external role keeps identical bounds across air-swing and motion settings (4.5s)
+  ✓  27 browser-tests/pets.spec.ts:66:1 › refined reading, repair and quiet frames animate; confirmation finishes and holds (15.3s)
+  ✓  28 browser-tests/pets.spec.ts:76:1 › closing settings during image decode releases the pending preview object URLs (6.8s)
+  ✓  29 browser-tests/playful.spec.ts:3:1 › built-in Bigfish previews all 101 old and new motions without installing another role (17.9s)
+  ✓  30 browser-tests/playful.spec.ts:27:1 › new built-in idle signs use action dialogue and honor quiet and reduced settings (9.0s)
+  ✓  31 browser-tests/preview.spec.ts:2:1 › preview renders generated sprites, responds to task state, and preserves settings (3.3s)
+  ✓  32 browser-tests/preview.spec.ts:23:1 › floating controls synchronize settings, collapse, drag and reject invalid packs (2.1s)
+  ✓  33 browser-tests/preview.spec.ts:40:1 › narrow screen keeps preview controls in the viewport (1.8s)
+  ✓  34 browser-tests/preview.spec.ts:47:1 › five sign routines play actual image frames and remain non-contact (7.2s)
+  ✓  35 browser-tests/preview.spec.ts:67:1 › quiet mode stops high-energy frame cycling while keeping the companion visible (1.8s)
+  ✓  36 browser-tests/preview.spec.ts:75:1 › pet body and collapsed icon drag without accidental expansion; positions survive refresh (3.2s)
+  ✓  37 browser-tests/preview.spec.ts:92:1 › air swing drives the rendered expression and stops during tool execution (5.0s)
+  ✓  38 browser-tests/preview.spec.ts:104:1 › editable dialogue persists, previews animation, and tool rules validate (3.3s)
+  ✓  39 browser-tests/preview.spec.ts:115:1 › one card stays above the pet, with stats and controls together (1.7s)
+  ✓  40 browser-tests/preview.spec.ts:128:1 › long dialogue, large pet and viewport changes respect measured bounds (1.8s)
+  ✓  41 browser-tests/preview.spec.ts:146:1 › quiet companion does not rotate signs or messages over ten minutes and reload (3.7s)
+  ✓  42 browser-tests/preview.spec.ts:155:1 › settings preview shares idle budget and display-only-buttons has no status leakage (2.1s)
+  ✓  43 browser-tests/preview.spec.ts:164:1 › animation tiers, reduced motion, explicit whip off and saved preferences change actual rendering (4.0s)
+  ✓  44 browser-tests/preview.spec.ts:173:1 › lively defaults keep the sign after speech hides and schedule another complete idle gesture (2.7s)
+  ✘  45 browser-tests/scene-art.spec.ts:2:1 › painted themes and each furniture switch affect the actual pet stage without inference (9.1s)
+(node:41151) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41151) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  46 browser-tests/screenshot.spec.ts:2:1 › sharing a selected file previews and requires per-image consent; demo never sends or captures a screen (2.0s)
+  ✓  47 browser-tests/settings-review.spec.ts:3:1 › six frequency choices, paired custom bounds and sign preferences persist and affect the widget (3.7s)
+  ✓  48 browser-tests/settings-review.spec.ts:23:1 › cancelled task returns to idle interaction and reduced motion clearly explains suppression (2.7s)
+  ✓  49 browser-tests/settings-review.spec.ts:35:1 › text-only display accurately round-trips and sign finishes rather than repeatedly lifting (8.9s)
+  ✓  50 browser-tests/theme.spec.ts:22:1 › settings follow the host theme immediately, with readable controls and previews (3.3s)
+  ✓  51 browser-tests/voice.spec.ts:2:1 › voice needs a direct hold, fills text without model calls, and cancels on hiding (2.0s)
+  ✓  52 browser-tests/voice.spec.ts:22:1 › unsupported devices show an explanation and never request a microphone (1.7s)
+
+
+  1) browser-tests/companion-living.spec.ts:34:1 › local life plays an entry, holds the final pose, and yields without model calls 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: expect.toHaveAttribute: Target page, context or browser has been closed
+
+      38 |  await untilMotion(page,pet,'sit-down',125);
+      39 |  await page.clock.runFor(2700);await expect(canvas).toHaveAttribute('data-frame','7');await expect(canvas).toHaveAttribute('data-phase','hold');
+    > 40 |  await page.clock.runFor(3000);await expect(canvas).toHaveAttribute('data-motion','sit-down');await expect(canvas).toHaveAttribute('data-frame','7');
+         |                                                     ^
+      41 |  await untilMotion(page,pet,'stretch',15);await expect(canvas).toHaveAttribute('data-whip','false');
+      42 |  expect(hostRequests).toBe(0);
+      43 | });
+        at ./browser-tests/companion-living.spec.ts:40:53
+
+    Error Context: artifacts/browser-results/companion-living-local-lif-3595c--yields-without-model-calls/error-context.md
+
+  2) browser-tests/companion-living.spec.ts:45:1 › new work immediately interrupts idle sleep instead of hiding output behind a wake-up scene 
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.evaluate: Target page, context or browser has been closed
+
+      16 |  const timeline:{routine:string|null;motion:string|null;at:number}[]=[];
+      17 |  for(let i=0;i<seconds;i++){
+    > 18 |   const sample=await pet.evaluate(el=>({routine:el.getAttribute('data-routine'),motion:el.querySelector('canvas')?.getAttribute('data-motion')??null,at:Date.now()}));
+         |                          ^
+      19 |   if(timeline.at(-1)?.routine!==sample.routine||timeline.at(-1)?.motion!==sample.motion)timeline.push(sample);
+      20 |   if(sample.routine===motion){
+      21 |    // Native image.decode() is not controlled by the virtual clock. Do not skip an entire
+        at untilMotion (./browser-tests/companion-living.spec.ts:18:26)
+        at ./browser-tests/companion-living.spec.ts:47:2
+
+    Error Context: artifacts/browser-results/companion-living-new-work--85fe3-tput-behind-a-wake-up-scene/error-context.md
+
+  3) browser-tests/scene-art.spec.ts:2:1 › painted themes and each furniture switch affect the actual pet stage without inference 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.bf-home')
+    Expected: "garden"
+    Received: "sea"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.bf-home')
+        9 × locator resolved to <svg role="img" class="bf-home" data-theme="sea" data-art="painted" aria-label="大肥鱼的小窝" viewBox="0 0 340 250">…</svg>
+          - unexpected value "sea"
+
+
+      11 |  for(const [name,id]of [['小床','bed'],['书桌','desk'],['灯','lamp']]){await expect(scene.locator(`[data-scene-prop="${id}"]`)).toHaveCount(1);await settings.getByLabel(name!,{exact:true}).uncheck();await expect(scene.locator(`[data-scene-prop="${id}"]`)).toHaveCount(0);}
+      12 |  await settings.getByRole('button',{name:'关闭',exact:true}).click();await pet.screenshot({path:'artifacts/companion/painted-garden-widget.png'});expect(calls).toBe(0);
+    > 13 |  await page.reload();await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();await expect(page.locator('.bf-home')).toHaveAttribute('data-theme','garden');await expect(page.locator('.bf-home [data-scene-prop]')).toHaveCount(0);
+         |                                                                                                                              ^
+      14 | });
+      15 |
+        at ./browser-tests/scene-art.spec.ts:13:126
+
+    Error Context: artifacts/browser-results/scene-art-painted-themes-a-3c99d-pet-stage-without-inference/error-context.md
+
+  3 failed
+    browser-tests/companion-living.spec.ts:34:1 › local life plays an entry, holds the final pose, and yields without model calls 
+    browser-tests/companion-living.spec.ts:45:1 › new work immediately interrupts idle sleep instead of hiding output behind a wake-up scene 
+    browser-tests/scene-art.spec.ts:2:1 › painted themes and each furniture switch affect the actual pet stage without inference 
+  49 passed (11.7m)

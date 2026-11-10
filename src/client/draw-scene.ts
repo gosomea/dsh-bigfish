@@ -1,72 +1,30 @@
-export function drawSceneProps(
-  c: CanvasRenderingContext2D,
-  theme: string,
-  t: number,
-  activity: number,
-  front: boolean,
-) {
-  c.save();
-  c.lineWidth = 2;
-  c.strokeStyle = "#7d92bb";
-  if (!front) {
-    c.fillStyle = "#5276b51b";
-    c.beginPath();
-    c.ellipse(233, 221, 89, 12, 0, 0, Math.PI * 2);
-    c.fill();
-    if (theme === "library") {
-      for (let i = 0; i < 5; i++) {
-        c.fillStyle = ["#8eaad1", "#decbae", "#b4c7e2"][i % 3]!;
-        c.fillRect(130 + i * 13, 161 - (i % 2) * 15, 10, 46 + (i % 2) * 15);
-      }
-    }
-    if (theme === "workshop") {
-      c.fillStyle = "#a9bddb";
-      c.fillRect(126, 190, 32, 29);
-      c.strokeRect(126, 190, 32, 29);
-      c.beginPath();
-      c.moveTo(136, 190);
-      c.lineTo(136, 181);
-      c.lineTo(148, 181);
-      c.lineTo(148, 190);
-      c.stroke();
-    }
-    if (theme === "rest") {
-      c.fillStyle = "#c5d4e9";
-      c.beginPath();
-      c.ellipse(238, 218, 84, 14, 0, 0, 7);
-      c.fill();
-    }
-    if (theme === "delivery") {
-      c.fillStyle = "#96b2db";
-      c.fillRect(140, 223, 187, 6);
-    }
-  } else {
-    if (theme === "desk") {
-      c.fillStyle = "#c5d6ed";
-      c.fillRect(131, 204, 203, 10);
-      c.fillStyle = "#849fc6";
-      c.fillRect(140, 214, 7, 17);
-      c.fillRect(321, 214, 7, 17);
-      c.fillStyle = "#eef4fe";
-      c.fillRect(172, 198, 83, 6);
-      c.fillStyle = "#8b9ebd";
-      for (let i = 0; i < 10; i++) c.fillRect(176 + i * 7, 199, 4, 2);
-      c.fillStyle = "#e3c69b";
-      c.fillRect(298, 188, 16, 16);
-      c.strokeRect(312, 192, 7, 7);
-    }
-    if (theme === "treadmill") {
-      c.fillStyle = "#7b97bf";
-      c.fillRect(141, 213, 187, 13);
-      c.fillStyle = "#dbe7f9";
-      const scroll = (t * (15 + 25 * activity)) % 22;
-      for (let i = 0; i < 8; i++) c.fillRect(146 + i * 22 - scroll, 217, 12, 3);
-      c.beginPath();
-      c.moveTo(327, 214);
-      c.lineTo(327, 147);
-      c.lineTo(306, 147);
-      c.stroke();
-    }
+import {drawSceneArt} from './scene-art.js';
+import {workFurniture} from './scene-state.js';
+/** Workspace decoration uses the same painted material and scale as the home, with local task cues. */
+export function drawSceneProps(c:CanvasRenderingContext2D,theme:string,t:number,activity:number,front:boolean){
+ c.save();
+ if(!front){
+  const backdrop=theme==='delivery'?'garden':theme==='library'?'night':'sea';
+  c.fillStyle='#5276b51b';c.beginPath();c.ellipse(233,221,89,12,0,0,Math.PI*2);c.fill();
+  if(theme==='library'){const p=workFurniture.shelf;drawSceneArt(c,'shelf',p.x,p.y,p.width,p.height);}
+  else if(theme==='workshop'||theme==='desk'){const p=workFurniture.desk;drawSceneArt(c,'desk',p.x,p.y,p.width,p.height);}
+  else if(theme==='rest'){const p=workFurniture.bed;drawSceneArt(c,'bed',p.x,p.y,p.width,p.height);}
+  else if(theme==='delivery'){const p=workFurniture.shelf;drawSceneArt(c,'shelf',p.x,p.y,p.width,p.height);}
+  if(theme!=='treadmill'){
+   c.save();c.strokeStyle=backdrop==='night'?'#b7c8e6':'#91c6d8';c.lineWidth=.9;
+   for(let i=0;i<3;i++){c.globalAlpha=.25+(t?Math.sin(t*.7+i)*.15:0);c.beginPath();c.ellipse(55+i*10,157+i*9,16+i*2,1.1,0,0,Math.PI*2);c.stroke();}c.restore();
   }
-  c.restore();
+ }else{
+  if(theme==='desk'||theme==='workshop'){
+   const glow=c.createRadialGradient(112,151,2,112,151,32);glow.addColorStop(0,`rgba(255,226,163,${.2+(t?Math.sin(t*.9)*.04:0)})`);glow.addColorStop(1,'rgba(255,226,163,0)');c.fillStyle=glow;c.fillRect(78,117,68,68);
+   c.strokeStyle='#d6dfeb';c.lineWidth=1.2;
+   for(let i=0;i<2;i++){const drift=t?Math.sin(t*.8+i)*1.8:0;c.beginPath();c.moveTo(137+i*5,169);c.quadraticCurveTo(132+i*5+drift,164,137+i*5,158);c.stroke();}
+  }
+  if(theme==='treadmill'){
+   c.fillStyle='#7b97bf';c.fillRect(141,213,187,13);c.fillStyle='#dbe7f9';const scroll=(t*(15+25*activity))%22;
+   for(let i=0;i<8;i++)c.fillRect(146+i*22-scroll,217,12,3);
+   c.strokeStyle='#7d92bb';c.lineWidth=2;c.beginPath();c.moveTo(327,214);c.lineTo(327,147);c.lineTo(306,147);c.stroke();
+  }
+ }
+ c.restore();
 }

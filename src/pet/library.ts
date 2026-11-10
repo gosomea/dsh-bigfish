@@ -9,6 +9,7 @@ export interface LoadedPet {
   release: () => void;
 }
 const endpoint = "/api/bigfish-pets";
+export type PetTransport=(query:string,bytes?:Uint8Array)=>Promise<Response>;
 export async function loadImages(
   key: string,
   pet: PetBundle,
@@ -137,6 +138,7 @@ async function localRecords<T>(
 }
 const empty = (): PetCatalog => ({ selected: null, entries: [] });
 export class PetLibrary {
+  private transport:PetTransport|undefined;
   native = false;
   catalog: PetCatalog = empty();
   active: LoadedPet | null = null;
@@ -144,6 +146,9 @@ export class PetLibrary {
   private listeners = new Set<() => void>();
   private revision = 0;
   private generation = 0;
+  private initialization = 0;
+  /** Invalidates read-only secondary asset leases when the Host/transport changes. */
+  get scope() { return this.initialization; }
   private timer: ReturnType<typeof setInterval> | undefined;
   subscribe = (fn: () => void) => {
     this.listeners.add(fn);
@@ -156,22 +161,26 @@ export class PetLibrary {
     this.revision++;
     this.listeners.forEach((fn) => fn());
   }
-  async init(native: boolean) {
+  async init(native: boolean,transport?:PetTransport) {
+    const initialization=++this.initialization;
+    clearInterval(this.timer);this.transport=transport;
     this.native = native;
     await this.refresh();
-    if (native)
+    if (native&&initialization===this.initialization)
       this.timer = setInterval(() => {
         void this.refresh().catch(() => {});
       }, 15000);
   }
   dispose() {
     clearInterval(this.timer);
+    this.initialization++;
     this.generation++;
     this.active?.release();
     this.active = null;
+    this.catalog=empty();this.error='';this.emit();
   }
   private async request(query = "", bytes?: Uint8Array) {
-    const r = await fetch(endpoint + (bytes ? "-upload" : "") + query, {
+    const r = this.transport?await this.transport(query,bytes):await fetch(endpoint + (bytes ? "-upload" : "") + query, {
       method: bytes || query.startsWith("?op=") ? "POST" : "GET",
       ...(bytes ? { body: bytes.slice() } : {}),
       cache: "no-store",
@@ -199,6 +208,7 @@ export class PetLibrary {
       const catalog: PetCatalog = this.native
         ? await (await this.request()).json()
         : ((await local<PetCatalog>("catalog")) ?? empty());
+      if(generation!==this.generation)return;
       let loaded: LoadedPet | null = this.active;
       if (catalog.selected !== this.active?.key) {
         loaded = catalog.selected
@@ -264,16 +274,29 @@ export class PetLibrary {
     return key;
   }
   async select(key: string | null) {
+    const initialization = this.initialization;
+    const current = () => {
+      if (initialization !== this.initialization)
+        throw Error("Host 已切换，未应用旧角色选择，请重试");
+    };
     let pending: LoadedPet | undefined;
-    if (key)
-      pending = await loadImages(key, await decodePet(await this.bytes(key)));
     try {
+      if (key) {
+        const bytes = await this.bytes(key);
+        current();
+        const pet = await decodePet(bytes);
+        current();
+        pending = await loadImages(key, pet);
+        current();
+      }
+      current();
       if (this.native)
         await this.request(
           "?op=select" + (key ? "&key=" + encodeURIComponent(key) : ""),
         );
       else
         await localRecords((r, put) => {
+          current();
           const c: PetCatalog = r.get("catalog") ?? empty();
           if (key && !c.entries.some((e) => e.key === key))
             throw Error("角色不存在");
@@ -281,10 +304,13 @@ export class PetLibrary {
           c.revision = crypto.randomUUID();
           put("catalog", c);
         }, true);
+      current();
     } finally {
       pending?.release();
     }
+    current();
     await this.refresh();
+    current();
   }
   async remove(key: string) {
     if (this.native)

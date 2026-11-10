@@ -7,7 +7,12 @@ mkdir -p "$root/artifacts"
 docker run --rm --init -e BIGFISH_NODE="$version" -e BIGFISH_LINUX_BROWSER="${BIGFISH_LINUX_BROWSER:-0}" -v "$root:/source:ro" -v "$root/artifacts:/reports" "node:$version-bookworm-slim" bash -euo pipefail -c '
  mkdir /work; cd /work
  cp /source/package.json /source/pnpm-lock.yaml /source/tsconfig.json /source/tsconfig.build.json /source/pnpm-workspace.yaml /source/playwright.config.ts .
- cp -R /source/src /source/tests /source/scripts /source/packs /source/assets /source/examples /source/skills /source/docs /source/browser-tests .
+ cp -R /source/bin /source/src /source/tests /source/scripts /source/packs /source/assets /source/examples /source/skills /source/docs /source/browser-tests .
+ mkdir desktop
+ cp /source/desktop/*.mjs /source/desktop/*.cjs /source/desktop/*.mts /source/desktop/package.json /source/desktop/package-lock.json desktop/
+ cp -R /source/desktop/build desktop/
+ apt-get update
+ apt-get install -y --no-install-recommends python3
  npm install --global pnpm@11.7.0 --registry=https://registry.npmjs.org
  pnpm install --frozen-lockfile
  pnpm check

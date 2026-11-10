@@ -8,9 +8,11 @@ import {
   type DecodedBackup,
 } from "../pet/backup.js";
 import type { Companion } from "./controller.js";
+import { useSettingsDraftGuard } from "./settings-draft-guard.js";
 
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e));
 export function BackupSettings({ controller }: { controller: Companion }) {
+  const { resetPreferences } = useSettingsDraftGuard();
   const file = useRef<HTMLInputElement>(null),
     sequence = useRef(0);
   const [busy, setBusy] = useState(false),
@@ -92,9 +94,10 @@ export function BackupSettings({ controller }: { controller: Companion }) {
         localStorage,
         petLibrary,
       );
+      resetPreferences();
       dispatchEvent(new Event("bigfish:pack"));
       setStatus(
-        "恢复完成。已有角色已保留，角色选择、偏好、台词和动作编排已恢复。",
+        "恢复完成。已有角色已保留，角色选择、偏好、台词和动作编排已恢复；未保存的偏好草稿已重置。",
       );
     } catch (e) {
       setStatus(message(e));

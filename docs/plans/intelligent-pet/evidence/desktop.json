@@ -1,0 +1,22 @@
+{
+  "phase": "desktop",
+  "accepted": false,
+  "implementationComplete": true,
+  "recordedAt": "2026-10-29T16:02:17.656715+00:00",
+  "checks": [
+    "macOS real Electron: 11 contract checks passed.",
+    "macOS arm64 DMG generated; hdiutil verify reported VALID.",
+    "Native ledger separately verified shared desktop settings, exact session navigation and cross-site rejection."
+  ],
+  "remaining": [
+    "Windows real-device installation and behavior",
+    "physical multiple monitors, mixed DPI and hardware sleep/resume",
+    "real microphone, user-selected ASR and macOS Accessibility/Automation permission experience",
+    "valid Developer ID signature, macOS notarization and Windows signature",
+    "final signed artifacts: cross-platform installation, long-run test and actual recordings"
+  ],
+  "snapshot": "round4-snapshot.json",
+  "testedPackageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "statusDocument": "../implementation-status.md",
+  "boundary": "Local/runtime/fixture evidence is distinct from formal dual-platform signed-release acceptance."
+}

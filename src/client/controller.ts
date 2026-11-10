@@ -11,6 +11,9 @@ import { PreferenceStore } from './preferences-store.js';
 export interface CompanionView { task?:string|undefined; recentTools?:readonly string[]; activity?: ActivitySummary | null; snapshot: Snapshot; model: string; issue: string | null; compatibility: DshBridgeStatus; demo: boolean }
 export interface Companion {
   preferences: PreferenceStore; getSnapshot(): CompanionView; subscribe(fn: () => void): () => void;
+  currentModel?(): {provider:string;model:string}|null;
+  canOpenSession?(): boolean;
+  openSession?(sessionId: string): Promise<void> | void;
   resetLearning(all?: boolean): void; dispose(): void;
 }
 const terminalState: Record<string, WorkState> = { completed: 'completed', aborted: 'cancelled', error: 'failed',
@@ -82,6 +85,19 @@ export class NativeCompanion implements Companion {
     this.timer = setInterval(() => this.publish(), 200);
   }
   getSnapshot = (): CompanionView => this.view;
+  currentModel = (): {provider:string;model:string}|null => {
+    let next:unknown,projected=false;
+    try {const value=this.binding?.session.projections.faceOf('modelSelection').getSnapshot();if(value&&typeof value==='object'&&Object.hasOwn(value,'next')){projected=true;next=(value as {next:unknown}).next;}}
+    catch { /* Older compositions may not expose a model projection. */ }
+    if(projected&&next===null)return null;
+    const value=(next??this.agent?.options) as {provider?:unknown;model?:unknown}|undefined;
+    return typeof value?.provider==='string'&&typeof value.model==='string'&&value.provider.trim()&&value.model.trim()?{provider:value.provider,model:value.model}:null;
+  };
+  canOpenSession = (): boolean => !this.disposed && this.bridge.canOpenSession();
+  openSession = (sessionId: string): void => {
+    if (this.disposed) throw new Error('宠物已关闭');
+    this.bridge.openSession(sessionId);
+  };
   subscribe = (fn: () => void): (() => void) => { this.listeners.add(fn); return () => { this.listeners.delete(fn); }; };
   private persist() {
     if (!this.preferences.getSnapshot().value.learnHistory || !this.storage) return;

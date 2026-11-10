@@ -1,6 +1,6 @@
 {
   "name": "dsh-bigfish",
-  "version": "0.6.0",
+  "version": "0.7.0-next.1",
   "description": "Adaptive DSH companion with replaceable, extensible character packs",
   "type": "module",
   "exports": {
@@ -30,16 +30,24 @@
   },
   "scripts": {
     "check": "tsc --noEmit",
-    "build": "tsx scripts/build.ts",
+    "build": "node --import tsx scripts/build.ts",
     "test": "node --import tsx --test tests/*.test.ts",
     "demo:replay": "tsx scripts/replay.ts",
     "probe:harness": "tsx scripts/probe-harness.ts",
-    "preview": "tsx scripts/serve.ts",
-    "test:browser": "playwright test",
+    "preview": "node --import tsx scripts/serve.ts",
+    "test:browser": "pnpm build && playwright test",
     "smoke:native": "tsx scripts/smoke-native.ts",
     "package": "pnpm pack --pack-destination dist",
     "test:soak": "tsx scripts/soak.ts",
-    "prepack": "pnpm check && pnpm build"
+    "prepack": "pnpm check && pnpm build",
+    "desktop:build": "node --import tsx scripts/build-desktop.ts",
+    "test:desktop": "pnpm desktop:build && node --import tsx scripts/check-desktop.ts",
+    "verify:web": "pnpm check && pnpm build && pnpm test && playwright test",
+    "release:verify": "node --import tsx scripts/release-gate.ts record",
+    "release:check": "node --import tsx scripts/release-gate.ts check",
+    "release:preview": "node --import tsx scripts/release-gate.ts publish-preview",
+    "release:formal": "node --import tsx scripts/release-gate.ts formal",
+    "prepublishOnly": "pnpm release:formal"
   },
   "devDependencies": {
     "@deepseek-ai/schemastery": "3.18.4",

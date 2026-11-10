@@ -1,3 +1,4 @@
+import {SettingsSelect} from '../client/settings-select.js';
 import {newBuiltinMotions} from '../client/builtin-extension.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { FishRenderer, classicPack } from '../client/renderer.js';
@@ -38,9 +39,9 @@ export function BuiltinPreview() {
   }, [motion]);
   return <div className="bf-pet-preview" data-testid="builtin-pet-preview">
     <label className="bf-field"><span>逐个预览动作（共 {motions.length} 个）</span>
-      <select aria-label="内置角色动作预览" value={motion} onChange={event => setMotion(event.target.value)}>
+      <SettingsSelect aria-label="内置角色动作预览" value={motion} onChange={event => setMotion(event.target.value)}>
         {motions.map(id => <option key={id} value={id}>{motionLabels[id]?.[0] ?? newBuiltinMotions.find(a=>a.id===id)?.label ?? id}</option>)}
-      </select>
+      </SettingsSelect>
     </label>
     <div className="bf-stage"><canvas ref={canvas} role="img" aria-label="大肥鱼动作预览" /></div>
     <p className="bf-help">预览展示完整动作，不切换当前角色，也不修改你的日常陪伴设置。</p>

@@ -1,4 +1,5 @@
 import { petLibrary } from "../pet/library.js";
+import type {Outfit} from '../companion/life-options.js';
 import { PetCanvas } from "../pet/canvas.js";
 import { type IdlePresentation } from "../domain/idle.js";
 import { motionReduced } from "../domain/motion-policy.js";
@@ -25,6 +26,8 @@ function LegacyFishCanvas({
   idle,
   activityTag = "",
   onAnimation,
+  scenery = true,
+  rotationHistory,
 }: {
   snapshot: Snapshot;
   prefs: Preferences;
@@ -36,6 +39,8 @@ function LegacyFishCanvas({
   idle?: IdlePresentation;
   activityTag?: string | undefined;
   onAnimation?: ((id: string) => void) | undefined;
+  scenery?: boolean;
+  rotationHistory?: Map<string,number>;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const renderer = useRef<FishRenderer>();
@@ -45,13 +50,13 @@ function LegacyFishCanvas({
     const element = canvas.current!;
     const r = new FishRenderer(element, shown, prefs, pack, () =>
       setError(element.dataset.error === "atlas"),
-    );
+    rotationHistory);
     renderer.current = r;
     return () => {
       r.dispose();
       renderer.current = undefined;
     };
-  }, [pack]);
+  }, [pack, rotationHistory]);
   useEffect(() => {
     if (renderer.current) {
       renderer.current.idlePresentation = idle;
@@ -59,6 +64,7 @@ function LegacyFishCanvas({
       renderer.current.activityMotion = activityMotion;
       renderer.current.activityTag = activityTag;
       renderer.current.onAnimation = onAnimation;
+      renderer.current.scenery = scenery && prefs.sceneryVisible;
       renderer.current.signText = t("waitSign");
       renderer.current.signAlternatives = [
         t("waitSign"),
@@ -89,6 +95,11 @@ export function FishCanvas(
   props: Parameters<typeof LegacyFishCanvas>[0] & {
     activityTag?: string | undefined;
     onAnimation?: (id: string) => void;
+    outfit?:Outfit;
+    interactions?:number;
+    growthUnlocks?:boolean;
+    previewSerial?:string;
+    onReady?:((serial:string)=>void)|undefined;
   },
 ) {
   useSyncExternalStore(petLibrary.subscribe, petLibrary.getSnapshot);
@@ -117,8 +128,11 @@ export function FishCanvas(
     <PetCanvas
       loaded={pet}
       onAnimation={props.onAnimation}
+      onReady={props.onReady}
+      rotationHistory={props.rotationHistory}
       prefs={props.prefs}
       paused={props.dragging ?? false}
+      scenery={(props.scenery ?? true) && props.prefs.sceneryVisible}
       input={{
         state: shown.state,
         richness: props.prefs.richness,
@@ -128,6 +142,10 @@ export function FishCanvas(
         activity: shown.activity,
         pressure: shown.pressure,
         whipHz: shown.whipHz,
+        outfit:props.outfit??'none',
+        interactions:props.interactions??0,
+        growthUnlocks:props.growthUnlocks??false,
+        ...(props.previewSerial?{previewSerial:props.previewSerial}:{}),
         ...(tag ? { tag } : {}),
         ...(props.previewMotion &&
         pet.pet.animations.some((a) => a.id === props.previewMotion)

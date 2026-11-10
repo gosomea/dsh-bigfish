@@ -1,3 +1,4 @@
+import {SettingsSelect} from './settings-select.js';
 import { petLibrary } from "../pet/library.js";
 import { actionIdle } from "../pet/action-dialogue.js";
 import { IdleDirector } from "../domain/idle.js";
@@ -82,7 +83,8 @@ function BehaviorPreview({
       </p>
       <label className="bf-field">
         <span>预览状态</span>
-        <select
+        <SettingsSelect
+          aria-label="预览状态"
           value={state}
           onChange={(e) => setState(e.target.value as Snapshot["state"])}
         >
@@ -100,7 +102,7 @@ function BehaviorPreview({
               {t(v)}
             </option>
           ))}
-        </select>
+        </SettingsSelect>
       </label>
       <div className="bf-button-row">
         {[5, 30, 120].map((seconds) => (

@@ -1,4 +1,5 @@
 import {petLibrary} from '../pet/library.js';
+import {useDesktopNavigation} from './desktop-navigation.js';
 import React from 'react';
 import { NativeCompanion } from './controller.js';
 import type { NativeServices, SettingsServices } from './native-contract.js';
@@ -10,11 +11,11 @@ export const inject = ['slots', 'locale', 'sessions', 'uiSession', 'connection']
 export interface ClientContext extends NativeServices {
   slots: { inject(name: any, callback: () => unknown): unknown; register(spec: any, component: any): () => void };
   locale: { register(namespace: any, dictionaries: any): () => void; bind(namespace: any): any };
-  get<K extends keyof SettingsServices>(name: K): SettingsServices[K] | undefined;
+  get<K extends keyof (SettingsServices & Pick<NativeServices, 'uiWorkspace'>)>(name: K): (SettingsServices & Pick<NativeServices, 'uiWorkspace'>)[K] | undefined;
   effect(effect: () => () => void, label?: string): unknown;
 }
-function Overlay(props: UIProps) { return <div className="bf-surface"><Widget {...props} /></div>; }
-function Section(props: UIProps) { return <div className="bf-surface"><SettingsPanel {...props} /></div>; }
+function Overlay(props: UIProps) { useDesktopNavigation(props.controller); return <div className="bf-surface"><Widget {...props} /></div>; }
+function Section(props: UIProps) { return <div className="bf-surface"><SettingsPanel {...props} embedded /></div>; }
 /** Native shell and settings contributions owned by the plugin fiber. */
 export function apply(ctx: ClientContext): void {
   void petLibrary.init(true); ctx.effect(() => () => petLibrary.dispose(), 'pet library');
@@ -29,7 +30,13 @@ export function apply(ctx: ClientContext): void {
     configForms: ctx.get('configForms'),
     settingsScope: ctx.get('settingsScope'),
   });
-  const controller = new NativeCompanion(ctx, storage, preferenceBridge.scope);
+  // Read lazily: a minimal/older composition can omit navigation, and the
+  // Workspace UI may become available after this optional client contribution.
+  const native: NativeServices = {
+    sessions: ctx.sessions, uiSession: ctx.uiSession, connection: ctx.connection,
+    get uiWorkspace() { return ctx.get('uiWorkspace'); },
+  };
+  const controller = new NativeCompanion(native, storage, preferenceBridge.scope);
   ctx.effect(() => () => controller.dispose(), 'bigfish controller');
   const t = ctx.locale.bind('bigfish') as Translate;
   const injected = () => ({ controller, t });

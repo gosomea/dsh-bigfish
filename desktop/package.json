@@ -1,0 +1,54 @@
+{
+  "name": "dsh-bigfish-desktop",
+  "version": "0.7.0-dev.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent Bigfish desktop companion",
+  "main": "main.mjs",
+  "scripts": {
+    "start": "electron .",
+    "package:mac": "electron-builder --mac --publish never",
+    "package:win": "electron-builder --win --publish never"
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.17.0"
+  },
+  "build": {
+    "appId": "dev.dsh.bigfish",
+    "productName": "大肥鱼",
+    "files": [
+      "main.mjs",
+      "preload.cjs",
+      "renderer/**",
+      "host-connection.mjs",
+      "host-api.mjs",
+      "geometry.mjs",
+      "native-geometry.mjs",
+      "voice-protocol.mjs"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.entertainment",
+      "hardenedRuntime": true,
+      "darkModeSupport": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.inherit.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "仅在你允许本次录音并按住说话时使用麦克风；松开后将本次音频发送到你选择的转写服务，识别文字先供你确认。",
+        "NSAppleEventsUsageDescription": "仅在你主动开启窗口几何感知后，通过系统事件读取窗口的位置和大小以安排宠物边缘互动；不读取窗口标题、截图或内容。"
+      }
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

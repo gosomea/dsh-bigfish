@@ -1,3 +1,4 @@
+import {settingsPage,settingsDisclosure,companionship,appearance,expertSpeed,selectControl} from './helpers/settings.js';
 import { test, expect } from '@playwright/test';
 test('preview renders generated sprites, responds to task state, and preserves settings', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
@@ -11,11 +12,11 @@ test('preview renders generated sprites, responds to task state, and preserves s
   await expect(page.locator('canvas')).toHaveAttribute('data-scene', 'delivery');
   await expect(page.locator('canvas')).toHaveAttribute('data-whip', 'false');
   await page.getByRole('button', { name: '完整设置', exact: true }).click();
-  await page.getByText('外观与动画',{exact:true}).click();await page.getByLabel('动画',{exact:true}).selectOption('reduced');
+  await appearance(page);await selectControl(page.getByLabel('动画',{exact:true}),'reduced');
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   await page.reload();
   await page.getByRole('button', { name: '完整设置', exact: true }).click();
-  await page.getByText('外观与动画',{exact:true}).click();await expect(page.getByLabel('动画',{exact:true})).toHaveValue('reduced');
+  await appearance(page);await expect(page.getByLabel('动画',{exact:true})).toHaveAttribute('data-value','reduced');
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   await page.screenshot({ path: 'artifacts/preview-desktop.png', fullPage: true });
   expect(errors).toEqual([]);
@@ -25,14 +26,15 @@ test('floating controls synchronize settings, collapse, drag and reject invalid 
   await page.getByRole('button', { name: '展开大肥鱼', exact: true }).click();
   const widget = page.getByTestId('bigfish-widget'); await expect(widget).toBeVisible();
   await widget.getByRole('button', { name: '设置', exact: true }).click();
-  await widget.getByLabel('鞭策节奏').selectOption('rhythm');
+  await widget.getByRole('button',{name:'完整设置',exact:true}).click();
+  await companionship(widget,true);await selectControl(widget.getByLabel('鞭策节奏'),'rhythm');
   await expect(widget.getByText('保存在此浏览器', { exact: true })).toBeVisible();
-  await widget.getByRole('button',{name:'完整设置',exact:true}).click();await widget.getByText('高级与重置',{exact:true}).click();await widget.getByText('内置大肥鱼动作编排（JSON）',{exact:true}).click();
+  await settingsDisclosure(widget,'高级与数据','专家参数');await widget.getByText('内置大肥鱼动作编排（JSON）',{exact:true}).click();
   await widget.locator('input[accept="application/json,.json"]').setInputFiles({ name: 'bad.json', mimeType: 'application/json', buffer: Buffer.from('{"schemaVersion":99}') });
   await expect(widget.getByText('动作包无效或缺少必要资源')).toBeVisible();
   await widget.getByRole('button', { name: '关闭', exact: true }).click();
-  const drag = widget.locator('.bf-dialogue-text'); const box = (await drag.boundingBox())!;
-  await page.mouse.move(box.x + 8, box.y + 8); await page.mouse.down(); await page.mouse.move(box.x - 90, box.y - 60, { steps: 8 }); await page.mouse.up();
+  const drag = widget.locator('.bf-pet-stage canvas'); const box = (await drag.boundingBox())!;
+  await page.mouse.move(box.x + box.width * .7, box.y + box.height * .45); await page.mouse.down(); await page.mouse.move(box.x + box.width * .7 - 98, box.y + box.height * .45 - 68, { steps: 8 }); await page.mouse.up();
   await widget.getByRole('button', { name: '收起大肥鱼' }).click(); await expect(widget).toHaveCount(0);
   await page.getByRole('button', { name: '展开大肥鱼', exact: true }).last().click();
   await expect(page.getByTestId('bigfish-widget')).toBeVisible();
@@ -47,7 +49,7 @@ test('narrow screen keeps preview controls in the viewport', async ({ page }) =>
 test('five sign routines play actual image frames and remain non-contact', async ({ page }) => {
  await page.addInitScript(()=>{Math.random=()=>0;});
   await page.goto('/');
-  await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('动作表现').selectOption('2');await page.getByRole('button',{name:'关闭',exact:true}).click();
+  await page.getByRole('button',{name:'完整设置',exact:true}).click();await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'2');await page.getByRole('button',{name:'关闭',exact:true}).click();
   await page.locator('#demo-state').selectOption('idle');
   const canvas = page.locator('.bf-demo-stage canvas');
   await expect(canvas).toHaveAttribute('data-motion', 'wait-sign');
@@ -67,7 +69,7 @@ test('five sign routines play actual image frames and remain non-contact', async
 test('quiet mode stops high-energy frame cycling while keeping the companion visible', async ({ page }) => {
   await page.goto('/'); await page.locator('#demo-state').selectOption('generating'); await page.locator('#demo-motion').selectOption('type');
   const canvas = page.locator('.bf-demo-stage canvas'); await expect(canvas).toHaveAttribute('data-atlas', 'motions');
-  await page.getByRole('button', { name: '完整设置', exact: true }).click(); await page.getByLabel('动作表现').selectOption('0');
+  await page.getByRole('button', { name: '完整设置', exact: true }).click(); await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'0');
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   await expect(canvas).toHaveAttribute('data-atlas', 'classic'); await expect(canvas).toHaveAttribute('data-frame', '3');
 });
@@ -75,10 +77,11 @@ test('quiet mode stops high-energy frame cycling while keeping the companion vis
 test('pet body and collapsed icon drag without accidental expansion; positions survive refresh', async ({ page }) => {
   await page.goto('/'); await page.getByRole('button', { name: '展开大肥鱼', exact: true }).click();
   const widget = page.getByTestId('bigfish-widget'); const canvas = widget.locator('canvas');
-  const before = (await widget.boundingBox())!, body = (await canvas.boundingBox())!;
+  const body = (await canvas.boundingBox())!;
   await page.mouse.move(body.x + body.width * .7, body.y + body.height * .45); await page.mouse.down();
   await page.mouse.move(body.x + body.width * .7 - 100, body.y + body.height * .45 - 70, { steps: 8 }); await page.mouse.up();
-  const after = (await widget.boundingBox())!; expect(after.x).toBeCloseTo(before.x - 100, 0); expect(after.y).toBeCloseTo(before.y - 70, 0);
+  // The card can shrink when speech hides; the character's stable foot must still follow the drag.
+  const after = (await canvas.boundingBox())!; expect(after.x).toBeCloseTo(body.x - 100, 0); expect(after.y).toBeCloseTo(body.y - 70, 0);
   await widget.getByRole('button', { name: '收起大肥鱼' }).click(); const icon = page.locator('.bf-restore'); const box = (await icon.boundingBox())!;
   await page.mouse.move(box.x + 24, box.y + 24); await page.mouse.down(); await page.mouse.move(box.x - 66, box.y - 26, { steps: 8 }); await page.mouse.up();
   await expect(icon).toBeVisible(); await expect(widget).toHaveCount(0);
@@ -92,7 +95,7 @@ test('pet body and collapsed icon drag without accidental expansion; positions s
 test('air swing drives the rendered expression and stops during tool execution', async ({ page }) => {
   await page.goto('/'); await page.locator('#demo-state').selectOption('generating');
   await page.getByRole('button', { name: '完整设置', exact: true }).click();
-  await page.getByText('高级与重置',{exact:true}).click();await page.getByLabel('按模型自动校准').uncheck(); await page.getByLabel('鞭策节奏').selectOption('rhythm');
+  await expertSpeed(page);await page.getByLabel('按模型自动校准').uncheck(); await companionship(page,true);await selectControl(page.getByLabel('鞭策节奏'),'rhythm');
   await page.getByRole('button', { name: '关闭', exact: true }).click();
   const canvas = page.locator('.bf-demo-stage canvas'); await expect(canvas).toHaveAttribute('data-whip', 'true');
   await expect.poll(async () => canvas.evaluate(c => c.dataset.beat === 'react' && c.dataset.frame === c.dataset.beatPose && c.dataset.reaction !== 'none'),{intervals:[50]}).toBe(true);
@@ -102,13 +105,13 @@ test('air swing drives the rendered expression and stops during tool execution',
 });
 
 test('editable dialogue persists, previews animation, and tool rules validate',async({page})=>{
- await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByText('自定义台词与工具',{exact:true}).click();
- await page.getByLabel('台词分类').selectOption('read');await page.getByLabel('台词列表').fill('正在查看 {file}～\n我去找线索！');await page.getByRole('button',{name:'保存这一类台词'}).click();
- await expect(page.getByText('已保存',{exact:true})).toBeVisible();
+ await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await settingsDisclosure(page,'高级与数据','自定义台词与工具');
+ await selectControl(page.getByLabel('台词分类'),'read');await page.getByLabel('台词列表').fill('正在查看 {file}～\n我去找线索！');await page.getByRole('button',{name:'保存这一类台词'}).click();
+ await expect(page.getByLabel('高级与数据').getByText('已保存',{exact:true})).toBeVisible();
  await page.getByRole('button',{name:'预览气泡与动作'}).click();await expect(page.getByLabel('台词动作预览').locator('canvas')).toHaveAttribute('data-motion','read');
- await page.getByText('工具与扩展 · 专属规则',{exact:true}).click();await page.getByLabel('工具名称或前缀').fill('my_reader*');await page.getByLabel('工具显示名称').fill('我的文件工具');await page.getByLabel('工具分类',{exact:true}).selectOption('read');await page.getByRole('button',{name:'保存工具规则'}).click();
+ await page.getByText('工具与扩展 · 专属规则',{exact:true}).click();await page.getByLabel('工具名称或前缀').fill('my_reader*');await page.getByLabel('工具显示名称').fill('我的文件工具');await selectControl(page.getByLabel('工具分类',{exact:true}),'read');await page.getByRole('button',{name:'保存工具规则'}).click();
  await expect(page.getByText('my_reader*',{exact:true})).toBeVisible();await page.screenshot({path:'artifacts/dialogue-settings.png'});
- await page.reload();await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByText('自定义台词与工具',{exact:true}).click();await page.getByText('工具与扩展 · 专属规则',{exact:true}).click();await expect(page.getByLabel('台词列表')).toHaveValue('正在查看 {file}～\n我去找线索！');await expect(page.getByText('my_reader*',{exact:true})).toBeVisible();
+ await page.reload();await page.getByRole('button',{name:'完整设置',exact:true}).click();await settingsDisclosure(page,'高级与数据','自定义台词与工具');await page.getByText('工具与扩展 · 专属规则',{exact:true}).click();await expect(page.getByLabel('台词列表')).toHaveValue('正在查看 {file}～\n我去找线索！');await expect(page.getByText('my_reader*',{exact:true})).toBeVisible();
  await page.getByLabel('台词列表').fill('{secret}');await page.getByRole('button',{name:'保存这一类台词'}).click();await expect(page.getByText('保存失败，请检查内容或刷新后重试')).toBeVisible();
 });
 
@@ -145,28 +148,28 @@ test('long dialogue, large pet and viewport changes respect measured bounds',asy
 
 test('quiet companion does not rotate signs or messages over ten minutes and reload',async({page})=>{
  await page.clock.install();await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget');
- await widget.getByRole('button',{name:'设置',exact:true}).click();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByRole('button',{name:'关闭',exact:true}).click();
+ await widget.getByRole('button',{name:'设置',exact:true}).click();await companionship(page);await selectControl(page.getByLabel('活跃程度',{exact:true}),'quiet');await page.getByRole('button',{name:'关闭',exact:true}).click();
  await page.clock.fastForward(9000);await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
- await page.clock.fastForward(600000);await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);await expect(widget.locator('.bf-card-actions button')).toHaveCount(2);
+ await page.clock.fastForward(600000);await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);await expect(widget.locator('.bf-card-actions button')).toHaveCount(3);
  await page.reload();await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();await expect(widget.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
  await page.locator('#demo-state').selectOption('waiting-user');await expect(widget.locator('.bf-state')).toContainText('等你确认');await page.clock.fastForward(600000);await expect(widget.locator('.bf-state')).toContainText('等你确认');
 });
 
 test('settings preview shares idle budget and display-only-buttons has no status leakage',async({page})=>{
  await page.addInitScript(()=>{Math.random=()=>0;});
- await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('空闲互动',{exact:true}).selectOption('quiet');await page.getByText('预览当前效果',{exact:true}).click();const preview=page.getByLabel('行为预览');
+ await page.goto('/');await page.getByRole('button',{name:'完整设置',exact:true}).click();await companionship(page);await selectControl(page.getByLabel('活跃程度',{exact:true}),'quiet');await settingsDisclosure(page,'外观与生活','预览当前效果');const preview=page.getByLabel('行为预览');
  await expect(preview.locator('canvas')).toHaveAttribute('data-motion','wait-sign');await preview.getByRole('button',{name:'快进 30 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-motion','breathe');await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
- await page.getByLabel('空闲互动',{exact:true}).selectOption('frequent');await preview.getByRole('button',{name:'重新预览',exact:true}).click();await preview.getByRole('button',{name:'快进 120 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-idle-active','true');
- await page.getByLabel('消息显示',{exact:true}).selectOption('buttons');await expect(preview.locator('.bf-state')).toHaveCount(0);await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
+ await companionship(page);await selectControl(page.getByLabel('活跃程度',{exact:true}),'frequent');await settingsPage(page,'外观与生活');await preview.getByRole('button',{name:'重新预览',exact:true}).click();await preview.getByRole('button',{name:'快进 120 秒',exact:true}).click();await expect(preview.locator('canvas')).toHaveAttribute('data-idle-active','true');
+ await appearance(page);await selectControl(page.getByLabel('消息显示',{exact:true}),'buttons');await expect(preview.locator('.bf-state')).toHaveCount(0);await expect(preview.locator('.bf-dialogue-text')).toHaveCount(0);
  await page.getByRole('button',{name:'关闭',exact:true}).click();await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget');await page.locator('#demo-state').selectOption('generating');await expect(widget.locator('.bf-state,.bf-stats,.bf-dialogue-text')).toHaveCount(0);await expect(widget.getByRole('button',{name:'设置',exact:true})).toBeVisible();
 });
 
 test('animation tiers, reduced motion, explicit whip off and saved preferences change actual rendering',async({page})=>{
  await page.goto('/');await page.locator('#demo-state').selectOption('generating');await page.locator('#demo-motion').selectOption('run');const canvas=page.locator('.bf-demo-stage canvas');
- await page.getByRole('button',{name:'完整设置',exact:true}).click();await page.getByLabel('启用鞭策动作').uncheck();await page.getByLabel('动作表现').selectOption('2');await expect(canvas).toHaveAttribute('data-motion','run');await expect(canvas).toHaveAttribute('data-whip','false');
- await page.getByLabel('动作表现').selectOption('1');await expect(canvas).not.toHaveAttribute('data-motion','run');await page.getByLabel('动作表现').selectOption('0');await expect(canvas).toHaveAttribute('data-atlas','classic');
- await page.getByLabel('动作表现').selectOption('2');await expect(canvas).toHaveAttribute('data-motion','run');await page.getByText('外观与动画',{exact:true}).click();await page.getByLabel('动画',{exact:true}).selectOption('reduced');await expect(canvas).toHaveAttribute('data-reduced','true');const frame=await canvas.getAttribute('data-frame');await page.waitForTimeout(400);await expect(canvas).toHaveAttribute('data-frame',frame!);
- await page.getByLabel('动画',{exact:true}).selectOption('normal');await expect(canvas).toHaveAttribute('data-motion','run');await page.reload();await page.getByRole('button',{name:'完整设置',exact:true}).click();await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByLabel('动作表现')).toHaveValue('2');
+ await page.getByRole('button',{name:'完整设置',exact:true}).click();await companionship(page);await page.getByLabel('启用鞭策动作').uncheck();await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'2');await expect(canvas).toHaveAttribute('data-motion','run');await expect(canvas).toHaveAttribute('data-whip','false');
+ await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'1');await expect(canvas).not.toHaveAttribute('data-motion','run');await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'0');await expect(canvas).toHaveAttribute('data-atlas','classic');
+ await companionship(page,true);await selectControl(page.getByLabel('动作幅度'),'2');await expect(canvas).toHaveAttribute('data-motion','run');await appearance(page);await selectControl(page.getByLabel('动画',{exact:true}),'reduced');await expect(canvas).toHaveAttribute('data-reduced','true');const frame=await canvas.getAttribute('data-frame');await page.waitForTimeout(400);await expect(canvas).toHaveAttribute('data-frame',frame!);
+ await selectControl(page.getByLabel('动画',{exact:true}),'normal');await expect(canvas).toHaveAttribute('data-motion','run');await page.reload();await page.getByRole('button',{name:'完整设置',exact:true}).click();await expect(page.getByLabel('启用鞭策动作')).not.toBeChecked();await expect(page.getByLabel('动作幅度')).toHaveAttribute('data-value','2');
 });
 
 
@@ -175,6 +178,9 @@ test('lively defaults keep the sign after speech hides and schedule another comp
  await page.clock.install();await page.goto('/');await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();const widget=page.getByTestId('bigfish-widget'),canvas=widget.locator('canvas');
  await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(1);
  await page.clock.fastForward(7000);await expect(canvas).toHaveAttribute('data-motion','wait-sign');await expect(canvas).toHaveAttribute('data-idle-active','true');await expect(widget.locator('.bf-dialogue-text')).toHaveCount(0);
- await page.clock.fastForward(5500);await expect(canvas).toHaveAttribute('data-motion','breathe');await page.clock.fastForward(40000);await expect(canvas).toHaveAttribute('data-idle-active','true');await expect(canvas).not.toHaveAttribute('data-motion','breathe');
+ await page.clock.fastForward(5500);await expect(canvas).toHaveAttribute('data-motion','breathe');
+ // The next complete daily performance may be an idle gesture or a new life/walking chain.
+ await expect.poll(async()=>{for(let i=0;i<10;i++)await page.clock.fastForward(100);return canvas.evaluate(c=>({motion:c.dataset.motion,active:c.dataset.idleActive==='true'||c.dataset.atlas==='companion'}));},{intervals:[25],timeout:15000}).toMatchObject({active:true});
+ await expect(canvas).not.toHaveAttribute('data-motion','breathe');
  await page.locator('#demo-state').selectOption('generating');await expect(canvas).not.toHaveAttribute('data-motion','wait-sign');await expect(canvas).toHaveAttribute('data-idle-active','false');
 });

@@ -1,3 +1,65 @@
+// src/pet/capabilities.ts
+var interactionKinds = ["head", "tail", "biscuit", "tea", "ball", "toy", "wave", "click"];
+var lifeActions = ["sit-down", "wake-up", "sleep", "stretch", "lie-down", "nest", "desk-tidy", "lamp", "book-close", "postcard", "success-bow", "failure-check", "point"];
+var homeActions = ["nest", "desk-tidy", "lamp"];
+function validateAccessoryAnchors(value, width, height) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw Error("\u88C5\u626E\u951A\u70B9\u65E0\u6548");
+  for (const [key, p] of Object.entries(value)) {
+    if (!["head", "neck", "chest"].includes(key) || !p || typeof p !== "object" || !Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x < 0 || p.y < 0 || p.x > width || p.y > height) throw Error("\u88C5\u626E\u951A\u70B9\u8D8A\u51FA\u89D2\u8272\u753B\u5E03");
+  }
+}
+function validateBehaviors(p, animations) {
+  const finite = (v, min, max) => typeof v === "number" && Number.isFinite(v) && v >= min && v <= max;
+  if (p.body !== void 0) {
+    const b = p.body?.bounds, f = p.body?.foot;
+    if (!b || !f || !finite(b.x, 0, p.canvas.width) || !finite(b.y, 0, p.canvas.height) || !finite(b.width, 1, p.canvas.width - b.x) || !finite(b.height, 1, p.canvas.height - b.y) || !finite(f.x, b.x, b.x + b.width) || !finite(f.y, b.y, b.y + b.height)) throw Error("\u8EAB\u4F53\u8FB9\u754C\u6216\u843D\u811A\u70B9\u65E0\u6548");
+    if (p.body.accessories !== void 0) validateAccessoryAnchors(p.body.accessories, p.canvas.width, p.canvas.height);
+  }
+  const check = (id2) => {
+    if (typeof id2 !== "string" || !animations.some((a) => a.id === id2)) throw Error("\u884C\u4E3A\u5F15\u7528\u4E86\u4E0D\u5B58\u5728\u7684\u52A8\u4F5C");
+  };
+  const mapping = (raw, keys, label) => {
+    if (!raw || typeof raw !== "object" || Array.isArray(raw) || !Object.keys(raw).length) throw Error(`${label}\u58F0\u660E\u65E0\u6548`);
+    for (const [key, value] of Object.entries(raw)) {
+      if (!keys.includes(key)) throw Error(`\u672A\u77E5${label}\u7C7B\u578B`);
+      check(value);
+    }
+  };
+  if (p.behaviors !== void 0) {
+    if (!p.behaviors || typeof p.behaviors !== "object" || Array.isArray(p.behaviors)) throw Error("\u884C\u4E3A\u58F0\u660E\u65E0\u6548");
+    if (p.behaviors.movement !== void 0) {
+      const m = p.behaviors.movement;
+      if (!m || typeof m !== "object") throw Error("\u884C\u8D70\u58F0\u660E\u65E0\u6548");
+      for (const key of ["left", "right", "stop"]) check(m[key]);
+      if (m.turn !== void 0) check(m.turn);
+      for (const key of ["left", "right"]) {
+        const a = animations.find((a2) => a2.id === m[key]);
+        if (new Set(a.frames.map((f) => JSON.stringify([f.asset, f.rect]))).size < 2) throw Error("\u884C\u8D70\u9700\u8981\u81F3\u5C11\u4E24\u5F20\u4E0D\u540C\u59FF\u6001\uFF0C\u4E0D\u80FD\u5E73\u79FB\u7AD9\u7ACB\u56FE");
+      }
+    }
+    if (p.behaviors.interactions !== void 0) mapping(p.behaviors.interactions, interactionKinds, "\u89E6\u6478");
+    if (p.behaviors.life !== void 0) mapping(p.behaviors.life, lifeActions, "\u751F\u6D3B");
+    if (p.behaviors.home !== void 0) mapping(p.behaviors.home, homeActions, "\u5BB6\u56ED");
+    if (p.behaviors.voice !== void 0) {
+      mapping(p.behaviors.voice, ["listen", "speak"], "\u8BED\u97F3\u5C55\u793A");
+      check(p.behaviors.voice.listen);
+      check(p.behaviors.voice.speak);
+    }
+    if (p.behaviors.paired !== void 0) {
+      mapping(p.behaviors.paired, ["greet", "exchange", "part"], "\u53CC\u5BA0");
+      for (const key of ["greet", "exchange", "part"]) check(p.behaviors.paired[key]);
+    }
+  }
+  if (p.home !== void 0) {
+    if (!p.home || typeof p.home !== "object" || typeof p.home.background !== "string" || !Object.hasOwn(p.assets ?? {}, p.home.background)) throw Error("\u5BB6\u56ED\u80CC\u666F\u5FC5\u987B\u5F15\u7528\u5305\u5185\u56FE\u7247\u8D44\u6E90");
+  }
+  if (p.capabilities.includes("movement") && (!p.body || !p.behaviors?.movement)) throw Error("\u884C\u8D70\u80FD\u529B\u9700\u8981\u8EAB\u4F53\u8FB9\u754C\u3001\u843D\u811A\u70B9\u53CA\u52A8\u4F5C\u6620\u5C04");
+  if (p.capabilities.includes("touch") && !Object.keys(p.behaviors?.interactions ?? {}).length) throw Error("\u89E6\u6478\u80FD\u529B\u9700\u8981\u81F3\u5C11\u4E00\u4E2A\u52A8\u4F5C\u6620\u5C04");
+  for (const [cap, key] of [["life", "life"], ["home", "home"], ["voice-display", "voice"], ["paired", "paired"]]) if (p.capabilities.includes(cap) && !Object.keys(p.behaviors?.[key] ?? {}).length) throw Error(`${cap}\u80FD\u529B\u9700\u8981\u771F\u5B9E\u52A8\u4F5C\u6620\u5C04`);
+  if (p.capabilities.includes("home") && !p.home) throw Error("\u5BB6\u56ED\u80FD\u529B\u9700\u8981\u771F\u5B9E\u80CC\u666F\u56FE\u7247");
+  if (p.capabilities.includes("paired") && !p.body) throw Error("\u53CC\u5BA0\u80FD\u529B\u9700\u8981\u8EAB\u4F53\u78B0\u649E\u8FB9\u754C");
+}
+
 // src/pet/archive.ts
 var MAX_ARCHIVE = 32 * 1024 * 1024;
 var MAX_EXPANDED = 64 * 1024 * 1024;
@@ -179,7 +241,7 @@ function parsePet(files) {
   if (!files[p.thumbnail] || !safePath(p.thumbnail)) throw Error("\u7F3A\u5C11\u7F29\u7565\u56FE");
   const thumb = imageSize(files[p.thumbnail]);
   if (thumb.width * thumb.height > 32 * 1024 * 1024) throw Error("\u7F29\u7565\u56FE\u5C3A\u5BF8\u8D85\u9650");
-  if (!Array.isArray(p.capabilities) || p.capabilities.some((c) => !["sign", "air-swing", "scenes", "look"].includes(c))) throw Error("\u4E0D\u652F\u6301\u7684\u5FC5\u8981\u80FD\u529B");
+  if (!Array.isArray(p.capabilities) || p.capabilities.some((c) => !["sign", "air-swing", "scenes", "look", "movement", "touch", "life", "home", "voice-display", "paired"].includes(c))) throw Error("\u4E0D\u652F\u6301\u7684\u5FC5\u8981\u80FD\u529B");
   const raw = json(files, str(p.animations)), animations = [], ids = /* @__PURE__ */ new Set();
   let frames = 0;
   if (!Array.isArray(raw) || !raw.length || raw.length > 2048) throw Error("\u52A8\u753B\u6570\u91CF\u5E94\u4E3A 1\u20132048");
@@ -196,6 +258,10 @@ function parsePet(files) {
     number(a.weight, 0.01, 100);
     number(a.cooldownMs, 0, 36e5);
     if (a.family !== void 0) id(a.family);
+    if (a.unlockAt !== void 0) {
+      number(a.unlockAt, 0, 1e4);
+      if (!Number.isInteger(a.unlockAt)) throw Error("\u52A8\u4F5C\u89E3\u9501\u6B21\u6570\u5FC5\u987B\u4E3A\u6574\u6570");
+    }
     if (!Array.isArray(a.frames) || !a.frames.length || a.frames.length > 512 || (frames += a.frames.length) > 32768) throw Error("\u52A8\u753B\u5E27\u6570\u91CF\u8D85\u9650");
     if (a.holdFrame !== void 0) {
       number(a.holdFrame, 0, a.frames.length - 1);
@@ -213,6 +279,7 @@ function parsePet(files) {
       if (x + w > asset.width || y + h > asset.height) throw Error("\u5E27\u8D85\u51FA\u56FE\u96C6");
       if (w !== p.canvas.width || h !== p.canvas.height) throw Error("\u6BCF\u5E27\u5C3A\u5BF8\u5FC5\u987B\u7B49\u4E8E\u89D2\u8272\u903B\u8F91\u753B\u5E03\uFF08\u5236\u4F5C\u65F6\u5148\u5BF9\u9F50\uFF09");
       number(f.durationMs, 16, 1e4);
+      if (f.accessories !== void 0) validateAccessoryAnchors(f.accessories, p.canvas.width, p.canvas.height);
       if (f.sign) {
         const s = object(f.sign);
         number(s.x, 0, w);
@@ -230,11 +297,13 @@ function parsePet(files) {
     if (a.scene && (!p.scenes || !Object.hasOwn(p.scenes, a.scene))) throw Error("\u52A8\u4F5C\u5F15\u7528\u7684\u573A\u666F\u4E0D\u5B58\u5728");
     animations.push(a);
   }
+  validateBehaviors(p, animations);
   object(p.fallbacks);
   for (const role of requiredRoles) {
     const a = animations.find((a2) => a2.id === p.fallbacks[role]);
     if (!a || !a.tags.includes(role)) throw Error(`\u7F3A\u5C11 ${role} \u57FA\u7840\u52A8\u4F5C\u6620\u5C04`);
     if (a.intensity !== 0) throw Error(`\u57FA\u7840\u52A8\u4F5C ${role} \u5FC5\u987B\u652F\u6301\u8F7B\u67D4\u6A21\u5F0F`);
+    if ((a.unlockAt ?? 0) > 0) throw Error(`\u57FA\u7840\u52A8\u4F5C ${role} \u4E0D\u80FD\u88AB\u6210\u957F\u9501\u5B9A`);
   }
   if (p.scenes) for (const [key, s] of Object.entries(object(p.scenes))) {
     id(key);

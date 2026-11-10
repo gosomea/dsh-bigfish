@@ -83,3 +83,69 @@ id@version 唯一。同版本不同内容拒绝，更新请提升版本。多版
 输入根目录 pet.json + spritesheetPath 指向图片；v1（省略 spriteVersionNumber 或=1）1536×1872，v2=2 为 1536×2288，均 192×208 单元格。适配器生成语义映射，不修改原图；v2 的 16 个方向帧作为扩展动作保留。工具专属动作、牌面、近失反应缺失时回退或关闭该能力。
 
 双目标输出是条件能力：只有完整提供目标格式的所有标准行和 16 方向时，使用 Skill 的 export-codex 脚本组装 v2。不得把缺帧包标作完整 Codex v2。
+
+## 智能宠物开发版：可选身体与互动声明
+
+以下字段随智能宠物开发分支提供，尚未发布到 npm 0.6.0。原有包无需修改；不要在面向旧插件的包中声明新的必要能力。
+
+```json
+{
+  "capabilities": ["movement", "touch"],
+  "body": {
+    "bounds": {"x": 8, "y": 4, "width": 112, "height": 136},
+    "foot": {"x": 64, "y": 136}
+  },
+  "behaviors": {
+    "movement": {"left": "walk-left", "right": "walk-right", "stop": "stand", "turn": "turn"},
+    "interactions": {"head": "pet-head", "tail": "touch-tail", "biscuit": "eat", "tea": "drink", "ball": "catch", "toy": "play", "wave": "wave", "click": "greet"}
+  }
+}
+```
+
+所有动作 ID 必须实际存在；左右行走分别至少含两个不同帧矩形。身体边界、落脚点使用角色画布坐标，落脚点必须在身体边界内。`body.bounds` 应覆盖整套动作中所有可见姿态的并集，包括极端帧伸出的尾巴、手脚和随身道具，不能只框住躯干。插件按该边界缩放并在固定舞台内裁切；制作后必须在插件或桌面舞台检查每段极端帧，确认没有裁边，不能只靠离线原画布预览。`movement` 与 `touch` 是必要能力声明；没有声明的旧角色仍可导入，缺失互动回到基础待机，不平移站立图假装行走。
+
+声明和元数据校验不能证明步态质量；必须实际预览起步、循环、停步及边缘停止。当前内置 32 段、256 帧已逐帧检查，`artAccepted: true` 的范围是 `runtime-usability`（基础显示可用）；`authorFinalApproval` 仍为 `pending`，蓝描边与帧间透视、比例变化仍保留，不计入已发布动作数。0.7 开发版已把下面的生活、装扮、家园、语音展示与双宠声明接入运行时；面向 npm 0.6 的包不能声明这些必要能力。具体演出复用同一调度器，不新建模型调用。
+
+## 0.7 开发版：生活、装扮、家园与双宠
+
+这些扩展仍使用 `formatVersion: 1`，均为可选数据；旧包继续有效。必要能力新增 `life`、`home`、`voice-display`、`paired`。未知必要能力仍拒绝导入。声明能力必须提供真实素材及下面的映射，不得用标签冒充素材完成。
+
+```json
+{
+  "capabilities": ["touch", "life", "home", "voice-display", "paired"],
+  "body": {
+    "bounds": {"x": 8, "y": 4, "width": 112, "height": 136},
+    "foot": {"x": 64, "y": 136},
+    "accessories": {"head": {"x": 42, "y": 28}, "neck": {"x": 64, "y": 68}, "chest": {"x": 47, "y": 84}}
+  },
+  "home": {"background": "myHomeAsset"},
+  "behaviors": {
+    "interactions": {"head": "touch-head", "ball": "catch-ball", "toy": "play-fish", "wave": "greet", "tea": "drink", "biscuit": "share", "tail": "comb-tail"},
+    "life": {"sit-down": "sit", "sleep": "sleep", "wake-up": "wake", "point": "point", "book-close": "close-book"},
+    "home": {"nest": "tidy-bed", "desk-tidy": "tidy-desk", "lamp": "light-lamp"},
+    "voice": {"listen": "listen", "speak": "speak"},
+    "paired": {"greet": "greet", "exchange": "pass-ball", "part": "goodbye"}
+  }
+}
+```
+
+所有映射值必须是该包中存在的动作 ID，家园背景必须是 `assets` 中存在且成功解码的包内图片。生活键可用 `sit-down`、`wake-up`、`sleep`、`stretch`、`lie-down`、`nest`、`desk-tidy`、`lamp`、`book-close`、`postcard`、`success-bow`、`failure-check`、`point`。可以只声明实际拥有的部分；缺少的完整生活链不运行。家园动作键只接受 `nest/desk-tidy/lamp`；`home` 必要能力同时要求背景与至少一个家园动作。`voice-display` 必须有 `listen/speak` 两个动作；它只提供视觉表现，**不会授予麦克风、模型、语音服务权限或加载声音脚本**。`paired` 必须有身体边界及 `greet/exchange/part` 三个动作。
+
+运行时把统一生活语义解析为该角色真实动作，`wave/tea/biscuit/head-pat/ball-catch/fish-toy/tail-comb` 也会使用触摸映射。任务关键反馈缺少独立素材时，仍使用五类基础角色回退；不能因为没有小剧场素材而失去成功、错误或等待反馈。双宠第一段使用 `greet`，交换道具段使用 `exchange`，谢幕使用 `part`。副宠在同一舞台内与主宠保持不重叠的身体区域，道具按双方边界来回传递；共用同一行为链、Host 与预算，不另启模型调度。
+
+### 实际装扮锚点
+
+`body.accessories` 是静态装扮锚点，支持 `head/neck/chest`，坐标为角色逻辑画布内位置。可在单个 `frame` 中提供同结构 `accessories` 覆盖；帧坐标仍相对于整张角色画布，不能是原图集中的绝对位置。躺下、俯身等大幅变化应逐帧提供锚点，或显式写 `accessories: {}` 让该帧不佩戴；省略帧级字段会继承身体的静态锚点。锚点不得超出画布。运行时只绘制内置的小蝴蝶结、星徽或围巾，不加载外部代码和远程素材。原画上的尾巴、标志、角色身份不能被装扮遮掉。
+
+### 真实成长解锁
+
+可选 `animations[].unlockAt` 为 `0–10000` 的整数，表示启用“成长动作解锁”时需要真实记录的主动互动次数。关闭该设置立即恢复可用；默认关闭。五个强度零的基础 fallback **不得**设置大于零的 `unlockAt`，因此任务工作、成功、失败、等待与安静待机始终可用。每次计数来自 Host 接受的真实主动互动；不能按页面刷新、随机数、虚构故事或播放次数增加。
+
+角色预览仍允许制作时检阅素材；实际导演按用户当前互动计数过滤动作池。明确启用成长限制时，运行中的显式动作也必须通过解锁检查。季节／成长小故事标为虚构，不写入任务记忆或冒充会话成果；真实称号只依赖记录中的互动计数。自动演出只由新的阶段或季节变化触发，并受用户间隔、工作优先和安静设置约束；重开页面不重播旧阶段。
+
+### 制作与验收
+
+1. 保留原有五个 fallback，再逐项添加确实制作的生活动作；不要用站立图平移假装行走、双宠互动或不同动作。
+2. 为每套素材对齐身体边界、落脚点；装扮选择直立与极端帧逐个检查，确保尾巴和标志可见。
+3. 用 Skill 验证器检查所有引用、锚点、解锁条件与素材；旧版本验证器不认识新必要能力时应升级插件／Skill，不能删掉能力名绕过检查。
+4. 逐动作预览映射；插件中再验证完整链、双宠身体边界、道具交接、入场停留收尾、工作打断及静默。数据校验通过不等于素材相似度、接触感或双平台安装已经验收。

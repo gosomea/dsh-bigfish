@@ -9,6 +9,13 @@ export interface DshBridgeStatus {
   missing: readonly string[];
 }
 
+export function validateSessionNavigationId(sessionId: string): void {
+  if (typeof sessionId !== 'string' || !sessionId || sessionId.length > 256 ||
+      sessionId.trim() !== sessionId || /[\u0000-\u001f\u007f-\u009f]/u.test(sessionId)) {
+    throw new Error('会话标识无效');
+  }
+}
+
 /**
  * Read the public DSH session surfaces without making Bigfish own a session's
  * lifetime. Older hosts stage selection on sessions.list; newer hosts expose
@@ -52,6 +59,17 @@ export class DshSessionBridge {
   currentBinding(): Binding | undefined {
     const id = this.currentSessionId();
     return id === undefined ? undefined : this.ctx.sessions.binding(id);
+  }
+
+  canOpenSession(): boolean { return typeof this.ctx.uiWorkspace?.openSession === 'function'; }
+
+  openSession(sessionId: string): void {
+    validateSessionNavigationId(sessionId);
+    const navigation = this.ctx.uiWorkspace;
+    if (typeof navigation?.openSession !== 'function') {
+      throw new Error('当前 DSH 界面未提供会话跳转，请在会话列表打开原会话');
+    }
+    navigation.openSession(sessionId);
   }
 
   waiting(sessionId: string): boolean {

@@ -20,8 +20,8 @@ test('all five idle presets and custom use post-gesture rest with bounded deadli
 test('background, folding and remounting never postpone an existing idle deadline',()=>{
  const p={...defaults,greetOnOpen:false};const d=new IdleDirector(undefined,()=>.5);
  d.tick(1000,true,true,p);const due=d.memory.nextAt;
- d.tick(2000,true,false,p);d.tick(4000,true,true,p);assert.equal(d.memory.nextAt,due);
- const restored=new IdleDirector(d.memory,()=>.5);restored.tick(5000,true,true,p);assert.equal(restored.memory.nextAt,due);
+ d.tick(due-300,true,false,p);d.tick(due-200,true,true,p);assert.equal(d.memory.nextAt,due);
+ const restored=new IdleDirector(d.memory,()=>.5);restored.tick(due-100,true,true,p);assert.equal(restored.memory.nextAt,due);
  assert.equal(restored.tick(due,true,true,p).active,true);
 });
 test('a new tab opened while working still greets when it first becomes idle',()=>{

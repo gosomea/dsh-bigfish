@@ -1,0 +1,28 @@
+{
+  "checks": [
+    "registered disposable home and native Host inactivity verified before installation",
+    "native attachment/model services available; consent and workspace authorization reject before provider work",
+    "real native image decoder rejects corrupt raster; edge and bounded streaming request reject without provider dispatch",
+    "exact text-only model is refused before adapter dispatch and releases the reservation",
+    "real native attachment admission accepts a PNG over 32 KiB; one local vision request receives one durable image and exact shared usage",
+    "native Web file preview sends nothing until explicit confirmation; result and usage appear only in manual screenshot UI",
+    "insufficient pet budget causes a visible local reminder with zero provider preparation/dispatch and no usage",
+    "explicit cancel aborts the local vision stream, rejects stale output and settles shared reservation",
+    "structured screenshot account quota error directly reaches pet bubble without remembering screenshot content"
+  ],
+  "packageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "harnessVersion": "0.2.2-alpha.2",
+  "model": "Local in-process image-capable adapter; no paid provider",
+  "fixturePngBytes": 77048,
+  "metrics": {
+    "prepared": 5,
+    "dispatched": 4,
+    "images": 4,
+    "invalidPurpose": 0,
+    "lastImageBytes": 77048,
+    "waiting": 0,
+    "aborted": 1,
+    "mode": "quota"
+  },
+  "clientErrors": []
+}

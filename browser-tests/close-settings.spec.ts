@@ -1,3 +1,4 @@
+import {settingsDisclosure,expertSpeed} from './helpers/settings.js';
 import {test,expect} from '@playwright/test';
 
 for(const kind of ['popover','modal'] as const)test(`${kind} close button stays visible and clickable at the bottom on desktop and mobile`,async({page})=>{
@@ -6,7 +7,7 @@ for(const kind of ['popover','modal'] as const)test(`${kind} close button stays 
   if(kind==='popover'){
    await page.getByRole('button',{name:'展开大肥鱼',exact:true}).click();await page.getByTestId('bigfish-widget').getByRole('button',{name:'设置',exact:true}).click();await page.getByTestId('bigfish-widget').getByRole('button',{name:'完整设置',exact:true}).click();
   }else await page.getByRole('button',{name:'完整设置',exact:true}).first().click();
-  const panel=page.locator(kind==='popover'?'.bf-popover':'.bf-modal');await panel.getByText('高级与重置',{exact:true}).click();
+  const panel=page.locator(kind==='popover'?'.bf-popover':'.bf-modal');await expertSpeed(panel);await settingsDisclosure(panel,'高级与数据','自定义台词与工具');
   await panel.evaluate(el=>{el.scrollTop=el.scrollHeight;});
   expect(await panel.evaluate(el=>el.scrollTop)).toBeGreaterThan(100);
   const close=panel.getByRole('button',{name:'关闭',exact:true}),before=(await close.boundingBox())!,bounds=(await panel.boundingBox())!;

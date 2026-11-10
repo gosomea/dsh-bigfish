@@ -14,7 +14,7 @@ test('quiet idle has one greeting then no speech, signs or actions for ten minut
 });
 test('idle modes share a single bounded burst, honor custom fixed/random lines, and stop for work',()=>{
  for(const [idleMode,min,max] of [['occasional',60000,120000],['natural',15000,30000],['frequent',5000,10000],['continuous',1000,3000]] as const){
-  const d=new IdleDirector({greeted:true},()=>.5),p={...defaults,idleMode,idleRandomText:true,dialogueJson:'{"idle":["A","B"]}'};
+  const d=new IdleDirector({greeted:true},()=>.5),p={...defaults,idleMode,talkLevel:2,idleRandomText:true,dialogueJson:'{"idle":["A","B"]}'};
   d.tick(0,true,true,p);assert.ok(d.memory.nextAt>=min&&d.memory.nextAt<=max);const next=d.memory.nextAt;
   assert.equal(d.tick(next-1,true,true,p).active,false);const v=d.tick(next,true,true,p);assert.equal(v.active,true);assert.equal(v.showText,true);
   assert.equal(d.tick(next+6000,true,true,p).active,true);assert.equal(d.tick(next+6000,true,true,p).showText,false);assert.equal(d.tick(next+12000,true,true,p).active,false);const second=d.tick(d.memory.nextAt,true,true,p);assert.notEqual(second.text,v.text);

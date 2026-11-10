@@ -1,0 +1,21 @@
+[WebServer] (node:44677) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ tsx scripts/serve.ts
+[WebServer] (node:44706) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:44713) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:44775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 browser-tests/companion-living.spec.ts:34:1 › local life plays an entry, holds the final pose, and yields without model calls (10.3s)
+  ✓  2 browser-tests/companion-living.spec.ts:45:1 › new work immediately interrupts idle sleep instead of hiding output behind a wake-up scene (13.5s)
+  ✓  3 browser-tests/companion-living.spec.ts:55:1 › direct interaction and important waiting state take priority over a living scene (12.9s)
+  ✓  4 browser-tests/companion-living.spec.ts:65:1 › quiet idle does not start life scenes after long simulated rests or a reload (3.8s)
+  ✓  5 browser-tests/scene-art.spec.ts:2:1 › painted themes and each furniture switch affect the actual pet stage without inference (4.1s)
+
+  5 passed (47.1s)

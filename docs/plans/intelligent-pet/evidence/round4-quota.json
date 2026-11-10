@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "registered isolated home identified; no matching Host process before install",
+    "live isolated Host has no active retained sessions",
+    "real native task QUOTA produces visible bubble in ordinary mode without pet model calls",
+    "another page and reload do not replay the same quota notice",
+    "tracking disabled still shows quota without retaining its title/message or using pet model",
+    "1000-token preflight rejects with visible budget bubble and no model request, usage or duplicate notice"
+  ],
+  "packageSha256": "b702210be541d1497adf88bceca1cba7f2ddbf7974b2960f3d12cfd3505315c7",
+  "harnessVersion": "0.2.2-alpha.2",
+  "model": "Local in-process fixture; no paid provider",
+  "petModelRequests": 0,
+  "announcedIds": [
+    "fact-ba176e9bd5d44963ee02aa26dd2997f335308e301b6eb1f5b453391e4945af4c",
+    "limit-f2c518cb2e2525ff235406d46c102d0835a7ba793a75825614091659c7391a0e",
+    "alert-budget-71b440ee655b14a338187a66ad62f7f66617f5b90c5fce6af9128b881345bf51"
+  ]
+}

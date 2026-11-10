@@ -1,3 +1,4 @@
+import {SettingsSelect} from '../client/settings-select.js';
 import React, { useState } from "react";
 import type { LoadedPet } from "./library.js";
 import { PetCanvas } from "./canvas.js";
@@ -8,7 +9,7 @@ export function PetPreview({ loaded }: { loaded: LoadedPet }) {
     <div className="bf-pet-preview">
       <label className="bf-field">
         <span>逐个预览动作（共 {loaded.pet.animations.length} 个）</span>
-        <select
+        <SettingsSelect
           aria-label="角色动作预览"
           value={motion}
           onChange={(e) => setMotion(e.target.value)}
@@ -19,7 +20,7 @@ export function PetPreview({ loaded }: { loaded: LoadedPet }) {
               {a.label} · {a.id}
             </option>
           ))}
-        </select>
+        </SettingsSelect>
       </label>
       <PetCanvas
         loaded={loaded}

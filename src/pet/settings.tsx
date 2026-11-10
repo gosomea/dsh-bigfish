@@ -1,3 +1,4 @@
+import {companionClips} from '../client/companion-clips.js';
 import { PetPreview } from "./preview.js";
 import React, {
   useEffect,
@@ -74,7 +75,7 @@ export function RoleSettings() {
       />
       <div className="bf-role-card">
         <strong>大肥鱼 · 内置</strong>
-        <span>101 类动作 · 原有 29 类 + 新增 72 段 · 18 种举牌</span>
+        <span>101 类动作 · 18 种举牌；另有 {companionClips.length} 段智能宠物新序列，可在角色详情中预览</span>
         <div className="bf-button-row">
           <button
             disabled={busy}

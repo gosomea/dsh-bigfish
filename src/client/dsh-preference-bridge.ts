@@ -23,7 +23,9 @@ export function createPreferenceBridge(services: SettingsServices): DshPreferenc
 
 function configFormScope(form: PreferenceForm): PreferenceScope {
   return {
-    getSnapshot: () => form.getSnapshot(),
+    // ConfigForm is Host-backed. Current DSH snapshots omit the legacy mode
+    // discriminator; the normalized scope must still use revision-fenced writes.
+    getSnapshot: () => ({...form.getSnapshot(), mode: 'host'}),
     subscribe: listener => form.subscribe(listener),
     // ConfigForm reports Host refusal as false; legacy SettingsScope rejects.
     // PreferenceStore consumes one throw-on-failure contract for both versions.
