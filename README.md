@@ -5,10 +5,10 @@
 **让等待 Agent 工作的时间，多一只陪着你的大肥鱼。**
 
 她会敲键盘、翻书、修工具、举牌等你，也会在任务结束时开心收工。<br>
-**新增 72 段趣味动画 · 432 个新绘制姿态 · 13 种举牌小剧场**，直接加入内置大肥鱼<br>
+**0.7 Web 预览版加入散步与回家、互动玩具和三套小窝。**<br>
 一个装在 **DeepSeek Harness Web** 里的可拖动宠物，支持替换角色、制作动作和自定义台词。
 
-[npm 安装](#快速安装) · [看新动画](#72-段新动画从等你到收工) · [观看录屏](https://github.com/gosomea/dsh-bigfish/blob/main/docs/media/bigfish-demo.mp4) · [制作自己的角色](#做一只属于你的宠物)
+[npm 安装](#快速安装) · [0.7 Web 预览版](#07-web-预览版) · [两分钟演示](#两分钟演示) · [制作自己的角色](#做一只属于你的宠物)
 
 **活泼陪伴、随时安静 · 鞭策随时关闭 · 角色包自由替换**
 
@@ -16,7 +16,7 @@
 
 ## 快速安装
 
-需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。2026-10-08 查验时，DSH 的 npm `latest` 为 `0.2.0-rc.2`；Bigfish 稳定版为 **`0.6.0`**，内置 **101 类动作**（原有 29 类 + 新增 72 段）。插件按宿主能力选择设置与会话桥接，不把 DSH 核心包带入插件。Node 要求 `^22.19.0 || >=24.0.0`。精确实测范围见[兼容性记录](docs/compatibility.md)。
+需要已经安装 **DeepSeek Harness（DSH）**，并使用它的 Web 界面。Bigfish 稳定版为 **`0.6.0`**，内置 **101 类动作**（原有 29 类 + 新增 72 段）。插件按宿主能力选择设置与会话桥接，不把 DSH 核心包带入插件。Node 要求 `^22.19.0 || >=24.0.0`。精确实测范围见[兼容性记录](docs/compatibility.md)。
 
 直接从 npm 安装到你使用的 Web profile，无需下载源码或手动构建：
 
@@ -40,6 +40,23 @@ npx --yes dsh-bigfish install-skill
 安装后新建 DSH 会话，即可让 Agent 使用 `$dsh-bigfish-pet-maker` 制作新角色或扩展动作，再从「完整设置 → 角色库」导入生成的 `.dshpet`。详见[角色制作示例](#做一只属于你的宠物)。
 
 [详细安装、升级与卸载](https://github.com/gosomea/dsh-bigfish/blob/main/docs/installation.md) · [常见问题](https://github.com/gosomea/dsh-bigfish/blob/main/docs/faq.md) · [npm 包页面](https://www.npmjs.com/package/dsh-bigfish)
+
+## 0.7 Web 预览版
+
+**`0.7.0-next.1`** 新增网页内散步与回家、摸头、接球、三套小窝，以及可选的智能管家。新增 32 段八帧动作，与稳定版的 101 类动作分别统计。普通动作在本地运行，智能模式默认关闭。
+
+```sh
+dsh plugin --profile web add dsh-bigfish@0.7.0-next.1
+dsh --profile web
+```
+
+[GitHub 预览版发布说明](https://github.com/gosomea/dsh-bigfish/releases/tag/v0.7.0-next.1) · [npm 版本页](https://www.npmjs.com/package/dsh-bigfish/v/0.7.0-next.1) · [功能与配置](#07-web-预览版功能与验收)
+
+### 两分钟演示
+
+[![大肥鱼在海边小窝举牌，点击打开两分钟演示](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/bigfish-0.7-web-preview.jpg)](https://github.com/gosomea/dsh-bigfish/releases/download/v0.7.0-next.1/dsh-bigfish-0.7.0-next.1-demo.mp4)
+
+[打开或下载 MP4](https://github.com/gosomea/dsh-bigfish/releases/download/v0.7.0-next.1/dsh-bigfish-0.7.0-next.1-demo.mp4) · 2:00 · 1080p · 普通话旁白与中文字幕。画面来自插件预览，任务使用模拟数据，旁白使用 AI 合成。
 
 ## 72 段新动画，从等你到收工
 
@@ -80,7 +97,7 @@ npx --yes dsh-bigfish install-skill
 
 ![大肥鱼实际动画：举牌等候、打字、空挥联动与工具执行](https://raw.githubusercontent.com/gosomea/dsh-bigfish/main/docs/media/bigfish-demo.gif)
 
-> 本节 GIF 和下面的录屏来自插件自带预览：使用实际宠物渲染与动画，任务和速度由演示数据驱动。只录制宠物区域，不包含聊天内容。社区独立项目，非 DeepSeek 官方产品。
+> 本节 GIF 来自插件自带预览，使用实际宠物渲染与动画，任务和速度由演示数据驱动。大肥鱼是社区独立项目。
 
 ## 她会做什么？
 
@@ -212,9 +229,9 @@ Node `^22.19.0 || >=24.0.0`，pnpm `11.7.0`。原生接入探针需要另行准�
 
 测试范围、可执行门禁和未验收项见 [验证说明](docs/verification.md)。
 
-## 智能宠物开发分支
+## 0.7 Web 预览版功能与验收
 
-**`0.7.0-next.1` 是 Web 预览版**。上面的默认安装仍对应稳定版 `0.6.0`。想体验预览可运行 `dsh plugin --profile web add dsh-bigfish@next`。新增 **32 段八帧序列（256 帧）**，与原有 101 项动作编排分别统计。她可以先起步再散步，在边缘停下、探头、护住尾巴再坐下。普通动作有收尾，重要提醒和直接互动能立即接管。
+新增 **32 段八帧序列（256 帧）**。大肥鱼可以先起步再散步，在边缘停下、探头、护住尾巴再坐下。普通动作有收尾，重要提醒和直接互动能立即接管。
 
 任务状态、工具动作和 32 段八帧素材见[动作与状态索引](docs/animation-states.md)。
 
